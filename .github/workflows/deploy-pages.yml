@@ -15,8 +15,26 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
     steps:
       - uses: actions/checkout@v4
+      - name: Use the application workflow as the Pages source
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const repo = { owner: context.repo.owner, repo: context.repo.repo };
+            const { data: site } = await github.request('GET /repos/{owner}/{repo}/pages', repo);
+            if (site.build_type !== 'workflow') {
+              await github.request('PATCH /repos/{owner}/{repo}/pages', {
+                ...repo,
+                build_type: 'workflow',
+              });
+              core.info('Changed Pages source to GitHub Actions.');
+            } else {
+              core.info('Pages already uses GitHub Actions.');
+            }
       - uses: actions/setup-node@v4
         with:
           node-version: 22
