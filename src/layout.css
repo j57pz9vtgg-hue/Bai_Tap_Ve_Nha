@@ -1,4 +1,4 @@
-/* Keep both visual themes comfortably sized instead of stretching across a monitor. */
+/* Full-width application with compact controls and illustrations. */
 body {
   background: #eef2f3;
   display: flow-root;
@@ -7,32 +7,32 @@ body {
 
 @media (min-width: 761px) {
   .app-layout {
-    width: calc(100% - 32px);
-    max-width: 1440px;
-    min-height: calc(100dvh - 32px);
-    margin: 16px auto;
+    width: 100%;
+    max-width: none;
+    min-height: 100dvh;
+    margin: 0;
     position: relative;
     background: var(--cream);
-    border: 1px solid #dfe7e5;
-    border-radius: 18px;
-    box-shadow: 0 8px 32px #173a4510;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
   }
   .app-layout .desktop-sidebar {
     width: 248px;
-    top: 17px;
-    left: max(17px, calc((100vw - 1440px) / 2 + 1px));
+    top: 0;
+    left: 0;
     bottom: auto;
-    height: calc(100dvh - 34px);
+    height: 100dvh;
   }
   .app-layout .sidebar {
     height: 100%;
     padding: 20px 15px 24px;
-    border-radius: 17px 0 0 17px;
+    border-radius: 0;
   }
   .app-layout .main-shell {
     margin-left: 248px;
-    min-height: calc(100dvh - 34px);
-    border-radius: 0 17px 17px 0;
+    min-height: 100dvh;
+    border-radius: 0;
   }
   .app-layout .brand {
     font-size: 26px;
@@ -144,7 +144,7 @@ body {
   }
   .app-layout .hero {
     height: 188px;
-    border-radius: 0 17px 0 0;
+    border-radius: 0;
   }
   .app-layout .hero-tools {
     height: 54px;
@@ -189,7 +189,7 @@ body {
     margin-bottom: 3px;
   }
   .app-layout .content {
-    max-width: 1160px;
+    max-width: none;
     padding: 0 24px 22px;
   }
   .app-layout .breadcrumbs {
@@ -251,6 +251,7 @@ body {
   }
   .app-layout .card-image-button {
     aspect-ratio: 2.4;
+    max-height: 145px;
     border-radius: 9px;
   }
   .app-layout .exercise-card h3 {
