@@ -57,8 +57,8 @@
   margin: auto;
 }
 .topic-world .paper-shell {
-  background: #ffffffed;
-  border: 1px solid #c4edff;
+  background: transparent;
+  border: 0;
   border-radius: 16px 16px 0 0;
   overflow: clip;
 }
@@ -166,6 +166,8 @@
   min-height: 50px;
 }
 .exam-paper {
+  width: min(100%, 210mm);
+  margin-inline: auto;
   background: #fff;
   border: 1px solid #c5e9ff;
   border-radius: 12px;
@@ -280,6 +282,8 @@
   font-size: 12px;
 }
 .topic-setup {
+  background: #ffffffed;
+  border-radius: 16px 16px 0 0;
   padding: 20px 25px 12px;
 }
 .topic-filters {
@@ -483,9 +487,8 @@
   background: #f0fbff;
 }
 .topic-world .exam-paper {
-  margin-top: 0;
-  border-radius: 0;
-  border-top: 0;
+  margin-top: 10px;
+  border-radius: 12px;
   padding-top: 0;
 }
 .paper-dialog .quiz-confirm {
