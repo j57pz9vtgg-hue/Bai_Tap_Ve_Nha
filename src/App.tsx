@@ -1,22 +1,19 @@
 import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import {
-  ArrowLeft,
-  ArrowRight,
   BookOpen,
-  GraduationCap,
-  SearchX,
-  ShieldCheck,
+  Search,
+  UsersRound,
+  X,
+  ArrowRight,
   Trophy,
-  Grid2X2,
-  List,
 } from "lucide-react";
 import {
-  CategoryCards,
   Dialog,
   ExerciseCard,
-  Hero,
-  Sidebar,
+  PixelIcon,
   StudyFilters,
+  formatDuration,
+  publicAsset,
 } from "./components";
 import {
   CATEGORIES,
@@ -27,34 +24,50 @@ import {
   storageId,
 } from "./data";
 import type { Category, Draft, Exercise, Result, Section } from "./data";
-import { ThemeProvider, themeAsset, useTheme } from "./theme";
 
 const Quiz = lazy(() => import("./Quiz"));
-type ParentTab = "results" | "help";
+type Selection = {
+  exercise: Exercise;
+  section: Section;
+  grade: number;
+  mode: "play" | "result";
+};
 
 export default function App() {
-  return (
-    <ThemeProvider>
-      <LearningApp />
-    </ThemeProvider>
-  );
-}
-
-function LearningApp() {
-  const { theme } = useTheme();
   const [saved, setSaved] = useState(readSaved);
   const [section, setSection] = useState<Section>("timo");
   const [schoolSubject, setSchoolSubject] = useState<Section>("toan");
-  const [category, setCategory] = useState<Category>("all");
+  const [category, setCategory] = useState<Category>("qualifier");
   const [search, setSearch] = useState("");
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [parentTab, setParentTab] = useState<ParentTab | null>(null);
-  const [exercise, setExercise] = useState<Exercise | null>(null);
+  const [parentTab, setParentTab] = useState<"results" | "help" | null>(null);
+  const [selection, setSelection] = useState<Selection | null>(null);
   const [storageError, setStorageError] = useState(false);
-  const [view, setView] = useState<"grid" | "list">("grid");
   const grade = saved.grade;
   const isExam = section === "timo" || section === "asmo";
-  const exerciseId = exercise ? storageId(section, grade, exercise.id) : "";
+  const exerciseId = selection
+    ? storageId(selection.section, selection.grade, selection.exercise.id)
+    : "";
+  const normalized = (s: string) =>
+    s
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[đĐ]/g, "d")
+      .toLowerCase();
+  const exercises = getExercises(section, category).filter((e) =>
+    normalized(e.title).includes(normalized(search.trim())),
+  );
+  const results = Object.values(saved.results).sort((a, b) =>
+    b.date.localeCompare(a.date),
+  );
+  const categoryTitle =
+    category === "all"
+      ? "Tất cả đề"
+      : (CATEGORIES.find((c) => c.id === category)?.title ?? "Bài tập");
+  const title = isExam
+    ? `${categoryTitle} ${SECTION_LABELS[section]}`
+    : category === "topic"
+      ? `Luyện theo chủ đề ${SECTION_LABELS[section]}`
+      : `Bài tập ${SECTION_LABELS[section]}`;
 
   useEffect(() => {
     try {
@@ -65,17 +78,18 @@ function LearningApp() {
     }
   }, [saved]);
 
-  function navigate(next: Section, nextCategory: Category = "all") {
-    setSection(next);
-    setCategory(nextCategory);
+  function changeProgram(program: "timo" | "asmo" | "school") {
+    setSection(program === "school" ? schoolSubject : program);
+    setCategory(program === "school" ? "all" : "qualifier");
     setSearch("");
-    setMenuOpen(false);
   }
-
   const saveDraft = useCallback(
     (draft: Draft) => {
-      if (!exerciseId) return;
-      setSaved((s) => ({ ...s, drafts: { ...s.drafts, [exerciseId]: draft } }));
+      if (exerciseId)
+        setSaved((s) => ({
+          ...s,
+          drafts: { ...s.drafts, [exerciseId]: draft },
+        }));
     },
     [exerciseId],
   );
@@ -86,266 +100,161 @@ function LearningApp() {
       return { ...s, drafts, results: { ...s.results, [result.id]: result } };
     });
   }, []);
-
-  const sidebarProps = {
-    category,
-    isExam,
-    onCategory: (next: Category) => {
-      setCategory(next);
-      setSearch("");
-    },
-  };
-  const normalized = (s: string) =>
-    s
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/đ/g, "d")
-      .toLowerCase();
-  const exercises = getExercises(section, category).filter((e) =>
-    normalized(e.title).includes(normalized(search.trim())),
-  );
-  const results = Object.values(saved.results).sort((a, b) =>
-    b.date.localeCompare(a.date),
-  );
-  const selectedTitle =
-    category === "all"
-      ? `Tất cả đề ${SECTION_LABELS[section]}`
-      : `${CATEGORIES.find((c) => c.id === category)?.title} ${SECTION_LABELS[section]}`;
+  function viewPastResult(result: Result) {
+    const id = result.id.split(":").slice(2).join(":");
+    const exercise = [
+      ...getExercises(result.section, "all"),
+      ...getExercises(result.section, "topic"),
+    ].find((e) => e.id === id);
+    if (exercise) {
+      setParentTab(null);
+      setSelection({
+        exercise,
+        grade: result.grade,
+        section: result.section,
+        mode: "result",
+      });
+    }
+  }
 
   return (
-    <div className={`app-layout catalog-layout theme-${theme}`}>
+    <div className="pixel-app">
       <a className="skip-link" href="#main-content">
         Đến nội dung chính
       </a>
-      <div className="desktop-sidebar">
-        <Sidebar {...sidebarProps} />
-      </div>
-      <div className="main-shell">
-        <Hero
-          search={search}
-          onSearch={setSearch}
-          onMenu={() => setMenuOpen(true)}
-          onParent={() => setParentTab("results")}
-        />
-        <main id="main-content" className="content">
-          <StudyFilters
-            grade={grade}
-            section={section}
-            onGrade={(n) => setSaved((s) => ({ ...s, grade: n }))}
-            onProgram={(program) =>
-              navigate(program === "school" ? schoolSubject : program)
-            }
-            onSubject={(subject) => {
-              setSchoolSubject(subject);
-              navigate(subject);
+      <header className="site-header">
+        <div className="header-inner">
+          <button
+            className="brand"
+            aria-label="Góc học tập của bé — Danh sách đề"
+            onClick={() => {
+              setSearch("");
+              setCategory(isExam ? "qualifier" : "all");
             }}
-          />
-          <div className={theme === "garden" ? "garden-intro" : "page-intro"}>
-            {theme === "garden" ? (
-              <img
-                className="garden-intro-art"
-                src={`${import.meta.env.BASE_URL}assets/garden-banner.webp`}
-                alt=""
+          >
+            <img src={publicAsset("pixel-book")} alt="" />
+            <span>Góc học tập của bé</span>
+            <span className="brand-spark" aria-hidden="true">
+              ✦
+            </span>
+          </button>
+          <div className="header-tools">
+            <div className="search-box">
+              <Search size={21} />
+              <input
+                type="search"
+                aria-label="Tìm bài tập"
+                placeholder="Tìm bài tập"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
-            ) : null}
-            {storageError ? (
-              <div className="storage-warning" role="alert">
-                Trình duyệt không cho phép lưu dữ liệu. Kết quả chỉ được giữ đến
-                khi tải lại trang.
-              </div>
-            ) : null}
-            <h1>
-              {section === "home"
-                ? "Hôm nay bé khám phá gì?"
-                : isExam
-                  ? selectedTitle
-                  : SECTION_LABELS[section]}
-            </h1>
-            {theme === "garden" ? (
-              <p className="garden-description">
-                Khám phá kiến thức cùng những người bạn nhỏ.
-                <br />
-                Hãy chọn danh mục hoặc bắt đầu làm bài ngay nhé!
-              </p>
-            ) : null}
-          </div>
-          {section === "home" ? (
-            <>
-              <p className="home-description">
-                Chọn một hành trình và cùng{" "}
-                {theme === "space"
-                  ? "nhà du hành"
-                  : theme === "garden"
-                    ? "các bạn thú nhỏ"
-                    : "Khủng Long"}{" "}
-                học thêm điều mới nhé!
-              </p>
-              <div className="home-grid">
-                <button onClick={() => navigate("timo")}>
-                  <img
-                    src={themeAsset(theme, "dino")}
-                    alt={
-                      theme === "garden"
-                        ? "Bạn sóc khám phá kiến thức"
-                        : theme === "space"
-                          ? "Nhà du hành khám phá vũ trụ"
-                          : "Khủng long khám phá"
-                    }
-                  />
-                  <span>
-                    <Trophy size={24} />
-                    <strong>Các kỳ thi</strong>
-                    <ArrowRight size={21} />
-                  </span>
-                  <p>Luyện tập cùng TIMO và ASMO</p>
-                </button>
-                <button onClick={() => navigate("toan")}>
-                  <img
-                    src={themeAsset(theme, "triceratops")}
-                    alt={
-                      theme === "garden"
-                        ? "Bạn mèo đọc sách"
-                        : theme === "space"
-                          ? "Nhà du hành đọc sách"
-                          : "Khủng long tìm tòi"
-                    }
-                  />
-                  <span>
-                    <BookOpen size={24} />
-                    <strong>Báo bài của trường</strong>
-                    <ArrowRight size={21} />
-                  </span>
-                  <p>Toán, Tiếng Việt, ESL, Math và Science</p>
-                </button>
-              </div>
-            </>
-          ) : (
-            <>
-              {isExam ? (
-                <CategoryCards
-                  category={category}
-                  onSelect={(c) => {
-                    setCategory(c);
-                    setSearch("");
-                  }}
-                />
-              ) : (
-                <p className="subject-description">
-                  Cùng ôn bài và khám phá kiến thức {SECTION_LABELS[section]}{" "}
-                  lớp {grade} nhé!
-                </p>
-              )}
-              <div className="list-heading">
-                <div>
-                  <h2>
-                    {search.trim()
-                      ? "Kết quả tìm kiếm"
-                      : category === "topic"
-                        ? "Chọn chủ đề"
-                        : isExam
-                          ? theme === "garden"
-                            ? "Danh sách đề bài"
-                            : "Danh sách đề"
-                          : "Bài tập của bé"}
-                  </h2>
-                  {theme === "garden" ? (
-                    <p className="garden-list-description">
-                      Chọn đề bài và cùng luyện tập mỗi ngày nhé!
-                    </p>
-                  ) : null}
-                </div>
-                {theme === "garden" ? (
-                  <div
-                    className="view-switcher"
-                    role="group"
-                    aria-label="Kiểu hiển thị bài tập"
-                  >
-                    <button
-                      aria-label="Dạng lưới"
-                      aria-pressed={view === "grid"}
-                      onClick={() => setView("grid")}
-                    >
-                      <Grid2X2 size={19} />
-                    </button>
-                    <button
-                      aria-label="Dạng danh sách"
-                      aria-pressed={view === "list"}
-                      onClick={() => setView("list")}
-                    >
-                      <List size={21} />
-                    </button>
-                  </div>
-                ) : null}
-                {category !== "all" ? (
-                  <button
-                    className="text-button"
-                    onClick={() => {
-                      setCategory("all");
-                      setSearch("");
-                    }}
-                  >
-                    <ArrowLeft size={16} />
-                    Tất cả đề
-                  </button>
-                ) : null}
-              </div>
-              {exercises.length ? (
-                <div
-                  className={`exercise-grid ${theme === "garden" && view === "list" ? "exercise-list" : ""}`}
+              {search ? (
+                <button
+                  className="icon-button"
+                  aria-label="Xóa tìm kiếm"
+                  onClick={() => setSearch("")}
                 >
-                  {exercises.map((e) => {
-                    const id = storageId(section, grade, e.id);
-                    return (
-                      <ExerciseCard
-                        key={id}
-                        exercise={e}
-                        grade={grade}
-                        result={saved.results[id]}
-                        hasDraft={Boolean(saved.drafts[id])}
-                        onOpen={() => setExercise(e)}
-                      />
-                    );
-                  })}
-                </div>
-              ) : (
-                <div className="empty-state">
-                  <SearchX size={40} />
-                  <h3>Chưa tìm thấy bài tập</h3>
-                  <p>Thử một từ khóa khác, ví dụ “vòng loại” nhé.</p>
-                  <button
-                    className="secondary-button"
-                    onClick={() => setSearch("")}
-                  >
-                    Xem tất cả bài tập
-                  </button>
-                </div>
-              )}
-              <div className="sample-footer">
-                <ShieldCheck size={16} />
-                <span>
-                  Nội dung luyện tập mẫu · Kết quả lưu trên thiết bị của bạn
-                </span>
-              </div>
-            </>
-          )}
-        </main>
-        {theme === "garden" ? (
-          <img
-            className="garden-meadow"
-            src={`${import.meta.env.BASE_URL}assets/garden-footer.webp`}
-            alt=""
-          />
-        ) : null}
+                  <X size={17} />
+                </button>
+              ) : null}
+            </div>
+            <button
+              className="parent-button"
+              onClick={() => setParentTab("results")}
+            >
+              <UsersRound size={23} fill="currentColor" />
+              <span>Phụ huynh</span>
+            </button>
+          </div>
+        </div>
+      </header>
+      <div className="adventure-banner">
+        <h1 className="banner-message">Học vui, chinh phục từng bài!</h1>
       </div>
-      {menuOpen ? (
-        <Dialog
-          title="Danh mục học tập"
-          onClose={() => setMenuOpen(false)}
-          className="drawer"
-        >
-          <Sidebar {...sidebarProps} onClose={() => setMenuOpen(false)} />
-        </Dialog>
-      ) : null}
+      <main id="main-content" className="page-content">
+        <StudyFilters
+          grade={grade}
+          section={section}
+          category={category}
+          onGrade={(n) => setSaved((s) => ({ ...s, grade: n }))}
+          onProgram={changeProgram}
+          onSubject={(subject) => {
+            setSchoolSubject(subject);
+            setSection(subject);
+            setCategory("all");
+            setSearch("");
+          }}
+          onCategory={(c) => {
+            setCategory(c);
+            setSearch("");
+          }}
+        />
+        {storageError ? (
+          <p className="storage-warning" role="alert">
+            Trình duyệt không cho phép lưu dữ liệu. Kết quả sẽ mất khi tải lại
+            trang.
+          </p>
+        ) : null}
+        <section className="exercise-section" aria-labelledby="catalog-title">
+          <div className="catalog-heading">
+            <div className="catalog-title">
+              <PixelIcon name="flag" size={37} />
+              <div>
+                <h2 id="catalog-title">
+                  {search.trim() ? "Kết quả tìm kiếm" : title}
+                </h2>
+                <p>
+                  Lớp {grade}
+                  <span>•</span>
+                  {isExam ? "Toán" : SECTION_LABELS[section]}
+                </p>
+              </div>
+            </div>
+            <span className="exercise-count" aria-live="polite">
+              {exercises.length} {category === "topic" ? "chủ đề" : "đề"}
+              <PixelIcon name="star" size={23} />
+            </span>
+          </div>
+          {exercises.length ? (
+            <div className="exercise-grid">
+              {exercises.map((exercise, index) => {
+                const id = storageId(section, grade, exercise.id);
+                return (
+                  <ExerciseCard
+                    key={id}
+                    exercise={exercise}
+                    index={index}
+                    result={saved.results[id]}
+                    hasDraft={Boolean(saved.drafts[id])}
+                    onOpen={() =>
+                      setSelection({ exercise, section, grade, mode: "play" })
+                    }
+                    onView={() =>
+                      setSelection({ exercise, section, grade, mode: "result" })
+                    }
+                  />
+                );
+              })}
+            </div>
+          ) : (
+            <div className="empty-state">
+              <BookOpen size={38} />
+              <h3>Chưa tìm thấy bài tập</h3>
+              <p>Thử từ khóa khác hoặc chọn lại nội dung luyện tập nhé.</p>
+              <button className="primary-button" onClick={() => setSearch("")}>
+                Xóa tìm kiếm
+                <ArrowRight size={18} />
+              </button>
+            </div>
+          )}
+        </section>
+        <p className="sample-footer">
+          Bài luyện tập mẫu · Kết quả thực tế lưu trên trình duyệt này
+        </p>
+      </main>
+      <footer className="world-footer" aria-hidden="true">
+        <img src={publicAsset("pixel-ground")} alt="" />
+      </footer>
       {parentTab ? (
         <Dialog
           title="Góc phụ huynh"
@@ -353,10 +262,10 @@ function LearningApp() {
           className="parent-dialog"
         >
           <div className="parent-title-icon">
-            <GraduationCap size={30} />
+            <UsersRound size={29} />
           </div>
           <h2>Góc phụ huynh</h2>
-          <p className="parent-subtitle">Cùng con lớn lên qua từng bài học.</p>
+          <p className="parent-subtitle">Cùng bé chinh phục từng bài học.</p>
           <div className="parent-tabs">
             <button
               className={parentTab === "results" ? "active" : ""}
@@ -379,7 +288,11 @@ function LearningApp() {
               {results.length ? (
                 <div className="result-list">
                   {results.map((r) => (
-                    <div className="result-row" key={r.id}>
+                    <button
+                      className="result-row"
+                      key={r.id}
+                      onClick={() => viewPastResult(r)}
+                    >
                       <span className="result-list-icon">
                         <Trophy size={23} />
                       </span>
@@ -391,20 +304,21 @@ function LearningApp() {
                             dateStyle: "short",
                           }).format(new Date(r.date))}
                         </span>
+                        <small>{formatDuration(r.elapsedSeconds)}</small>
                       </div>
                       <b>
                         {r.score}/{r.total}
                       </b>
-                    </div>
+                    </button>
                   ))}
                 </div>
               ) : (
                 <div className="empty-state">
-                  <BookOpen size={39} />
+                  <PixelIcon name="book" size={43} />
                   <h3>Hành trình của bé sắp bắt đầu</h3>
                   <p>
-                    Hãy chọn một bài tập. Kết quả sẽ xuất hiện ở đây khi bé nộp
-                    bài.
+                    Chọn một đề và bắt đầu làm bài. Kết quả sẽ được lưu sau khi
+                    nộp bài.
                   </p>
                   <button
                     className="primary-button"
@@ -416,39 +330,41 @@ function LearningApp() {
                 </div>
               )}
               <p className="sample-notice">
-                Mỗi bài hiển thị kết quả lần làm gần nhất. Chưa có tài khoản
-                hoặc đồng bộ giữa các thiết bị.
+                Hiển thị lần làm gần nhất của mỗi bài. Các kết quả cũ vẫn được
+                giữ; bài cũ chưa có thời gian sẽ hiển thị “—”.
               </p>
             </>
           ) : (
             <div className="help-content">
-              <h3>Đồng hành cùng bé</h3>
               <ol>
                 <li>
-                  <strong>Chọn lớp của bé</strong>
-                  <p>Dùng mục “Chọn lớp” để xem bài tập dành cho lớp 1–5.</p>
-                </li>
-                <li>
-                  <strong>Chọn hành trình học</strong>
+                  <strong>Chọn nội dung học</strong>
                   <p>
-                    Khám phá TIMO, ASMO hoặc các môn trong “Báo bài của trường”.
-                    Các bài hiện tại là nội dung mẫu, chưa phải đề thi hay bài
-                    báo chính thức của trường.
+                    Chọn lớp 1–5, chương trình TIMO/ASMO hoặc Báo bài của
+                    trường, môn học và nội dung luyện tập ở thanh lọc.
                   </p>
                 </li>
                 <li>
-                  <strong>Làm bài và xem lời giải</strong>
+                  <strong>Làm bài</strong>
                   <p>
-                    Bé có 15 phút cho mỗi bài. Sau khi nộp, bé có thể xem đáp án
-                    và lời giải từng câu.
+                    Mỗi bài có 15 phút. Bé có thể chuyển câu, tạm đóng bài rồi
+                    quay lại. Đồng hồ vẫn tiếp tục chạy và bài tự nộp khi hết
+                    giờ.
                   </p>
                 </li>
                 <li>
-                  <strong>Theo dõi sự tiến bộ</strong>
+                  <strong>Xem tiến bộ</strong>
                   <p>
-                    Kết quả và câu trả lời đang làm được lưu trên trình duyệt
-                    này. Xóa dữ liệu trình duyệt sẽ xóa hồ sơ; không dùng dữ
-                    liệu này cho thông tin nhạy cảm.
+                    Sau khi nộp, điểm và thời gian thực tế được lưu. Chọn “Xem
+                    kết quả” để xem lại hoặc “Làm lại” để luyện tập thêm.
+                  </p>
+                </li>
+                <li>
+                  <strong>Lưu trên thiết bị</strong>
+                  <p>
+                    Nội dung hiện là bài luyện tập mẫu, không phải đề thi chính
+                    thức. Chưa có tài khoản hoặc đồng bộ giữa các thiết bị. Xóa
+                    dữ liệu trình duyệt sẽ xóa kết quả.
                   </p>
                 </li>
               </ol>
@@ -456,7 +372,7 @@ function LearningApp() {
           )}
         </Dialog>
       ) : null}
-      {exercise ? (
+      {selection ? (
         <Suspense
           fallback={
             <div className="loading-overlay" role="status">
@@ -465,15 +381,22 @@ function LearningApp() {
           }
         >
           <Quiz
-            key={exerciseId}
+            key={`${exerciseId}:${selection.mode}`}
             id={exerciseId}
-            section={section}
-            grade={grade}
-            exercise={exercise}
-            draft={saved.drafts[exerciseId]}
+            exercise={selection.exercise}
+            grade={selection.grade}
+            section={selection.section}
+            draft={
+              selection.mode === "play" ? saved.drafts[exerciseId] : undefined
+            }
+            initialResult={
+              selection.mode === "result"
+                ? saved.results[exerciseId]
+                : undefined
+            }
             onSave={saveDraft}
             onFinish={finish}
-            onClose={() => setExercise(null)}
+            onClose={() => setSelection(null)}
           />
         </Suspense>
       ) : null}

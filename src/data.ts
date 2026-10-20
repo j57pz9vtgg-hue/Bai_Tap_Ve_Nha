@@ -5,7 +5,6 @@ export type Exercise = {
   id: string;
   title: string;
   category: Category;
-  image: string;
   topic?: number;
 };
 export type Question = {
@@ -22,6 +21,9 @@ export type Result = {
   total: number;
   date: string;
   section: Section;
+  answers?: Record<number, number>;
+  elapsedSeconds?: number;
+  questions?: Question[];
 };
 export type Draft = {
   answers: Record<number, number>;
@@ -77,44 +79,32 @@ export function getExercises(section: Section, category: Category): Exercise[] {
           id: "logic",
           title: "Tư duy logic",
           category: "topic",
-          image: "triceratops",
           topic: 0,
         },
         {
           id: "numbers",
           title: "Khám phá số học",
           category: "topic",
-          image: "dino",
           topic: 1,
         },
         {
           id: "shapes",
           title: "Thế giới hình học",
           category: "topic",
-          image: "hero",
           topic: 2,
         },
       ];
-    const exams: Exercise[] = [
-      {
-        id: "qualifier-01",
-        title: "Đề vòng loại 01",
-        category: "qualifier",
-        image: "dino",
-      },
-      {
-        id: "qualifier-02",
-        title: "Đề vòng loại 02",
-        category: "qualifier",
-        image: "triceratops",
-      },
-      {
-        id: "national-01",
-        title: "Đề Quốc gia 01",
-        category: "national",
-        image: "hero",
-      },
-    ];
+    const exams: Exercise[] = (["qualifier", "national"] as const).flatMap(
+      (kind) =>
+        Array.from({ length: 15 }, (_, index) => {
+          const number = String(index + 1).padStart(2, "0");
+          return {
+            id: `${kind}-${number}`,
+            title: `${kind === "qualifier" ? "Đề vòng loại" : "Đề Quốc gia"} ${number}`,
+            category: kind,
+          };
+        }),
+    );
     return category === "all"
       ? exams
       : exams.filter((exam) => exam.category === category);
@@ -130,7 +120,6 @@ export function getExercises(section: Section, category: Category): Exercise[] {
     id: `lesson-${i}`,
     title,
     category: "all",
-    image: ["dino", "triceratops", "hero"][i],
     topic: i,
   }));
 }
@@ -163,7 +152,8 @@ export function getQuestions(
   section: Section,
   exercise: Exercise,
 ): Question[] {
-  const variant = exercise.id.includes("02") ? 2 : 0;
+  const exerciseNumber = Number(exercise.id.match(/-(\d+)$/)?.[1] ?? 1);
+  const variant = Math.max(0, exerciseNumber - 1) * 2;
   const advanced = exercise.category === "national" ? 2 : 0;
   const n = grade * 2 + variant + advanced;
   const english = section === "math";

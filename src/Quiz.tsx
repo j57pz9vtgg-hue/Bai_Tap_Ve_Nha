@@ -13,7 +13,7 @@ import {
   X,
 } from "lucide-react";
 import { Dialog } from "./components";
-import { themeAsset, useTheme } from "./theme";
+import { publicAsset } from "./components";
 import { getQuestions } from "./data";
 import type { Draft, Exercise, Result, Section } from "./data";
 
@@ -23,6 +23,7 @@ type QuizProps = {
   section: Section;
   id: string;
   draft?: Draft;
+  initialResult?: Result;
   onSave: (draft: Draft) => void;
   onFinish: (result: Result) => void;
   onClose: () => void;
@@ -34,15 +35,19 @@ export default function Quiz({
   section,
   id,
   draft,
+  initialResult,
   onSave,
   onFinish,
   onClose,
 }: QuizProps) {
-  const { theme } = useTheme();
-  const questions = getQuestions(grade, section, exercise);
-  const [started, setStarted] = useState(Boolean(draft));
+  const [reviewingSaved, setReviewingSaved] = useState(Boolean(initialResult));
+  const questions =
+    reviewingSaved && initialResult?.questions
+      ? initialResult.questions
+      : getQuestions(grade, section, exercise);
+  const [started, setStarted] = useState(Boolean(draft || initialResult));
   const [answers, setAnswers] = useState<Record<number, number>>(
-    draft?.answers ?? {},
+    initialResult?.answers ?? draft?.answers ?? {},
   );
   const [index, setIndex] = useState(draft?.index ?? 0);
   const [deadline, setDeadline] = useState(draft?.deadline ?? 0);
@@ -50,11 +55,16 @@ export default function Quiz({
     draft ? Math.max(0, Math.ceil((draft.deadline - Date.now()) / 1000)) : 900,
   );
   const [stage, setStage] = useState<"work" | "confirm" | "result" | "review">(
-    "work",
+    initialResult ? "result" : "work",
   );
   const [confirmLeave, setConfirmLeave] = useState(false);
-  const submitted = useRef(false);
-  const score = questions.filter((q, i) => answers[i] === q.correct).length;
+  const submitted = useRef(Boolean(initialResult));
+  const score =
+    reviewingSaved && initialResult
+      ? initialResult.score
+      : questions.filter((q, i) => answers[i] === q.correct).length;
+  const total =
+    reviewingSaved && initialResult ? initialResult.total : questions.length;
   const answered = Object.keys(answers).length;
   const current = questions[index];
   const finished = stage === "result" || stage === "review";
@@ -70,6 +80,12 @@ export default function Quiz({
       total: questions.length,
       date: new Date().toISOString(),
       section,
+      answers,
+      questions,
+      elapsedSeconds: Math.min(
+        900,
+        Math.max(0, Math.floor((Date.now() - (deadline - 900000)) / 1000)),
+      ),
     });
     setStage("result");
   }
@@ -114,6 +130,7 @@ export default function Quiz({
   };
   const restart = () => {
     submitted.current = false;
+    setReviewingSaved(false);
     setAnswers({});
     setIndex(0);
     setStage("work");
@@ -129,14 +146,8 @@ export default function Quiz({
       {!started ? (
         <div className="quiz-intro">
           <img
-            src={themeAsset(theme, exercise.image)}
-            alt={
-              theme === "garden"
-                ? "Cuộc phiêu lưu học tập cùng các bạn thú nhỏ"
-                : theme === "space"
-                  ? "Cuộc phiêu lưu học tập cùng nhà du hành"
-                  : "Cuộc phiêu lưu học tập cùng khủng long"
-            }
+            src={publicAsset("pixel-hero")}
+            alt="Cuộc phiêu lưu học tập trong thế giới pixel"
           />
           <span className="intro-kicker">Sẵn sàng khám phá chưa?</span>
           <h2>{exercise.title}</h2>
@@ -170,14 +181,14 @@ export default function Quiz({
             <Trophy size={64} />
           </div>
           <h2>
-            {score === questions.length
+            {score === total
               ? "Xuất sắc lắm, nhà thám hiểm!"
               : "Bé đã hoàn thành rồi!"}
           </h2>
           <p>Mỗi lần luyện tập là một lần bé tiến bộ hơn.</p>
           <div className="result-score">
             {score}
-            <span> / {questions.length}</span>
+            <span> / {total}</span>
           </div>
           <p>Câu trả lời đúng</p>
           <div className="result-facts">
@@ -187,11 +198,12 @@ export default function Quiz({
             </span>
             <span>
               <PencilIcon />
-              {questions.length - score} câu cần ôn lại
+              {total - score} câu cần ôn lại
             </span>
           </div>
           <button
             className="start-button"
+            disabled={reviewingSaved && !initialResult?.answers}
             onClick={() => {
               setStage("review");
               setIndex(0);
@@ -200,6 +212,12 @@ export default function Quiz({
             Xem đáp án & lời giải
             <ArrowRight size={20} />
           </button>
+          {reviewingSaved && !initialResult?.answers ? (
+            <p className="sample-notice">
+              Kết quả cũ chưa lưu câu trả lời chi tiết. Bé có thể làm lại để lưu
+              lời giải và thời gian.
+            </p>
+          ) : null}
           <div className="result-actions">
             <button className="text-button" onClick={restart}>
               <RotateCcw size={17} />
@@ -241,7 +259,7 @@ export default function Quiz({
           <div className="question-heading">
             <strong>
               Câu {index + 1}
-              <span> / {questions.length}</span>
+              <span> / {total}</span>
             </strong>
             <span>
               {stage === "review"

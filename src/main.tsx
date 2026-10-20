@@ -1,11 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import "./styles.css";
-import "./themes.css";
-import "./layout.css";
-import "./garden.css";
-import "./catalog.css";
+import "./dialogs.css";
+import "./pixel.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

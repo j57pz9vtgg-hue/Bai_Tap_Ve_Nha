@@ -1,55 +1,11 @@
 import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
-import {
-  BookOpen,
-  ChevronDown,
-  ChevronRight,
-  FlaskConical,
-  GraduationCap,
-  Menu,
-  Pencil,
-  Search,
-  Trophy,
-  FileText,
-  Medal,
-  LibraryBig,
-  Rocket,
-  Trees,
-  Sprout,
-  X,
-} from "lucide-react";
-import { CATEGORIES, SECTION_LABELS } from "./data";
+import { X, ChevronDown, Check, Clock3 } from "lucide-react";
+import { SECTION_LABELS } from "./data";
 import type { Category, Exercise, Result, Section } from "./data";
-import { themeAsset, useTheme } from "./theme";
 
-export function ThemeSwitcher() {
-  const { theme, setTheme } = useTheme();
-  return (
-    <div className="theme-switcher" role="group" aria-label="Chọn giao diện">
-      <button
-        aria-pressed={theme === "dinosaur"}
-        onClick={() => setTheme("dinosaur")}
-      >
-        <Trees size={16} />
-        Khủng long
-      </button>
-      <button
-        aria-pressed={theme === "space"}
-        onClick={() => setTheme("space")}
-      >
-        <Rocket size={16} />
-        Vũ trụ
-      </button>
-      <button
-        aria-pressed={theme === "garden"}
-        onClick={() => setTheme("garden")}
-      >
-        <Sprout size={16} />
-        Vườn học tập
-      </button>
-    </div>
-  );
-}
+export const publicAsset = (name: string) =>
+  `${import.meta.env.BASE_URL}assets/${name}.webp`;
 
 export function Dialog({
   children,
@@ -98,90 +54,79 @@ export function Dialog({
   );
 }
 
-type SidebarProps = {
-  category: Category;
-  isExam: boolean;
-  onCategory: (category: Category) => void;
-  onClose?: () => void;
-};
-
-export function Sidebar({
-  category,
-  isExam,
-  onCategory,
-  onClose,
-}: SidebarProps) {
-  const { theme } = useTheme();
-  const items = [
-    { id: "all" as const, title: "Tất cả đề", Icon: Trophy },
-    { id: "qualifier" as const, title: "Đề vòng loại", Icon: FileText },
-    { id: "national" as const, title: "Đề Quốc gia", Icon: Medal },
-    { id: "topic" as const, title: "Luyện theo chủ đề", Icon: LibraryBig },
-  ];
-  const choose = (next: Category) => {
-    onCategory(next);
-    onClose?.();
-  };
+export function PixelIcon({
+  name,
+  size = 24,
+}: {
+  name: "book" | "flag" | "star";
+  size?: number;
+}) {
   return (
-    <aside className="sidebar catalog-sidebar">
-      {onClose ? (
-        <button
-          className="icon-button mobile-close"
-          aria-label="Đóng menu"
-          onClick={onClose}
-        >
-          <X />
-        </button>
-      ) : null}
-      <button
-        className="brand"
-        onClick={() => choose("all")}
-        aria-label="Góc học tập của bé — Tất cả đề"
-      >
-        <img src={themeAsset(theme, "logo")} alt="" className="brand-dino" />
-        <span>
-          Góc học tập<span>của bé</span>
-        </span>
-      </button>
-      <nav className="catalog-navigation" aria-label="Danh mục đề bài">
-        {items.map(({ id, title, Icon }) => (
-          <button
-            key={id}
-            className={`nav-row ${category === id ? "selected" : ""}`}
-            aria-current={category === id ? "page" : undefined}
-            disabled={!isExam && (id === "qualifier" || id === "national")}
-            title={
-              !isExam && (id === "qualifier" || id === "national")
-                ? "Dành cho chương trình kỳ thi TIMO hoặc ASMO"
-                : undefined
-            }
-            onClick={() => choose(id)}
-          >
-            <Icon size={25} />
-            <span>{title}</span>
-          </button>
-        ))}
-      </nav>
-      <div className="catalog-theme-picker">
-        <span>Giao diện</span>
-        <ThemeSwitcher />
-      </div>
-    </aside>
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      shapeRendering="crispEdges"
+    >
+      {name === "book" ? (
+        <>
+          <path d="M2 4h8v1h4V4h8v17h-8v1h-4v-1H2z" fill="#083b54" />
+          <path
+            d="M4 3h6v1h4V3h6v15h-6v1h-4v-1H4z"
+            fill="#fcffff"
+            stroke="#0e8095"
+          />
+          <path
+            d="M11 5h2v13h-2zM5 7h4v2H5zm0 4h4v1H5zm0 3h4v1H5z"
+            fill="#52c5d5"
+          />
+          <path d="M16 4h2v2h2v2h-2v7h-2V8h-2V6h2z" fill="#ffc43d" />
+        </>
+      ) : name === "flag" ? (
+        <>
+          <path d="M5 2h3v20H5z" fill="#543325" />
+          <path d="M8 3h6v2h7v8h-6v-2H8z" fill="#fc6385" stroke="#7e304f" />
+          <path d="M9 4h4v2H9z" fill="#ffd8e3" />
+          <path d="M3 21h7v2H3z" fill="#a56a34" />
+        </>
+      ) : (
+        <>
+          <path
+            d="M10 2h4v5h2v2h6v4h-3v6h-5v-2h-4v2H5v-6H2V9h6V7h2z"
+            fill="#ffd047"
+            stroke="#74491d"
+          />
+          <path d="M10 5h2v4H8v2H5v-1h5z" fill="#fff4b0" />
+        </>
+      )}
+    </svg>
   );
+}
+
+export function formatDuration(seconds?: number) {
+  if (seconds === undefined) return "—";
+  const value = Math.max(0, Math.floor(seconds));
+  return `${Math.floor(value / 60)} phút ${String(value % 60).padStart(2, "0")} giây`;
 }
 
 export function StudyFilters({
   grade,
   section,
+  category,
   onGrade,
   onProgram,
   onSubject,
+  onCategory,
 }: {
   grade: number;
   section: Section;
+  category: Category;
   onGrade: (grade: number) => void;
   onProgram: (program: "timo" | "asmo" | "school") => void;
   onSubject: (subject: Section) => void;
+  onCategory: (category: Category) => void;
 }) {
   const isExam = section === "timo" || section === "asmo";
   return (
@@ -189,7 +134,6 @@ export function StudyFilters({
       <div className="filter-field">
         <label htmlFor="study-grade">Chọn lớp</label>
         <div className="filter-select">
-          <GraduationCap size={21} />
           <select
             id="study-grade"
             value={grade}
@@ -207,7 +151,6 @@ export function StudyFilters({
       <div className="filter-field">
         <label htmlFor="study-program">Chọn chương trình học</label>
         <div className="filter-select">
-          <BookOpen size={21} />
           <select
             id="study-program"
             value={isExam ? section : "school"}
@@ -225,7 +168,6 @@ export function StudyFilters({
       <div className="filter-field">
         <label htmlFor="study-subject">Chọn môn học</label>
         <div className="filter-select">
-          <FlaskConical size={21} />
           <select
             id="study-subject"
             value={isExam ? "toan" : section}
@@ -243,168 +185,118 @@ export function StudyFilters({
           <ChevronDown size={18} />
         </div>
       </div>
+      <div className="filter-field">
+        <label htmlFor="study-category">Chọn nội dung luyện tập</label>
+        <div className="filter-select">
+          <select
+            id="study-category"
+            value={category}
+            onChange={(e) => onCategory(e.target.value as Category)}
+          >
+            <option value="all">Tất cả đề</option>
+            {isExam ? (
+              <>
+                <option value="qualifier">Đề vòng loại</option>
+                <option value="national">Đề Quốc gia</option>
+              </>
+            ) : null}
+            <option value="topic">Luyện theo chủ đề</option>
+          </select>
+          <ChevronDown size={18} />
+        </div>
+      </div>
     </div>
   );
 }
 
-export function Hero({
-  search,
-  onSearch,
-  onMenu,
-  onParent,
-}: {
-  search: string;
-  onSearch: (s: string) => void;
-  onMenu: () => void;
-  onParent: () => void;
-}) {
-  const { theme } = useTheme();
-  return (
-    <header className="hero">
-      <div className="hero-tools">
-        <button
-          className="mobile-menu icon-button"
-          onClick={onMenu}
-          aria-label="Mở menu"
-        >
-          <Menu size={25} />
-        </button>
-        <div className="search-box">
-          <Search size={23} />
-          <input
-            type="search"
-            aria-label="Tìm bài tập"
-            placeholder="Tìm bài tập"
-            value={search}
-            onChange={(e) => onSearch(e.target.value)}
-          />
-          {search ? (
-            <button
-              className="icon-button clear-search"
-              aria-label="Xóa tìm kiếm"
-              onClick={() => onSearch("")}
-            >
-              <X size={17} />
-            </button>
-          ) : null}
-        </div>
-        <button className="parent-button" onClick={onParent}>
-          <span className="avatar">
-            <GraduationCap size={22} />
-          </span>
-          <span>Phụ huynh</span>
-          <ChevronDown size={19} />
-        </button>
-      </div>
-      {theme === "space" ? (
-        <div className="space-headline">
-          <div>
-            Góc học tập<span>của bé</span>
-          </div>
-          <p>Khám phá tri thức – Vươn tới những ước mơ!</p>
-        </div>
-      ) : theme === "dinosaur" ? (
-        <div className="wooden-sign" aria-label="Khám phá tri thức mỗi ngày">
-          <span>KHÁM PHÁ</span>
-          <span>TRI THỨC</span>
-          <span>MỖI NGÀY!</span>
-        </div>
-      ) : null}
-      <div className="mobile-brand">
-        Góc học tập <span>của bé</span>
-      </div>
-    </header>
-  );
-}
-
-export function CategoryCards({
-  category,
-  onSelect,
-}: {
-  category: Category;
-  onSelect: (category: Category) => void;
-}) {
-  return (
-    <div className="category-grid" aria-label="Loại đề">
-      {CATEGORIES.map((c) => (
-        <button
-          key={c.id}
-          className={`category-card ${c.tone} ${category === c.id ? "chosen" : ""}`}
-          onClick={() => onSelect(category === c.id ? "all" : c.id)}
-          aria-pressed={category === c.id}
-        >
-          <span
-            className={`category-emoji category-icon-${c.id}`}
-            aria-hidden="true"
-          />
-          <span className="category-copy">
-            <strong>{c.title}</strong>
-            <span>{c.description}</span>
-          </span>
-          <ChevronRight size={23} />
-        </button>
-      ))}
-    </div>
-  );
-}
-
+const COLORS = [
+  "#ffae21",
+  "#28a9ef",
+  "#f84e7b",
+  "#30bf66",
+  "#a143ec",
+  "#10b4b8",
+  "#ffc62e",
+];
 export function ExerciseCard({
   exercise,
-  grade,
+  index,
   result,
   hasDraft,
   onOpen,
+  onView,
 }: {
   exercise: Exercise;
-  grade: number;
+  index: number;
   result?: Result;
   hasDraft: boolean;
   onOpen: () => void;
+  onView: () => void;
 }) {
-  const { theme } = useTheme();
+  const number = Number(exercise.id.match(/-(\d+)$/)?.[1] ?? index + 1);
   return (
-    <article className="exercise-card">
-      <button
-        className="card-image-button"
-        onClick={onOpen}
-        aria-label={`Mở ${exercise.title}`}
-      >
-        <img
-          className={`card-image ${exercise.image === "hero" ? "explorer-image" : ""}`}
-          src={themeAsset(theme, exercise.image)}
-          alt={
-            theme === "garden"
-              ? "Bạn thú nhỏ khám phá kiến thức trong khu vườn"
-              : theme === "space"
-                ? "Nhà du hành nhỏ khám phá vũ trụ"
-                : exercise.image === "triceratops"
-                  ? "Khủng long nhỏ khám phá dấu chân trong rừng"
-                  : "Bạn nhỏ và khủng long cùng khám phá khu rừng"
-          }
-        />
-      </button>
-      <h3>
-        <button onClick={onOpen}>{exercise.title}</button>
-      </h3>
-      <div className="card-meta">
-        <span>
-          <GraduationCap size={25} fill="currentColor" />
-          Lớp {grade}
-        </span>
+    <article className={`exercise-card ${result ? "is-complete" : ""}`}>
+      <div className="exercise-top">
         <span
-          className={`status ${result ? "done" : hasDraft ? "in-progress" : ""}`}
+          className="number-badge"
+          style={{ color: COLORS[(number - 1) % COLORS.length] }}
+          aria-hidden="true"
         >
-          {result
-            ? `Đã làm · ${result.score}/${result.total}`
-            : hasDraft
-              ? "Đang làm"
-              : "Chưa làm"}
+          <svg viewBox="0 0 40 44" shapeRendering="crispEdges">
+            <path
+              d="M10 2h20v3h5v5h3v24h-3v5h-5v3H10v-3H5v-5H2V10h3V5h5z"
+              fill="#10234b"
+            />
+            <path
+              d="M11 5h18v3h5v4h1v20h-3v5h-5v2H11v-3H7v-5H5V12h3V8h3z"
+              fill="currentColor"
+            />
+            <path d="M11 7h15v2H12v4H9v9H7V12h3V9h1z" fill="#ffffff88" />
+          </svg>
+          <span>{number}</span>
+        </span>
+        <div className="exercise-name">
+          <h2>{exercise.title}</h2>
+          <span
+            className={`status ${result ? "done" : hasDraft ? "in-progress" : ""}`}
+          >
+            {result ? <Check size={13} /> : <Clock3 size={13} />}
+            {result ? "Đã làm" : hasDraft ? "Đang làm" : "Chưa làm"}
+          </span>
+        </div>
+        <span className="card-charm">
+          <PixelIcon
+            name={(["star", "book", "flag"] as const)[index % 3]}
+            size={22}
+          />
         </span>
       </div>
-      <button className="start-button" onClick={onOpen}>
-        <Pencil size={25} fill="white" />
-        {result ? "Làm lại" : hasDraft ? "Tiếp tục" : "Làm bài"}
-      </button>
+      <dl className="exercise-stats">
+        <div>
+          <dt>Kết quả:</dt>
+          <dd>{result ? `${result.score}/${result.total} câu đúng` : "—"}</dd>
+        </div>
+        <div>
+          <dt>Thời gian:</dt>
+          <dd>{formatDuration(result?.elapsedSeconds)}</dd>
+        </div>
+      </dl>
+      <div className="card-actions">
+        {result ? (
+          <>
+            <button className="view-result-button" onClick={onView}>
+              Xem kết quả
+            </button>
+            <button className="retry-button" onClick={onOpen}>
+              {hasDraft ? "Tiếp tục" : "Làm lại"}
+            </button>
+          </>
+        ) : (
+          <button className="start-button" onClick={onOpen}>
+            {hasDraft ? "Tiếp tục" : "Làm bài"}
+          </button>
+        )}
+      </div>
     </article>
   );
 }
