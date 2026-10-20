@@ -9,6 +9,8 @@ import {
   SearchX,
   ShieldCheck,
   Trophy,
+  Grid2X2,
+  List,
 } from "lucide-react";
 import {
   CategoryCards,
@@ -16,6 +18,7 @@ import {
   ExerciseCard,
   Hero,
   Sidebar,
+  ThemeSwitcher,
 } from "./components";
 import {
   CATEGORIES,
@@ -51,6 +54,8 @@ function LearningApp() {
   const [schoolOpen, setSchoolOpen] = useState(true);
   const [exercise, setExercise] = useState<Exercise | null>(null);
   const [storageError, setStorageError] = useState(false);
+  const [preferencesOpen, setPreferencesOpen] = useState(false);
+  const [view, setView] = useState<"grid" | "list">("grid");
   const grade = saved.grade;
   const isExam = section === "timo" || section === "asmo";
   const exerciseId = exercise ? storageId(section, grade, exercise.id) : "";
@@ -98,6 +103,8 @@ function LearningApp() {
     onNavigate: navigate,
     onToggleExams: () => setExamsOpen((v) => !v),
     onToggleSchool: () => setSchoolOpen((v) => !v),
+    onProgress: () => setParentTab("results"),
+    onSettings: () => setPreferencesOpen(true),
   };
   const normalized = (s: string) =>
     s
@@ -132,43 +139,71 @@ function LearningApp() {
           onParent={() => setParentTab("results")}
         />
         <main id="main-content" className="content">
-          <div className="breadcrumbs" aria-label="Đường dẫn">
-            <button aria-label="Trang chủ" onClick={() => navigate("home")}>
-              <House size={18} fill="currentColor" />
-            </button>
-            <ChevronRight size={15} />
-            <button onClick={() => setMenuOpen(true)}>Lớp {grade}</button>
-            {section !== "home" ? (
-              <>
-                <span>/</span>
-                <span>{isExam ? "Các kỳ thi" : "Báo bài của trường"}</span>
-                <span>/</span>
-                <span aria-current="page">{SECTION_LABELS[section]}</span>
-              </>
+          <div className={theme === "garden" ? "garden-intro" : "page-intro"}>
+            {theme === "garden" ? (
+              <img
+                className="garden-intro-art"
+                src={`${import.meta.env.BASE_URL}assets/garden-banner.webp`}
+                alt=""
+              />
+            ) : null}
+            <div className="breadcrumbs" aria-label="Đường dẫn">
+              <button aria-label="Trang chủ" onClick={() => navigate("home")}>
+                <House size={18} fill="currentColor" />
+              </button>
+              <ChevronRight size={15} />
+              <button onClick={() => setMenuOpen(true)}>Lớp {grade}</button>
+              {section !== "home" ? (
+                <>
+                  <span>/</span>
+                  <span>{isExam ? "Các kỳ thi" : "Báo bài của trường"}</span>
+                  <span>/</span>
+                  <span aria-current="page">{SECTION_LABELS[section]}</span>
+                </>
+              ) : null}
+            </div>
+            {storageError ? (
+              <div className="storage-warning" role="alert">
+                Trình duyệt không cho phép lưu dữ liệu. Kết quả chỉ được giữ đến
+                khi tải lại trang.
+              </div>
+            ) : null}
+            <h1>
+              {section === "home"
+                ? "Hôm nay bé khám phá gì?"
+                : isExam
+                  ? selectedTitle
+                  : SECTION_LABELS[section]}
+            </h1>
+            {theme === "garden" ? (
+              <p className="garden-description">
+                Khám phá kiến thức cùng những người bạn nhỏ.
+                <br />
+                Hãy chọn danh mục hoặc bắt đầu làm bài ngay nhé!
+              </p>
             ) : null}
           </div>
-          {storageError ? (
-            <div className="storage-warning" role="alert">
-              Trình duyệt không cho phép lưu dữ liệu. Kết quả chỉ được giữ đến
-              khi tải lại trang.
-            </div>
-          ) : null}
           {section === "home" ? (
             <>
-              <h1>Hôm nay bé khám phá gì?</h1>
               <p className="home-description">
                 Chọn một hành trình và cùng{" "}
-                {theme === "space" ? "nhà du hành" : "Khủng Long"} học thêm điều
-                mới nhé!
+                {theme === "space"
+                  ? "nhà du hành"
+                  : theme === "garden"
+                    ? "các bạn thú nhỏ"
+                    : "Khủng Long"}{" "}
+                học thêm điều mới nhé!
               </p>
               <div className="home-grid">
                 <button onClick={() => navigate("timo")}>
                   <img
                     src={themeAsset(theme, "dino")}
                     alt={
-                      theme === "space"
-                        ? "Nhà du hành khám phá vũ trụ"
-                        : "Khủng long khám phá"
+                      theme === "garden"
+                        ? "Bạn sóc khám phá kiến thức"
+                        : theme === "space"
+                          ? "Nhà du hành khám phá vũ trụ"
+                          : "Khủng long khám phá"
                     }
                   />
                   <span>
@@ -182,9 +217,11 @@ function LearningApp() {
                   <img
                     src={themeAsset(theme, "triceratops")}
                     alt={
-                      theme === "space"
-                        ? "Nhà du hành đọc sách"
-                        : "Khủng long tìm tòi"
+                      theme === "garden"
+                        ? "Bạn mèo đọc sách"
+                        : theme === "space"
+                          ? "Nhà du hành đọc sách"
+                          : "Khủng long tìm tòi"
                     }
                   />
                   <span>
@@ -198,7 +235,6 @@ function LearningApp() {
             </>
           ) : (
             <>
-              <h1>{isExam ? selectedTitle : SECTION_LABELS[section]}</h1>
               {isExam ? (
                 <CategoryCards
                   category={category}
@@ -214,15 +250,46 @@ function LearningApp() {
                 </p>
               )}
               <div className="list-heading">
-                <h2>
-                  {search.trim()
-                    ? "Kết quả tìm kiếm"
-                    : category === "topic"
-                      ? "Chọn chủ đề"
-                      : isExam
-                        ? "Danh sách đề"
-                        : "Bài tập của bé"}
-                </h2>
+                <div>
+                  <h2>
+                    {search.trim()
+                      ? "Kết quả tìm kiếm"
+                      : category === "topic"
+                        ? "Chọn chủ đề"
+                        : isExam
+                          ? theme === "garden"
+                            ? "Danh sách đề bài"
+                            : "Danh sách đề"
+                          : "Bài tập của bé"}
+                  </h2>
+                  {theme === "garden" ? (
+                    <p className="garden-list-description">
+                      Chọn đề bài và cùng luyện tập mỗi ngày nhé!
+                    </p>
+                  ) : null}
+                </div>
+                {theme === "garden" ? (
+                  <div
+                    className="view-switcher"
+                    role="group"
+                    aria-label="Kiểu hiển thị bài tập"
+                  >
+                    <button
+                      aria-label="Dạng lưới"
+                      aria-pressed={view === "grid"}
+                      onClick={() => setView("grid")}
+                    >
+                      <Grid2X2 size={19} />
+                    </button>
+                    <button
+                      aria-label="Dạng danh sách"
+                      aria-pressed={view === "list"}
+                      onClick={() => setView("list")}
+                    >
+                      <List size={21} />
+                    </button>
+                  </div>
+                ) : null}
                 {category !== "all" ? (
                   <button
                     className="text-button"
@@ -237,7 +304,9 @@ function LearningApp() {
                 ) : null}
               </div>
               {exercises.length ? (
-                <div className="exercise-grid">
+                <div
+                  className={`exercise-grid ${theme === "garden" && view === "list" ? "exercise-list" : ""}`}
+                >
                   {exercises.map((e) => {
                     const id = storageId(section, grade, e.id);
                     return (
@@ -274,6 +343,13 @@ function LearningApp() {
             </>
           )}
         </main>
+        {theme === "garden" ? (
+          <img
+            className="garden-meadow"
+            src={`${import.meta.env.BASE_URL}assets/garden-footer.webp`}
+            alt=""
+          />
+        ) : null}
       </div>
       {menuOpen ? (
         <Dialog
@@ -282,6 +358,21 @@ function LearningApp() {
           className="drawer"
         >
           <Sidebar {...sidebarProps} onClose={() => setMenuOpen(false)} />
+        </Dialog>
+      ) : null}
+      {preferencesOpen ? (
+        <Dialog
+          title="Cài đặt giao diện"
+          onClose={() => setPreferencesOpen(false)}
+          className="preferences-dialog"
+        >
+          <h2>Cài đặt giao diện</h2>
+          <p>Chọn không gian học tập bé yêu thích.</p>
+          <ThemeSwitcher />
+          <p className="sample-notice">
+            Lựa chọn được ghi nhớ trên trình duyệt này. Bài tập và kết quả được
+            giữ nguyên khi đổi giao diện.
+          </p>
         </Dialog>
       ) : null}
       {parentTab ? (

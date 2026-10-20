@@ -20,7 +20,7 @@ npm run preview
 
 ## Chức năng
 
-- Hai giao diện Khủng long / Vũ trụ, chuyển bằng bộ chọn dưới logo (trên điện thoại: mở menu). Giao diện được ghi nhớ riêng, dùng chung bài tập và kết quả.
+- Ba giao diện Khủng long / Vũ trụ / Vườn học tập, chuyển bằng bộ chọn dưới logo (trên điện thoại: mở menu). Giao diện được ghi nhớ riêng, dùng chung bài tập và kết quả. Vườn học tập có chế độ xem dạng lưới/danh sách và lối tắt vào tiến độ, cài đặt giao diện.
 
 - Chọn lớp 1–5; tìm bài tập có hoặc không có dấu tiếng Việt.
 - TIMO, ASMO: tất cả đề, đề vòng loại, đề Quốc gia, luyện theo chủ đề.

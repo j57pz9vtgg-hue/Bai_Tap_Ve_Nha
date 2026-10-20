@@ -1,0 +1,532 @@
+/* Third theme: a warm, botanical reading corner. */
+.page-intro + .category-grid {
+  margin-top: 15px;
+}
+.theme-switcher {
+  flex-wrap: wrap;
+}
+.theme-switcher button {
+  flex: 1 1 calc(50% - 4px);
+}
+.theme-switcher button:last-child {
+  flex-basis: 100%;
+}
+.theme-switcher svg {
+  flex-shrink: 0;
+}
+.preferences-dialog > p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #6b8075;
+  margin-top: 12px;
+}
+.preferences-dialog .theme-switcher {
+  margin: 20px 0;
+}
+.preferences-dialog .theme-switcher button {
+  min-height: 43px;
+  font-size: 13px;
+}
+.app-layout.theme-garden {
+  --ink: #173f31;
+  --teal: #34845d;
+  --cream: #fffdf6;
+  --orange: #3d9861;
+  color: #214d3c;
+  background: #fffdf6;
+}
+.app-layout.theme-garden .main-shell {
+  position: relative;
+  background: #fffdf8;
+  isolation: isolate;
+}
+.app-layout.theme-garden .content {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 66px;
+}
+.app-layout.theme-garden .sidebar {
+  background: linear-gradient(100deg, #f4f8ee, #edf6e9);
+  border-color: #e1ebdc;
+}
+.app-layout.theme-garden .brand {
+  color: #326341;
+}
+.app-layout.theme-garden .brand > span > span {
+  color: #ca832d;
+}
+.app-layout.theme-garden .brand-dino {
+  width: 55px;
+  height: 63px;
+}
+.app-layout.theme-garden .theme-switcher {
+  background: #e9f0df;
+  border-color: #dbe7d2;
+}
+.app-layout.theme-garden .theme-switcher button {
+  color: #63816a;
+}
+.app-layout.theme-garden .theme-switcher button[aria-pressed="true"] {
+  background: #fffef7;
+  color: #39764f;
+}
+.app-layout.theme-garden .grade-picker {
+  background: #ffffff65;
+  border: 1px solid #dde8d7;
+  border-radius: 12px;
+  padding: 10px;
+  margin: 12px 0;
+}
+.app-layout.theme-garden .grade-picker label {
+  color: #527654;
+}
+.app-layout.theme-garden .select-wrap select {
+  border-color: #d5e3cd;
+  background: #fffef9;
+  color: #284f3c;
+}
+.app-layout.theme-garden .nav-row {
+  color: #315841;
+}
+.app-layout.theme-garden .nav-row > svg:first-child {
+  color: #3b7455;
+}
+.app-layout.theme-garden .nav-row:hover {
+  background: #e5eedc;
+}
+.app-layout.theme-garden .nav-parent.selected,
+.app-layout.theme-garden .school-parent {
+  background: #e1edda;
+}
+.app-layout.theme-garden .exam-link.active {
+  background: #dcebd5;
+  color: #296749;
+}
+.app-layout.theme-garden .all-exams.current,
+.app-layout.theme-garden .subject-nav .active {
+  background: #e0edda;
+  color: #30704b;
+}
+.app-layout.theme-garden .subnav-branch {
+  border-color: #d2e3c7;
+}
+.app-layout.theme-garden .subnav-branch button.current,
+.app-layout.theme-garden .subnav-branch button:hover {
+  color: #36784f;
+}
+.garden-shortcuts {
+  margin: 18px 3px 0;
+  padding-top: 12px;
+  border-top: 1px solid #d9e6d2;
+}
+.app-layout.theme-garden .hero {
+  background: #fffef9;
+  height: 64px;
+  border-bottom: 1px solid #f0eee2;
+}
+.app-layout.theme-garden .hero-tools {
+  height: 64px;
+  padding: 10px 25px;
+  justify-content: space-between;
+}
+.app-layout.theme-garden .search-box {
+  width: 56%;
+  max-width: 630px;
+  height: 41px;
+  background: #f8f7f1;
+  border-color: #e7e6dc;
+  color: #7d8279;
+  border-radius: 13px;
+}
+.app-layout.theme-garden .search-box input {
+  color: #355341;
+  font-size: 14px;
+}
+.app-layout.theme-garden .search-box input::placeholder {
+  color: #989c90;
+}
+.app-layout.theme-garden .parent-button {
+  background: transparent;
+  color: #344e43;
+  font-size: 14px;
+}
+.app-layout.theme-garden .avatar {
+  background: #ecdfcb;
+  color: #8b633c;
+}
+.app-layout.theme-garden .mobile-brand {
+  display: none;
+}
+.garden-intro {
+  min-height: 205px;
+  margin: 0 -24px;
+  padding: 0 24px 25px;
+  background: #fffdf4 url("/assets/garden-banner.webp") right center / auto 100%
+    no-repeat;
+}
+.app-layout.theme-garden .breadcrumbs {
+  color: #628c68;
+  min-height: 49px;
+}
+.app-layout.theme-garden .garden-intro h1 {
+  max-width: 49%;
+  font-size: 36px;
+  margin-top: 5px;
+  line-height: 1.2;
+  color: #234f3c;
+}
+.garden-description {
+  max-width: 48%;
+  color: #697763;
+  font-size: 13px;
+  line-height: 1.85;
+  margin-top: 10px;
+}
+.app-layout.theme-garden .category-grid {
+  margin-top: 15px;
+}
+.app-layout.theme-garden .category-card {
+  background: #fff5d8;
+  border: 1px solid #f7edcf;
+  color: #274e3c;
+  border-radius: 14px;
+  min-height: 98px;
+}
+.app-layout.theme-garden .category-card.gold {
+  background: #edf6fc;
+  border-color: #e7f0f4;
+}
+.app-layout.theme-garden .category-card.green {
+  background: #eff7e9;
+  border-color: #e6efde;
+}
+.app-layout.theme-garden .category-card.chosen {
+  border: 2px solid #76a177;
+}
+.app-layout.theme-garden .category-copy > span {
+  color: #687863;
+  font-size: 13px;
+}
+.app-layout.theme-garden .category-card > svg {
+  width: 28px;
+  height: 28px;
+  padding: 5px;
+  border-radius: 50%;
+  background: #f8eac2;
+  color: #94642d;
+}
+.app-layout.theme-garden .category-card.gold > svg {
+  background: #d7eaff;
+  color: #376d9d;
+}
+.app-layout.theme-garden .category-card.green > svg {
+  background: #dcefd7;
+  color: #4c8c5a;
+}
+.app-layout.theme-garden .list-heading {
+  margin-top: 22px;
+  gap: 12px;
+}
+.app-layout.theme-garden .list-heading > div:first-child {
+  flex: 1;
+}
+.app-layout.theme-garden .list-heading h2 {
+  color: #28503d;
+}
+.garden-list-description {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #727f6b;
+  margin-top: 4px;
+}
+.view-switcher {
+  display: flex;
+  padding: 4px;
+  gap: 3px;
+  border: 1px solid #dedfd2;
+  border-radius: 10px;
+  background: #fffef8;
+  flex-shrink: 0;
+}
+.view-switcher button {
+  display: grid;
+  place-items: center;
+  min-width: 34px;
+  min-height: 31px;
+  border-radius: 7px;
+  color: #879580;
+  background: transparent;
+}
+.view-switcher button[aria-pressed="true"] {
+  background: #5c9c6b;
+  color: white;
+}
+.app-layout.theme-garden .exercise-card {
+  background: #fffefb;
+  border: 1px solid #ecebde;
+  box-shadow: 0 5px 14px #52573305;
+  border-radius: 13px;
+}
+.app-layout.theme-garden .card-image-button {
+  background: #f7f0dc;
+}
+.app-layout.theme-garden .exercise-card h3 {
+  color: #234e3d;
+}
+.app-layout.theme-garden .card-meta > span:first-child {
+  background: #f1f4ef;
+  color: #57725b;
+  padding: 5px 8px;
+  border-radius: 7px;
+}
+.app-layout.theme-garden .card-meta svg {
+  color: #65836a;
+}
+.app-layout.theme-garden .status {
+  background: #fff0eb;
+  color: #c57860;
+}
+.app-layout.theme-garden .status.done {
+  background: #e1efdc;
+  color: #50824e;
+}
+.app-layout.theme-garden .status.in-progress {
+  background: #fcf1cc;
+  color: #8d7844;
+}
+.app-layout.theme-garden .start-button {
+  background: linear-gradient(100deg, #3b9860, #5aa56a);
+  color: white;
+  border-radius: 9px;
+}
+.app-layout.theme-garden .start-button svg {
+  stroke: white;
+  fill: transparent;
+  filter: none;
+}
+.app-layout.theme-garden .home-grid > button {
+  background: #fffdf5;
+  border-color: #e5eadb;
+}
+.app-layout.theme-garden .sample-footer {
+  color: #84947b;
+}
+.garden-meadow {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 115px;
+  object-fit: fill;
+  pointer-events: none;
+}
+.app-layout.theme-garden .dialog {
+  background: #fffdf5;
+  border-color: #dfe8d7;
+}
+.app-layout.theme-garden .primary-button {
+  background: #438e58;
+}
+.app-layout.theme-garden .secondary-button {
+  color: #467450;
+  background: #e9f1df;
+}
+.app-layout.theme-garden .text-button {
+  color: #53815b;
+}
+.app-layout.theme-garden .dialog-close {
+  color: #6d8b6b;
+  background: #f1f4e7;
+}
+.app-layout.theme-garden .timer {
+  background: #e9f2dd;
+  color: #5b8150;
+}
+.app-layout.theme-garden .quiz-progress > span {
+  background: #76aa69;
+}
+.app-layout.theme-garden .question-navigator .current-question {
+  outline-color: #67975b;
+}
+.app-layout.theme-garden .quiz-confirm {
+  background: #fffdf4f5;
+}
+.app-layout.theme-garden .parent-title-icon,
+.app-layout.theme-garden .parent-tabs {
+  background: #edf3e3;
+}
+.app-layout.theme-garden .parent-tabs button.active {
+  color: #4d8551;
+}
+.app-layout.theme-garden .empty-state {
+  background: #f7faef;
+  border-color: #dce6d1;
+}
+.app-layout.theme-garden .exercise-list {
+  grid-template-columns: 1fr;
+}
+.app-layout.theme-garden .exercise-list .exercise-card {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr) 150px;
+  grid-template-rows: auto auto;
+  column-gap: 18px;
+  align-items: center;
+  padding: 12px;
+}
+.app-layout.theme-garden .exercise-list .card-image-button {
+  grid-row: 1 / 3;
+  aspect-ratio: 2.3;
+}
+.app-layout.theme-garden .exercise-list h3 {
+  margin: 0;
+  align-self: end;
+}
+.app-layout.theme-garden .exercise-list .card-meta {
+  margin: 5px 0 0;
+  align-self: start;
+  justify-content: start;
+  gap: 12px;
+}
+.app-layout.theme-garden .exercise-list .start-button {
+  grid-column: 3;
+  grid-row: 1 / 3;
+}
+@media (min-width: 761px) and (max-width: 1100px) {
+  .garden-intro {
+    margin-inline: -18px;
+    padding-inline: 18px;
+    min-height: 200px;
+    background-position: 65% center;
+  }
+  .app-layout.theme-garden .garden-intro h1 {
+    font-size: 31px;
+    max-width: 53%;
+  }
+  .garden-description {
+    font-size: 12px;
+    max-width: 48%;
+  }
+  .app-layout.theme-garden .exercise-list .exercise-card {
+    grid-template-columns: 125px minmax(0, 1fr);
+  }
+  .app-layout.theme-garden .exercise-list .card-image-button {
+    grid-row: 1 / 4;
+  }
+  .app-layout.theme-garden .exercise-list .start-button {
+    grid-column: 2;
+    grid-row: 3;
+    margin-top: 9px;
+  }
+}
+@media (max-width: 760px) {
+  .app-layout.theme-garden .hero,
+  .app-layout.theme-garden .hero-tools {
+    height: 64px;
+  }
+  .app-layout.theme-garden .hero-tools {
+    padding: 10px 15px;
+    gap: 10px;
+  }
+  .app-layout.theme-garden .search-box {
+    width: auto;
+    flex: 1;
+    height: 43px;
+  }
+  .app-layout.theme-garden .mobile-menu {
+    background: #edf3e6;
+    color: #628263;
+  }
+  .app-layout.theme-garden .parent-button {
+    padding: 4px;
+  }
+  .app-layout.theme-garden .garden-intro {
+    margin-inline: -16px;
+    padding: 0 16px 155px;
+    min-height: 330px;
+    background-position: 75% bottom;
+    background-size: auto 170px;
+    background-repeat: no-repeat;
+    background-color: #fffdf4;
+  }
+  .app-layout.theme-garden .garden-intro h1 {
+    max-width: 100%;
+    font-size: 31px;
+    margin-top: 0;
+  }
+  .garden-description {
+    max-width: 100%;
+    font-size: 12px;
+    margin-top: 7px;
+  }
+  .app-layout.theme-garden .category-card {
+    min-height: 79px;
+  }
+  .app-layout.theme-garden .list-heading {
+    align-items: center;
+  }
+  .app-layout.theme-garden .list-heading h2 {
+    font-size: 25px;
+  }
+  .garden-list-description {
+    font-size: 11px;
+    max-width: 245px;
+  }
+  .app-layout.theme-garden .exercise-list .exercise-card {
+    grid-template-columns: 95px minmax(0, 1fr);
+    column-gap: 12px;
+  }
+  .app-layout.theme-garden .exercise-list .card-image-button {
+    grid-row: 1 / 4;
+    aspect-ratio: 1;
+    height: 96px;
+  }
+  .app-layout.theme-garden .exercise-list h3 {
+    font-size: 20px;
+  }
+  .app-layout.theme-garden .exercise-list .card-meta {
+    font-size: 11px;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .app-layout.theme-garden .exercise-list .card-meta > span:first-child {
+    padding: 3px 5px;
+  }
+  .app-layout.theme-garden .exercise-list .status {
+    padding: 4px 6px;
+    font-size: 10px;
+  }
+  .app-layout.theme-garden .exercise-list .start-button {
+    grid-column: 2;
+    grid-row: 3;
+    margin-top: 9px;
+    font-size: 15px;
+    min-height: 38px;
+  }
+}
+
+@media (min-width: 761px) {
+  .garden-intro {
+    position: relative;
+    isolation: isolate;
+    background-image: none;
+  }
+  .garden-intro-art {
+    position: absolute;
+    z-index: -1;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    object-fit: cover;
+    object-position: right center;
+    mask-image: linear-gradient(to right, transparent, #000 18%);
+    pointer-events: none;
+  }
+}
+@media (max-width: 760px) {
+  .garden-intro-art {
+    display: none;
+  }
+}

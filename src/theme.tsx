@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 
-export type Theme = "dinosaur" | "space";
+export type Theme = "dinosaur" | "space" | "garden";
 const THEME_KEY = "homework-theme:v1";
 const ThemeContext = createContext<{
   theme: Theme;
@@ -14,7 +14,8 @@ const ThemeContext = createContext<{
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
     try {
-      return localStorage.getItem(THEME_KEY) === "space" ? "space" : "dinosaur";
+      const stored = localStorage.getItem(THEME_KEY);
+      return stored === "space" || stored === "garden" ? stored : "dinosaur";
     } catch {
       return "dinosaur";
     }
@@ -27,7 +28,14 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
     document
       .querySelector('meta[name="theme-color"]')
-      ?.setAttribute("content", theme === "space" ? "#eaf7ff" : "#fffbee");
+      ?.setAttribute(
+        "content",
+        theme === "space"
+          ? "#eaf7ff"
+          : theme === "garden"
+            ? "#eef6e9"
+            : "#fffbee",
+      );
   }, [theme]);
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
@@ -44,5 +52,13 @@ export function themeAsset(theme: Theme, name: string) {
     triceratops: "space-triceratops",
     hero: "space-card",
   };
-  return `${import.meta.env.BASE_URL}assets/${theme === "space" ? (spaceAssets[name] ?? name) : name}.webp`;
+  const gardenAssets: Record<string, string> = {
+    logo: "garden-logo",
+    dino: "garden-dino",
+    triceratops: "garden-triceratops",
+    hero: "garden-card",
+  };
+  const assets =
+    theme === "space" ? spaceAssets : theme === "garden" ? gardenAssets : {};
+  return `${import.meta.env.BASE_URL}assets/${assets[name] ?? name}.webp`;
 }

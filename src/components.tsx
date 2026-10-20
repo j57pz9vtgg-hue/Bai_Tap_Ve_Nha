@@ -16,13 +16,16 @@ import {
   Trophy,
   Rocket,
   Trees,
+  Sprout,
+  ChartNoAxesColumnIncreasing,
+  Settings,
   X,
 } from "lucide-react";
 import { CATEGORIES, SECTION_LABELS } from "./data";
 import type { Category, Exercise, Result, Section } from "./data";
 import { themeAsset, useTheme } from "./theme";
 
-function ThemeSwitcher() {
+export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
   return (
     <div className="theme-switcher" role="group" aria-label="Chọn giao diện">
@@ -39,6 +42,13 @@ function ThemeSwitcher() {
       >
         <Rocket size={16} />
         Vũ trụ
+      </button>
+      <button
+        aria-pressed={theme === "garden"}
+        onClick={() => setTheme("garden")}
+      >
+        <Sprout size={16} />
+        Vườn học tập
       </button>
     </div>
   );
@@ -102,6 +112,8 @@ type SidebarProps = {
   onToggleExams: () => void;
   onToggleSchool: () => void;
   onClose?: () => void;
+  onProgress: () => void;
+  onSettings: () => void;
 };
 const subjects = [
   { id: "toan" as const, icon: Calculator },
@@ -124,6 +136,8 @@ export function Sidebar(props: SidebarProps) {
     onToggleExams,
     onToggleSchool,
     onClose,
+    onProgress,
+    onSettings,
   } = props;
   const isExam = section === "timo" || section === "asmo";
   const navigate = (s: Section, c: Category = "all") => {
@@ -255,8 +269,36 @@ export function Sidebar(props: SidebarProps) {
           </div>
         ) : null}
       </nav>
+      {theme === "garden" ? (
+        <div className="garden-shortcuts">
+          <button
+            className="nav-row"
+            onClick={() => {
+              onClose?.();
+              onProgress();
+            }}
+          >
+            <ChartNoAxesColumnIncreasing size={21} />
+            <span>Tiến độ học tập</span>
+          </button>
+          <button
+            className="nav-row"
+            onClick={() => {
+              onClose?.();
+              onSettings();
+            }}
+          >
+            <Settings size={21} />
+            <span>Cài đặt</span>
+          </button>
+        </div>
+      ) : null}
       {theme === "dinosaur" ? (
-        <img className="sidebar-art" src={`${import.meta.env.BASE_URL}assets/sidebar.webp`} alt="" />
+        <img
+          className="sidebar-art"
+          src={`${import.meta.env.BASE_URL}assets/sidebar.webp`}
+          alt=""
+        />
       ) : null}
     </aside>
   );
@@ -318,13 +360,13 @@ export function Hero({
           </div>
           <p>Khám phá tri thức – Vươn tới những ước mơ!</p>
         </div>
-      ) : (
+      ) : theme === "dinosaur" ? (
         <div className="wooden-sign" aria-label="Khám phá tri thức mỗi ngày">
           <span>KHÁM PHÁ</span>
           <span>TRI THỨC</span>
           <span>MỖI NGÀY!</span>
         </div>
-      )}
+      ) : null}
       <div className="mobile-brand">
         Góc học tập <span>của bé</span>
       </div>
@@ -388,11 +430,13 @@ export function ExerciseCard({
           className={`card-image ${exercise.image === "hero" ? "explorer-image" : ""}`}
           src={themeAsset(theme, exercise.image)}
           alt={
-            theme === "space"
-              ? "Nhà du hành nhỏ khám phá vũ trụ"
-              : exercise.image === "triceratops"
-                ? "Khủng long nhỏ khám phá dấu chân trong rừng"
-                : "Bạn nhỏ và khủng long cùng khám phá khu rừng"
+            theme === "garden"
+              ? "Bạn thú nhỏ khám phá kiến thức trong khu vườn"
+              : theme === "space"
+                ? "Nhà du hành nhỏ khám phá vũ trụ"
+                : exercise.image === "triceratops"
+                  ? "Khủng long nhỏ khám phá dấu chân trong rừng"
+                  : "Bạn nhỏ và khủng long cùng khám phá khu rừng"
           }
         />
       </button>

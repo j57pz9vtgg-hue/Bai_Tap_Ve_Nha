@@ -131,9 +131,11 @@ export default function Quiz({
           <img
             src={themeAsset(theme, exercise.image)}
             alt={
-              theme === "space"
-                ? "Cuộc phiêu lưu học tập cùng nhà du hành"
-                : "Cuộc phiêu lưu học tập cùng khủng long"
+              theme === "garden"
+                ? "Cuộc phiêu lưu học tập cùng các bạn thú nhỏ"
+                : theme === "space"
+                  ? "Cuộc phiêu lưu học tập cùng nhà du hành"
+                  : "Cuộc phiêu lưu học tập cùng khủng long"
             }
           />
           <span className="intro-kicker">Sẵn sàng khám phá chưa?</span>
