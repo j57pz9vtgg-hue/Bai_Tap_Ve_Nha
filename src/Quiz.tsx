@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Dialog } from "./components";
 import { publicAsset } from "./components";
+import { ParentPassword } from "./ParentPassword";
 import { PaperWorkspace } from "./PaperWorkspace";
 import { getPracticeQuestions, getQuestions } from "./data";
 import type { Draft, Exercise, Result, Section } from "./data";
@@ -28,6 +29,7 @@ type QuizProps = {
   onSave: (draft: Draft) => void;
   onFinish: (result: Result) => void;
   onClose: () => void;
+  onSetupPassword: () => void;
   onConfigure?: (grade: number, section: Section, exercise: Exercise) => void;
 };
 
@@ -41,6 +43,7 @@ export default function Quiz({
   onSave,
   onFinish,
   onClose,
+  onSetupPassword,
   onConfigure,
 }: QuizProps) {
   const [reviewingSaved, setReviewingSaved] = useState(Boolean(initialResult));
@@ -65,6 +68,7 @@ export default function Quiz({
   const [stage, setStage] = useState<"work" | "confirm" | "result" | "review">(
     initialResult ? "result" : "work",
   );
+  const [resultUnlocked, setResultUnlocked] = useState(false);
   const [confirmLeave, setConfirmLeave] = useState(false);
   const submitted = useRef(Boolean(initialResult));
   const score =
@@ -139,6 +143,7 @@ export default function Quiz({
   const restart = () => {
     submitted.current = false;
     setReviewingSaved(false);
+    setResultUnlocked(false);
     setQuestions(getPracticeQuestions(grade, section, exercise));
     setAnswers({});
     setIndex(0);
@@ -150,7 +155,7 @@ export default function Quiz({
     <Dialog
       title={exercise.title}
       onClose={requestClose}
-      className={`quiz-dialog ${isPaper && ((started && stage !== "result") || (isTopic && stage !== "result")) ? "paper-dialog" : ""}`}
+      className={`quiz-dialog ${stage === "result" ? "result-dialog" : ""} ${isPaper && ((started && stage !== "result") || (isTopic && stage !== "result")) ? "paper-dialog" : ""}`}
     >
       {!started && !isTopic ? (
         <div className="quiz-intro">
@@ -184,6 +189,15 @@ export default function Quiz({
             <ArrowRight size={20} />
           </button>
         </div>
+      ) : stage === "result" && !resultUnlocked ? (
+        <div className="result-lock">
+          <ParentPassword
+            purpose="review"
+            onCancel={onClose}
+            onSetup={onSetupPassword}
+            onUnlock={() => setResultUnlocked(true)}
+          />
+        </div>
       ) : stage === "result" ? (
         <div className="result-view">
           <div className="result-trophy">
@@ -214,8 +228,10 @@ export default function Quiz({
             className="start-button"
             disabled={reviewingSaved && !initialResult?.answers}
             onClick={() => {
-              setStage("review");
-              setIndex(0);
+              if (resultUnlocked) {
+                setStage("review");
+                setIndex(0);
+              }
             }}
           >
             Xem đáp án & lời giải
@@ -261,7 +277,7 @@ export default function Quiz({
         />
       ) : (
         <div
-          className="quiz-workspace"
+          className={`quiz-workspace ${stage === "review" ? "is-review" : ""}`}
           inert={stage === "confirm" || confirmLeave}
         >
           <div className="quiz-header">
@@ -286,50 +302,54 @@ export default function Quiz({
               style={{ width: `${(answered / questions.length) * 100}%` }}
             />
           </div>
-          <div className="question-heading">
-            <strong>
-              Câu {index + 1}
-              <span> / {total}</span>
-            </strong>
-            <span>
-              {stage === "review"
-                ? "Cùng xem lại nhé!"
-                : `Đã trả lời ${answered}/${questions.length}`}
-            </span>
-          </div>
-          <h3 className="question-text">{current.text}</h3>
-          <div className="answers">
-            {current.options.map((option, i) => (
-              <button
-                key={i}
-                disabled={stage === "review"}
-                className={`answer ${answers[index] === i ? "selected-answer" : ""} ${stage === "review" && current.correct === i ? "correct-answer" : ""} ${stage === "review" && answers[index] === i && current.correct !== i ? "wrong-answer" : ""}`}
-                onClick={() => setAnswers((a) => ({ ...a, [index]: i }))}
-              >
-                <span className="answer-letter">{"ABCD"[i]}</span>
-                <span>{option}</span>
-                {stage === "review" && current.correct === i ? (
-                  <Check size={22} />
-                ) : answers[index] === i ? (
-                  <span className="answer-check">
-                    <Check size={17} />
-                  </span>
-                ) : null}
-              </button>
-            ))}
-          </div>
-          {stage === "review" ? (
-            <div className="explanation">
-              <strong>
-                <Sparkles size={18} />
-                Lời giải
-              </strong>
-              <p>{current.explanation}</p>
-              {answers[index] === undefined ? (
-                <small>Bé chưa trả lời câu này.</small>
-              ) : null}
+          <div className="quiz-review-row">
+            <div className="quiz-review-question">
+              <div className="question-heading">
+                <strong>
+                  Câu {index + 1}
+                  <span> / {total}</span>
+                </strong>
+                <span>
+                  {stage === "review"
+                    ? "Cùng xem lại nhé!"
+                    : `Đã trả lời ${answered}/${questions.length}`}
+                </span>
+              </div>
+              <h3 className="question-text">{current.text}</h3>
+              <div className="answers">
+                {current.options.map((option, i) => (
+                  <button
+                    key={i}
+                    disabled={stage === "review"}
+                    className={`answer ${answers[index] === i ? "selected-answer" : ""} ${stage === "review" && current.correct === i ? "correct-answer" : ""} ${stage === "review" && answers[index] === i && current.correct !== i ? "wrong-answer" : ""}`}
+                    onClick={() => setAnswers((a) => ({ ...a, [index]: i }))}
+                  >
+                    <span className="answer-letter">{"ABCD"[i]}</span>
+                    <span>{option}</span>
+                    {stage === "review" && current.correct === i ? (
+                      <Check size={22} />
+                    ) : answers[index] === i ? (
+                      <span className="answer-check">
+                        <Check size={17} />
+                      </span>
+                    ) : null}
+                  </button>
+                ))}
+              </div>
             </div>
-          ) : null}
+            {stage === "review" ? (
+              <div className="explanation">
+                <strong>
+                  <Sparkles size={18} />
+                  Lời giải
+                </strong>
+                <p>{current.explanation}</p>
+                {answers[index] === undefined ? (
+                  <small>Bé chưa trả lời câu này.</small>
+                ) : null}
+              </div>
+            ) : null}
+          </div>
           <div className="quiz-bottom">
             <button
               className="secondary-button"

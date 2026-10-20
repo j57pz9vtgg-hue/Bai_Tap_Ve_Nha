@@ -305,66 +305,74 @@ export function PaperWorkspace(p: Props) {
           )}
         </header>
         <article
-          className="exam-paper"
+          className={`exam-paper ${p.review ? "review-paper" : ""}`}
           aria-label={p.review ? "Đáp án và lời giải" : "Bài luyện tập Toán"}
         >
           {!topic && (
             <div className="paper-heading">
               <h1>{p.review ? "ĐÁP ÁN & LỜI GIẢI" : "BÀI LUYỆN TẬP TOÁN"}</h1>
               <p>Đề minh họa • {p.questions.length} câu</p>
-              <div>Chọn một đáp án cho mỗi câu hỏi.</div>
+              <div>
+                {p.review
+                  ? "Đối chiếu câu trả lời và xem lời giải cho từng câu."
+                  : "Chọn một đáp án cho mỗi câu hỏi."}
+              </div>
             </div>
           )}
           {p.questions.map((q, i) => (
-            <fieldset
+            <div
               key={i}
-              className="paper-question"
-              disabled={!p.started || p.review}
+              className={
+                p.review
+                  ? "paper-question-row review-row"
+                  : "paper-question-row"
+              }
             >
-              <legend>
-                <strong>Câu {i + 1}.</strong> {q.text}
-              </legend>
-              <div className="paper-options">
-                {q.options.map((option, j) => (
-                  <label
-                    key={j}
-                    className={`${p.review && q.correct === j ? "paper-correct" : ""} ${p.review && p.answers[i] === j && q.correct !== j ? "paper-wrong" : ""}`}
-                  >
-                    <input
-                      type="radio"
-                      name={`paper-question-${i}`}
-                      checked={p.answers[i] === j}
-                      onChange={() => p.onAnswer(i, j)}
-                    />
-                    <span>
-                      {"ABCD"[j]}. {option}
-                    </span>
-                  </label>
-                ))}
-              </div>
+              <fieldset
+                className="paper-question"
+                disabled={!p.started || p.review}
+              >
+                <legend>
+                  <strong>Câu {i + 1}.</strong> {q.text}
+                </legend>
+                <div className="paper-options">
+                  {q.options.map((option, j) => (
+                    <label
+                      key={j}
+                      className={`${p.review && q.correct === j ? "paper-correct" : ""} ${p.review && p.answers[i] === j && q.correct !== j ? "paper-wrong" : ""}`}
+                    >
+                      <input
+                        type="radio"
+                        name={`paper-question-${i}`}
+                        checked={p.answers[i] === j}
+                        onChange={() => p.onAnswer(i, j)}
+                      />
+                      <span>
+                        {"ABCD"[j]}. {option}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
               {p.review && (
-                <div className="paper-explanation">
+                <aside
+                  className="paper-explanation"
+                  aria-label={`Đáp án và lời giải câu ${i + 1}`}
+                >
+                  <strong className="review-answer-heading">
+                    Lời giải câu {i + 1}
+                  </strong>
                   <b>Đáp án {"ABCD"[q.correct]}.</b> {q.explanation}
                   {p.answers[i] === undefined && (
                     <span> Bé chưa trả lời câu này.</span>
                   )}
-                </div>
+                </aside>
               )}
-            </fieldset>
-          ))}
-          <footer className="paper-end">
-            <div>
-              Đã trả lời {answered}/{p.questions.length} câu
-              <br />
-              {p.review
-                ? "Bài luyện tập minh họa"
-                : `Còn ${p.questions.length - answered} câu chưa trả lời`}
             </div>
-            {p.started && !p.review ? submit : null}
-            <small>
-              Chủ đề và bài mẫu minh họa • Thời gian làm bài: 15 phút
-            </small>
-          </footer>
+          ))}
+          {p.started && !p.review && (
+            <footer className="paper-end">{submit}</footer>
+          )}
         </article>
       </div>
     </div>

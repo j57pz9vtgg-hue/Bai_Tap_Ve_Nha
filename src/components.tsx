@@ -1,6 +1,15 @@
 import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
-import { X, ChevronDown, Check, Clock3 } from "lucide-react";
+import {
+  X,
+  ChevronDown,
+  Check,
+  Clock3,
+  BookOpen,
+  Flag,
+  Star,
+} from "lucide-react";
+import { useLearningTheme } from "./theme";
 import { SECTION_LABELS } from "./data";
 import type { Category, Exercise, Result, Section } from "./data";
 
@@ -61,6 +70,13 @@ export function PixelIcon({
   name: "book" | "flag" | "star";
   size?: number;
 }) {
+  const { theme } = useLearningTheme();
+  if (theme !== "pixel") {
+    const Icon = name === "book" ? BookOpen : name === "flag" ? Flag : Star;
+    return (
+      <Icon size={size} aria-hidden="true" className="smooth-theme-icon" />
+    );
+  }
   return (
     <svg
       width={size}
@@ -233,6 +249,8 @@ export function ExerciseCard({
   onOpen: () => void;
   onView: () => void;
 }) {
+  const { theme } = useLearningTheme();
+  const artIndex = index % 16;
   const number = Number(exercise.id.match(/-(\d+)$/)?.[1] ?? index + 1);
   return (
     <article className={`exercise-card ${result ? "is-complete" : ""}`}>
@@ -253,7 +271,9 @@ export function ExerciseCard({
             />
             <path d="M11 7h15v2H12v4H9v9H7V12h3V9h1z" fill="#ffffff88" />
           </svg>
-          <span>{number}</span>
+          <span>
+            {theme === "pixel" ? number : String(number).padStart(2, "0")}
+          </span>
         </span>
         <div className="exercise-name">
           <h2>{exercise.title}</h2>
@@ -274,13 +294,22 @@ export function ExerciseCard({
       <dl className="exercise-stats">
         <div>
           <dt>Kết quả:</dt>
-          <dd>{result ? `${result.score}/${result.total} câu đúng` : "—"}</dd>
+          <dd>{result ? "Đã lưu" : "—"}</dd>
         </div>
         <div>
           <dt>Thời gian:</dt>
           <dd>{formatDuration(result?.elapsedSeconds)}</dd>
         </div>
       </dl>
+      {theme !== "pixel" && (
+        <span
+          className="exercise-card-art"
+          aria-hidden="true"
+          style={{
+            backgroundPosition: `${((artIndex % 4) * 100) / 3}% ${(Math.floor(artIndex / 4) * 100) / 3}%`,
+          }}
+        />
+      )}
       <div className="card-actions">
         {result ? (
           <>

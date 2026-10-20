@@ -12,14 +12,13 @@ import {
   UsersRound,
   X,
   ArrowRight,
-  Trophy,
+  Palette,
+  LogOut,
 } from "lucide-react";
 import {
   Dialog,
   ExerciseCard,
-  PixelIcon,
   StudyFilters,
-  formatDuration,
   publicAsset,
 } from "./components";
 import {
@@ -32,12 +31,10 @@ import {
 } from "./data";
 import type { Category, Draft, Exercise, Result, Section } from "./data";
 
-import {
-  BackgroundPicker,
-  readBackground,
-  saveBackground,
-} from "./BackgroundPicker";
-import type { Background } from "./BackgroundPicker";
+import { ThemePicker } from "./ThemePicker";
+import { THEMES, useLearningTheme } from "./theme";
+import { useAppAccess } from "./AccessGate";
+import { ParentPassword } from "./ParentPassword";
 
 const Quiz = lazy(() => import("./Quiz"));
 type Selection = {
@@ -48,6 +45,9 @@ type Selection = {
 };
 
 export default function App() {
+  const { theme } = useLearningTheme();
+  const { logout } = useAppAccess();
+  const [appearanceOpen, setAppearanceOpen] = useState(false);
   const mastheadRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const element = mastheadRef.current;
@@ -67,25 +67,12 @@ export default function App() {
       );
     };
   }, []);
-  const [background, setBackground] = useState<Background>(readBackground);
-  const [backgroundError, setBackgroundError] = useState(false);
-  useEffect(() => {
-    document.documentElement.dataset.background = background;
-    try {
-      saveBackground(background);
-      setBackgroundError(false);
-    } catch {
-      setBackgroundError(true);
-    }
-  }, [background]);
   const [saved, setSaved] = useState(readSaved);
   const [section, setSection] = useState<Section>("timo");
   const [schoolSubject, setSchoolSubject] = useState<Section>("toan");
   const [category, setCategory] = useState<Category>("qualifier");
   const [search, setSearch] = useState("");
-  const [parentTab, setParentTab] = useState<
-    "results" | "help" | "background" | null
-  >(null);
+  const [parentOpen, setParentOpen] = useState(false);
   const [selection, setSelection] = useState<Selection | null>(null);
   const [storageError, setStorageError] = useState(false);
   const grade = saved.grade;
@@ -101,9 +88,6 @@ export default function App() {
       .toLowerCase();
   const exercises = getExercises(section, category).filter((e) =>
     normalized(e.title).includes(normalized(search.trim())),
-  );
-  const results = Object.values(saved.results).sort((a, b) =>
-    b.date.localeCompare(a.date),
   );
   const categoryTitle =
     category === "all"
@@ -146,22 +130,6 @@ export default function App() {
       return { ...s, drafts, results: { ...s.results, [result.id]: result } };
     });
   }, []);
-  function viewPastResult(result: Result) {
-    const id = result.id.split(":").slice(2).join(":");
-    const exercise = [
-      ...getExercises(result.section, "all"),
-      ...getExercises(result.section, "topic"),
-    ].find((e) => e.id === id);
-    if (exercise) {
-      setParentTab(null);
-      setSelection({
-        exercise,
-        grade: result.grade,
-        section: result.section,
-        mode: "result",
-      });
-    }
-  }
 
   return (
     <div className="pixel-app">
@@ -179,7 +147,11 @@ export default function App() {
                 setCategory(isExam ? "qualifier" : "all");
               }}
             >
-              <img src={publicAsset("pixel-book")} alt="" />
+              {theme === "pixel" ? (
+                <img src={publicAsset("pixel-book")} alt="" />
+              ) : (
+                <BookOpen className="modern-brand-icon" size={44} />
+              )}
               <span>Góc học tập của bé</span>
               <span className="brand-spark" aria-hidden="true">
                 ✦
@@ -206,8 +178,24 @@ export default function App() {
                 ) : null}
               </div>
               <button
+                className="icon-button appearance-button"
+                aria-label="Chọn giao diện"
+                title="Chọn giao diện"
+                onClick={() => setAppearanceOpen(true)}
+              >
+                <Palette size={22} />
+              </button>
+              <button
+                className="icon-button logout-button"
+                aria-label="Đăng xuất"
+                title="Đăng xuất"
+                onClick={logout}
+              >
+                <LogOut size={21} />
+              </button>
+              <button
                 className="parent-button"
-                onClick={() => setParentTab("results")}
+                onClick={() => setParentOpen(true)}
               >
                 <UsersRound size={23} fill="currentColor" />
                 <span>Phụ huynh</span>
@@ -217,10 +205,10 @@ export default function App() {
         </header>
         <div className="adventure-banner">
           <h1 className="banner-message">Học vui, chinh phục từng bài!</h1>
-          {background !== "pixel" && (
+          {theme !== "pixel" && (
             <img
-              className="theme-banner-art"
-              src={publicAsset(`${background}-hero`)}
+              className="modern-hero"
+              src={publicAsset(THEMES.find((t) => t.id === theme)!.hero)}
               alt=""
               aria-hidden="true"
             />
@@ -300,139 +288,21 @@ export default function App() {
       <footer className="world-footer" aria-hidden="true">
         <img src={publicAsset("pixel-ground")} alt="" />
       </footer>
-      {parentTab ? (
+      {appearanceOpen && (
+        <ThemePicker onClose={() => setAppearanceOpen(false)} />
+      )}
+      {parentOpen && (
         <Dialog
-          title="Góc phụ huynh"
-          onClose={() => setParentTab(null)}
-          className="parent-dialog"
+          title="Mật khẩu phụ huynh"
+          className="parent-dialog password-settings-dialog"
+          onClose={() => setParentOpen(false)}
         >
-          <div className="parent-title-icon">
-            <UsersRound size={29} />
-          </div>
-          <h2>Góc phụ huynh</h2>
-          <p className="parent-subtitle">Cùng bé chinh phục từng bài học.</p>
-          <div className="parent-tabs">
-            <button
-              className={parentTab === "results" ? "active" : ""}
-              onClick={() => setParentTab("results")}
-            >
-              Kết quả của bé
-            </button>
-            <button
-              className={parentTab === "help" ? "active" : ""}
-              onClick={() => setParentTab("help")}
-            >
-              Hướng dẫn
-            </button>
-            <button
-              className={parentTab === "background" ? "active" : ""}
-              onClick={() => setParentTab("background")}
-            >
-              Hình nền
-            </button>
-          </div>
-          {parentTab === "background" ? (
-            <>
-              <BackgroundPicker value={background} onChange={setBackground} />
-              {backgroundError && (
-                <p className="storage-warning" role="alert">
-                  Không thể lưu lựa chọn hình nền. Bạn vẫn có thể đổi nền trong
-                  phiên này.
-                </p>
-              )}
-            </>
-          ) : parentTab === "results" ? (
-            <>
-              <p className="local-profile">
-                Hồ sơ trên trình duyệt này · {results.length} bài đã làm
-              </p>
-              {results.length ? (
-                <div className="result-list">
-                  {results.map((r) => (
-                    <button
-                      className="result-row"
-                      key={r.id}
-                      onClick={() => viewPastResult(r)}
-                    >
-                      <span className="result-list-icon">
-                        <Trophy size={23} />
-                      </span>
-                      <div>
-                        <strong>{r.title}</strong>
-                        <span>
-                          {SECTION_LABELS[r.section]} · Lớp {r.grade} ·{" "}
-                          {new Intl.DateTimeFormat("vi-VN", {
-                            dateStyle: "short",
-                          }).format(new Date(r.date))}
-                        </span>
-                        <small>{formatDuration(r.elapsedSeconds)}</small>
-                      </div>
-                      <b>
-                        {r.score}/{r.total}
-                      </b>
-                    </button>
-                  ))}
-                </div>
-              ) : (
-                <div className="empty-state">
-                  <PixelIcon name="book" size={43} />
-                  <h3>Hành trình của bé sắp bắt đầu</h3>
-                  <p>
-                    Chọn một đề và bắt đầu làm bài. Kết quả sẽ được lưu sau khi
-                    nộp bài.
-                  </p>
-                  <button
-                    className="primary-button"
-                    onClick={() => setParentTab(null)}
-                  >
-                    Khám phá bài tập
-                    <ArrowRight size={18} />
-                  </button>
-                </div>
-              )}
-              <p className="sample-notice">
-                Hiển thị lần làm gần nhất của mỗi bài. Các kết quả cũ vẫn được
-                giữ; bài cũ chưa có thời gian sẽ hiển thị “—”.
-              </p>
-            </>
-          ) : (
-            <div className="help-content">
-              <ol>
-                <li>
-                  <strong>Chọn nội dung học</strong>
-                  <p>
-                    Chọn lớp 1–5, chương trình TIMO/ASMO hoặc Báo bài của
-                    trường, môn học và nội dung luyện tập ở thanh lọc.
-                  </p>
-                </li>
-                <li>
-                  <strong>Làm bài</strong>
-                  <p>
-                    Mỗi bài có 15 phút. Bé có thể chuyển câu, tạm đóng bài rồi
-                    quay lại. Đồng hồ vẫn tiếp tục chạy và bài tự nộp khi hết
-                    giờ.
-                  </p>
-                </li>
-                <li>
-                  <strong>Xem tiến bộ</strong>
-                  <p>
-                    Sau khi nộp, điểm và thời gian thực tế được lưu. Chọn “Xem
-                    kết quả” để xem lại hoặc “Làm lại” để luyện tập thêm.
-                  </p>
-                </li>
-                <li>
-                  <strong>Lưu trên thiết bị</strong>
-                  <p>
-                    Nội dung hiện là bài luyện tập mẫu, không phải đề thi chính
-                    thức. Chưa có tài khoản hoặc đồng bộ giữa các thiết bị. Xóa
-                    dữ liệu trình duyệt sẽ xóa kết quả.
-                  </p>
-                </li>
-              </ol>
-            </div>
-          )}
+          <ParentPassword
+            purpose="settings"
+            onCancel={() => setParentOpen(false)}
+          />
         </Dialog>
-      ) : null}
+      )}
       {selection ? (
         <Suspense
           fallback={
@@ -463,6 +333,10 @@ export default function App() {
                 ? saved.results[exerciseId]
                 : undefined
             }
+            onSetupPassword={() => {
+              setSelection(null);
+              setParentOpen(true);
+            }}
             onSave={saveDraft}
             onFinish={finish}
             onClose={() => setSelection(null)}

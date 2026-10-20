@@ -755,3 +755,60 @@
     width: 100%;
   }
 }
+
+/* Parent review pairs each question with its solution in a wider reading area. */
+.exam-paper.review-paper {
+  width: min(100%, 1200px);
+}
+.review-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid #d4dfef;
+}
+.review-row .paper-question {
+  border-bottom: 0;
+  padding: 0;
+}
+.review-row .paper-explanation {
+  margin-top: 0;
+  min-width: 0;
+  font-size: 16px;
+}
+.review-answer-heading {
+  display: block;
+  color: #075081;
+  margin-bottom: 6px;
+}
+.review-row .paper-options {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 16px;
+}
+.dialog.quiz-dialog:has(.quiz-workspace.is-review) {
+  width: min(1100px, calc(100% - 32px));
+}
+.quiz-workspace.is-review .quiz-review-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+.quiz-workspace.is-review .explanation {
+  margin-top: 0;
+}
+@media (max-width: 760px) {
+  .review-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    padding: 20px 0;
+  }
+  .quiz-workspace.is-review .quiz-review-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+  .review-row .paper-explanation {
+    font-size: 14px;
+  }
+}

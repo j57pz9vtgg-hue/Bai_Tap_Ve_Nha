@@ -103,10 +103,10 @@ jobs:
             await new Promise(resolve => setTimeout(resolve, 5000));
           }
           assert.ok(verified, 'The public site must serve the current production application.');
-          for (const path of [expected, '/Bai_Tap_Ve_Nha/assets/pixel-hero.webp', '/Bai_Tap_Ve_Nha/assets/pixel-world.webp', '/Bai_Tap_Ve_Nha/assets/pixel-book.webp', '/Bai_Tap_Ve_Nha/assets/pixel-ground.webp', '/Bai_Tap_Ve_Nha/fonts/baloo2.ttf', ...['dinosaur-hero', 'dinosaur-foliage', 'rabbit-hero', 'rabbit-foliage', 'purple-hero', 'robot-hero', 'space-hero'].map(name => `/Bai_Tap_Ve_Nha/assets/${name}.webp`)]) {
+          for (const path of [expected, '/Bai_Tap_Ve_Nha/assets/pixel-hero.webp', '/Bai_Tap_Ve_Nha/assets/pixel-world.webp', '/Bai_Tap_Ve_Nha/assets/pixel-book.webp', '/Bai_Tap_Ve_Nha/assets/pixel-ground.webp', '/Bai_Tap_Ve_Nha/fonts/baloo2.ttf', ...['park-hero','museum-hero','island-hero','robot-lab-hero','cosmos-hero','bunny-hero','prehistoric-sprites','island-sprites','robot-sprites','cosmos-sprites','bunny-sprites'].map(name => `/Bai_Tap_Ve_Nha/assets/${name}.webp`)]) {
             const response = await fetch(new URL(path, site), { signal: AbortSignal.timeout(15000) });
             assert.ok(response.ok, `Missing public asset: ${path}`);
             assert.ok(Number(response.headers.get('content-length')) > 0 || (await response.arrayBuffer()).byteLength > 0);
           }
-          console.log('Verified the live production application, JavaScript, all six background themes and font.');
+          console.log('Verified the live production application, JavaScript, all theme artwork and font.');
           JS
