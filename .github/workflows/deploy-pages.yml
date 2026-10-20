@@ -15,26 +15,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
+    outputs:
+      main_js: ${{ steps.bundle.outputs.main_js }}
     steps:
       - uses: actions/checkout@v4
-      - name: Use the application workflow as the Pages source
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const repo = { owner: context.repo.owner, repo: context.repo.repo };
-            const { data: site } = await github.request('GET /repos/{owner}/{repo}/pages', repo);
-            if (site.build_type !== 'workflow') {
-              await github.request('PATCH /repos/{owner}/{repo}/pages', {
-                ...repo,
-                build_type: 'workflow',
-              });
-              core.info('Changed Pages source to GitHub Actions.');
-            } else {
-              core.info('Pages already uses GitHub Actions.');
-            }
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -44,6 +28,15 @@ jobs:
         run: npm run build
         env:
           VITE_BASE_PATH: /Bai_Tap_Ve_Nha/
+      - name: Record the production entry point
+        id: bundle
+        run: |
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const html = fs.readFileSync('dist/index.html', 'utf8');
+          const source = html.match(/<script[^>]*src="([^"]+\.js)"/)[1];
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `main_js=${source}\n`);
+          JS
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -55,10 +48,58 @@ jobs:
     permissions:
       pages: write
       id-token: write
+      actions: read
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Wait for any legacy Pages publication to finish
+        uses: actions/github-script@v7
+        with:
+          script: |
+            for (let attempt = 0; attempt < 24; attempt++) {
+              const { data } = await github.rest.actions.listWorkflowRunsForRepo({
+                owner: context.repo.owner, repo: context.repo.repo,
+                head_sha: context.sha, per_page: 100,
+              });
+              const pending = data.workflow_runs.filter(run =>
+                run.id !== context.runId &&
+                (run.path?.startsWith('dynamic/pages/') || run.name === 'pages build and deployment') &&
+                run.status !== 'completed'
+              );
+              if (!pending.length) return;
+              core.info('Waiting for the legacy Pages job before publishing the application.');
+              await new Promise(resolve => setTimeout(resolve, 10000));
+            }
+            throw new Error('Legacy Pages publication did not finish within four minutes.');
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify the public application and its assets
+        env:
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+          EXPECTED_SCRIPT: ${{ needs.build.outputs.main_js }}
+        run: |
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict';
+          const site = process.env.SITE_URL;
+          const expected = process.env.EXPECTED_SCRIPT;
+          assert.ok(expected, 'The build must provide an entry point.');
+          let verified = false;
+          for (let attempt = 0; attempt < 18; attempt++) {
+            const response = await fetch(`${site}?deployment=${process.env.GITHUB_SHA}-${attempt}`, { cache: 'no-store' });
+            const html = await response.text();
+            if (response.ok && html.includes(expected) && !html.includes('/src/main.tsx')) {
+              verified = true;
+              break;
+            }
+            await new Promise(resolve => setTimeout(resolve, 5000));
+          }
+          assert.ok(verified, 'The public site must serve the current production application.');
+          for (const path of [expected, '/Bai_Tap_Ve_Nha/assets/hero.webp', '/Bai_Tap_Ve_Nha/assets/space-hero.webp', '/Bai_Tap_Ve_Nha/assets/space-logo.webp', '/Bai_Tap_Ve_Nha/fonts/baloo2.ttf']) {
+            const response = await fetch(new URL(path, site));
+            assert.ok(response.ok, `Missing public asset: ${path}`);
+            assert.ok(Number(response.headers.get('content-length')) > 0 || (await response.arrayBuffer()).byteLength > 0);
+          }
+          console.log('Verified the live production application, JavaScript, both themes and font.');
+          JS
