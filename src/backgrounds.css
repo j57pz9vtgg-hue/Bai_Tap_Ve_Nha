@@ -1,0 +1,155 @@
+/* Only artwork and backdrop colors vary. All interactive UI shares the existing styles. */
+:root[data-background="dinosaur"] {
+  --scene: url("/assets/dinosaur-hero.webp");
+  --decoration: url("/assets/dinosaur-foliage.webp");
+  --backdrop: #fffdf1;
+}
+:root[data-background="rabbit"] {
+  --scene: url("/assets/rabbit-hero.webp");
+  --decoration: url("/assets/rabbit-foliage.webp");
+  --backdrop: #f4f9ed;
+}
+:root[data-background="purple"] {
+  --scene: url("/assets/purple-hero.webp");
+  --decoration: url("/assets/purple-hero.webp");
+  --catalog-art: none;
+  --backdrop: #f5f0ff;
+}
+:root[data-background="robot"] {
+  --scene: url("/assets/robot-hero.webp");
+  --decoration: url("/assets/robot-hero.webp");
+  --catalog-art: none;
+  --backdrop: #edfaff;
+}
+:root[data-background="space"] {
+  --scene: url("/assets/space-hero.webp");
+  --decoration: url("/assets/space-hero.webp");
+  --catalog-art: none;
+  --backdrop: #edf5ff;
+}
+:root[data-background]:not([data-background="pixel"]) .pixel-app {
+  background-color: var(--backdrop);
+  background-image: var(--catalog-art, var(--decoration));
+  background-position: center bottom;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}
+:root[data-background]:not([data-background="pixel"]) .adventure-banner {
+  background-image: var(--scene);
+  background-position: center 40%;
+  image-rendering: auto;
+}
+:root[data-background]:not([data-background="pixel"]) .banner-message {
+  background: #fffffff0;
+  border-radius: 8px;
+}
+:root[data-background]:not([data-background="pixel"]) .world-footer {
+  background: var(--decoration) center bottom / cover no-repeat;
+}
+:root[data-background]:not([data-background="pixel"]) .world-footer img {
+  visibility: hidden;
+}
+:root[data-background]:not([data-background="pixel"]) .paper-world {
+  background-color: var(--backdrop);
+  background-image: var(--scene);
+  background-position: center top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+:root[data-background="dinosaur"]:not([data-background="pixel"]) .pixel-app {
+  background-image: var(--decoration), var(--decoration);
+  background-position:
+    left bottom,
+    right bottom;
+  background-size:
+    280px auto,
+    280px auto;
+}
+:root[data-background="rabbit"]:not([data-background="pixel"]) .paper-world {
+  background-image: var(--decoration), var(--scene);
+  background-position:
+    center bottom,
+    center top;
+  background-size:
+    100% auto,
+    cover;
+}
+.background-picker {
+  border: 0;
+  padding: 0;
+  margin: 22px 0 0;
+  min-width: 0;
+}
+.background-picker legend {
+  font-weight: 700;
+  font-size: 19px;
+}
+.background-picker > p {
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 8px 0 18px;
+  color: #506a9a;
+}
+.background-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.background-option {
+  border: 2px solid #d7e9f5;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.background-option.is-selected {
+  border-color: #008fa7;
+}
+.background-option > img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  display: block;
+}
+.background-option > span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 10px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.background-option input {
+  accent-color: #008fa7;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  flex-shrink: 0;
+}
+@media (max-width: 650px) {
+  .background-options {
+    gap: 10px;
+  }
+  .background-option > span {
+    font-size: 13px;
+    padding: 10px 7px;
+  }
+  .background-option > img {
+    height: 80px;
+  }
+  :root[data-background="dinosaur"]:not([data-background="pixel"]) .pixel-app {
+    background-size:
+      150px auto,
+      150px auto;
+  }
+}
+
+:root[data-background="rabbit"]:not([data-background="pixel"])
+  .adventure-banner {
+  background-position: center 70%;
+}
+:root[data-background="space"]:not([data-background="pixel"])
+  .adventure-banner {
+  background-position: center 65%;
+}

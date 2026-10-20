@@ -1,4 +1,11 @@
-import { lazy, Suspense, useCallback, useEffect, useState } from "react";
+import {
+  lazy,
+  Suspense,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   BookOpen,
   Search,
@@ -25,6 +32,13 @@ import {
 } from "./data";
 import type { Category, Draft, Exercise, Result, Section } from "./data";
 
+import {
+  BackgroundPicker,
+  readBackground,
+  saveBackground,
+} from "./BackgroundPicker";
+import type { Background } from "./BackgroundPicker";
+
 const Quiz = lazy(() => import("./Quiz"));
 type Selection = {
   exercise: Exercise;
@@ -34,12 +48,44 @@ type Selection = {
 };
 
 export default function App() {
+  const mastheadRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const element = mastheadRef.current;
+    if (!element) return;
+    const updateHeight = () =>
+      document.documentElement.style.setProperty(
+        "--catalog-masthead-height",
+        `${element.getBoundingClientRect().height}px`,
+      );
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(element);
+    updateHeight();
+    return () => {
+      observer.disconnect();
+      document.documentElement.style.removeProperty(
+        "--catalog-masthead-height",
+      );
+    };
+  }, []);
+  const [background, setBackground] = useState<Background>(readBackground);
+  const [backgroundError, setBackgroundError] = useState(false);
+  useEffect(() => {
+    document.documentElement.dataset.background = background;
+    try {
+      saveBackground(background);
+      setBackgroundError(false);
+    } catch {
+      setBackgroundError(true);
+    }
+  }, [background]);
   const [saved, setSaved] = useState(readSaved);
   const [section, setSection] = useState<Section>("timo");
   const [schoolSubject, setSchoolSubject] = useState<Section>("toan");
   const [category, setCategory] = useState<Category>("qualifier");
   const [search, setSearch] = useState("");
-  const [parentTab, setParentTab] = useState<"results" | "help" | null>(null);
+  const [parentTab, setParentTab] = useState<
+    "results" | "help" | "background" | null
+  >(null);
   const [selection, setSelection] = useState<Selection | null>(null);
   const [storageError, setStorageError] = useState(false);
   const grade = saved.grade;
@@ -122,73 +168,77 @@ export default function App() {
       <a className="skip-link" href="#main-content">
         Đến nội dung chính
       </a>
-      <header className="site-header">
-        <div className="header-inner">
-          <button
-            className="brand"
-            aria-label="Góc học tập của bé — Danh sách đề"
-            onClick={() => {
-              setSearch("");
-              setCategory(isExam ? "qualifier" : "all");
-            }}
-          >
-            <img src={publicAsset("pixel-book")} alt="" />
-            <span>Góc học tập của bé</span>
-            <span className="brand-spark" aria-hidden="true">
-              ✦
-            </span>
-          </button>
-          <div className="header-tools">
-            <div className="search-box">
-              <Search size={21} />
-              <input
-                type="search"
-                aria-label="Tìm bài tập"
-                placeholder="Tìm bài tập"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              {search ? (
-                <button
-                  className="icon-button"
-                  aria-label="Xóa tìm kiếm"
-                  onClick={() => setSearch("")}
-                >
-                  <X size={17} />
-                </button>
-              ) : null}
-            </div>
+      <div className="catalog-masthead" ref={mastheadRef}>
+        <header className="site-header">
+          <div className="header-inner">
             <button
-              className="parent-button"
-              onClick={() => setParentTab("results")}
+              className="brand"
+              aria-label="Góc học tập của bé — Danh sách đề"
+              onClick={() => {
+                setSearch("");
+                setCategory(isExam ? "qualifier" : "all");
+              }}
             >
-              <UsersRound size={23} fill="currentColor" />
-              <span>Phụ huynh</span>
+              <img src={publicAsset("pixel-book")} alt="" />
+              <span>Góc học tập của bé</span>
+              <span className="brand-spark" aria-hidden="true">
+                ✦
+              </span>
             </button>
+            <div className="header-tools">
+              <div className="search-box">
+                <Search size={21} />
+                <input
+                  type="search"
+                  aria-label="Tìm bài tập"
+                  placeholder="Tìm bài tập"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                {search ? (
+                  <button
+                    className="icon-button"
+                    aria-label="Xóa tìm kiếm"
+                    onClick={() => setSearch("")}
+                  >
+                    <X size={17} />
+                  </button>
+                ) : null}
+              </div>
+              <button
+                className="parent-button"
+                onClick={() => setParentTab("results")}
+              >
+                <UsersRound size={23} fill="currentColor" />
+                <span>Phụ huynh</span>
+              </button>
+            </div>
           </div>
+        </header>
+        <div className="adventure-banner">
+          <h1 className="banner-message">Học vui, chinh phục từng bài!</h1>
         </div>
-      </header>
-      <div className="adventure-banner">
-        <h1 className="banner-message">Học vui, chinh phục từng bài!</h1>
+        <div className="page-content catalog-filter-bar">
+          <StudyFilters
+            grade={grade}
+            section={section}
+            category={category}
+            onGrade={(n) => setSaved((s) => ({ ...s, grade: n }))}
+            onProgram={changeProgram}
+            onSubject={(subject) => {
+              setSchoolSubject(subject);
+              setSection(subject);
+              setCategory("all");
+              setSearch("");
+            }}
+            onCategory={(c) => {
+              setCategory(c);
+              setSearch("");
+            }}
+          />
+        </div>
       </div>
       <main id="main-content" className="page-content">
-        <StudyFilters
-          grade={grade}
-          section={section}
-          category={category}
-          onGrade={(n) => setSaved((s) => ({ ...s, grade: n }))}
-          onProgram={changeProgram}
-          onSubject={(subject) => {
-            setSchoolSubject(subject);
-            setSection(subject);
-            setCategory("all");
-            setSearch("");
-          }}
-          onCategory={(c) => {
-            setCategory(c);
-            setSearch("");
-          }}
-        />
         {storageError ? (
           <p className="storage-warning" role="alert">
             Trình duyệt không cho phép lưu dữ liệu. Kết quả sẽ mất khi tải lại
@@ -279,8 +329,24 @@ export default function App() {
             >
               Hướng dẫn
             </button>
+            <button
+              className={parentTab === "background" ? "active" : ""}
+              onClick={() => setParentTab("background")}
+            >
+              Hình nền
+            </button>
           </div>
-          {parentTab === "results" ? (
+          {parentTab === "background" ? (
+            <>
+              <BackgroundPicker value={background} onChange={setBackground} />
+              {backgroundError && (
+                <p className="storage-warning" role="alert">
+                  Không thể lưu lựa chọn hình nền. Bạn vẫn có thể đổi nền trong
+                  phiên này.
+                </p>
+              )}
+            </>
+          ) : parentTab === "results" ? (
             <>
               <p className="local-profile">
                 Hồ sơ trên trình duyệt này · {results.length} bài đã làm

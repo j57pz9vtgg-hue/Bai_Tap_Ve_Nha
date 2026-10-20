@@ -1259,3 +1259,18 @@ button {
     font-size: 11px;
   }
 }
+
+/* Keep the complete catalog banner and filters visible while browsing sets. */
+html {
+  scroll-padding-top: calc(var(--catalog-masthead-height, 0px) + 12px);
+}
+.catalog-masthead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--backdrop, #d3f5ff);
+}
+.catalog-filter-bar {
+  display: flow-root;
+  padding-bottom: 0;
+}
