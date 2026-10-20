@@ -3,9 +3,7 @@ import {
   ArrowLeft,
   ArrowRight,
   BookOpen,
-  ChevronRight,
   GraduationCap,
-  House,
   SearchX,
   ShieldCheck,
   Trophy,
@@ -18,7 +16,7 @@ import {
   ExerciseCard,
   Hero,
   Sidebar,
-  ThemeSwitcher,
+  StudyFilters,
 } from "./components";
 import {
   CATEGORIES,
@@ -46,15 +44,13 @@ function LearningApp() {
   const { theme } = useTheme();
   const [saved, setSaved] = useState(readSaved);
   const [section, setSection] = useState<Section>("timo");
+  const [schoolSubject, setSchoolSubject] = useState<Section>("toan");
   const [category, setCategory] = useState<Category>("all");
   const [search, setSearch] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [parentTab, setParentTab] = useState<ParentTab | null>(null);
-  const [examsOpen, setExamsOpen] = useState(true);
-  const [schoolOpen, setSchoolOpen] = useState(true);
   const [exercise, setExercise] = useState<Exercise | null>(null);
   const [storageError, setStorageError] = useState(false);
-  const [preferencesOpen, setPreferencesOpen] = useState(false);
   const [view, setView] = useState<"grid" | "list">("grid");
   const grade = saved.grade;
   const isExam = section === "timo" || section === "asmo";
@@ -73,8 +69,6 @@ function LearningApp() {
     setSection(next);
     setCategory(nextCategory);
     setSearch("");
-    if (next === "timo" || next === "asmo") setExamsOpen(true);
-    else if (next !== "home") setSchoolOpen(true);
     setMenuOpen(false);
   }
 
@@ -94,17 +88,12 @@ function LearningApp() {
   }, []);
 
   const sidebarProps = {
-    grade,
-    section,
     category,
-    examsOpen,
-    schoolOpen,
-    onGrade: (n: number) => setSaved((s) => ({ ...s, grade: n })),
-    onNavigate: navigate,
-    onToggleExams: () => setExamsOpen((v) => !v),
-    onToggleSchool: () => setSchoolOpen((v) => !v),
-    onProgress: () => setParentTab("results"),
-    onSettings: () => setPreferencesOpen(true),
+    isExam,
+    onCategory: (next: Category) => {
+      setCategory(next);
+      setSearch("");
+    },
   };
   const normalized = (s: string) =>
     s
@@ -124,7 +113,7 @@ function LearningApp() {
       : `${CATEGORIES.find((c) => c.id === category)?.title} ${SECTION_LABELS[section]}`;
 
   return (
-    <div className={`app-layout theme-${theme}`}>
+    <div className={`app-layout catalog-layout theme-${theme}`}>
       <a className="skip-link" href="#main-content">
         Đến nội dung chính
       </a>
@@ -139,6 +128,18 @@ function LearningApp() {
           onParent={() => setParentTab("results")}
         />
         <main id="main-content" className="content">
+          <StudyFilters
+            grade={grade}
+            section={section}
+            onGrade={(n) => setSaved((s) => ({ ...s, grade: n }))}
+            onProgram={(program) =>
+              navigate(program === "school" ? schoolSubject : program)
+            }
+            onSubject={(subject) => {
+              setSchoolSubject(subject);
+              navigate(subject);
+            }}
+          />
           <div className={theme === "garden" ? "garden-intro" : "page-intro"}>
             {theme === "garden" ? (
               <img
@@ -147,21 +148,6 @@ function LearningApp() {
                 alt=""
               />
             ) : null}
-            <div className="breadcrumbs" aria-label="Đường dẫn">
-              <button aria-label="Trang chủ" onClick={() => navigate("home")}>
-                <House size={18} fill="currentColor" />
-              </button>
-              <ChevronRight size={15} />
-              <button onClick={() => setMenuOpen(true)}>Lớp {grade}</button>
-              {section !== "home" ? (
-                <>
-                  <span>/</span>
-                  <span>{isExam ? "Các kỳ thi" : "Báo bài của trường"}</span>
-                  <span>/</span>
-                  <span aria-current="page">{SECTION_LABELS[section]}</span>
-                </>
-              ) : null}
-            </div>
             {storageError ? (
               <div className="storage-warning" role="alert">
                 Trình duyệt không cho phép lưu dữ liệu. Kết quả chỉ được giữ đến
@@ -358,21 +344,6 @@ function LearningApp() {
           className="drawer"
         >
           <Sidebar {...sidebarProps} onClose={() => setMenuOpen(false)} />
-        </Dialog>
-      ) : null}
-      {preferencesOpen ? (
-        <Dialog
-          title="Cài đặt giao diện"
-          onClose={() => setPreferencesOpen(false)}
-          className="preferences-dialog"
-        >
-          <h2>Cài đặt giao diện</h2>
-          <p>Chọn không gian học tập bé yêu thích.</p>
-          <ThemeSwitcher />
-          <p className="sample-notice">
-            Lựa chọn được ghi nhớ trên trình duyệt này. Bài tập và kết quả được
-            giữ nguyên khi đổi giao diện.
-          </p>
         </Dialog>
       ) : null}
       {parentTab ? (

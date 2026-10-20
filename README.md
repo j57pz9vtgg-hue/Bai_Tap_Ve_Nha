@@ -48,3 +48,7 @@ Các đề, bài tập và lời giải hiện tại là **dữ liệu luyện t
 ## Công nghệ
 
 React 19, TypeScript, Vite, Lucide. Hình minh họa được tạo riêng theo mẫu thiết kế và tối ưu WebP. Phông chữ Baloo 2 và Be Vietnam Pro hỗ trợ tiếng Việt.
+
+## Bố cục và bộ lọc
+
+Menu trái gồm Tất cả đề, Đề vòng loại, Đề Quốc gia, Luyện theo chủ đề. Chọn lớp, chương trình (TIMO, ASMO, Báo bài của trường) và môn học trong thanh lọc phía trên danh sách. TIMO/ASMO hiện có bài Toán mẫu; các môn còn lại nằm trong chương trình Báo bài của trường. Xem tiến độ qua mục Phụ huynh.

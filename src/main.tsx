@@ -5,6 +5,7 @@ import "./styles.css";
 import "./themes.css";
 import "./layout.css";
 import "./garden.css";
+import "./catalog.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
