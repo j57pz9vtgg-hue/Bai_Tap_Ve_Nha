@@ -10,7 +10,7 @@ permissions:
 
 concurrency:
   group: github-pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -45,6 +45,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 12
     permissions:
       pages: write
       id-token: write
@@ -75,6 +76,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          timeout: 180000
       - name: Verify the public application and its assets
         env:
           SITE_URL: ${{ steps.deployment.outputs.page_url }}
@@ -86,18 +89,22 @@ jobs:
           const expected = process.env.EXPECTED_SCRIPT;
           assert.ok(expected, 'The build must provide an entry point.');
           let verified = false;
-          for (let attempt = 0; attempt < 18; attempt++) {
-            const response = await fetch(`${site}?deployment=${process.env.GITHUB_SHA}-${attempt}`, { cache: 'no-store' });
-            const html = await response.text();
-            if (response.ok && html.includes(expected) && !html.includes('/src/main.tsx')) {
-              verified = true;
-              break;
+          for (let attempt = 0; attempt < 12; attempt++) {
+            try {
+              const response = await fetch(`${site}?deployment=${process.env.GITHUB_SHA}-${attempt}`, { cache: 'no-store', signal: AbortSignal.timeout(10000) });
+              const html = await response.text();
+              if (response.ok && html.includes(expected) && !html.includes('/src/main.tsx')) {
+                verified = true;
+                break;
+              }
+            } catch (error) {
+              console.log(`Waiting for the published site: ${error.message}`);
             }
             await new Promise(resolve => setTimeout(resolve, 5000));
           }
           assert.ok(verified, 'The public site must serve the current production application.');
           for (const path of [expected, '/Bai_Tap_Ve_Nha/assets/pixel-hero.webp', '/Bai_Tap_Ve_Nha/assets/pixel-world.webp', '/Bai_Tap_Ve_Nha/assets/pixel-book.webp', '/Bai_Tap_Ve_Nha/assets/pixel-ground.webp', '/Bai_Tap_Ve_Nha/fonts/baloo2.ttf']) {
-            const response = await fetch(new URL(path, site));
+            const response = await fetch(new URL(path, site), { signal: AbortSignal.timeout(15000) });
             assert.ok(response.ok, `Missing public asset: ${path}`);
             assert.ok(Number(response.headers.get('content-length')) > 0 || (await response.arrayBuffer()).byteLength > 0);
           }
