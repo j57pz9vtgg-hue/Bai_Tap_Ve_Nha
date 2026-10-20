@@ -29,6 +29,7 @@ export type Draft = {
   answers: Record<number, number>;
   index: number;
   deadline: number;
+  questions?: Question[];
 };
 export type Saved = {
   version: 1;
@@ -77,19 +78,19 @@ export function getExercises(section: Section, category: Category): Exercise[] {
       return [
         {
           id: "logic",
-          title: "Tư duy logic",
+          title: "Dãy số và quy luật",
           category: "topic",
           topic: 0,
         },
         {
           id: "numbers",
-          title: "Khám phá số học",
+          title: "Phép tính và số học",
           category: "topic",
           topic: 1,
         },
         {
           id: "shapes",
-          title: "Thế giới hình học",
+          title: "Hình học và đếm hình",
           category: "topic",
           topic: 2,
         },
@@ -434,4 +435,75 @@ export function readSaved(): Saved {
     /* An unavailable or corrupted store starts a fresh local profile. */
   }
   return { version: 1, grade: 2, results: {}, drafts: {} };
+}
+
+// New sessions snapshot their questions; older drafts retain their original set.
+export function getPracticeQuestions(
+  grade: number,
+  section: Section,
+  exercise: Exercise,
+): Question[] {
+  if (section !== "timo" && section !== "asmo")
+    return getQuestions(grade, section, exercise);
+  if (exercise.category === "topic") {
+    return Array.from({ length: 25 }, (_, i) => {
+      const step = Math.min(grade + 1, 5) + (i % 3);
+      const first = 1 + i;
+      if (exercise.topic === 0) {
+        const last = first + step * 3;
+        return choice(
+          `Số tiếp theo trong dãy ${first}, ${first + step}, ${first + step * 2}, ${last}, … là số nào?`,
+          last + step,
+          [last + step - 1, last + step + 1, last + step + 2],
+          `Mỗi số tăng thêm ${step}. Số tiếp theo là ${last} + ${step} = ${last + step}.`,
+          i,
+        );
+      }
+      if (exercise.topic === 1) {
+        const a = grade * 3 + i,
+          b = (i % 7) + 2;
+        return choice(
+          `Tính: ${a} + ${b} = ?`,
+          a + b,
+          [a + b - 1, a + b + 1, a + b + 2],
+          `${a} + ${b} = ${a + b}. Đếm thêm ${b} từ ${a}.`,
+          i,
+        );
+      }
+      const sides = [3, 4, 4][i % 3],
+        names = ["tam giác", "hình vuông", "hình chữ nhật"];
+      const count = (i % 5) + 1;
+      return choice(
+        `Có ${count} ${names[i % 3]} riêng biệt. Các hình có tất cả bao nhiêu cạnh?`,
+        count * sides,
+        [count * sides - 1, count * sides + 1, count * sides + 2],
+        `Mỗi ${names[i % 3]} có ${sides} cạnh. Tổng số cạnh là ${Array(count).fill(sides).join(" + ")} = ${count * sides}.`,
+        i,
+      );
+    });
+  }
+  const original = getQuestions(grade, section, exercise);
+  const variant = Number(exercise.id.match(/-(\d+)$/)?.[1] ?? 1);
+  return [
+    ...original,
+    ...Array.from({ length: 25 - original.length }, (_, i) => {
+      const a = grade * 3 + variant + i,
+        b = (i % 6) + 2;
+      return i % 2 === 0
+        ? choice(
+            `Tính: ${a} + ${b} = ?`,
+            a + b,
+            [a + b - 1, a + b + 1, a + b + 2],
+            `${a} + ${b} = ${a + b}.`,
+            i,
+          )
+        : choice(
+            `Lan có ${a + b} nhãn vở, tặng bạn ${b} nhãn vở. Lan còn bao nhiêu nhãn vở?`,
+            a,
+            [a - 1, a + 1, a + 2],
+            `Số nhãn vở còn lại: ${a + b} − ${b} = ${a}.`,
+            i,
+          );
+    }),
+  ];
 }

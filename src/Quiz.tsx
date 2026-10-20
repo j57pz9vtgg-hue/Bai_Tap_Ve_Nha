@@ -14,7 +14,8 @@ import {
 } from "lucide-react";
 import { Dialog } from "./components";
 import { publicAsset } from "./components";
-import { getQuestions } from "./data";
+import { PaperWorkspace } from "./PaperWorkspace";
+import { getPracticeQuestions, getQuestions } from "./data";
 import type { Draft, Exercise, Result, Section } from "./data";
 
 type QuizProps = {
@@ -27,6 +28,7 @@ type QuizProps = {
   onSave: (draft: Draft) => void;
   onFinish: (result: Result) => void;
   onClose: () => void;
+  onConfigure?: (grade: number, section: Section, exercise: Exercise) => void;
 };
 
 export default function Quiz({
@@ -39,12 +41,18 @@ export default function Quiz({
   onSave,
   onFinish,
   onClose,
+  onConfigure,
 }: QuizProps) {
   const [reviewingSaved, setReviewingSaved] = useState(Boolean(initialResult));
-  const questions =
-    reviewingSaved && initialResult?.questions
-      ? initialResult.questions
-      : getQuestions(grade, section, exercise);
+  const isPaper = section === "timo" || section === "asmo";
+  const isTopic = isPaper && exercise.category === "topic";
+  const [questions, setQuestions] = useState(() =>
+    initialResult
+      ? (initialResult.questions ?? getQuestions(grade, section, exercise))
+      : draft
+        ? (draft.questions ?? getQuestions(grade, section, exercise))
+        : getPracticeQuestions(grade, section, exercise),
+  );
   const [started, setStarted] = useState(Boolean(draft || initialResult));
   const [answers, setAnswers] = useState<Record<number, number>>(
     initialResult?.answers ?? draft?.answers ?? {},
@@ -92,7 +100,7 @@ export default function Quiz({
 
   useEffect(() => {
     if (!started || finished) return;
-    onSave({ answers, index, deadline });
+    onSave({ answers, index, deadline, questions });
   }, [answers, index, deadline, started, finished, onSave]);
 
   useEffect(() => {
@@ -131,6 +139,7 @@ export default function Quiz({
   const restart = () => {
     submitted.current = false;
     setReviewingSaved(false);
+    setQuestions(getPracticeQuestions(grade, section, exercise));
     setAnswers({});
     setIndex(0);
     setStage("work");
@@ -141,9 +150,9 @@ export default function Quiz({
     <Dialog
       title={exercise.title}
       onClose={requestClose}
-      className="quiz-dialog"
+      className={`quiz-dialog ${isPaper && ((started && stage !== "result") || (isTopic && stage !== "result")) ? "paper-dialog" : ""}`}
     >
-      {!started ? (
+      {!started && !isTopic ? (
         <div className="quiz-intro">
           <img
             src={publicAsset("pixel-hero")}
@@ -229,6 +238,27 @@ export default function Quiz({
           </div>
           <p className="sample-notice">Đã lưu kết quả trên trình duyệt này.</p>
         </div>
+      ) : isPaper ? (
+        <PaperWorkspace
+          exercise={exercise}
+          grade={grade}
+          section={section}
+          questions={questions}
+          answers={answers}
+          started={started}
+          review={stage === "review"}
+          elapsed={
+            finished
+              ? (initialResult?.elapsedSeconds ?? 900 - remaining)
+              : 900 - remaining
+          }
+          inert={stage === "confirm" || confirmLeave}
+          onAnswer={(q, a) => setAnswers((prev) => ({ ...prev, [q]: a }))}
+          onStart={start}
+          onSubmit={() => setStage("confirm")}
+          onClose={requestClose}
+          onConfigure={onConfigure}
+        />
       ) : (
         <div
           className="quiz-workspace"

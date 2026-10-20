@@ -383,6 +383,14 @@ export default function App() {
           <Quiz
             key={`${exerciseId}:${selection.mode}`}
             id={exerciseId}
+            onConfigure={(nextGrade, nextSection, nextExercise) =>
+              setSelection({
+                grade: nextGrade,
+                section: nextSection,
+                exercise: nextExercise,
+                mode: "play",
+              })
+            }
             exercise={selection.exercise}
             grade={selection.grade}
             section={selection.section}
