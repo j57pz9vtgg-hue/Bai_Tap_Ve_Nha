@@ -1,0 +1,629 @@
+/* The same learning app, two complete visual worlds. */
+.theme-switcher {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid #e0e8d9;
+  border-radius: 12px;
+  background: #f3f4e9;
+  margin: 17px 8px 16px;
+  position: relative;
+  z-index: 1;
+}
+.theme-switcher button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex: 1;
+  padding: 8px 5px;
+  min-height: 35px;
+  border-radius: 8px;
+  background: transparent;
+  color: #668075;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.theme-switcher button[aria-pressed="true"] {
+  color: #146b64;
+  background: #fffefa;
+  box-shadow: 0 2px 5px #204b3512;
+}
+.theme-dinosaur .sidebar {
+  padding-top: 28px;
+}
+.theme-dinosaur .grade-picker {
+  margin-top: 17px;
+}
+.theme-dinosaur .sidebar-art {
+  top: 760px;
+}
+.theme-space {
+  --ink: #08286b;
+  --teal: #096bdf;
+  --orange: #087bff;
+  --cream: #fbfeff;
+  --line: #dcecff;
+  color: #16376b;
+  background: #fbfeff;
+}
+.theme-space .main-shell {
+  background: linear-gradient(120deg, #fff, #f8fdff);
+}
+.theme-space .sidebar {
+  padding-top: 26px;
+  background: linear-gradient(110deg, #fff, #eff9ff);
+  border-color: #e1effa;
+}
+.theme-space .brand {
+  color: #092c75;
+}
+.theme-space .brand > span > span {
+  color: #ff720b;
+}
+.theme-space .brand-dino {
+  width: 67px;
+  height: 80px;
+  object-fit: contain;
+}
+.theme-space .theme-switcher {
+  background: #eaf4ff;
+  border-color: #d8eaff;
+}
+.theme-space .theme-switcher button {
+  color: #58749b;
+}
+.theme-space .theme-switcher button[aria-pressed="true"] {
+  color: #096bdf;
+  background: white;
+  box-shadow: 0 2px 6px #2270d215;
+}
+.theme-space .grade-picker {
+  margin: 14px 0 15px;
+  padding: 12px 15px;
+  background: #ffffffd9;
+  border: 1px solid #edf6fd;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px #2369ba04;
+}
+.theme-space .grade-picker label {
+  font-size: 13px;
+  color: #516c98;
+}
+.theme-space .select-wrap select {
+  border-color: #cfe4ff;
+  color: #17396b;
+  border-radius: 10px;
+  box-shadow: none;
+}
+.theme-space .nav-row {
+  color: #14316d;
+}
+.theme-space .nav-row > svg:first-child {
+  color: #0878ef;
+}
+.theme-space .nav-row:hover {
+  background: #e8f4ff;
+}
+.theme-space .nav-parent.selected,
+.theme-space .school-parent {
+  background: #e0f1ff;
+  color: #0a2c72;
+}
+.theme-space .school-parent > svg:first-child {
+  color: #0781fc;
+}
+.theme-space .exam-link.active {
+  background: transparent;
+  color: #0978ff;
+  font-weight: 600;
+}
+.theme-space .exam-subnav .all-exams.current {
+  background: #dcedff;
+  color: #0875f5;
+}
+.theme-space .subnav-branch {
+  border-color: #d5e8fa;
+}
+.theme-space .subnav-branch .current,
+.theme-space .subnav-branch button:hover {
+  color: #0875f5;
+}
+.theme-space .subject-nav .active {
+  background: #dcedff;
+  color: #076ae5;
+}
+.theme-space .hero {
+  height: 320px;
+  background: linear-gradient(100deg, #e4f1ff, #bce7ff);
+  isolation: isolate;
+}
+.theme-space .hero::before {
+  content: "";
+  position: absolute;
+  inset: 73px 0 0;
+  z-index: -1;
+  background: #e8f6ff url("/assets/space-hero.webp") center/cover no-repeat;
+}
+.theme-space .hero-tools {
+  height: 73px;
+  padding: 12px 24px;
+  align-items: center;
+  gap: 40px;
+}
+.theme-space .search-box {
+  height: 48px;
+  border-radius: 19px;
+  background: #fffeff;
+  border: 1px solid #b8e0ff;
+  width: 44%;
+  max-width: 540px;
+  color: #5a7194;
+}
+.theme-space .search-box input {
+  color: #17386e;
+}
+.theme-space .search-box input::placeholder {
+  color: #7586a3;
+}
+.theme-space .search-box:focus-within {
+  box-shadow: 0 0 0 3px #82c6ff70;
+}
+.theme-space .parent-button {
+  background: transparent;
+  color: #072a72;
+  font-size: 16px;
+  gap: 11px;
+}
+.theme-space .avatar {
+  background: linear-gradient(#349eff, #0072ed);
+  color: white;
+  width: 40px;
+  height: 40px;
+}
+.space-headline {
+  position: absolute;
+  left: 42px;
+  top: 112px;
+  max-width: 47%;
+  color: #08286b;
+}
+.space-headline > div {
+  font-family: "Baloo 2", sans-serif;
+  font-size: 66px;
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -1.5px;
+}
+.space-headline > div > span {
+  display: block;
+  color: #ff7905;
+  font-size: 1.08em;
+}
+.space-headline > p {
+  font-size: 15px;
+  color: #0759be;
+  font-weight: 600;
+  margin: 15px 0 0;
+  line-height: 1.5;
+}
+.theme-space .mobile-brand {
+  display: none;
+}
+.theme-space .breadcrumbs {
+  color: #0873fa;
+}
+.theme-space h1 {
+  color: #08286b;
+}
+.theme-space h2,
+.theme-space h3 {
+  color: #0a2b71;
+}
+.theme-space .category-card {
+  border: 1px solid #d5e9ff;
+  color: #08286b;
+  border-radius: 12px;
+  background: #ecf7ff;
+}
+.theme-space .category-card.gold {
+  background: #fff7eb;
+  border-color: #ffead0;
+}
+.theme-space .category-card.green {
+  background: #ecf9ef;
+  border-color: #d2efdd;
+}
+.theme-space .category-card.chosen {
+  border: 2px solid #2b8afa;
+  box-shadow: 0 3px 14px #086cf50d;
+}
+.theme-space .category-copy > span {
+  color: #5b7195;
+}
+.theme-space .category-card > svg {
+  border: 1px solid #d5eaff;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  padding: 7px;
+  background: #fff;
+  color: #143e85;
+}
+.theme-space .exercise-card {
+  background: #fff;
+  border: 1px solid #dbeaff;
+  border-radius: 17px;
+  box-shadow: 0 5px 15px #1865ac05;
+}
+.theme-space .card-image-button {
+  aspect-ratio: 2.65;
+  border-radius: 11px;
+  background: #c9e4ff;
+}
+.theme-space .explorer-image {
+  object-position: center;
+}
+.theme-space .card-meta > span:first-child,
+.theme-space .card-meta svg {
+  color: #5b79a2;
+}
+.theme-space .status {
+  border-radius: 20px;
+  background: #ffecd1;
+  color: #d05b05;
+}
+.theme-space .status.done {
+  background: #e4f4e8;
+  color: #278152;
+}
+.theme-space .status.in-progress {
+  background: #e4f0ff;
+  color: #196bd6;
+}
+.theme-space .start-button {
+  background: linear-gradient(100deg, #087ef5, #1084ff);
+  border-radius: 30px;
+  box-shadow: inset 0 1px 0 #fff2;
+  font-size: 18px;
+}
+.theme-space .start-button svg {
+  stroke: white;
+  filter: none;
+}
+.theme-space .dialog {
+  background: #fbfeff;
+  border-color: #dceaff;
+  color: #17376b;
+}
+.theme-space .dialog::backdrop {
+  background: #072b685c;
+}
+.theme-space .dialog-close {
+  background: #eff7ff;
+  color: #53769b;
+}
+.theme-space .primary-button {
+  background: #0879ee;
+}
+.theme-space .secondary-button {
+  background: #e6f2ff;
+  color: #2766ad;
+}
+.theme-space .text-button {
+  color: #086bdc;
+}
+.theme-space .sample-footer {
+  color: #8299b5;
+}
+.theme-space .home-description,
+.theme-space .subject-description {
+  color: #57779f;
+}
+.theme-space .home-grid > button {
+  background: white;
+  border-color: #dceaff;
+}
+.theme-space .home-grid p {
+  color: #58759c;
+}
+.theme-space .empty-state {
+  color: #7296bd;
+  border-color: #d5e5f6;
+  background: #f5faff;
+}
+.theme-space .empty-state h3 {
+  color: #174b8b;
+}
+.theme-space .parent-title-icon,
+.theme-space .parent-tabs {
+  background: #eaf4ff;
+}
+.theme-space .parent-tabs button.active {
+  color: #0873e9;
+}
+.theme-space .answer {
+  background: white;
+  border-color: #dce8fa;
+}
+.theme-space .answer-letter {
+  background: #edf5ff;
+  color: #6f8fb9;
+}
+.theme-space .answer.selected-answer {
+  background: #e6f3ff;
+  border-color: #4596ef;
+  color: #175da7;
+}
+.theme-space .selected-answer .answer-letter,
+.theme-space .answer-check {
+  background: #287edd;
+  color: white;
+}
+.theme-space .answer.correct-answer {
+  border-color: #53a26b;
+  background: #e5f4df;
+  color: #397343;
+}
+.theme-space .answer.wrong-answer {
+  background: #fff0e7;
+  border-color: #dd966e;
+  color: #a35435;
+}
+.theme-space .quiz-progress {
+  background: #e5eef9;
+}
+.theme-space .quiz-progress > span {
+  background: #3891f3;
+}
+.theme-space .timer {
+  color: #126ecf;
+  background: #e5f2ff;
+}
+.theme-space .question-heading strong {
+  color: #126ecf;
+}
+.theme-space .question-navigator .answered {
+  background: #e2efff;
+  color: #1d6dd1;
+  border-color: #b6d8ff;
+}
+.theme-space .question-navigator .current-question {
+  outline-color: #2b81e3;
+}
+.theme-space .quiz-confirm {
+  background: #f8fcfff5;
+}
+@media (min-width: 1400px) and (max-width: 1599px) {
+  .theme-space .sidebar {
+    padding-top: 26px;
+  }
+  .theme-dinosaur .sidebar {
+    padding-top: 28px;
+  }
+}
+@media (max-width: 1200px) {
+  .theme-space .hero {
+    height: 295px;
+  }
+  .space-headline {
+    left: 25px;
+    top: 120px;
+    max-width: 49%;
+  }
+  .space-headline > div {
+    font-size: 53px;
+  }
+  .space-headline > p {
+    font-size: 12px;
+  }
+  .theme-space .hero-tools {
+    gap: 20px;
+    padding-inline: 17px;
+  }
+  .theme-space .parent-button {
+    font-size: 13px;
+  }
+  .theme-space .category-card > svg {
+    width: 28px;
+    height: 28px;
+    padding: 5px;
+  }
+  .theme-space .category-card {
+    gap: 10px;
+  }
+  .theme-switcher {
+    margin-inline: 2px;
+  }
+  .theme-switcher button {
+    font-size: 11px;
+    gap: 5px;
+  }
+}
+@media (max-width: 1000px) {
+  .space-headline > div {
+    font-size: 46px;
+  }
+  .space-headline > p {
+    max-width: 200px;
+  }
+  .theme-space .hero::before {
+    background-position: 60% center;
+  }
+  .theme-space .category-card {
+    gap: 16px;
+  }
+}
+@media (max-width: 760px) {
+  .theme-space .hero {
+    height: 285px;
+  }
+  .theme-space .hero-tools {
+    height: 68px;
+    padding: 12px 15px;
+    gap: 10px;
+  }
+  .theme-space .hero::before {
+    top: 68px;
+    background-position: 60% center;
+    background-size: auto 100%;
+  }
+  .theme-space .mobile-menu {
+    background: #ffffffec;
+    color: #096bdd;
+  }
+  .theme-space .search-box {
+    height: 43px;
+    width: auto;
+    max-width: none;
+    flex: 1;
+    border-radius: 13px;
+  }
+  .theme-space .parent-button {
+    padding: 3px 5px;
+    height: 43px;
+  }
+  .theme-space .avatar {
+    height: 34px;
+    width: 34px;
+  }
+  .space-headline {
+    left: 21px;
+    top: 116px;
+    max-width: 48%;
+  }
+  .space-headline > div {
+    font-size: 39px;
+    letter-spacing: -1px;
+  }
+  .space-headline > p {
+    font-size: 11px;
+    max-width: 160px;
+    margin-top: 13px;
+    line-height: 1.6;
+  }
+  .theme-space .category-card {
+    padding: 14px 16px;
+  }
+  .theme-space .category-copy strong {
+    font-size: 23px;
+  }
+  .theme-space .category-card > svg {
+    width: 32px;
+    height: 32px;
+    padding: 6px;
+  }
+  .theme-space .start-button {
+    font-size: 18px;
+  }
+  .theme-space .drawer .sidebar {
+    padding-top: 42px;
+  }
+  .theme-space .theme-switcher {
+    margin-top: 13px;
+    margin-bottom: 13px;
+  }
+  .theme-space .grade-picker {
+    margin-top: 10px;
+  }
+  .theme-dinosaur .drawer .sidebar {
+    padding-top: 43px;
+  }
+}
+@media (max-width: 400px) {
+  .space-headline {
+    left: 18px;
+    max-width: 48%;
+  }
+  .space-headline > div {
+    font-size: 34px;
+  }
+  .space-headline > p {
+    font-size: 10px;
+    max-width: 150px;
+  }
+  .theme-space .category-card {
+    gap: 10px;
+  }
+  .theme-space .category-copy strong {
+    font-size: 22px;
+  }
+  .theme-space .category-emoji {
+    width: 48px;
+  }
+  .theme-space .category-card > svg {
+    width: 28px;
+    height: 28px;
+  }
+  .theme-switcher button {
+    font-size: 12px;
+  }
+}
+
+/* Align the space theme with the supplied desktop composition. */
+@media (min-width: 761px) {
+  .theme-space .sidebar {
+    padding-top: 64px;
+  }
+  .theme-space .sidebar > .theme-switcher {
+    position: absolute;
+    top: 10px;
+    left: 26px;
+    right: 26px;
+    margin: 0;
+    padding: 3px;
+  }
+  .theme-space .sidebar > .theme-switcher button {
+    min-height: 29px;
+    padding-block: 5px;
+  }
+  .theme-space h1 {
+    font-size: 46px;
+    line-height: 1.1;
+  }
+  .theme-space h1 + .category-grid {
+    margin-top: 12px;
+  }
+  .theme-space .category-card {
+    min-height: 139px;
+  }
+  .theme-space .list-heading {
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+  .theme-space .exercise-card {
+    position: relative;
+  }
+  .theme-space .exercise-card h3 {
+    margin-top: 8px;
+    padding-right: 95px;
+    font-size: 23px;
+  }
+  .theme-space .card-meta {
+    min-height: 27px;
+    margin: 0 0 8px;
+    font-size: 15px;
+  }
+  .theme-space .card-meta .status {
+    position: absolute;
+    right: 18px;
+    bottom: 98px;
+  }
+  .theme-space .start-button {
+    height: 50px;
+    min-height: 50px;
+  }
+}
+@media (min-width: 761px) and (max-width: 1200px) {
+  .theme-space .exercise-card h3 {
+    padding-right: 0;
+    font-size: 21px;
+  }
+  .theme-space .card-meta .status {
+    position: static;
+  }
+  .theme-space h1 {
+    font-size: 37px;
+  }
+}
