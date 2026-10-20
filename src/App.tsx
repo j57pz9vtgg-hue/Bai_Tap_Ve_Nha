@@ -217,6 +217,14 @@ export default function App() {
         </header>
         <div className="adventure-banner">
           <h1 className="banner-message">Học vui, chinh phục từng bài!</h1>
+          {background !== "pixel" && (
+            <img
+              className="theme-banner-art"
+              src={publicAsset(`${background}-hero`)}
+              alt=""
+              aria-hidden="true"
+            />
+          )}
         </div>
         <div className="page-content catalog-filter-bar">
           <StudyFilters
@@ -246,25 +254,12 @@ export default function App() {
           </p>
         ) : null}
         <section className="exercise-section" aria-labelledby="catalog-title">
-          <div className="catalog-heading">
-            <div className="catalog-title">
-              <PixelIcon name="flag" size={37} />
-              <div>
-                <h2 id="catalog-title">
-                  {search.trim() ? "Kết quả tìm kiếm" : title}
-                </h2>
-                <p>
-                  Lớp {grade}
-                  <span>•</span>
-                  {isExam ? "Toán" : SECTION_LABELS[section]}
-                </p>
-              </div>
-            </div>
-            <span className="exercise-count" aria-live="polite">
-              {exercises.length} {category === "topic" ? "chủ đề" : "đề"}
-              <PixelIcon name="star" size={23} />
-            </span>
-          </div>
+          <h2 id="catalog-title" className="visually-hidden">
+            {search.trim() ? "Kết quả tìm kiếm" : title}
+          </h2>
+          <span className="visually-hidden" aria-live="polite">
+            {exercises.length} {category === "topic" ? "chủ đề" : "đề"}
+          </span>
           {exercises.length ? (
             <div className="exercise-grid">
               {exercises.map((exercise, index) => {
