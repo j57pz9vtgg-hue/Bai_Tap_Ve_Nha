@@ -812,3 +812,109 @@
     font-size: 14px;
   }
 }
+
+.dialog.topic-example-dialog {
+  width: min(980px, calc(100% - 24px));
+  padding: 32px;
+  text-align: left;
+}
+.topic-example-dialog h1 {
+  font:
+    800 32px/1.25 "Baloo 2",
+    sans-serif;
+  margin: 8px 0 24px;
+}
+.topic-example-dialog h1 span {
+  font-size: 24px;
+}
+.topic-source {
+  color: #53728e;
+  margin: 0;
+  font-size: 14px;
+}
+.topic-example-dialog h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 21px;
+  color: #08778d;
+}
+.age-example-question {
+  font-size: 20px;
+  line-height: 1.7;
+  font-weight: 600;
+}
+.age-example-translation {
+  font-size: 18px;
+  font-style: italic;
+  line-height: 1.7;
+  color: #52637a;
+}
+.age-solution-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  margin-top: 24px;
+  border-radius: 9px;
+  border: 1px solid #b9d8c2;
+  color: #315e46;
+  background: #f0f7e8;
+  font-weight: 700;
+}
+.age-solution {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 18px 0;
+  padding: 22px;
+  border: 1px solid #dce7cd;
+  border-radius: 12px;
+  background: #f8faee;
+}
+.age-solution > section + section {
+  border-left: 2px solid #c5d89b;
+  padding-left: 24px;
+}
+.age-solution h3 {
+  margin-top: 0;
+  font-size: 20px;
+}
+.age-solution p {
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 12px 0;
+}
+.topic-awaiting {
+  padding: 16px;
+  border-radius: 10px;
+  background: #edf7fc;
+  color: #45667b;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.topic-example-dialog > .primary-button {
+  padding: 12px 20px;
+  border-radius: 9px;
+}
+@media (max-width: 760px) {
+  .dialog.topic-example-dialog {
+    padding: 28px 18px 20px;
+  }
+  .topic-example-dialog h1 {
+    font-size: 27px;
+  }
+  .age-solution {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    gap: 12px;
+  }
+  .age-solution > section + section {
+    border-left: 0;
+    border-top: 2px solid #c5d89b;
+    padding: 18px 0 0;
+  }
+  .age-example-question {
+    font-size: 18px;
+  }
+}

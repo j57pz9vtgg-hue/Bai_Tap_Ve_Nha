@@ -26,6 +26,7 @@ import {
 } from "./data";
 import type { Category, Draft, Exercise, Result, Section } from "./data";
 
+import { TopicExample } from "./TopicExample";
 import { ThemePicker } from "./ThemePicker";
 import { THEMES, useLearningTheme } from "./theme";
 import { useAppAccess } from "./AccessGate";
@@ -81,7 +82,7 @@ export default function App() {
       .replace(/[\u0300-\u036f]/g, "")
       .replace(/[đĐ]/g, "d")
       .toLowerCase();
-  const exercises = getExercises(section, category).filter((e) =>
+  const exercises = getExercises(section, category, grade).filter((e) =>
     normalized(e.title).includes(normalized(search.trim())),
   );
   const categoryTitle =
@@ -328,7 +329,9 @@ export default function App() {
           />
         </Dialog>
       )}
-      {selection ? (
+      {selection?.exercise.exampleOnly ? (
+        <TopicExample onClose={() => setSelection(null)} />
+      ) : selection ? (
         <Suspense
           fallback={
             <div className="loading-overlay" role="status">

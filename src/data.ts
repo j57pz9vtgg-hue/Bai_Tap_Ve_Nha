@@ -6,6 +6,7 @@ export type Exercise = {
   title: string;
   category: Category;
   topic?: number;
+  exampleOnly?: boolean;
 };
 export type Question = {
   text: string;
@@ -75,9 +76,24 @@ export const CATEGORIES = [
 // Only original exercises and answer keys supplied by the owner may be added here.
 // The catalog stays empty until real source material is provided.
 export function getExercises(
-  _section: Section,
-  _category: Category,
+  section: Section,
+  category: Category,
+  grade: number = 2,
 ): Exercise[] {
+  if (
+    section === "timo" &&
+    grade === 2 &&
+    (category === "topic" || category === "all")
+  ) {
+    return [
+      {
+        id: "age-problem",
+        title: "Bài toán về tuổi (Age problem)",
+        category: "topic",
+        exampleOnly: true,
+      },
+    ];
+  }
   return [];
 }
 

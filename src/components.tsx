@@ -280,8 +280,20 @@ export function ExerciseCard({
           <span
             className={`status ${result ? "done" : hasDraft ? "in-progress" : ""}`}
           >
-            {result ? <Check size={13} /> : <Clock3 size={13} />}
-            {result ? "Đã làm" : hasDraft ? "Đang làm" : "Chưa làm"}
+            {exercise.exampleOnly ? (
+              <BookOpen size={13} />
+            ) : result ? (
+              <Check size={13} />
+            ) : (
+              <Clock3 size={13} />
+            )}
+            {exercise.exampleOnly
+              ? "Có bài ví dụ"
+              : result
+                ? "Đã làm"
+                : hasDraft
+                  ? "Đang làm"
+                  : "Chưa làm"}
           </span>
         </div>
         <span className="card-charm">
@@ -291,16 +303,23 @@ export function ExerciseCard({
           />
         </span>
       </div>
-      <dl className="exercise-stats">
-        <div>
-          <dt>Kết quả:</dt>
-          <dd>{result ? "Đã lưu" : "—"}</dd>
-        </div>
-        <div>
-          <dt>Thời gian:</dt>
-          <dd>{formatDuration(result?.elapsedSeconds)}</dd>
-        </div>
-      </dl>
+      {exercise.exampleOnly ? (
+        <p className="exercise-stats">
+          TIMO · Lớp 2<br />
+          Chưa có câu luyện tập
+        </p>
+      ) : (
+        <dl className="exercise-stats">
+          <div>
+            <dt>Kết quả:</dt>
+            <dd>{result ? "Đã lưu" : "—"}</dd>
+          </div>
+          <div>
+            <dt>Thời gian:</dt>
+            <dd>{formatDuration(result?.elapsedSeconds)}</dd>
+          </div>
+        </dl>
+      )}
       {theme !== "pixel" && (
         <span
           className="exercise-card-art"
@@ -322,7 +341,11 @@ export function ExerciseCard({
           </>
         ) : (
           <button className="start-button" onClick={onOpen}>
-            {hasDraft ? "Tiếp tục" : "Làm bài"}
+            {exercise.exampleOnly
+              ? "Xem ví dụ"
+              : hasDraft
+                ? "Tiếp tục"
+                : "Làm bài"}
           </button>
         )}
       </div>
