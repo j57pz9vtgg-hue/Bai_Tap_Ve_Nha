@@ -630,6 +630,8 @@ function FoodChoices({ solution = false }: { solution?: boolean }) {
 export const hasSolutionDiagram = (diagram?: QuestionDiagram) =>
   diagram !== undefined &&
   [
+    "p6-squares",
+    "p6-cubes-side",
     "p5-inverse",
     "p5-cubes-count",
     "p5-cubes-top",
@@ -694,10 +696,10 @@ export function QuestionIllustration({
     );
   }
   if (diagram.startsWith("p6-")) {
-    if (solution) return null;
+    if (solution && !hasSolutionDiagram(diagram)) return null;
     return (
       <div className={`question-illustration illustration-${diagram}`}>
-        <Paper6Illustration name={diagram.slice(3)} />
+        <Paper6Illustration name={diagram.slice(3)} solution={solution} />
       </div>
     );
   }

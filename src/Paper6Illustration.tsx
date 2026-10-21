@@ -1,5 +1,11 @@
 import { SourceDrawing, SourceCube, SymbolStrip } from "./Paper4Illustration";
-export function Paper6Illustration({ name }: { name: string }) {
+export function Paper6Illustration({
+  name,
+  solution = false,
+}: {
+  name: string;
+  solution?: boolean;
+}) {
   if (
     [
       "sequence2",
@@ -91,15 +97,26 @@ export function Paper6Illustration({ name }: { name: string }) {
         viewBox="0 0 330 130"
       >
         {cells.map(([x, y], i) => (
-          <rect
-            key={i}
-            x={30 + x * 40}
-            y={20 + y * 40}
-            width="40"
-            height="40"
-            fill="white"
-            stroke="#888"
-          />
+          <g key={i}>
+            <rect
+              x={30 + x * 40}
+              y={20 + y * 40}
+              width="40"
+              height="40"
+              fill="white"
+              stroke="#888"
+            />
+            {solution && (
+              <text
+                x={50 + x * 40}
+                y={47 + y * 40}
+                fontSize="20"
+                textAnchor="middle"
+              >
+                {i + 1}
+              </text>
+            )}
+          </g>
         ))}
       </SourceDrawing>
     );
@@ -134,9 +151,26 @@ export function Paper6Illustration({ name }: { name: string }) {
         <SourceCube x={50} y={70} />
         <SourceCube x={118} y={84} />
         <SourceCube x={66} y={84} />
-        <SourceCube x={100} y={50} />
         <SourceCube x={100} y={90} />
+        <SourceCube x={100} y={50} />
         <SourceCube x={140} y={90} />
+        {solution && (
+          <g fontSize="15" textAnchor="middle">
+            <text x="36" y="94">
+              1
+            </text>
+            <text x="51" y="131">
+              2
+            </text>
+            <text x="77" y="130">
+              3
+            </text>
+            <text x="87" y="91">
+              4
+            </text>
+            <path d="M40 90H49M55 127H65" stroke="#111" />
+          </g>
+        )}
       </SourceDrawing>
     );
   return null;
