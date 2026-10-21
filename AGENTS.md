@@ -16,7 +16,7 @@
 
 - The owner explicitly allows viewing Bài mẫu and its supplied solution without a parent password. This exception applies only to topic teaching examples; practice/exam results, answer keys and worked solutions remain parent-password protected.
 
-- Opening a topic with Làm bài/Làm lại starts the timer immediately and shows Nộp bài. Xem ví dụ is preview-only and does not start a new timer. Preserve any existing draft/deadline when resuming; hide redundant start controls while practicing.
+- Opening a topic with Làm bài/Làm lại starts the timer immediately and shows Nộp bài; replace the old Xem ví dụ catalog action with Làm bài (or Tiếp tục for an existing draft). The collapsible example remains available within the running practice screen and does not reset its timer. Preserve any existing draft/deadline when resuming; hide redundant start controls while practicing.
 
 - Paper question lists show questions, translations, illustrations and choices without source-strand headings (Logical thinking, Number Theory, etc.) or per-question source captions. Keep the source metadata in content for classification and traceability.
 
@@ -58,3 +58,5 @@
 
 - After q18–20 is completed, use paper1 q21–25 and their supplied explanations as examples for topic-20 Sắp xếp số và tìm thứ hạng (q21), topic-21 Lập số chẵn không lặp chữ số (q22), topic-22 Lập hai số có tổng nhỏ nhất (q23), topic-23 Đếm số cách kết hợp (q24), topic-24 Mua hàng nhận quà tặng (q25). Merge matching supplied questions from the three papers. Food combinations and successive route choices both belong to topic23's combination-counting pattern.
 - Current completed catalog:24 named topics,75 unique questions; topic01 has6 questions and two examples, all other topics have3 questions and one example. All75 supplied questions currently match a topic. Hide empty topic cards, including Chưa có chủ đề; retain that bucket for future unmatched or uncertain questions. Never force uncertain new content into an existing topic.
+
+- After completing all requested topic batches, the owner requires initial topic-card action Làm bài, immediate timed practice and Nộp bài (no Bắt đầu step). After submission retain inline score/time plus Xem đáp án & lời giải and Làm lại. Example panels remain collapsed by default and public; detailed practice solutions require the parent password in a floating dialog. All75 current questions are classified into24 topics; future papers/questions need semantic review and must remain unassigned when uncertain, even if their question numbers match an existing paper.

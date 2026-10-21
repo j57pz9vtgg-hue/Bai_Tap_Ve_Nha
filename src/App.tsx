@@ -275,10 +275,7 @@ export default function App() {
                         exercise,
                         section,
                         grade,
-                        mode:
-                          exercise.exampleOnly && !saved.results[id]
-                            ? "example"
-                            : "play",
+                        mode: "play",
                       })
                     }
                     onView={() =>

@@ -366,11 +366,7 @@ export function ExerciseCard({
           </>
         ) : (
           <button className="start-button" onClick={onOpen}>
-            {exercise.exampleOnly
-              ? "Xem ví dụ"
-              : hasDraft
-                ? "Tiếp tục"
-                : "Làm bài"}
+            {hasDraft ? "Tiếp tục" : "Làm bài"}
           </button>
         )}
       </div>

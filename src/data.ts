@@ -35,9 +35,17 @@ const TOPIC_BY_SOURCE_NUMBER: Record<number, string> = {
   24: "topic-23",
   25: "topic-24",
 };
+// These mappings were reviewed for the three supplied papers only.
+// A future paper must be reviewed before its questions are assigned.
+const CLASSIFIED_PAPERS = new Set([
+  "Đề số 1 · Vòng loại TIMO lớp 2",
+  "Đề số 2 · Vòng loại TIMO lớp 2",
+  "Đề số 3 · Vòng loại TIMO lớp 2",
+]);
 for (const question of ALL_QUESTIONS) {
-  question.topicId =
-    TOPIC_BY_SOURCE_NUMBER[question.sourceNumber ?? 0] ?? "unassigned";
+  question.topicId = CLASSIFIED_PAPERS.has(question.sourcePaper ?? "")
+    ? (TOPIC_BY_SOURCE_NUMBER[question.sourceNumber ?? 0] ?? "unassigned")
+    : "unassigned";
 }
 export type Section =
   "home" | "timo" | "asmo" | "toan" | "vietnamese" | "esl" | "math" | "science";
