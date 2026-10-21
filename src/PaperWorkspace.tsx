@@ -9,7 +9,13 @@ import {
   Play,
   Send,
 } from "lucide-react";
-import { getExercises, SECTION_LABELS, hasStudentAnswer } from "./data";
+import {
+  getExercises,
+  SECTION_LABELS,
+  hasStudentAnswer,
+  hasProvidedAnswer,
+  isCorrectAnswer,
+} from "./data";
 import { publicAsset } from "./components";
 import {
   QuestionIllustration,
@@ -317,6 +323,13 @@ export function PaperWorkspace(p: Props) {
                       value={p.answers[i] ?? ""}
                       onChange={(e) => p.onAnswer(i, e.target.value)}
                     />
+                    {p.review && hasProvidedAnswer(q) && (
+                      <span>
+                        {isCorrectAnswer(q, p.answers[i])
+                          ? "Đúng"
+                          : "Chưa đúng"}
+                      </span>
+                    )}
                   </label>
                 ) : (
                   <div
@@ -366,7 +379,7 @@ export function PaperWorkspace(p: Props) {
                   </div>
                 )}
               </fieldset>
-              {p.review && q.correct !== null && (
+              {p.review && hasProvidedAnswer(q) && (
                 <aside
                   className="paper-explanation"
                   aria-label={`Đáp án và lời giải câu ${i + 1}`}
@@ -374,7 +387,11 @@ export function PaperWorkspace(p: Props) {
                   <strong className="review-answer-heading">
                     Lời giải câu {i + 1}
                   </strong>
-                  <b>Đáp án {"ABCD"[q.correct]}.</b>
+                  <b>
+                    {q.answerFormat === "text"
+                      ? `Đáp án: ${q.correctText}`
+                      : `Đáp án ${"ABCD"[q.correct!]}.`}
+                  </b>
                   {hasSolutionDiagram(q.diagram) && (
                     <QuestionIllustration diagram={q.diagram} solution />
                   )}

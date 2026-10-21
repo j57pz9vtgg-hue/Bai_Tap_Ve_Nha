@@ -20,6 +20,8 @@ import {
   getPracticeQuestions,
   getQuestions,
   hasStudentAnswer,
+  hasProvidedAnswer,
+  isCorrectAnswer,
   refreshSuppliedQuestions,
 } from "./data";
 import type { Draft, Exercise, Result, Section, StudentAnswer } from "./data";
@@ -93,7 +95,7 @@ export default function Quiz({
   const score =
     reviewingSaved && initialResult
       ? initialResult.score
-      : questions.filter((q, i) => answers[i] === q.correct).length;
+      : questions.filter((q, i) => isCorrectAnswer(q, answers[i])).length;
   const total =
     reviewingSaved && initialResult ? initialResult.total : questions.length;
   const answered = Object.values(answers).filter(hasStudentAnswer).length;
@@ -102,16 +104,7 @@ export default function Quiz({
 
   function finish() {
     if (submitted.current) return;
-    if (
-      !questions.length ||
-      questions.some(
-        (q) =>
-          typeof q.correct !== "number" ||
-          !Number.isInteger(q.correct) ||
-          q.correct < 0 ||
-          q.correct >= q.options.length,
-      )
-    ) {
+    if (!questions.length || questions.some((q) => !hasProvidedAnswer(q))) {
       window.alert(
         "Chưa có đáp án được cung cấp cho bộ đề này. Bài làm chưa được chấm điểm.",
       );

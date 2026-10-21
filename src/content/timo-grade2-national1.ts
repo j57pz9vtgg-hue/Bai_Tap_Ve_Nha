@@ -1,7 +1,7 @@
 import type { Question } from "../data";
 
 //25 owner-supplied written-response questions, with original vocabulary glosses.
-// No answer key or explanations supplied; never infer missing answers.
+// Answer key and explanations subsequently supplied by the owner; preserve received content.
 export const TIMO_GRADE2_NATIONAL1: Question[] = [
   {
     sourceNumber: 1,
@@ -11,7 +11,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "62",
+    explanation:
+      "Quy luật: Khoảng cách giữa 2 số liên tiếp trong dãy tăng dần 1 đơn vị.\n20 + 3 = 23; 23 + 4 = 27; 27 + 5 = 32; 32 + 6 = 38; 38 + 7 = 45; 45 + 8 = 53; …\nVậy số cần tìm là: 53 + 9 = 62.\nĐáp số: 62.",
     topicId: "topic-01",
     strand: "Logical thinking / Tư duy lô-gic",
     diagram: "n1-sequence1",
@@ -25,7 +27,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "R",
+    explanation:
+      "Quy luật: Tách dãy đã cho thành 2 dãy đan xen nhau.\nDãy thứ nhất: F, I, L, O, …\nDãy thứ hai: S, Q, O, M, …\nChữ cái cần tìm là chữ cái tiếp theo của dãy thứ nhất.\nQuy luật của dãy thứ nhất: Hai chữ cái liên tiếp trong dãy cách nhau 2 chữ cái trong bảng chữ cái tiếng Anh.\nA B C D E F G H I J K L M N O P Q R S T U V W X Y Z\nVậy chữ cái cần tìm là R.\nĐáp số: R.",
     topicId: "unassigned",
     strand: "Logical thinking / Tư duy lô-gic",
     diagram: "n1-letters",
@@ -38,7 +42,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "95",
+    explanation:
+      "Để hoàn thành 4 bức tranh, Mary cần vẽ 4 lần và nghỉ 3 lần.\nTổng thời gian Mary cần là: 20 + 20 + 20 + 20 + 5 + 5 + 5 = 95 (phút).\nĐáp số: 95.",
     topicId: "unassigned",
     strand: "Logical thinking / Tư duy lô-gic",
   },
@@ -51,7 +57,10 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "Wednesday",
+    acceptedAnswers: ["Thứ Tư"],
+    explanation:
+      "Ngày 11/08 cách ngày 31/08 là 20 ngày.\nNgày 31/08 cách ngày 30/09 là 30 ngày.\nNgày 30/09 cách ngày 15/10 là 15 ngày.\nDo đó, ngày 11/08 cách ngày 15/10 là: 20 + 30 + 15 = 65 (ngày).\nNhận xét: Cứ sau một tuần (7 ngày), thứ trong tuần lặp lại.\nTa có: 65 = 7 + 7 + 7 + 7 + 7 + 7 + 7 + 7 + 7 + 2 = 7 × 9 + 2.\nVì ngày 11/08 là thứ Hai nên 9 tuần sau vẫn là thứ Hai. 2 ngày sau đó là thứ Tư.\nVậy ngày 15/10 là thứ Tư.\nĐáp số: Wednesday.",
     topicId: "topic-05",
     strand: "Logical thinking / Tư duy lô-gic",
   },
@@ -63,7 +72,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "48",
+    explanation:
+      "Số dấu ★ trong mỗi nhóm lần lượt là: 0, 3, 8, 15, …\nQuy luật: Khoảng cách giữa 2 số liên tiếp trong dãy tăng dần 2 đơn vị.\n0 + 3 = 3; 3 + 5 = 8; 8 + 7 = 15; …\nSố thứ 5 của dãy là: 15 + 9 = 24.\nSố thứ 6 của dãy là: 24 + 11 = 35.\nSố thứ 7 của dãy là: 35 + 13 = 48.\nVậy nhóm thứ 7 có 48 dấu ★.\nĐáp số: 48.",
     topicId: "topic-04",
     strand: "Logical thinking / Tư duy lô-gic",
     diagram: "n1-star-groups",
@@ -76,7 +87,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "17",
+    explanation:
+      "1 + 4 − 7 + 10 − 13 + 16 − 19 + 22 − 25 + 28\n= 1 + 4 + (10 − 7) + (16 − 13) + (22 − 19) + (28 − 25)\n= 1 + 4 + 3 + 3 + 3 + 3\n= (1 + 4) + (3 + 3 + 3 + 3)\n= 5 + 12\n= 17.\nĐáp số: 17.",
     topicId: "topic-08",
     strand: "Arithmetic / Số học",
   },
@@ -88,7 +101,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "330",
+    explanation:
+      "26 + 48 + 52 + 83 + 84 + 37\n= (26 + 84) + (48 + 52) + (83 + 37)\n= 110 + 100 + 120\n= 210 + 120\n= 330.\nĐáp số: 330.",
     topicId: "topic-06",
     strand: "Arithmetic / Số học",
   },
@@ -100,7 +115,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "420",
+    explanation:
+      "14 × 15 + 14 × 8 − 10 × 14 + 17 × 14\n= (15 + 8 − 10 + 17) × 14\n= (23 − 10 + 17) × 14\n= (13 + 17) × 14\n= 30 × 14\n= 3 × 10 × 14\n= 3 × 140\n= 140 + 140 + 140\n= 420.\nĐáp số: 420.",
     topicId: "unassigned",
     strand: "Arithmetic / Số học",
   },
@@ -112,7 +129,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "8",
+    explanation:
+      "22 − 7 − 6 + 11 − 9 − 3\n= 15 − 6 + 11 − 9 − 3\n= 9 + 11 − 9 − 3\n= 20 − 9 − 3\n= 11 − 3\n= 8.\nĐáp số: 8.",
     topicId: "topic-08",
     strand: "Arithmetic / Số học",
   },
@@ -125,7 +144,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "5",
+    explanation:
+      "Trường hợp 1: Hàng đơn vị là phép cộng không nhớ.\nXét hàng đơn vị, ta có: A + A = 8. Do đó, A = 4.\nXét hàng chục, ta có: A + B = 9. Do đó, B = 9 − A = 9 − 4 = 5 (thỏa mãn).\nTrường hợp 2: Hàng đơn vị là phép cộng có nhớ.\nXét hàng đơn vị, ta có: A + A = 18. Do đó, A = 9.\nXét hàng chục, ta có: A + B + 1 = 9. Ta không tìm được giá trị của B.\nVậy giá trị của B cần tìm là 5.\nĐáp số: 5.",
     topicId: "topic-10",
     strand: "Arithmetic / Số học",
     diagram: "n1-addition",
@@ -139,7 +160,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "497",
+    explanation:
+      "Số lớn nhất có 3 chữ số nhỏ hơn 500 là 499 (không thỏa mãn có 3 chữ số khác nhau).\nSố lớn nhất tiếp theo là 498 (không thỏa mãn là số lẻ).\nSố lớn nhất tiếp theo là 497 (thỏa mãn là số lẻ có 3 chữ số khác nhau).\nVậy số cần tìm là 497.\nĐáp số: 497.",
     topicId: "unassigned",
     strand: "Number Theory / Số học",
   },
@@ -152,7 +175,10 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "Odd",
+    acceptedAnswers: ["lẻ", "số lẻ"],
+    explanation:
+      "Tổng của 15 số lẻ là số lẻ nên tổng điểm của 15 đứa trẻ đầu tiên là số lẻ.\nTổng của 6 số chẵn là số chẵn nên tổng điểm của 6 đứa trẻ tiếp theo là số chẵn.\nTổng của một số lẻ và một số chẵn là số lẻ nên tổng điểm của 21 đứa trẻ này là số lẻ.\nTổng của 2 số lẻ là số chẵn. Do đó, để tổng điểm của 30 đứa trẻ là số chẵn thì tổng điểm của 9 đứa trẻ còn lại là số lẻ.\nĐáp số: Odd.",
     topicId: "unassigned",
     strand: "Number Theory / Số học",
   },
@@ -164,7 +190,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "6",
+    explanation:
+      "Tổng số trứng Mary cần mua là: 35 + 29 = 64 (quả).\nTa có: 64 = 12 + 12 + 12 + 12 + 12 + 4 = 12 × 5 + 4.\nNếu Mary mua 5 hộp thì không đủ 64 quả trứng.\nVậy Mary cần mua ít nhất 6 hộp.\nĐáp số: 6.",
     topicId: "unassigned",
     strand: "Number Theory / Số học",
   },
@@ -177,7 +205,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "9 + 10 − 8 − 5 = 6",
+    explanation:
+      "Ta có: 9 + 10 − 8 − 5 = 19 − 8 − 5 = 11 − 5 = 6.\nVậy phép tính đúng là: 9 + 10 − 8 − 5 = 6.\nĐáp số: 9 + 10 − 8 − 5 = 6.",
     topicId: "topic-13",
     strand: "Number Theory / Số học",
     diagram: "n1-operators",
@@ -191,7 +221,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "90",
+    explanation:
+      "Quy luật: Các số trong dãy giảm dần 11 đơn vị.\n200 − 11 = 189; 189 − 11 = 178; 178 − 11 = 167; 167 − 11 = 156; …\nCác số tiếp theo của dãy lần lượt là: 145, 134, 123, 112, 101, 90, …\nVậy số thứ 11 của dãy là 90.\nĐáp số: 90.",
     topicId: "topic-01",
     strand: "Number Theory / Số học",
     diagram: "n1-sequence15",
@@ -204,7 +236,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "22",
+    explanation:
+      "Vì hình chóp có 12 đỉnh nên đáy của hình chóp là đa giác có 11 đỉnh.\nDo đó, hình chóp có 11 cạnh bên và 11 cạnh đáy.\nVậy tổng số cạnh của hình chóp là: 11 + 11 = 22 (cạnh).\nĐáp số: 22.",
     topicId: "unassigned",
     strand: "Geometry / Hình học",
   },
@@ -217,7 +251,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "11",
+    explanation:
+      "Ta có hình vẽ đánh số như minh họa.\nVậy ta có thể nhìn thấy ít nhất 11 mặt hình vuông từ phía trên.\nĐáp số: 11.",
     topicId: "topic-17",
     strand: "Geometry / Hình học",
     diagram: "n1-cubes",
@@ -230,7 +266,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "19",
+    explanation:
+      "Ta có hình vẽ đánh số như minh họa.\nCó 11 đoạn thẳng đơn là: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11.\nCó 6 đoạn thẳng được ghép bởi 2 đoạn thẳng đơn là: (1 + 2), (3 + 4), (4 + 5), (6 + 7), (7 + 8), (10 + 11).\nCó 2 đoạn thẳng được ghép bởi 3 đoạn thẳng đơn là: (3 + 4 + 5), (6 + 7 + 8).\nVậy hình đã cho có tất cả số đoạn thẳng là: 11 + 6 + 2 = 19 (đoạn thẳng).\nĐáp số: 19.",
     topicId: "topic-18",
     strand: "Geometry / Hình học",
     diagram: "n1-segments",
@@ -243,7 +281,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "18",
+    explanation:
+      "Số góc trong của một đa giác bằng với số đỉnh của đa giác đó.\nTa có hình vẽ đánh số như minh họa.\nVì đa giác đã cho có 18 đỉnh nên có 18 góc trong.\nĐáp số: 18.",
     topicId: "unassigned",
     strand: "Geometry / Hình học",
     diagram: "n1-polygon",
@@ -256,7 +296,10 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "■",
+    acceptedAnswers: ["▪"],
+    explanation:
+      "Quy luật: Nhóm 5 hình (■ ★ ● ● ★) lặp lại.\nVậy hình cần tìm là ■.\nĐáp số: ■.",
     topicId: "topic-16",
     strand: "Geometry / Hình học",
     diagram: "n1-shapes",
@@ -270,7 +313,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "4",
+    explanation:
+      "Tổng số tiền Neo có là: 1 × 6 + 2 × 3 + 5 × 6 = 6 + 6 + 30 = 42 (đô-la).\nTa có: 42 = 10 + 10 + 10 + 10 + 2 = 10 × 4 + 2.\nVậy Neo có thể đổi được nhiều nhất 4 tờ tiền 10 đô-la.\nĐáp số: 4.",
     topicId: "unassigned",
     strand: "Combinatorics / Tổ hợp",
   },
@@ -283,7 +328,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "7",
+    explanation:
+      "Xét tính chẵn lẻ của mỗi số từ trái sang phải, ta có dãy sau:\nLẻ, Chẵn, Lẻ, Chẵn, Lẻ, Chẵn, …\nQuy luật: Các số lẻ và chẵn xen kẽ nhau, bắt đầu từ số lẻ.\nDo đó, trong các số từ số thứ 5 đến số thứ 18, các số lẻ là số thứ 5, số thứ 7, số thứ 9, số thứ 11, số thứ 13, số thứ 15 và số thứ 17.\nVậy có 7 số lẻ trong các số từ số thứ 5 đến số thứ 18.\nĐáp số: 7.",
     topicId: "topic-01",
     strand: "Combinatorics / Tổ hợp",
     diagram: "n1-sequence22",
@@ -297,7 +344,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "18",
+    explanation:
+      "Có 3 cách đi từ vườn thú đến ga tàu.\nCó 2 cách đi từ ga tàu đến rạp chiếu phim.\nCó 3 cách đi từ rạp chiếu phim đến sân chơi.\nVậy số cách đi từ vườn thú đến sân chơi là: 3 × 2 × 3 = 18 (cách).\nĐáp số: 18.",
     topicId: "topic-23",
     strand: "Combinatorics / Tổ hợp",
   },
@@ -310,7 +359,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "21",
+    explanation:
+      "Gọi số thanh sô-cô-la ban đầu của Andy và Eric là A và E.\nVì Eric cho Mary 12 thanh sô-cô-la nên số thanh sô-cô-la lúc sau của Eric là: E − 12.\nVì Andy nhận từ Mary 9 thanh sô-cô-la nên số thanh sô-cô-la lúc sau của Andy là: A + 9.\nVì lúc sau họ có số thanh sô-cô-la bằng nhau nên ta có: E − 12 = A + 9.\nDo đó, E = A + 9 + 12 = A + 21.\nVậy ban đầu Eric có nhiều hơn Andy 21 thanh sô-cô-la.\nĐáp số: 21.",
     topicId: "topic-14",
     strand: "Combinatorics / Tổ hợp",
   },
@@ -323,7 +374,9 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "639",
+    explanation:
+      "Số lớn nhất có 3 chữ số tạo được là 943.\nSố nhỏ nhất có 3 chữ số tạo được là 304.\nHiệu cần tìm là: 943 − 304 = 639.\nĐáp số: 639.",
     topicId: "unassigned",
     strand: "Combinatorics / Tổ hợp",
   },

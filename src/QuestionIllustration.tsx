@@ -630,6 +630,9 @@ function FoodChoices({ solution = false }: { solution?: boolean }) {
 export const hasSolutionDiagram = (diagram?: QuestionDiagram) =>
   diagram !== undefined &&
   [
+    "n1-cubes",
+    "n1-segments",
+    "n1-polygon",
     "p7-arrow-groups",
     "p7-squares",
     "p7-cubes-right",
@@ -680,13 +683,14 @@ export function QuestionIllustration({
 }: DiagramProps) {
   if (!diagram) return null;
   if (/^n\d+-/.test(diagram)) {
-    if (solution) return null;
+    if (solution && !hasSolutionDiagram(diagram)) return null;
     const dash = diagram.indexOf("-");
     return (
       <div className={`question-illustration illustration-${diagram}`}>
         <NationalIllustration
           paper={Number(diagram.slice(1, dash))}
           name={diagram.slice(dash + 1)}
+          solution={solution}
         />
       </div>
     );

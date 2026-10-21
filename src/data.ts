@@ -128,6 +128,8 @@ export const hasStudentAnswer = (value: StudentAnswer | undefined) =>
   value !== undefined && (typeof value !== "string" || value.trim().length > 0);
 export type Question = {
   answerFormat?: "text";
+  correctText?: string;
+  acceptedAnswers?: string[];
   translation?: string;
   diagram?: QuestionDiagram;
   strand?: string;
@@ -445,5 +447,37 @@ export function refreshSuppliedQuestions(questions: Question[]): Question[] {
           current.text === saved.text &&
           JSON.stringify(current.options) === JSON.stringify(saved.options),
       ) ?? saved,
+  );
+}
+
+// Compare only owner-supplied answers; normalize typography, never evaluate/solve input.
+export function normalizeTextAnswer(value: string): string {
+  return value
+    .normalize("NFKC")
+    .trim()
+    .toLocaleLowerCase("vi")
+    .replace(/[−–]/g, "-")
+    .replace(/[×·]/g, "*")
+    .replace(/[÷:]/g, "/")
+    .replace(/\s+/g, "")
+    .replace(/[.。]$/, "");
+}
+export function hasProvidedAnswer(q: Question): boolean {
+  return q.answerFormat === "text"
+    ? Boolean(q.correctText?.trim())
+    : typeof q.correct === "number" &&
+        Number.isInteger(q.correct) &&
+        q.correct >= 0 &&
+        q.correct < q.options.length;
+}
+export function isCorrectAnswer(
+  q: Question,
+  answer: StudentAnswer | undefined,
+): boolean {
+  if (!hasProvidedAnswer(q) || !hasStudentAnswer(answer)) return false;
+  if (q.answerFormat !== "text") return answer === q.correct;
+  if (typeof answer !== "string") return false;
+  return [q.correctText!, ...(q.acceptedAnswers ?? [])].some(
+    (expected) => normalizeTextAnswer(expected) === normalizeTextAnswer(answer),
   );
 }

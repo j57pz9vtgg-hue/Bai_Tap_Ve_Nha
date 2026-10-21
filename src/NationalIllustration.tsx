@@ -91,9 +91,11 @@ function DotLines({
 export function NationalIllustration({
   paper,
   name,
+  solution = false,
 }: {
   paper: number;
   name: string;
+  solution?: boolean;
 }) {
   if (paper === 1) {
     if (
@@ -200,6 +202,27 @@ export function NationalIllustration({
           {[204, 244, 284, 324].map((x) => (
             <SourceCube key={x} x={x} y={128} />
           ))}
+          {solution && (
+            <g fontSize="15" textAnchor="middle">
+              {[
+                [96, 42, 1],
+                [132, 116, 2],
+                [130, 124, 3],
+                [158, 56, 4],
+                [186, 70, 5],
+                [238, 108, 6],
+                [230, 124, 7],
+                [264, 124, 8],
+                [267, 70, 9],
+                [304, 124, 10],
+                [344, 124, 11],
+              ].map(([x, y, n]) => (
+                <text key={n} x={x} y={y}>
+                  {n}
+                </text>
+              ))}
+            </g>
+          )}
         </SourceDrawing>
       );
     if (name === "segments") {
@@ -231,6 +254,31 @@ export function NationalIllustration({
           {points.map(([x, y], i) => (
             <circle key={i} cx={x} cy={y} r="3.5" />
           ))}
+          {solution && (
+            <g fontSize="12" textAnchor="middle">
+              {[
+                [0, 6],
+                [6, 1],
+                [0, 7],
+                [7, 8],
+                [8, 2],
+                [4, 6],
+                [6, 7],
+                [7, 3],
+                [0, 3],
+                [3, 8],
+                [8, 5],
+              ].map(([a, b], i) => (
+                <text
+                  key={i}
+                  x={(points[a][0] + points[b][0]) / 2}
+                  y={(points[a][1] + points[b][1]) / 2 - 5}
+                >
+                  {i + 1}
+                </text>
+              ))}
+            </g>
+          )}
         </SourceDrawing>
       );
     }
@@ -246,6 +294,34 @@ export function NationalIllustration({
             stroke="#111"
             strokeWidth="1.8"
           />
+          {solution && (
+            <g fontSize="10" textAnchor="middle">
+              {[
+                [20, 14],
+                [49, 14],
+                [57, 51],
+                [92, 50],
+                [84, 10],
+                [151, 10],
+                [166, 105],
+                [145, 97],
+                [165, 128],
+                [125, 134],
+                [137, 99],
+                [107, 97],
+                [117, 134],
+                [91, 134],
+                [103, 96],
+                [82, 101],
+                [99, 63],
+                [19, 76],
+              ].map(([x, y], i) => (
+                <text key={i} x={x} y={y}>
+                  {i + 1}
+                </text>
+              ))}
+            </g>
+          )}
         </SourceDrawing>
       );
     if (name === "shapes")
