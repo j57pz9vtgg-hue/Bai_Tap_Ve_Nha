@@ -3,16 +3,26 @@ import type { FormEvent, ReactNode } from "react";
 import { BookOpen, Eye, EyeOff, LockKeyhole } from "lucide-react";
 import { APP_ACCESS } from "./accessConfig";
 const SESSION_KEY = "homework-access-session:v1";
+const REMEMBER_KEY = "homework-access-remember:v1";
+function hasAccess(
+  storageName: "localStorage" | "sessionStorage",
+  key: string,
+) {
+  try {
+    return window[storageName].getItem(key) === APP_ACCESS.digest;
+  } catch {
+    return false;
+  }
+}
 const AccessContext = createContext({ logout: () => {} });
 export const useAppAccess = () => useContext(AccessContext);
 export function AccessGate({ children }: { children: ReactNode }) {
-  const [unlocked, setUnlocked] = useState(() => {
-    try {
-      return sessionStorage.getItem(SESSION_KEY) === APP_ACCESS.digest;
-    } catch {
-      return false;
-    }
-  });
+  const [unlocked, setUnlocked] = useState(
+    () =>
+      hasAccess("localStorage", REMEMBER_KEY) ||
+      hasAccess("sessionStorage", SESSION_KEY),
+  );
+  const [remember, setRemember] = useState(false);
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -23,7 +33,14 @@ export function AccessGate({ children }: { children: ReactNode }) {
     } catch {
       /* In-memory lock still applies. */
     }
+    try {
+      localStorage.removeItem(REMEMBER_KEY);
+    } catch {
+      /* The current page still locks if browser storage is unavailable. */
+    }
     setUnlocked(false);
+    setRemember(false);
+    setVisible(false);
     setPassword("");
     setError("");
   }
@@ -61,6 +78,12 @@ export function AccessGate({ children }: { children: ReactNode }) {
         sessionStorage.setItem(SESSION_KEY, APP_ACCESS.digest);
       } catch {
         /* Access remains valid until this page reloads. */
+      }
+      try {
+        if (remember) localStorage.setItem(REMEMBER_KEY, APP_ACCESS.digest);
+        else localStorage.removeItem(REMEMBER_KEY);
+      } catch {
+        /* A blocked persistent store does not prevent this login. */
       }
       setPassword("");
       setUnlocked(true);
@@ -110,6 +133,15 @@ export function AccessGate({ children }: { children: ReactNode }) {
               {visible ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
+          <label className="remember-login">
+            <input
+              type="checkbox"
+              checked={remember}
+              onChange={(e) => setRemember(e.target.checked)}
+              disabled={busy}
+            />
+            <span>Ghi nhớ đăng nhập</span>
+          </label>
           {error && (
             <p role="alert" className="password-error">
               {error}
@@ -119,9 +151,6 @@ export function AccessGate({ children }: { children: ReactNode }) {
             {busy ? "Đang đăng nhập…" : "Đăng nhập"}
           </button>
         </form>
-        <small>
-          Mật khẩu phụ huynh được dùng riêng khi xem kết quả và lời giải.
-        </small>
       </section>
     </main>
   );

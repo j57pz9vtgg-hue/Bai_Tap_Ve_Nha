@@ -71,12 +71,27 @@
   font-weight: 700;
   font-size: 16px;
 }
-.access-card small {
-  display: block;
-  color: #6e8297;
-  font-size: 12px;
-  line-height: 1.6;
-  margin-top: 20px;
+.access-card form > .remember-login {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-block: 4px;
+  min-height: 32px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #365a73;
+  cursor: pointer;
+}
+.remember-login input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: #009daf;
+  flex-shrink: 0;
+}
+.remember-login input:focus-visible {
+  outline: 2px solid #087fb8;
+  outline-offset: 3px;
 }
 .access-card .password-error {
   margin: 0;

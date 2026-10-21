@@ -18,7 +18,7 @@ npm run preview
 
 ## Mật khẩu
 
-- Mật khẩu vào ứng dụng: khóa giao diện cơ bản theo lựa chọn dùng GitHub Pages. Cấu hình chỉ chứa salt và bản băm PBKDF2-SHA256 trong `src/accessConfig.ts`, không chứa mật khẩu rõ. Phiên truy cập lưu trong `sessionStorage`; Đăng xuất khóa lại ứng dụng và giữ dữ liệu bài làm.
+- Mật khẩu vào ứng dụng: khóa giao diện cơ bản theo lựa chọn dùng GitHub Pages. Cấu hình chỉ chứa salt và bản băm PBKDF2-SHA256 trong `src/accessConfig.ts`, không chứa mật khẩu rõ. Phiên truy cập lưu trong `sessionStorage`. Chọn **Ghi nhớ đăng nhập** lưu trạng thái truy cập riêng trong `localStorage` để tự vào ứng dụng khi mở lại cùng trình duyệt; không lưu mật khẩu rõ. **Đăng xuất** xóa cả phiên truy cập lẫn trạng thái ghi nhớ, đồng thời giữ dữ liệu bài làm và mật khẩu phụ huynh.
 - Mật khẩu phụ huynh: phụ huynh tự thiết lập sau khi vào ứng dụng, tối thiểu 6 ký tự, bắt buộc khác mật khẩu đăng nhập. Đổi mật khẩu cần mật khẩu phụ huynh hiện tại. Salt/bản băm lưu riêng ở `homework-parent-password:v1` trên trình duyệt này.
 - Điểm số, đáp án và lời giải chỉ được hiển thị sau khi nhập đúng mật khẩu phụ huynh. Mỗi lần mở lại kết quả phải nhập lại. Thẻ đề chỉ thông báo kết quả đã lưu.
 - Đây là khóa thao tác ở phía trình duyệt, không phải xác thực máy chủ. GitHub Pages vẫn phục vụ tệp tĩnh; mã nguồn và dữ liệu lưu cục bộ có thể được xem bằng công cụ phát triển. Mật khẩu phụ huynh và kết quả chưa đồng bộ giữa thiết bị.
