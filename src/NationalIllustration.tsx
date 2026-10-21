@@ -548,5 +548,161 @@ export function NationalIllustration({
         </SourceDrawing>
       );
   }
+  if (paper === 5) {
+    if (name === "table")
+      return (
+        <SourceTable
+          rows={[
+            [1, 2, 2],
+            [3, 4, 12],
+            [5, 6, 30],
+            [7, 8, "?"],
+          ]}
+        />
+      );
+    if (name === "letters")
+      return <div className="diagram-number-line">B、D、G、I、L、N、___</div>;
+    if (name === "sequence11")
+      return <div className="diagram-number-line">99、92、85、78、71、…</div>;
+    if (name === "operators")
+      return <div className="diagram-number-line">23 __ 7 __ 11 __ 3 = 22</div>;
+    if (name === "addition")
+      return <Addition top="B A" bottom="C B" total="1 6 2" />;
+    if (name === "expressions")
+      return (
+        <div className="diagram-number-line">
+          2×4，42÷7，36÷3，7×2，9×9，39÷3，72÷9
+        </div>
+      );
+    if (name === "hash-groups")
+      return (
+        <SourceDrawing
+          label="Bốn nhóm ô vuông chứa dấu thăng theo đề"
+          viewBox="0 0 630 270"
+        >
+          {[2, 4, 6, 8].map((n, i) => {
+            const x = [10, 90, 230, 410][i],
+              u = 23,
+              y = 220 - n * u;
+            return (
+              <g key={n} transform={`translate(${x} ${y})`}>
+                {Array.from({ length: n * n }, (_, k) => {
+                  const r = Math.floor(k / n),
+                    c = k % n;
+                  return (
+                    <g key={k}>
+                      <rect
+                        x={c * u}
+                        y={r * u}
+                        width={u}
+                        height={u}
+                        fill="white"
+                        stroke="#333"
+                        strokeWidth=".8"
+                      />
+                      {(r === n - 1 ||
+                        (r < n - 1 && (c === r || c === n - 2 - r))) && (
+                        <text
+                          x={(c + 0.5) * u}
+                          y={(r + 0.5) * u + 5}
+                          textAnchor="middle"
+                          fontSize="16"
+                        >
+                          #
+                        </text>
+                      )}
+                    </g>
+                  );
+                })}
+                <text
+                  x={(n * u) / 2}
+                  y={250 - y}
+                  textAnchor="middle"
+                  fontSize="14"
+                >
+                  Group {i + 1}
+                </text>
+              </g>
+            );
+          })}
+        </SourceDrawing>
+      );
+    if (name === "squares")
+      return (
+        <SourceDrawing
+          label="Các ô vuông ghép hình bậc thang theo đề"
+          viewBox="0 0 220 185"
+        >
+          {[
+            [0, 0],
+            [1, 0],
+            [2, 0],
+            [0, 1],
+            [1, 1],
+            [2, 1],
+            [1, 2],
+            [2, 2],
+            [3, 2],
+            [4, 2],
+            [3, 3],
+            [4, 3],
+          ].map(([x, y], i) => (
+            <rect
+              key={i}
+              x={20 + x * 34}
+              y={20 + y * 34}
+              width="34"
+              height="34"
+              fill="white"
+              stroke="#333"
+              strokeWidth="1"
+            />
+          ))}
+        </SourceDrawing>
+      );
+    if (name === "segments") {
+      const a = [20, 120],
+        b = [80, 35],
+        c = [155, 120],
+        d = [225, 32],
+        e = [285, 120],
+        m1 = [50, 77.5],
+        m4 = [255, 76];
+      const h1 = intersection(m1, m4, b, c),
+        h2 = intersection(m1, m4, c, d);
+      return (
+        <DotLines
+          lines={[
+            [a, b],
+            [b, c],
+            [c, d],
+            [d, e],
+            [m1, m4],
+          ]}
+          points={[a, b, c, d, e, m1, h1, h2, m4]}
+          viewBox="0 0 310 155"
+        />
+      );
+    }
+    if (name === "cubes")
+      return (
+        <SourceDrawing
+          label="Các khối lập phương, quan sát từ phía trên"
+          viewBox="0 0 300 245"
+        >
+          {[127, 92, 57].map((y) => (
+            <SourceCube key={y} x={167} y={y} size={35} depth={12} />
+          ))}
+          <SourceCube x={105} y={142} size={35} depth={12} />
+          <SourceCube x={70} y={133} size={35} depth={12} />
+          <SourceCube x={70} y={98} size={35} depth={12} />
+          <SourceCube x={202} y={127} size={35} depth={12} />
+          <SourceCube x={58} y={145} size={35} depth={12} />
+          <SourceCube x={81} y={157} size={35} depth={12} />
+          <SourceCube x={155} y={139} size={35} depth={12} />
+          <SourceCube x={143} y={151} size={35} depth={12} />
+        </SourceDrawing>
+      );
+  }
   return null;
 }
