@@ -7,3 +7,4 @@
 - Keep an empty catalog when no real papers have been supplied. Do not restore the removed illustrative material.
 - When the owner sends a topic and worked example, update the application immediately. The first supplied topic is TIMO Grade 2: Bài toán về tuổi (Age problem), Amy/John example, with the owner's two supplied solutions. Worked teaching examples are distinct from practice/exam answer keys.
 - Classify incoming exam questions into owner-supplied topics using their examples. Put unmatched or uncertain questions in "Chưa có chủ đề"; do not invent additional topic names.
+- The second supplied TIMO Grade 2 topic is Bài toán về ngày tháng (Date Problem). It contains the owner's two examples: Wednesday/day-after-tomorrow with 17 days later (Thursday), and 17 February 2020 to 27 April 2020 (Monday). Use only the solutions supplied in those images.

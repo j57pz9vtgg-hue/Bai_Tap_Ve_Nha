@@ -918,3 +918,12 @@
     font-size: 18px;
   }
 }
+
+.date-example + .date-example {
+  margin-top: 32px;
+  border-top: 1px solid #d8e4de;
+  padding-top: 20px;
+}
+.age-solution.date-solution {
+  grid-template-columns: minmax(0, 1fr);
+}

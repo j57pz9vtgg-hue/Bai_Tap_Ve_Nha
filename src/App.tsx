@@ -330,7 +330,10 @@ export default function App() {
         </Dialog>
       )}
       {selection?.exercise.exampleOnly ? (
-        <TopicExample onClose={() => setSelection(null)} />
+        <TopicExample
+          exerciseId={selection.exercise.id}
+          onClose={() => setSelection(null)}
+        />
       ) : selection ? (
         <Suspense
           fallback={

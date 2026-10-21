@@ -92,6 +92,12 @@ export function getExercises(
         category: "topic",
         exampleOnly: true,
       },
+      {
+        id: "date-problem",
+        title: "Bài toán về ngày tháng (Date Problem)",
+        category: "topic",
+        exampleOnly: true,
+      },
     ];
   }
   return [];
