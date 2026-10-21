@@ -209,6 +209,21 @@ export default function App() {
           </div>
         </header>
         <div className="adventure-banner">
+          {["crystal", "cloud", "forest", "magic", "treasure", "cars"].includes(
+            theme,
+          ) && (
+            <div
+              className={`crystal-theme-label ${theme}-theme-label`}
+              aria-hidden="true"
+            >
+              <span>CHỦ ĐỀ</span>
+              <strong>
+                {THEMES.find(
+                  (item) => item.id === theme,
+                )?.name.toLocaleUpperCase("vi")}
+              </strong>
+            </div>
+          )}
           <h1 className="banner-message">Học vui, chinh phục từng bài!</h1>
           {theme !== "pixel" && (
             <img
@@ -219,36 +234,12 @@ export default function App() {
             />
           )}
         </div>
+        {theme === "bunny" && (
+          <span className="bunny-theme-label" aria-hidden="true">
+            CHỦ ĐỀ<strong>THỎ CON</strong>
+          </span>
+        )}
         <div className="page-content catalog-filter-bar">
-          {theme !== "pixel" && theme !== "museum" && (
-            <div className="theme-caption">
-              {[
-                "crystal",
-                "cloud",
-                "forest",
-                "magic",
-                "treasure",
-                "cars",
-              ].includes(theme) && (
-                <div
-                  className={`crystal-theme-label ${theme}-theme-label`}
-                  aria-hidden="true"
-                >
-                  <span>CHỦ ĐỀ</span>
-                  <strong>
-                    {THEMES.find(
-                      (item) => item.id === theme,
-                    )?.name.toLocaleUpperCase("vi")}
-                  </strong>
-                </div>
-              )}
-              {theme === "bunny" && (
-                <span className="bunny-theme-label" aria-hidden="true">
-                  CHỦ ĐỀ<strong>THỎ CON</strong>
-                </span>
-              )}
-            </div>
-          )}
           <StudyFilters
             grade={grade}
             section={section}
