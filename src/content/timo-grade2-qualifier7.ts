@@ -1,6 +1,6 @@
 import type { Question } from "../data";
 
-// All25 owner-supplied questions; answer key and explanations not yet supplied.
+// All25 owner-supplied questions with supplied answers and explanations.
 export const TIMO_GRADE2_QUALIFIER7: Question[] = [
   {
     sourceNumber: 1,
@@ -15,8 +15,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     ],
     strand: "Logical thinking / Tư duy lô-gic",
     topicId: "unassigned",
-    correct: null,
-    explanation: null,
+    correct: 1,
+    explanation:
+      "Sau 12 tháng (tức 1 năm) thì tháng trong năm lặp lại.\nTháng trước là tháng 4 nên hiện tại là tháng 5. Do đó, 12 tháng nữa tính từ hiện tại cũng là tháng 5.\n13 tháng nữa là tháng 6. 14 tháng nữa là tháng 7. 15 tháng nữa là tháng 8. 16 tháng nữa là tháng 9.\nĐáp số: B.",
   },
   {
     sourceNumber: 2,
@@ -27,8 +28,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["E", "S", "U", "Y"],
     strand: "Logical thinking / Tư duy lô-gic",
     topicId: "unassigned",
-    correct: null,
-    explanation: null,
+    correct: 3,
+    explanation:
+      "Quy luật: Tách dãy đã cho thành 2 dãy nhỏ đan xen nhau:\nDãy thứ nhất: A, B, C, D, …\nDãy thứ hai: Z, __, X, W, …\nChữ cái cần tìm là của dãy thứ hai.\nQuy luật của dãy thứ hai: Các chữ cái được sắp xếp theo thứ tự ngược với bảng chữ cái tiếng Anh.\nChữ cái còn thiếu là Y.\nĐáp số: D.",
     diagram: "p7-letters",
   },
   {
@@ -40,8 +42,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["35", "39", "30", "36"],
     strand: "Logical thinking / Tư duy lô-gic",
     topicId: "topic-01",
-    correct: null,
-    explanation: null,
+    correct: 0,
+    explanation:
+      "Quy luật: Khoảng cách giữa 2 số liên tiếp của dãy tăng dần 1 đơn vị.\n50 − 1 = 49; 49 − 2 = 47; 47 − 3 = 44; 44 − 4 = 40; …\nSố cần tìm là: 40 − 5 = 35.\nĐáp số: A.",
     diagram: "p7-sequence3",
   },
   {
@@ -53,8 +56,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["15", "20", "21", "16"],
     strand: "Logical thinking / Tư duy lô-gic",
     topicId: "topic-04",
-    correct: null,
-    explanation: null,
+    correct: 2,
+    explanation:
+      "Cách 1:\nSố mũi tên trong mỗi nhóm lần lượt là: 3, 6, 10, 15, …\nQuy luật: Khoảng cách giữa 2 số liên tiếp của dãy tăng dần 1 đơn vị.\n3 + 3 = 6; 6 + 4 = 10; 10 + 5 = 15; …\nVậy nhóm thứ 5 có số hình là: 15 + 6 = 21.\nCách 2:\nTa có nhóm thứ 5 như hình minh họa.\nVậy nhóm thứ 5 có 21 mũi tên.\nĐáp số: C.",
     diagram: "p7-arrow-groups",
   },
   {
@@ -66,8 +70,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["$14", "$9", "$21", "$8"],
     strand: "Logical thinking / Tư duy lô-gic",
     topicId: "unassigned",
-    correct: null,
-    explanation: null,
+    correct: 1,
+    explanation:
+      "Alice cần trả số tiền là: 2 × 7 = 14 (đô).\nAlice còn lại số tiền là: 23 − 14 = 9 (đô).\nĐáp số: B.",
   },
   {
     sourceNumber: 6,
@@ -77,8 +82,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["220", "200", "210", "230"],
     strand: "Arithmetic / Số học",
     topicId: "topic-06",
-    correct: null,
-    explanation: null,
+    correct: 0,
+    explanation:
+      "28 + 43 + 72 + 29 + 11 + 37\n= (28 + 72) + (43 + 37) + (29 + 11)\n= 100 + 80 + 40\n= 220.\nĐáp số: A.",
   },
   {
     sourceNumber: 7,
@@ -89,8 +95,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["23", "46", "2", "40"],
     strand: "Arithmetic / Số học",
     topicId: "topic-07",
-    correct: null,
-    explanation: null,
+    correct: 1,
+    explanation:
+      "❀ + ❀ − 22 = ❀ + 24\n❀ − 22 = 24\n❀ = 24 + 22\n❀ = 46.\nĐáp số: B.",
     diagram: "p7-flowers",
   },
   {
@@ -101,8 +108,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["100", "80", "90", "180"],
     strand: "Arithmetic / Số học",
     topicId: "topic-01",
-    correct: null,
-    explanation: null,
+    correct: 2,
+    explanation:
+      "2 + 4 + 6 + … + 16 + 18\n= 2 + 4 + 6 + 8 + 10 + 12 + 14 + 16 + 18\n= (2 + 8) + (4 + 6) + (12 + 18) + (14 + 16) + 10\n= 10 + 10 + 30 + 30 + 10\n= 90.\nĐáp số: C.",
   },
   {
     sourceNumber: 9,
@@ -112,8 +120,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["60", "50", "40", "70"],
     strand: "Arithmetic / Số học",
     topicId: "unassigned",
-    correct: null,
-    explanation: null,
+    correct: 0,
+    explanation:
+      "7 × 2 + 11 × 2 + 2 × 3 + 2 × 9 = (7 + 11 + 3 + 9) × 2 = 30 × 2 = 60.\nĐáp số: A.",
   },
   {
     sourceNumber: 10,
@@ -124,8 +133,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["5", "6", "3", "4"],
     strand: "Arithmetic / Số học",
     topicId: "topic-10",
-    correct: null,
-    explanation: null,
+    correct: 1,
+    explanation:
+      "Trường hợp 1: Phép tính hàng chục là phép cộng không nhớ 1.\nDựa vào hàng trăm, ta có A = 5.\nDựa vào hàng đơn vị, ta có A + B = 10, suy ra B = 10 − A = 10 − 5 = 5 (không thỏa mãn vì trùng với A).\nTrường hợp 2: Phép tính hàng chục là phép cộng có nhớ 1.\nDựa vào hàng trăm, ta có A + 1 = 5, suy ra A = 4.\nDựa vào hàng đơn vị, ta có A + B = 10, suy ra B = 10 − A = 10 − 4 = 6.\nKiểm tra lại: 464 + 66 = 530 (thỏa mãn).\nVậy B = 6.\nĐáp số: B.",
     diagram: "p7-addition",
   },
   {
@@ -141,8 +151,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     ],
     strand: "Number Theory / Lý thuyết số",
     topicId: "unassigned",
-    correct: null,
-    explanation: null,
+    correct: 0,
+    explanation:
+      "1 + 2 + 3 + … + 9 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9\n= (1 + 9) + (2 + 8) + (3 + 7) + (4 + 6) + 5\n= 10 + 10 + 10 + 10 + 5 = 45.\nĐáp số: A.",
   },
   {
     sourceNumber: 12,
@@ -153,8 +164,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["15", "16", "31", "40"],
     strand: "Number Theory / Lý thuyết số",
     topicId: "unassigned",
-    correct: null,
-    explanation: null,
+    correct: 1,
+    explanation:
+      "Từ 10 đến 40 có 16 số chẵn (là 10, 12, 14, …, 38, 40) nên số bóng trong hộp là 16 quả.\nĐáp số: B.",
   },
   {
     sourceNumber: 13,
@@ -164,8 +176,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["355", "314", "335", "345"],
     strand: "Number Theory / Lý thuyết số",
     topicId: "topic-01",
-    correct: null,
-    explanation: null,
+    correct: 2,
+    explanation:
+      "Quy luật: Các số trong dãy giảm dần 21 đơn vị.\n419 − 21 = 398; 398 − 21 = 377; 377 − 21 = 356; …\nVậy số tiếp theo trong dãy số là: 356 − 21 = 335.\nĐáp số: C.",
     diagram: "p7-sequence13",
   },
   {
@@ -177,8 +190,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["27", "41", "14", "40"],
     strand: "Number Theory / Lý thuyết số",
     topicId: "topic-14",
-    correct: null,
-    explanation: null,
+    correct: 3,
+    explanation:
+      "Andy cho đi 27 viên bi nên lúc đầu Andy có nhiều hơn lúc sau 27 viên bi.\nCharlie nhận thêm 13 viên bi nên lúc đầu Charlie có ít hơn lúc sau 13 viên bi.\nLúc sau 3 bạn có số bi bằng nhau nên lúc đầu Andy có nhiều hơn Charlie là 27 + 13 = 40 viên bi.\nĐáp số: D.",
   },
   {
     sourceNumber: 15,
@@ -189,8 +203,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["2", "3", "4", "5"],
     strand: "Number Theory / Lý thuyết số",
     topicId: "unassigned",
-    correct: null,
-    explanation: null,
+    correct: 2,
+    explanation:
+      "Tổng số tem của hai anh em là: 19 + 12 = 31 (cái tem).\nTa có 31 = 9 + 9 + 9 + 4 nên cần ít nhất 4 trang để trưng bày được toàn bộ số tem.\nĐáp số: C.",
   },
   {
     sourceNumber: 16,
@@ -200,8 +215,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["21", "22", "16", "19"],
     strand: "Geometry / Hình học",
     topicId: "topic-15",
-    correct: null,
-    explanation: null,
+    correct: 0,
+    explanation:
+      "Ta đánh số các mảnh như hình minh họa.\nHình vuông đơn vị: có 15 hình là 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15 và 16.\nHình vuông có kích thước bằng 4 hình vuông đơn vị ghép lại: có 3 hình là (1, 2, 6, 7), (2, 3, 7, 8) và 11.\nHình vuông có kích thước bằng 9 hình vuông đơn vị ghép lại: có 3 hình là (4, 5, 6, 9, 10, 11), (5, 6, 7, 11, 12, 13) và (11, 12, 13, 14, 15, 16).\nVậy tổng số hình vuông là: 15 + 3 + 3 = 21 hình.\nĐáp số: A.",
     diagram: "p7-squares",
   },
   {
@@ -213,8 +229,8 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["4", "3", "7", "6"],
     strand: "Geometry / Hình học",
     topicId: "topic-17",
-    correct: null,
-    explanation: null,
+    correct: 0,
+    explanation: "Ta có hình vẽ như hình minh họa.\nĐáp số: A.",
     diagram: "p7-cubes-right",
   },
   {
@@ -225,8 +241,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["16", "12", "9", "8"],
     strand: "Geometry / Hình học",
     topicId: "unassigned",
-    correct: null,
-    explanation: null,
+    correct: 1,
+    explanation:
+      "Một khối lập phương có 4 cạnh ở mặt trên, 4 cạnh bên, 4 cạnh ở mặt dưới.\nNhư vậy, một khối lập phương có tất cả 12 cạnh.\nĐáp số: B.",
     diagram: "p7-cube",
   },
   {
@@ -237,8 +254,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["18", "24", "16", "28"],
     strand: "Geometry / Hình học",
     topicId: "topic-18",
-    correct: null,
-    explanation: null,
+    correct: 3,
+    explanation:
+      "Ta đánh số các đoạn thẳng như hình minh họa.\nĐoạn thẳng đơn: có 16 đoạn thẳng là 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 và 16.\nĐoạn thẳng được ghép bởi 2 đoạn thẳng đơn: có 8 đoạn là (1, 16), (16, 9), (3, 14), (14, 7), (12, 13), (13, 4), (10, 15) và (15, 6).\nĐoạn thẳng được ghép bởi 3 đoạn thẳng đơn: có 4 đoạn thẳng là (1, 16, 9), (3, 14, 7), (12, 13, 4) và (10, 15, 6).\nVậy có tất cả 16 + 8 + 4 = 28 đoạn thẳng.\nĐáp số: D.",
     diagram: "p7-segments",
   },
   {
@@ -250,8 +268,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["9", "10", "8", "6"],
     strand: "Geometry / Hình học",
     topicId: "topic-16",
-    correct: null,
-    explanation: null,
+    correct: 0,
+    explanation:
+      "Quy luật: Nhóm 5 hình (★ ○ ▽ ■ ▽) lặp lại.\n23 = 5 + 5 + 5 + 5 + 3 nên trong 23 hình đầu tiên có 4 nhóm hình (★ ○ ▽ ■ ▽) và thừa ra 3 hình lần lượt là (★ ○ ▽).\nTrong mỗi nhóm hình (★ ○ ▽ ■ ▽) có 2 hình tam giác. Vậy trong 4 nhóm có 8 hình tam giác. Trong 3 hình thừa ra có thêm 1 hình tam giác.\nTổng số hình tam giác trong 23 hình đầu tiên là: 8 + 1 = 9 (hình).\nĐáp số: A.",
     diagram: "p7-shapes",
   },
   {
@@ -263,8 +282,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["9594", "8999", "8352", "8694"],
     strand: "Combinatorics / Tổ hợp",
     topicId: "unassigned",
-    correct: null,
-    explanation: null,
+    correct: 3,
+    explanation:
+      "Số lớn nhất tạo được là 9731.\nSố nhỏ nhất tạo được là 1037.\nHiệu của số lớn nhất và số bé nhất là: 9731 − 1037 = 8694.\nĐáp số: D.",
   },
   {
     sourceNumber: 22,
@@ -275,8 +295,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["5", "6", "3", "2"],
     strand: "Combinatorics / Tổ hợp",
     topicId: "topic-14",
-    correct: null,
-    explanation: null,
+    correct: 2,
+    explanation:
+      "Tổng số sách ở 3 ngăn là: 7 + 8 + 3 = 18 (quyển).\nNếu 3 ngăn có số sách bằng nhau thì mỗi ngăn có 6 quyển.\nVậy cần di chuyển ít nhất 3 quyển sách để 3 ngăn có số sách bằng nhau. Trong đó, ta di chuyển 1 quyển sách từ ngăn trên cùng và 2 quyển sách từ ngăn giữa xuống ngăn cuối.\nĐáp số: C.",
     diagram: "p7-books",
   },
   {
@@ -288,8 +309,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["40", "20", "24", "30"],
     strand: "Combinatorics / Tổ hợp",
     topicId: "unassigned",
-    correct: null,
-    explanation: null,
+    correct: 0,
+    explanation:
+      "Chọn chữ số hàng trăm: 4 cách (khác chữ số 0).\nChọn chữ số hàng chục: 5 cách.\nChọn chữ số hàng đơn vị: 2 cách (0 hoặc 6).\nVậy có tất cả số các số thỏa mãn đề bài là: 4 × 5 × 2 = 40 (số).\nĐáp số: A.",
   },
   {
     sourceNumber: 24,
@@ -300,8 +322,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["7", "3", "8", "6"],
     strand: "Combinatorics / Tổ hợp",
     topicId: "topic-24",
-    correct: null,
-    explanation: null,
+    correct: 3,
+    explanation:
+      "Nhận xét: 15 = 4 + 4 + 4 + 3.\nCứ mua 4 chiếc bút thì Fred được tặng 2 cục tẩy. Vậy với 15 chiếc bút thì Fred được tặng số cục tẩy là: 2 + 2 + 2 = 6 (cục tẩy).\nĐáp số: D.",
   },
   {
     sourceNumber: 25,
@@ -312,8 +335,9 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
     options: ["2", "4", "6", "8"],
     strand: "Combinatorics / Tổ hợp",
     topicId: "unassigned",
-    correct: null,
-    explanation: null,
+    correct: 3,
+    explanation:
+      "Tổng các số trong tất cả các ô là: 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 = 45.\nVì tổng các số trong mỗi hàng là bằng nhau nên tổng đó là: 45 : 3 = 15.\nXét hàng 2, ta có: 3 + C + 7 = 15, suy ra C = 5.\nCòn lại các số: 2, 4, 6, 8.\nXét cột 1, ta có: A + 3 + D = 15, suy ra A + D = 15 − 3 = 12.\nTrong các số còn lại, chỉ có cặp số 4 và 8 có tổng là 12.\nNếu D = 8 thì xét hàng 3, ta có D + 9 + E = 8 + 9 + E = 17 + E > 15 (loại).\nDo đó, D = 4 và A = 8. Khi đó, ta tìm được B = 6 và E = 2.\nVậy A = 8.\nĐáp số: D.",
     diagram: "p7-magic-grid",
   },
 ];

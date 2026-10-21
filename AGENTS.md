@@ -81,3 +81,5 @@
 - Qualifier5 now has all25 supplied keys/solutions: B,D,A,B,D,D,C,A,C,B,D,B,C,B,A,A,D,C,C,B,C,B,B,C,A. All choices match supplied answers. Q8 matches topic09 (inverse operation diagram); q12,14,18,19,21,23,24 remain unassigned; retain other reviewed topics. Parent review includes inverse-operation, numbered cube/star and maximal-square diagrams plus the10-row flower-distribution table. No new topics/examples are created.
 
 - Qualifier6 now has25 supplied keys and explanations: C,A,B,B,D,D,B,C,C,C,A,B,B,A,A,C,A,D,C,D,A,D,C,A,D. All supplied answer values match choices. Reviewed topics unchanged: q3,7,10,13,15,17,20,22,24,25 remain unassigned. Retain numbered square/cube solution diagrams behind parent gate.
+
+- Qualifier7 now has25 supplied answers and worked explanations: B,D,A,C,B,A,B,C,A,B,A,B,C,D,C,A,A,B,D,A,D,C,A,D,D. All answers match choices; reviewed topics unchanged (q1,2,5,9,11,12,15,18,21,23,25 unassigned). Include supplied fifth arrow group, numbered square pieces (merged center piece11), right-view cube and16 numbered simple segments in parent review.

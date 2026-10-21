@@ -11,7 +11,62 @@ function Book({ x, y }: { x: number; y: number }) {
     </g>
   );
 }
-export function Paper7Illustration({ name }: { name: string }) {
+export function Paper7Illustration({
+  name,
+  solution = false,
+}: {
+  name: string;
+  solution?: boolean;
+}) {
+  if (name === "arrow-groups" && solution)
+    return (
+      <SourceDrawing
+        label="Nhóm thứ5 trong lưới6×6 với21 mũi tên"
+        viewBox="0 0 230 230"
+      >
+        {Array.from({ length: 36 }, (_, i) => {
+          const x = i % 6,
+            y = Math.floor(i / 6);
+          const marked =
+            y === 0 ||
+            x === 0 ||
+            [
+              [2, 2],
+              [3, 2],
+              [4, 2],
+              [5, 2],
+              [2, 3],
+              [2, 4],
+              [4, 4],
+              [5, 4],
+              [2, 5],
+              [4, 5],
+            ].some(([a, b]) => a === x && b === y);
+          return (
+            <g key={i}>
+              <rect
+                x={22 + x * 30}
+                y={20 + y * 30}
+                width="30"
+                height="30"
+                fill="white"
+                stroke="#555"
+              />
+              {marked && (
+                <text
+                  x={37 + x * 30}
+                  y={42 + y * 30}
+                  fontSize="23"
+                  textAnchor="middle"
+                >
+                  ⇨
+                </text>
+              )}
+            </g>
+          );
+        })}
+      </SourceDrawing>
+    );
   if (["letters", "sequence3", "sequence13", "flowers"].includes(name))
     return (
       <div className="diagram-number-line">
@@ -171,16 +226,32 @@ export function Paper7Illustration({ name }: { name: string }) {
         viewBox="0 0 230 230"
       >
         {cells.map(([x, y], i) => (
-          <rect
-            key={i}
-            x={25 + x * 33}
-            y={25 + y * 33}
-            width="33"
-            height="33"
-            fill="white"
-            stroke="#888"
-          />
+          <g key={i}>
+            <rect
+              x={25 + x * 33}
+              y={25 + y * 33}
+              width="33"
+              height="33"
+              fill="white"
+              stroke="#888"
+            />
+            {solution && (
+              <text
+                x={41.5 + x * 33}
+                y={48 + y * 33}
+                fontSize="18"
+                textAnchor="middle"
+              >
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 10, 13, 14, 15, 16][i]}
+              </text>
+            )}
+          </g>
         ))}
+        {solution && (
+          <text x="91" y="130" fontSize="20" textAnchor="middle">
+            11
+          </text>
+        )}
       </SourceDrawing>
     );
   }
@@ -197,6 +268,21 @@ export function Paper7Illustration({ name }: { name: string }) {
         <SourceCube x={190} y={75} />
         <SourceCube x={30} y={75} />
         <SourceCube x={230} y={75} />
+        {solution && (
+          <g fontSize="16" textAnchor="middle">
+            {[
+              [237, 53, 1],
+              [237, 72, 2],
+              [277, 100, 3],
+              [273, 78, 4],
+            ].map(([x, y, n]) => (
+              <text key={n} x={x} y={y}>
+                {n}
+              </text>
+            ))}
+            <path d="M269 75h-7" stroke="#111" />
+          </g>
+        )}
       </SourceDrawing>
     );
   if (name === "cube")
@@ -254,6 +340,32 @@ export function Paper7Illustration({ name }: { name: string }) {
         {points.map(([x, y], i) => (
           <circle key={i} cx={40 + x * 45} cy={25 + y * 45} r="2.6" />
         ))}
+        {solution && (
+          <g fontSize="14" textAnchor="middle">
+            {[
+              [75, 50, 1],
+              [107, 18, 2],
+              [140, 50, 3],
+              [158, 63, 4],
+              [183, 96, 5],
+              [158, 123, 6],
+              [140, 141, 7],
+              [107, 169, 8],
+              [75, 141, 9],
+              [62, 123, 10],
+              [30, 96, 11],
+              [62, 63, 12],
+              [107, 63, 13],
+              [140, 96, 14],
+              [107, 123, 15],
+              [75, 96, 16],
+            ].map(([x, y, n]) => (
+              <text key={n} x={x} y={y}>
+                {n}
+              </text>
+            ))}
+          </g>
+        )}
       </SourceDrawing>
     );
   }
