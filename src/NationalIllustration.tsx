@@ -704,5 +704,167 @@ export function NationalIllustration({
         </SourceDrawing>
       );
   }
+  if (paper === 6) {
+    if (name === "sequence3")
+      return (
+        <div className="diagram-number-line">12、15、21、30、42、57、___</div>
+      );
+    if (name === "letters")
+      return <div className="diagram-number-line">P、M、J、G、___</div>;
+    if (name === "operators12")
+      return <div className="diagram-number-line">15 __ 8 __ 6 __ 1 = 16</div>;
+    if (name === "operators13")
+      return <div className="diagram-number-line">6 __ 4 __ 3 __ 2 = 29</div>;
+    if (name === "blank")
+      return <div className="diagram-number-line">_____ ÷ 2 + 9 = 19</div>;
+    if (name === "addition9")
+      return <Addition top="A A" bottom="A B" total="7 2" />;
+    if (name === "addition15")
+      return <Addition top="B A" bottom="A B" total="C 8 7" />;
+    if (name === "numbers")
+      return (
+        <div className="diagram-number-line">
+          20196951、20186421、2020345、20198462
+        </div>
+      );
+    if (name === "shapes")
+      return (
+        <SymbolStrip
+          label="Dãy hình tròn đen, tam giác đen và vuông rỗng có chỗ trống"
+          symbols={[
+            "●",
+            "▲",
+            "●",
+            "□",
+            "●",
+            "▲",
+            "●",
+            "□",
+            "●",
+            "▲",
+            "●",
+            "＿",
+            "●",
+            "▲",
+            "●",
+            "□",
+          ]}
+        />
+      );
+    if (name === "cross-groups")
+      return (
+        <SourceDrawing
+          label="Bốn nhóm hình thoi gồm các ô vuông và dấu ※ theo đề"
+          viewBox="0 0 630 255"
+        >
+          {[1, 2, 3, 4].map((n, i) => {
+            const u = 24,
+              m = n - 1,
+              size = 2 * n - 1,
+              x = [25, 115, 260, 445][i],
+              y = 205 - size * u;
+            return (
+              <g key={n} transform={`translate(${x} ${y})`}>
+                {Array.from({ length: size * size }, (_, k) => {
+                  const r = Math.floor(k / size),
+                    c = k % size;
+                  if (Math.abs(r - m) + Math.abs(c - m) > m) return null;
+                  return (
+                    <g key={k}>
+                      <rect
+                        x={c * u}
+                        y={r * u}
+                        width={u}
+                        height={u}
+                        fill="white"
+                        stroke="#555"
+                        strokeWidth=".8"
+                      />
+                      {(r + c) % 2 === m % 2 && (
+                        <text
+                          x={(c + 0.5) * u}
+                          y={(r + 0.5) * u + 5}
+                          textAnchor="middle"
+                          fontSize="16"
+                        >
+                          ※
+                        </text>
+                      )}
+                    </g>
+                  );
+                })}
+                <text
+                  x={(size * u) / 2}
+                  y={235 - y}
+                  textAnchor="middle"
+                  fontSize="14"
+                >
+                  {i + 1}
+                  {["st", "nd", "rd", "th"][i]} Group
+                </text>
+              </g>
+            );
+          })}
+        </SourceDrawing>
+      );
+    if (name === "squares")
+      return (
+        <SourceDrawing
+          label="Các ô vuông ghép theo hình trong đề"
+          viewBox="0 0 235 220"
+        >
+          {[
+            [3, 0],
+            [4, 0],
+            [0, 1],
+            [3, 1],
+            [0, 2],
+            [1, 2],
+            [2, 2],
+            [3, 2],
+            [0, 3],
+            [1, 3],
+            [2, 3],
+            [0, 4],
+            [2, 4],
+          ].map(([x, y], i) => (
+            <rect
+              key={i}
+              x={30 + x * 34}
+              y={20 + y * 34}
+              width="34"
+              height="34"
+              fill="white"
+              stroke="#333"
+              strokeWidth="1"
+            />
+          ))}
+        </SourceDrawing>
+      );
+    if (name === "cubes")
+      return (
+        <SourceDrawing
+          label="Khối lập phương xếp dạng chữ U, quan sát từ bên cạnh"
+          viewBox="0 0 300 230"
+        >
+          {[110, 150].map((x) => (
+            <SourceCube key={x} x={x} y={138} />
+          ))}
+          {[138, 98].map((y) => (
+            <SourceCube key={y} x={190} y={y} />
+          ))}
+          {[138, 98, 58].map((y) => (
+            <SourceCube key={y} x={110} y={y} />
+          ))}
+          {[152, 112, 72].map((y) => (
+            <SourceCube key={y} x={96} y={y} />
+          ))}
+          {[56, 96, 136].map((x) => (
+            <SourceCube key={x} x={x} y={166} />
+          ))}
+          <SourceCube x={150} y={152} />
+        </SourceDrawing>
+      );
+  }
   return null;
 }
