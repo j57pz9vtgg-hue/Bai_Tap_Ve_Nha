@@ -57,7 +57,9 @@ export default function Quiz({
         ? (draft.questions ?? getQuestions(grade, section, exercise))
         : getPracticeQuestions(grade, section, exercise),
   );
-  const [started, setStarted] = useState(Boolean(draft || initialResult));
+  const [started, setStarted] = useState(
+    Boolean(initialResult || (draft && !(isTopic && exercise.example))),
+  );
   const [answers, setAnswers] = useState<Record<number, number>>(
     initialResult?.answers ?? draft?.answers ?? {},
   );
@@ -222,8 +224,15 @@ export default function Quiz({
             </section>
           </div>
           <p>{questions.length} câu luyện tập cùng dạng từ bộ đề bạn đã gửi.</p>
-          <button className="primary-button" onClick={start}>
-            Bắt đầu luyện tập <ArrowRight size={20} />
+          <button
+            className="primary-button"
+            onClick={() => {
+              if (draft) setStarted(true);
+              else start();
+            }}
+          >
+            {draft ? "Tiếp tục luyện tập" : "Bắt đầu luyện tập"}{" "}
+            <ArrowRight size={20} />
           </button>
         </section>
       ) : !started && !isTopic ? (
