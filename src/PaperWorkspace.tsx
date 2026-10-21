@@ -1,11 +1,6 @@
-import { useState } from "react";
 import {
   ArrowLeft,
-  ArrowRight,
-  BookOpen,
   ChartNoAxesColumnIncreasing,
-  ChevronDown,
-  ChevronUp,
   Clock3,
   FileCheck2,
   Play,
@@ -31,18 +26,11 @@ type Props = {
   onClose: () => void;
   onConfigure?: (grade: number, section: Section, exercise: Exercise) => void;
 };
-const topicNames = [
-  "Dãy số và quy luật",
-  "Phép tính và số học",
-  "Hình học và đếm hình",
-];
 export function PaperWorkspace(p: Props) {
-  const [exampleOpen, setExampleOpen] = useState(true);
   const topic = p.exercise.category === "topic";
   const answered = p.questions.filter(
     (_, i) => p.answers[i] !== undefined,
   ).length;
-  const title = topicNames[p.exercise.topic ?? 0];
   const clock = `${String(Math.floor(p.elapsed / 60)).padStart(2, "0")}:${String(p.elapsed % 60).padStart(2, "0")}`;
   const configure = (grade: number, section: Section, exercise = p.exercise) =>
     p.onConfigure?.(grade, section, exercise);
@@ -146,113 +134,18 @@ export function PaperWorkspace(p: Props) {
                 >
                   {getExercises(p.section, "topic").map((x) => (
                     <option key={x.id} value={x.id}>
-                      {topicNames[x.topic ?? 0]}
+                      {x.title}
                     </option>
                   ))}
                 </select>
               </label>
-              <button
-                className="example-toggle"
-                onClick={() => setExampleOpen(!exampleOpen)}
-                aria-expanded={exampleOpen}
-              >
-                <BookOpen />
-                Ví dụ bài mẫu
-              </button>
             </div>
-            <section className="topic-example">
-              <button
-                className="example-heading"
-                onClick={() => setExampleOpen(!exampleOpen)}
-                aria-expanded={exampleOpen}
-              >
-                <span>
-                  <BookOpen />
-                  Bài mẫu • {title}
-                </span>
-                <span>
-                  {exampleOpen ? <ChevronUp /> : <ChevronDown />}
-                  {exampleOpen ? "Thu gọn" : "Mở rộng"}
-                </span>
+            {!p.started && (
+              <button className="topic-start" onClick={p.onStart}>
+                <Play size={22} />
+                Bắt đầu luyện tập
               </button>
-              {exampleOpen && (
-                <>
-                  <div className="example-content">
-                    <div className="example-illustration">
-                      <h3>
-                        {p.exercise.topic === 0
-                          ? "Tìm số tiếp theo: 3, 6, 9, 12, …"
-                          : p.exercise.topic === 1
-                            ? "Tính: 12 + 3 = ?"
-                            : "Hai hình tam giác có tất cả bao nhiêu cạnh?"}
-                      </h3>
-                      {p.exercise.topic === 0 ? (
-                        <div
-                          className="sequence-diagram"
-                          aria-label="3 cộng 3 được 6, cộng 3 được 9, cộng 3 được 12, cộng 3 được 15"
-                        >
-                          {[3, 6, 9, 12, 15].map((n, i) => (
-                            <div key={n}>
-                              <span
-                                className={i === 4 ? "sequence-result" : ""}
-                              >
-                                {n}
-                              </span>
-                              {i < 4 && (
-                                <span className="sequence-arrow">
-                                  <small>+3</small>
-                                  <ArrowRight />
-                                </span>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="example-equation">
-                          {p.exercise.topic === 1
-                            ? "12 + 3 = 15"
-                            : "△ + △ = 3 + 3 = 6 cạnh"}
-                        </div>
-                      )}
-                    </div>
-                    <ol className="example-steps">
-                      <li>
-                        <b>Nhận xét:</b>{" "}
-                        {p.exercise.topic === 0
-                          ? "Mỗi số tăng thêm 3."
-                          : p.exercise.topic === 1
-                            ? "Cần đếm thêm 3 từ số 12."
-                            : "Mỗi hình tam giác có 3 cạnh."}
-                      </li>
-                      <li>
-                        <b>Tính:</b>{" "}
-                        {p.exercise.topic === 2 ? "3 + 3 = 6." : "12 + 3 = 15."}
-                      </li>
-                      <li>
-                        <b>Kết luận:</b>{" "}
-                        {p.exercise.topic === 0
-                          ? "Số tiếp theo là 15."
-                          : p.exercise.topic === 1
-                            ? "Kết quả là 15."
-                            : "Hai hình có tất cả 6 cạnh."}
-                      </li>
-                    </ol>
-                  </div>
-                  {!p.started && (
-                    <button className="topic-start" onClick={p.onStart}>
-                      <Play size={22} fill="currentColor" />
-                      Bắt đầu luyện tập
-                    </button>
-                  )}
-                </>
-              )}
-              {!exampleOpen && !p.started && (
-                <button className="topic-start" onClick={p.onStart}>
-                  <Play size={22} />
-                  Bắt đầu luyện tập
-                </button>
-              )}
-            </section>
+            )}
           </section>
         )}
         <header className="paper-toolbar">
@@ -311,7 +204,7 @@ export function PaperWorkspace(p: Props) {
           {!topic && (
             <div className="paper-heading">
               <h1>{p.review ? "ĐÁP ÁN & LỜI GIẢI" : "BÀI LUYỆN TẬP TOÁN"}</h1>
-              <p>Đề minh họa • {p.questions.length} câu</p>
+              <p>Đề bài • {p.questions.length} câu</p>
               <div>
                 {p.review
                   ? "Đối chiếu câu trả lời và xem lời giải cho từng câu."
@@ -354,7 +247,7 @@ export function PaperWorkspace(p: Props) {
                   ))}
                 </div>
               </fieldset>
-              {p.review && (
+              {p.review && q.correct !== null && (
                 <aside
                   className="paper-explanation"
                   aria-label={`Đáp án và lời giải câu ${i + 1}`}

@@ -289,18 +289,26 @@ export default function App() {
           ) : (
             <div className="empty-state">
               <BookOpen size={38} />
-              <h3>Chưa tìm thấy bài tập</h3>
-              <p>Thử từ khóa khác hoặc chọn lại nội dung luyện tập nhé.</p>
-              <button className="primary-button" onClick={() => setSearch("")}>
-                Xóa tìm kiếm
-                <ArrowRight size={18} />
-              </button>
+              <h3>
+                {search.trim() ? "Chưa tìm thấy bài tập" : "Chưa có bộ đề thật"}
+              </h3>
+              <p>
+                {search.trim()
+                  ? "Thử từ khóa khác hoặc chọn lại nội dung luyện tập."
+                  : "Các bộ đề sẽ xuất hiện sau khi được cung cấp. Đáp án và lời giải chỉ được ghi nhận từ tài liệu bạn gửi."}
+              </p>
+              {search.trim() && (
+                <button
+                  className="primary-button"
+                  onClick={() => setSearch("")}
+                >
+                  Xóa tìm kiếm
+                  <ArrowRight size={18} />
+                </button>
+              )}
             </div>
           )}
         </section>
-        <p className="sample-footer">
-          Bài luyện tập mẫu · Kết quả thực tế lưu trên trình duyệt này
-        </p>
       </main>
       <footer className="world-footer" aria-hidden="true">
         <img src={publicAsset("pixel-ground")} alt="" />

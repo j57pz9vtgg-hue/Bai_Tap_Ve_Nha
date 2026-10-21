@@ -83,6 +83,21 @@ export default function Quiz({
 
   function finish() {
     if (submitted.current) return;
+    if (
+      !questions.length ||
+      questions.some(
+        (q) =>
+          typeof q.correct !== "number" ||
+          !Number.isInteger(q.correct) ||
+          q.correct < 0 ||
+          q.correct >= q.options.length,
+      )
+    ) {
+      window.alert(
+        "Chưa có đáp án được cung cấp cho bộ đề này. Bài làm chưa được chấm điểm.",
+      );
+      return;
+    }
     submitted.current = true;
     onFinish({
       id,
