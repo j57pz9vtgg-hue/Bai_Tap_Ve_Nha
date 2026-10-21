@@ -6,10 +6,20 @@ const ALL_QUESTIONS = [
   ...TIMO_GRADE2_QUALIFIER2,
   ...TIMO_GRADE2_QUALIFIER3,
 ];
-// Classification follows the owner’s newly supplied numeric-sequence example.
+// Classify the three supplied papers against the owner's teaching examples.
+// Keep stable topic IDs so existing attempts/results remain attached to topic 1.
+const TOPIC_BY_SOURCE_NUMBER: Record<number, string> = {
+  1: "topic-01",
+  12: "topic-01",
+  2: "topic-02",
+  3: "topic-03",
+  4: "topic-04",
+  5: "topic-05",
+  6: "topic-06",
+};
 for (const question of ALL_QUESTIONS) {
-  if (question.sourceNumber === 1 || question.sourceNumber === 12)
-    question.topicId = "topic-01";
+  question.topicId =
+    TOPIC_BY_SOURCE_NUMBER[question.sourceNumber ?? 0] ?? "unassigned";
 }
 export type Section =
   "home" | "timo" | "asmo" | "toan" | "vietnamese" | "esl" | "math" | "science";
@@ -143,11 +153,26 @@ export function getExercises(
   const topics = [
     {
       id: "topic-01",
-      title: "Chủ đề 1",
+      title: "Dãy số và quy luật",
       category: "topic" as const,
       example: TIMO_GRADE2_QUALIFIER1[0],
       exampleOnly: true,
     },
+    ...[
+      { id: "topic-02", title: "Bài toán cộng có lời văn", sourceNumber: 2 },
+      { id: "topic-03", title: "Bài toán tính tuổi", sourceNumber: 3 },
+      { id: "topic-04", title: "Quy luật số lượng hình", sourceNumber: 4 },
+      { id: "topic-05", title: "Ngày và thứ trong tuần", sourceNumber: 5 },
+      { id: "topic-06", title: "Tính tổng bằng cách ghép số", sourceNumber: 6 },
+    ].map(({ id, title, sourceNumber }) => ({
+      id,
+      title,
+      category: "topic" as const,
+      example: TIMO_GRADE2_QUALIFIER1.find(
+        (q) => q.sourceNumber === sourceNumber,
+      ),
+      exampleOnly: true,
+    })),
     { id: "unassigned", title: "Chưa có chủ đề", category: "topic" as const },
   ].map((topic) => ({
     ...topic,
