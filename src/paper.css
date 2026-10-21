@@ -1183,3 +1183,16 @@
   outline: 2px solid #008cb9;
   outline-offset: 2px;
 }
+
+.national-number-table {
+  margin: 18px auto;
+  border-collapse: collapse;
+  font:
+    18px/1.5 Arial,
+    sans-serif;
+}
+.national-number-table td {
+  border: 1px solid #333;
+  padding: 10px 22px;
+  text-align: center;
+}

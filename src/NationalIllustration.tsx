@@ -13,6 +13,81 @@ export function intersection(
     (p * (c[1] - d[1]) - (a[1] - b[1]) * q) / den,
   ];
 }
+function SourceTable({ rows }: { rows: (number | string)[][] }) {
+  return (
+    <table className="national-number-table">
+      <tbody>
+        {rows.map((r, i) => (
+          <tr key={i}>
+            {r.map((v, j) => (
+              <td key={j}>{v}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+function Addition({
+  top,
+  bottom,
+  total,
+}: {
+  top: string;
+  bottom: string;
+  total: string;
+}) {
+  return (
+    <div
+      className="letter-addition"
+      role="img"
+      aria-label={`${top} cộng ${bottom} bằng ${total}`}
+    >
+      <span>{top}</span>
+      <span>+ {bottom}</span>
+      <span>{total}</span>
+    </div>
+  );
+}
+function Mesh({
+  paths,
+  viewBox = "0 0 280 150",
+}: {
+  paths: string;
+  viewBox?: string;
+}) {
+  return (
+    <SourceDrawing label="Các đường lưới của hình trong đề" viewBox={viewBox}>
+      <path d={paths} fill="none" stroke="#111" strokeWidth="1.3" />
+    </SourceDrawing>
+  );
+}
+function DotLines({
+  lines,
+  points,
+  viewBox = "0 0 260 180",
+}: {
+  lines: number[][][];
+  points: number[][];
+  viewBox?: string;
+}) {
+  return (
+    <SourceDrawing
+      label="Đoạn thẳng và các điểm đánh dấu theo đề"
+      viewBox={viewBox}
+    >
+      <g stroke="#111" strokeWidth="2" fill="none">
+        {lines.map(([a, b], i) => (
+          <path key={i} d={`M${a} ${b}`} />
+        ))}
+      </g>
+      {points.map(([x, y], i) => (
+        <circle key={i} cx={x} cy={y} r="4" />
+      ))}
+    </SourceDrawing>
+  );
+}
+
 export function NationalIllustration({
   paper,
   name,
@@ -193,6 +268,97 @@ export function NationalIllustration({
             "●",
           ]}
         />
+      );
+  }
+  if (paper === 2) {
+    if (name === "table")
+      return (
+        <SourceTable
+          rows={[
+            [2, 3, 6],
+            [5, 3, 15],
+            [4, 4, "?"],
+            [6, 5, 30],
+          ]}
+        />
+      );
+    if (name === "letters")
+      return <div className="diagram-number-line">D、H、J、N、P、___</div>;
+    if (name === "sequence13")
+      return <div className="diagram-number-line">89、80、71、62、…</div>;
+    if (name === "operators")
+      return <div className="diagram-number-line">15 __ 3 __ 7 __ 24 = 1</div>;
+    if (name === "addition")
+      return <Addition top="A" bottom="B A" total="1 0 4" />;
+    if (name === "expressions")
+      return (
+        <div className="diagram-number-line">
+          100÷4，15×4，6×7，3×9，2×10，4×17，60÷3
+        </div>
+      );
+    if (name === "rectangles")
+      return (
+        <Mesh
+          paths="M20 20H260V116H20Z M80 20V116 M140 20V116 M140 62H260 M200 20V62"
+          viewBox="0 0 280 140"
+        />
+      );
+    if (name === "segments") {
+      const points = [
+        [35, 20],
+        [75, 20],
+        [135, 20],
+        [175, 20],
+        [35, 60],
+        [175, 60],
+        [35, 120],
+        [175, 120],
+        [35, 160],
+        [75, 160],
+        [135, 160],
+        [175, 160],
+      ];
+      return (
+        <DotLines
+          lines={[
+            [points[0], points[3]],
+            [points[3], points[11]],
+            [points[11], points[8]],
+            [points[8], points[0]],
+            [points[4], points[1]],
+            [points[2], points[5]],
+            [points[7], points[10]],
+            [points[9], points[6]],
+          ]}
+          points={points}
+          viewBox="0 0 210 180"
+        />
+      );
+    }
+    if (name === "cubes")
+      return (
+        <SourceDrawing
+          label="Các khối lập phương, quan sát từ bên phải"
+          viewBox="0 0 300 230"
+        >
+          {[39, 69, 99, 129].map((y) => (
+            <SourceCube key={y} x={52} y={y} size={30} depth={10} />
+          ))}
+          {[83, 113].map((x) => (
+            <SourceCube key={x} x={x} y={127} size={30} depth={10} />
+          ))}
+          {[68, 98, 128].map((y) => (
+            <SourceCube key={y} x={140} y={y} size={30} depth={10} />
+          ))}
+          {[98, 128].map((y) => (
+            <SourceCube key={y} x={170} y={y} size={30} depth={10} />
+          ))}
+          <SourceCube x={43} y={108} size={30} depth={10} />
+          <SourceCube x={33} y={147} size={30} depth={10} />
+          <SourceCube x={73} y={137} size={30} depth={10} />
+          <SourceCube x={160} y={138} size={30} depth={10} />
+          <SourceCube x={150} y={148} size={30} depth={10} />
+        </SourceDrawing>
       );
   }
   return null;

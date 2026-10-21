@@ -6,6 +6,7 @@ import { TIMO_GRADE2_QUALIFIER5 } from "./content/timo-grade2-qualifier5";
 import { TIMO_GRADE2_QUALIFIER6 } from "./content/timo-grade2-qualifier6";
 import { TIMO_GRADE2_QUALIFIER7 } from "./content/timo-grade2-qualifier7";
 import { TIMO_GRADE2_NATIONAL1 } from "./content/timo-grade2-national1";
+import { TIMO_GRADE2_NATIONAL2 } from "./content/timo-grade2-national2";
 const ALL_QUESTIONS = [
   ...TIMO_GRADE2_QUALIFIER1,
   ...TIMO_GRADE2_QUALIFIER2,
@@ -15,6 +16,7 @@ const ALL_QUESTIONS = [
   ...TIMO_GRADE2_QUALIFIER6,
   ...TIMO_GRADE2_QUALIFIER7,
   ...TIMO_GRADE2_NATIONAL1,
+  ...TIMO_GRADE2_NATIONAL2,
 ];
 // Classify the three supplied papers against the owner's teaching examples.
 // Keep stable topic IDs so existing attempts/results remain attached to topic 1.
@@ -59,7 +61,8 @@ for (const question of ALL_QUESTIONS) {
         TIMO_GRADE2_QUALIFIER5.includes(question) ||
         TIMO_GRADE2_QUALIFIER6.includes(question) ||
         TIMO_GRADE2_QUALIFIER7.includes(question) ||
-        TIMO_GRADE2_NATIONAL1.includes(question)
+        TIMO_GRADE2_NATIONAL1.includes(question) ||
+        TIMO_GRADE2_NATIONAL2.includes(question)
       ? (question.topicId ?? "unassigned")
       : "unassigned";
 }
@@ -77,6 +80,7 @@ export type Exercise = {
   questionCount?: number;
 };
 export type QuestionDiagram =
+  | `n2-${string}`
   | `n1-${string}`
   | `p7-${"letters" | "sequence3" | "arrow-groups" | "flowers" | "addition" | "sequence13" | "squares" | "cubes-right" | "cube" | "segments" | "shapes" | "books" | "magic-grid"}`
   | `p6-${"sequence2" | "cross-groups" | "equation9" | "sequence12" | "operators" | "squares" | "shapes" | "cubes-side" | "sequence23"}`
@@ -233,6 +237,12 @@ export function getExercises(
       category: "national" as const,
       questionCount: TIMO_GRADE2_NATIONAL1.length,
     },
+    {
+      id: "national-02",
+      title: "Đề Quốc gia 02",
+      category: "national" as const,
+      questionCount: TIMO_GRADE2_NATIONAL2.length,
+    },
   ];
   const topics = [
     {
@@ -320,6 +330,7 @@ export function getQuestions(
   if (exercise.id === "qualifier-06") return TIMO_GRADE2_QUALIFIER6;
   if (exercise.id === "qualifier-07") return TIMO_GRADE2_QUALIFIER7;
   if (exercise.id === "national-01") return TIMO_GRADE2_NATIONAL1;
+  if (exercise.id === "national-02") return TIMO_GRADE2_NATIONAL2;
   if (exercise.category === "topic")
     return ALL_QUESTIONS.filter((q) => q.topicId === exercise.id);
   return [];
