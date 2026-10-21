@@ -16,6 +16,11 @@ const TOPIC_BY_SOURCE_NUMBER: Record<number, string> = {
   4: "topic-04",
   5: "topic-05",
   6: "topic-06",
+  7: "topic-07",
+  8: "topic-08",
+  9: "topic-09",
+  10: "topic-10",
+  11: "topic-11",
 };
 for (const question of ALL_QUESTIONS) {
   question.topicId =
@@ -31,6 +36,7 @@ export type Exercise = {
   topic?: number;
   exampleOnly?: boolean;
   example?: Question;
+  examples?: Question[];
   questionCount?: number;
 };
 export type QuestionDiagram =
@@ -156,6 +162,7 @@ export function getExercises(
       title: "Dãy số và quy luật",
       category: "topic" as const,
       example: TIMO_GRADE2_QUALIFIER1[0],
+      examples: [TIMO_GRADE2_QUALIFIER1[0], TIMO_GRADE2_QUALIFIER1[11]],
       exampleOnly: true,
     },
     ...[
@@ -164,6 +171,15 @@ export function getExercises(
       { id: "topic-04", title: "Quy luật số lượng hình", sourceNumber: 4 },
       { id: "topic-05", title: "Ngày và thứ trong tuần", sourceNumber: 5 },
       { id: "topic-06", title: "Tính tổng bằng cách ghép số", sourceNumber: 6 },
+      {
+        id: "topic-07",
+        title: "Tìm số bị che trong phép tính",
+        sourceNumber: 7,
+      },
+      { id: "topic-08", title: "Tính biểu thức cộng, trừ", sourceNumber: 8 },
+      { id: "topic-09", title: "Tính ngược theo sơ đồ", sourceNumber: 9 },
+      { id: "topic-10", title: "Tìm chữ số trong phép cộng", sourceNumber: 10 },
+      { id: "topic-11", title: "Đếm số theo tổng chữ số", sourceNumber: 11 },
     ].map(({ id, title, sourceNumber }) => ({
       id,
       title,

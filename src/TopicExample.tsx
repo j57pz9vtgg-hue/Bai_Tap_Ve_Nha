@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, BookOpen } from "lucide-react";
-import { QuestionIllustration } from "./QuestionIllustration";
+import {
+  QuestionIllustration,
+  hasSolutionDiagram,
+} from "./QuestionIllustration";
 import type { Exercise } from "./data";
 export function TopicExample({
   exercise,
@@ -19,8 +22,9 @@ export function TopicExample({
   useEffect(() => {
     if (showSignal) setExpanded(true);
   }, [showSignal]);
-  const example = exercise.example;
-  if (!example) return null;
+  const examples =
+    exercise.examples ?? (exercise.example ? [exercise.example] : []);
+  if (!examples.length) return null;
   return (
     <section className="topic-example-intro">
       <button
@@ -34,25 +38,35 @@ export function TopicExample({
       </button>
       {expanded && (
         <>
-          <div className="topic-example-columns">
-            <section>
-              <h3>Ví dụ</h3>
-              <p>{example.text}</p>
-              <p className="question-translation">{example.translation}</p>
-              <QuestionIllustration diagram={example.diagram} />
-              <div className="topic-example-options">
-                {example.options.map((option, i) => (
-                  <span key={i}>
-                    {"ABCD"[i]}. {option}
-                  </span>
-                ))}
-              </div>
-            </section>
-            <section>
-              <h3>Lời giải ví dụ</h3>
-              <p className="supplied-explanation">{example.explanation}</p>
-            </section>
-          </div>
+          {examples.map((example, index) => (
+            <div
+              className="topic-example-columns"
+              key={`${example.sourcePaper}:${example.sourceNumber}`}
+            >
+              <section>
+                <h3>Ví dụ{examples.length > 1 ? ` ${index + 1}` : ""}</h3>
+                <p>{example.text}</p>
+                <p className="question-translation">{example.translation}</p>
+                <QuestionIllustration diagram={example.diagram} />
+                <div className="topic-example-options">
+                  {example.options.map((option, i) => (
+                    <span key={i}>
+                      {"ABCD"[i]}. {option}
+                    </span>
+                  ))}
+                </div>
+              </section>
+              <section>
+                <h3>
+                  Lời giải ví dụ{examples.length > 1 ? ` ${index + 1}` : ""}
+                </h3>
+                {hasSolutionDiagram(example.diagram) && (
+                  <QuestionIllustration diagram={example.diagram} solution />
+                )}
+                <p className="supplied-explanation">{example.explanation}</p>
+              </section>
+            </div>
+          ))}
           <p>
             {exercise.questionCount ?? 0} câu luyện tập cùng dạng từ bộ đề bạn
             đã gửi.
