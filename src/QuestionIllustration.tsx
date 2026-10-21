@@ -630,6 +630,10 @@ function FoodChoices({ solution = false }: { solution?: boolean }) {
 export const hasSolutionDiagram = (diagram?: QuestionDiagram) =>
   diagram !== undefined &&
   [
+    "n5-squares",
+    "n5-segments",
+    "n5-cubes",
+    "n5-circle-triangles",
     "n4-squares",
     "n4-segments",
     "n4-cubes",
@@ -693,6 +697,13 @@ export function QuestionIllustration({
 }: DiagramProps) {
   if (!diagram) return null;
   if (/^n\d+-/.test(diagram)) {
+    if (
+      ["n5-circle-triangles", "n6-circle-pieces", "n7-right-triangle"].includes(
+        diagram,
+      ) &&
+      !solution
+    )
+      return null;
     if (solution && !hasSolutionDiagram(diagram)) return null;
     const dash = diagram.indexOf("-");
     return (

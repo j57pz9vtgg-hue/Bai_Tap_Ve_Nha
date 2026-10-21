@@ -910,6 +910,31 @@ export function NationalIllustration({
       );
   }
   if (paper === 5) {
+    if (name === "circle-triangles")
+      return solution ? (
+        <SourceDrawing
+          label="Bốn đường thẳng cắt hình tròn, đánh số các mảnh1,2,3"
+          viewBox="0 0 230 225"
+        >
+          <circle cx="110" cy="110" r="78" fill="none" stroke="#777" />
+          <path
+            d="M55 20 170 205M20 95 195 160M15 100 165 25M135 20 145 205"
+            fill="none"
+            stroke="#555"
+          />
+          <g fontSize="17">
+            <text x="122" y="68">
+              1
+            </text>
+            <text x="91" y="95">
+              2
+            </text>
+            <text x="145" y="163">
+              3
+            </text>
+          </g>
+        </SourceDrawing>
+      ) : null;
     if (name === "table")
       return (
         <SourceTable
@@ -1041,6 +1066,23 @@ export function NationalIllustration({
             [m1, m4],
           ]}
           points={[a, b, c, d, e, m1, h1, h2, m4]}
+          labels={
+            solution
+              ? [
+                  [67, 54, 1],
+                  [37, 102, 2],
+                  [102, 54, 3],
+                  [141, 105, 4],
+                  [175, 108, 5],
+                  [210, 54, 6],
+                  [247, 53, 7],
+                  [277, 105, 8],
+                  [85, 73, 9],
+                  [154, 73, 10],
+                  [225, 73, 11],
+                ]
+              : undefined
+          }
           viewBox="0 0 310 155"
         />
       );
@@ -1062,6 +1104,25 @@ export function NationalIllustration({
           <SourceCube x={81} y={157} size={35} depth={12} />
           <SourceCube x={155} y={139} size={35} depth={12} />
           <SourceCube x={143} y={151} size={35} depth={12} />
+          {solution && (
+            <g fontSize="14" textAnchor="middle">
+              {[
+                [229, 121, 1],
+                [194, 51, 2],
+                [182, 133, 3],
+                [163, 145, 4],
+                [149, 126, 5],
+                [127, 136, 6],
+                [97, 92, 7],
+                [106, 151, 8],
+                [78, 139, 9],
+              ].map(([x, y, n]) => (
+                <text key={n} x={x} y={y}>
+                  {n}
+                </text>
+              ))}
+            </g>
+          )}
         </SourceDrawing>
       );
   }
