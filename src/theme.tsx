@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 export const THEMES = [
   { id: "pixel", name: "Thế giới Pixel", hero: "pixel-hero" },
   { id: "bunny", name: "Thỏ con", hero: "bunny-hero" },
+  { id: "crystal", name: "Đảo pha lê", hero: "crystal-hero" },
 ] as const;
 export type LearningTheme = (typeof THEMES)[number]["id"];
 const KEY = "homework-interface:v3";

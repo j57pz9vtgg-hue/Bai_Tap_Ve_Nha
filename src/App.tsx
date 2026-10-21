@@ -142,7 +142,13 @@ export default function App() {
                 setCategory(isExam ? "qualifier" : "all");
               }}
             >
-              {theme === "pixel" ? (
+              {theme === "crystal" ? (
+                <img
+                  className="crystal-brand-icon"
+                  src={publicAsset("crystal-book")}
+                  alt=""
+                />
+              ) : theme === "pixel" ? (
                 <img src={publicAsset("pixel-book")} alt="" />
               ) : (
                 <BookOpen className="modern-brand-icon" size={44} />
@@ -201,6 +207,12 @@ export default function App() {
           </div>
         </header>
         <div className="adventure-banner">
+          {theme === "crystal" && (
+            <div className="crystal-theme-label" aria-hidden="true">
+              <span>CHỦ ĐỀ</span>
+              <strong>ĐẢO PHA LÊ</strong>
+            </div>
+          )}
           <h1 className="banner-message">Học vui, chinh phục từng bài!</h1>
           {theme !== "pixel" && (
             <img
@@ -247,10 +259,7 @@ export default function App() {
           <h2 id="catalog-title" className="visually-hidden">
             {search.trim() ? "Kết quả tìm kiếm" : title}
           </h2>
-          <span
-            className="visually-hidden"
-            aria-live="polite"
-          >
+          <span className="visually-hidden" aria-live="polite">
             {exercises.length} {category === "topic" ? "chủ đề" : "đề"}
           </span>
           {exercises.length ? (

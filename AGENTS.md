@@ -32,4 +32,6 @@
 
 - Exercise cards show Kết quả as correct/total câu đúng from the saved result (not Đã lưu), alongside saved elapsed time. This score summary is visible without a parent password; detailed solutions remain protected.
 
-- Available interface themes are only Thế giới Pixel and Thỏ con. The owner removed Công viên khủng long, Đảo khủng long 3D, Nhà khám phá khủng long, Robot and Vũ trụ. Saved selections of removed themes fall back to Pixel; do not restore those options.
+- Available interface themes are Thế giới Pixel, Thỏ con, and the owner-supplied Đảo pha lê (crystal). The owner removed Công viên khủng long, Đảo khủng long 3D, Nhà khám phá khủng long, Robot and Vũ trụ. Saved selections of removed themes fall back to Pixel; do not restore those options.
+
+- Đảo pha lê follows the owner’s crystal-island reference using generated crystal-world/hero/sprites/book assets. Preserve the removed catalog heading/count row and real-content-only policy: reference demo cards/scores are decorative examples and must not be imported as exercises/results.

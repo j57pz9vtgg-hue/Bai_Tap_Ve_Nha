@@ -3,6 +3,9 @@ import type { ReactNode } from "react";
 import {
   X,
   ChevronDown,
+  GraduationCap,
+  Blocks,
+  ClipboardList,
   Check,
   Clock3,
   BookOpen,
@@ -144,10 +147,16 @@ export function StudyFilters({
   onSubject: (subject: Section) => void;
   onCategory: (category: Category) => void;
 }) {
+  const { theme } = useLearningTheme();
   const isExam = section === "timo" || section === "asmo";
   return (
     <div className="study-filters" aria-label="Bộ lọc bài tập">
       <div className="filter-field">
+        {theme === "crystal" && (
+          <span className="crystal-filter-icon" aria-hidden="true">
+            <GraduationCap size={29} />
+          </span>
+        )}
         <label htmlFor="study-grade">Chọn lớp</label>
         <div className="filter-select">
           <select
@@ -165,6 +174,11 @@ export function StudyFilters({
         </div>
       </div>
       <div className="filter-field">
+        {theme === "crystal" && (
+          <span className="crystal-filter-icon" aria-hidden="true">
+            <BookOpen size={29} />
+          </span>
+        )}
         <label htmlFor="study-program">Chọn chương trình học</label>
         <div className="filter-select">
           <select
@@ -182,6 +196,11 @@ export function StudyFilters({
         </div>
       </div>
       <div className="filter-field">
+        {theme === "crystal" && (
+          <span className="crystal-filter-icon" aria-hidden="true">
+            <Blocks size={29} />
+          </span>
+        )}
         <label htmlFor="study-subject">Chọn môn học</label>
         <div className="filter-select">
           <select
@@ -202,6 +221,11 @@ export function StudyFilters({
         </div>
       </div>
       <div className="filter-field">
+        {theme === "crystal" && (
+          <span className="crystal-filter-icon" aria-hidden="true">
+            <ClipboardList size={29} />
+          </span>
+        )}
         <label htmlFor="study-category">Chọn nội dung luyện tập</label>
         <div className="filter-select">
           <select
@@ -275,7 +299,9 @@ export function ExerciseCard({
             <path d="M11 7h15v2H12v4H9v9H7V12h3V9h1z" fill="#ffffff88" />
           </svg>
           <span>
-            {theme === "pixel" ? number : String(number).padStart(2, "0")}
+            {theme === "pixel" || theme === "crystal"
+              ? number
+              : String(number).padStart(2, "0")}
           </span>
         </span>
         <div className="exercise-name">

@@ -991,3 +991,367 @@
   line-height: 1.5;
   text-align: left;
 }
+
+/* Crystal Island: pearlescent glass, faceted blue gems and a continuous illustrated sky. */
+:root[data-theme="crystal"] {
+  --theme-base: #eef5ff;
+  --theme-accent: #164fce;
+  --theme-action: linear-gradient(
+    180deg,
+    #b8e9ff 0%,
+    #5599ff 18%,
+    #6154ff 55%,
+    #2967ff 87%,
+    #8ee7ff 100%
+  );
+  --theme-action-ink: white;
+  --theme-sprites: url("/assets/crystal-sprites.webp");
+  --theme-hero: url("/assets/crystal-hero.webp");
+  --theme-edge: #c4d7f6;
+  --theme-button-soft: #d5f9f0;
+  --theme-ordinal: #609aff;
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"]) .pixel-app {
+  min-height: 100dvh;
+  background: #eef5ff url("/assets/crystal-world.webp") center top / cover fixed
+    no-repeat;
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"]) .catalog-masthead {
+  background: transparent;
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"]) .adventure-banner {
+  height: clamp(165px, 13vw, 210px);
+  padding: 0;
+  background: var(--theme-hero) center top / cover no-repeat;
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"]) .adventure-banner::before,
+:root[data-theme="crystal"]:not([data-theme="pixel"]) .modern-hero {
+  display: none;
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"]) .header-inner {
+  height: auto;
+  padding: 18px 32px;
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"]) .brand {
+  width: 340px;
+  max-width: 30%;
+  color: #0864d7;
+  text-shadow:
+    0 2px white,
+    2px 0 white,
+    -2px 0 white,
+    0 -2px white;
+  gap: 6px;
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"])
+  .brand
+  > span:first-of-type {
+  font-size: 31px;
+  line-height: 1.05;
+}
+:root[data-theme="crystal"] .brand-child {
+  color: #9c43cc;
+}
+:root[data-theme="crystal"] .crystal-brand-icon {
+  width: 76px;
+  height: 76px;
+  object-fit: contain;
+  image-rendering: auto;
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"]) .header-tools {
+  margin-top: 3px;
+}
+:root[data-theme="crystal"] .search-box,
+:root[data-theme="crystal"] .parent-button,
+:root[data-theme="crystal"] .appearance-button,
+:root[data-theme="crystal"] .logout-button {
+  background: #ffffffdd;
+  border: 2px solid #e1eeff;
+  box-shadow:
+    inset 0 0 0 1px white,
+    0 3px 8px #6786cc3d;
+  color: #1744b3;
+  border-radius: 22px;
+}
+.crystal-theme-label {
+  position: absolute;
+  top: 35px;
+  left: 46%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 9px 25px 13px;
+  color: white;
+  background: linear-gradient(
+    135deg,
+    #b3eaff,
+    #646ef2 35%,
+    #2456c9 65%,
+    #83d9ff
+  );
+  border: 3px solid #e3eeff;
+  outline: 1px solid #86a7f6;
+  clip-path: polygon(8% 0, 92% 0, 100% 50%, 92% 100%, 8% 100%, 0 50%);
+  filter: drop-shadow(0 3px 3px #5265b799);
+  text-shadow: 0 2px 2px #2445ab;
+}
+.crystal-theme-label span {
+  font-size: 12px;
+  font-weight: 700;
+}
+.crystal-theme-label strong {
+  font-size: 22px;
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"]) .study-filters {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: -15px 0 12px;
+  gap: 12px;
+  box-shadow: none;
+}
+:root[data-theme="crystal"] .filter-field {
+  position: relative;
+  background: #ffffffd9;
+  border: 1px solid #bad3f4;
+  border-radius: 16px;
+  padding: 11px 14px 11px 74px;
+  box-shadow:
+    inset 0 0 0 3px #fff,
+    inset 0 0 0 5px #e4edfc,
+    0 4px 8px #5577c33d;
+}
+:root[data-theme="crystal"] .filter-field label {
+  font-size: 12px;
+  color: #223477;
+  font-weight: 500;
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"]) .filter-select select {
+  color: #091e63;
+  background: linear-gradient(#fff, #f2f5ff);
+  border: 1px solid #b7c8ed;
+  height: 36px;
+  padding: 4px 25px 4px 10px;
+  font-size: 15px;
+}
+.crystal-filter-icon {
+  position: absolute;
+  left: 18px;
+  top: 20px;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  color: #5940df;
+  background: linear-gradient(145deg, #f0f6ff, #c5ceff);
+  box-shadow:
+    inset 2px 2px 3px white,
+    0 2px 3px #8091d82e;
+  filter: drop-shadow(0 2px 1px #c5bffc);
+}
+:root[data-theme="crystal"] .filter-field:nth-child(2) .crystal-filter-icon {
+  color: #0088ea;
+}
+:root[data-theme="crystal"] .filter-field:nth-child(3) .crystal-filter-icon {
+  color: #e8a322;
+  background: linear-gradient(145deg, #e0ffe8, #acf0db);
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"]) .exercise-card {
+  background: linear-gradient(145deg, #fffffff5, #f4f8ffef 65%, #e8ebffef);
+  border: 1px solid #b7cef1;
+  border-radius: 17px;
+  box-shadow:
+    inset 0 0 0 3px #fff,
+    inset 0 0 0 5px #e3edfc,
+    0 4px 9px #6e83c53b;
+  padding: 14px 15px 12px;
+  min-height: 195px;
+  color: #11195c;
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"])
+  .exercise-card
+  .number-badge {
+  width: 43px;
+  height: 48px;
+  clip-path: polygon(50% 0, 94% 22%, 94% 76%, 50% 100%, 6% 76%, 6% 22%);
+  border-radius: 0;
+  background: conic-gradient(
+    from 30deg,
+    #bdf6ff,
+    #5e9aff,
+    #8fa4ff,
+    #5e69ed,
+    #d1dfff,
+    #76ceff,
+    #bdf6ff
+  );
+  box-shadow: inset 0 0 0 3px #dff7ff;
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"])
+  .exercise-card
+  .number-badge
+  > span {
+  font-size: 29px;
+  color: white;
+  text-shadow: 0 2px 2px #284cbc;
+}
+:root[data-theme="crystal"] .exercise-name h2 {
+  font-weight: 800;
+  color: #10195b;
+}
+:root[data-theme="crystal"] .status {
+  background: #fff1d9;
+  color: #d8660b;
+  border-radius: 22px;
+}
+:root[data-theme="crystal"] .status.done {
+  background: #d4f7e4;
+  color: #08783e;
+}
+:root[data-theme="crystal"] .exercise-card-art {
+  left: 15px;
+  right: auto;
+  top: 65px;
+  width: 78px;
+  height: 78px;
+  clip-path: inset(0);
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"]) .exercise-stats {
+  margin-left: 82px;
+  padding-right: 0;
+  font-size: 12px;
+  margin-top: 14px;
+  line-height: 1.6;
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"]) .card-actions > button {
+  border: 1px solid #89bcf5;
+  border-radius: 12px;
+  box-shadow:
+    inset 0 0 0 2px #ffffffa8,
+    0 2px 4px #647bd34a;
+  font-weight: 750;
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"])
+  .card-actions
+  .start-button {
+  background: var(--theme-action);
+  text-shadow: 0 1px 2px #1539c8;
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"]) .view-result-button {
+  background: linear-gradient(white, #d0eefe);
+  color: #1341a8;
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"]) .retry-button {
+  background: linear-gradient(#f4fff6, #bbf4e8);
+  color: #104b88;
+}
+:root[data-theme="crystal"]:not([data-theme="pixel"]) .paper-world {
+  background: #f0f5ff url("/assets/crystal-world.webp") center top / cover fixed;
+}
+:root[data-theme="crystal"] .paper-brand {
+  color: #195bc8;
+}
+:root[data-theme="crystal"] .paper-brand > img {
+  content: url("/assets/crystal-book.webp");
+  image-rendering: auto;
+}
+:root[data-theme="crystal"] .paper-toolbar {
+  background: #f3f9fff5;
+  border-color: #b9d5f8;
+}
+:root[data-theme="crystal"] .paper-submit {
+  background: var(--theme-action);
+  color: white;
+  border: 1px solid #91baff;
+  box-shadow: inset 0 0 0 2px #ffffff88;
+}
+:root[data-theme="crystal"] .topic-example-intro {
+  background: #fffefcf7;
+  border-color: #c5baf4;
+}
+@media (max-width: 1100px) {
+  :root[data-theme="crystal"] .crystal-theme-label {
+    left: 40%;
+  }
+  :root[data-theme="crystal"] .filter-field {
+    padding-left: 54px;
+  }
+  :root[data-theme="crystal"] .crystal-filter-icon {
+    left: 10px;
+    width: 34px;
+    height: 38px;
+  }
+}
+@media (max-width: 760px) {
+  :root[data-theme="crystal"]:not([data-theme="pixel"]) .site-header {
+    position: relative;
+  }
+  :root[data-theme="crystal"]:not([data-theme="pixel"]) .header-inner {
+    padding: 12px 16px;
+    background: #eef5ffcc;
+  }
+  :root[data-theme="crystal"]:not([data-theme="pixel"]) .brand {
+    max-width: none;
+    width: auto;
+  }
+  :root[data-theme="crystal"]:not([data-theme="pixel"])
+    .brand
+    > span:first-of-type {
+    font-size: 24px;
+  }
+  :root[data-theme="crystal"] .crystal-brand-icon {
+    width: 52px;
+    height: 52px;
+  }
+  :root[data-theme="crystal"]:not([data-theme="pixel"]) .adventure-banner {
+    height: 130px;
+    background-size: auto 160px;
+    background-position: center;
+  }
+  .crystal-theme-label {
+    top: auto;
+    bottom: 18px;
+    left: auto !important;
+    right: 16px;
+    padding: 5px 20px;
+  }
+  .crystal-theme-label strong {
+    font-size: 17px;
+  }
+  :root[data-theme="crystal"]:not([data-theme="pixel"]) .study-filters {
+    margin: -8px 0 8px;
+    gap: 10px;
+  }
+  :root[data-theme="crystal"] .filter-field {
+    padding: 10px;
+  }
+  :root[data-theme="crystal"] .crystal-filter-icon {
+    display: none;
+  }
+  :root[data-theme="crystal"] .exercise-card-art {
+    width: 80px;
+    height: 80px;
+    top: 60px;
+  }
+  :root[data-theme="crystal"]:not([data-theme="pixel"]) .exercise-stats {
+    margin-left: 90px;
+    font-size: 13px;
+  }
+  :root[data-theme="crystal"]:not([data-theme="pixel"]) .pixel-app {
+    background-size: auto 100dvh;
+  }
+}
+
+:root[data-theme="crystal"] .brand-child {
+  display: block;
+}
+:root[data-theme="crystal"] .crystal-theme-label::after {
+  content: "";
+  position: absolute;
+  inset: 4px 8px;
+  border-top: 1px solid #ffffffbd;
+  border-bottom: 1px solid #bad9ff;
+  pointer-events: none;
+}
