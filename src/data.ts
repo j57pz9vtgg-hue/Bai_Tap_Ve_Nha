@@ -1,4 +1,6 @@
 import { TIMO_GRADE2_QUALIFIER1 } from "./content/timo-grade2-qualifier1";
+import { TIMO_GRADE2_QUALIFIER2 } from "./content/timo-grade2-qualifier2";
+const ALL_QUESTIONS = [...TIMO_GRADE2_QUALIFIER1, ...TIMO_GRADE2_QUALIFIER2];
 export type Section =
   "home" | "timo" | "asmo" | "toan" | "vietnamese" | "esl" | "math" | "science";
 export type Category = "all" | "qualifier" | "national" | "topic";
@@ -11,6 +13,7 @@ export type Exercise = {
   questionCount?: number;
 };
 export type QuestionDiagram =
+  | `p2-${"sequence" | "flowers" | "tree" | "chain" | "addition" | "sequence12" | "operations" | "operators" | "squares" | "shapes" | "cubes-front" | "segments" | "cubes-count" | "numbers" | "routes"}`
   | "sequence-1"
   | "hat-groups"
   | "bell-equation"
@@ -110,16 +113,24 @@ export function getExercises(
     category: "qualifier",
     questionCount: TIMO_GRADE2_QUALIFIER1.length,
   };
+  const exams = [
+    exam,
+    {
+      id: "qualifier-02",
+      title: "Đề vòng loại 02",
+      category: "qualifier" as const,
+      questionCount: TIMO_GRADE2_QUALIFIER2.length,
+    },
+  ];
   const topics = [
     { id: "unassigned", title: "Chưa có chủ đề", category: "topic" as const },
   ].map((topic) => ({
     ...topic,
-    questionCount: TIMO_GRADE2_QUALIFIER1.filter((q) => q.topicId === topic.id)
-      .length,
+    questionCount: ALL_QUESTIONS.filter((q) => q.topicId === topic.id).length,
   }));
-  if (category === "qualifier") return [exam];
+  if (category === "qualifier") return exams;
   if (category === "topic") return topics;
-  if (category === "all") return [exam, ...topics];
+  if (category === "all") return [...exams, ...topics];
   return [];
 }
 
@@ -130,8 +141,9 @@ export function getQuestions(
 ): Question[] {
   if (section !== "timo" || grade !== 2) return [];
   if (exercise.id === "qualifier-01") return TIMO_GRADE2_QUALIFIER1;
+  if (exercise.id === "qualifier-02") return TIMO_GRADE2_QUALIFIER2;
   if (exercise.category === "topic")
-    return TIMO_GRADE2_QUALIFIER1.filter((q) => q.topicId === exercise.id);
+    return ALL_QUESTIONS.filter((q) => q.topicId === exercise.id);
   return [];
 }
 export const getPracticeQuestions = getQuestions;

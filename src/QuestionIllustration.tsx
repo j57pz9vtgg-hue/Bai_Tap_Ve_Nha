@@ -1,3 +1,4 @@
+import { Paper2Illustration } from "./Paper2Illustration";
 import type { QuestionDiagram } from "./data";
 
 type DiagramProps = { diagram?: QuestionDiagram; solution?: boolean };
@@ -627,6 +628,14 @@ export const hasSolutionDiagram = (diagram?: QuestionDiagram) =>
     "operation-chain",
     "square-lines",
     "shape-pattern",
+    "p2-flowers",
+    "p2-tree",
+    "p2-chain",
+    "p2-squares",
+    "p2-shapes",
+    "p2-cubes-front",
+    "p2-segments",
+    "p2-cubes-count",
     "cubes-front",
     "boat-segments",
     "cubes-count",
@@ -636,7 +645,29 @@ export function QuestionIllustration({
   diagram,
   solution = false,
 }: DiagramProps) {
-  if (!diagram || (solution && !hasSolutionDiagram(diagram))) return null;
+  if (!diagram) return null;
+  if (diagram.startsWith("p2-")) {
+    if (
+      solution &&
+      ![
+        "p2-flowers",
+        "p2-tree",
+        "p2-chain",
+        "p2-squares",
+        "p2-shapes",
+        "p2-cubes-front",
+        "p2-segments",
+        "p2-cubes-count",
+      ].includes(diagram)
+    )
+      return null;
+    return (
+      <div className={`question-illustration illustration-${diagram}`}>
+        <Paper2Illustration name={diagram.slice(3)} solution={solution} />
+      </div>
+    );
+  }
+  if (solution && !hasSolutionDiagram(diagram)) return null;
   return (
     <div className={`question-illustration illustration-${diagram}`}>
       {diagram === "sequence-1" ? (

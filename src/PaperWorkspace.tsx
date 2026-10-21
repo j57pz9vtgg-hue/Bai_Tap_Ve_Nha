@@ -1,3 +1,4 @@
+import { Paper2Shape } from "./Paper2Illustration";
 import {
   ArrowLeft,
   ChartNoAxesColumnIncreasing,
@@ -277,7 +278,18 @@ export function PaperWorkspace(p: Props) {
                       />
                       <span>
                         {"ABCD"[j]}.{" "}
-                        {q.diagram === "shape-pattern" ? (
+                        {q.diagram === "p2-shapes" ? (
+                          <>
+                            <svg
+                              className="option-shape"
+                              viewBox="-17 -17 34 34"
+                              aria-hidden="true"
+                            >
+                              <Paper2Shape index={[1, 2, 0, 3][j]} />
+                            </svg>
+                            <span className="visually-hidden">{option}</span>
+                          </>
+                        ) : q.diagram === "shape-pattern" ? (
                           <>
                             <svg
                               className="option-shape"
