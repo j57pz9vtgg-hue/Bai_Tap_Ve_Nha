@@ -1095,3 +1095,26 @@
     font-size: 20px;
   }
 }
+
+/* Consistent question typography without changing the existing page layout. */
+.exam-paper {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.exam-paper .paper-question legend,
+.exam-paper .question-translation,
+.exam-paper .paper-options label,
+.exam-paper .diagram-number-line,
+.exam-paper .bell-equations,
+.exam-paper .letter-addition,
+.exam-paper .operation-boxes span,
+.exam-paper .paper-explanation,
+.exam-paper .supplied-explanation {
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5;
+}
+.exam-paper svg text {
+  font-family: Arial, Helvetica, sans-serif;
+}

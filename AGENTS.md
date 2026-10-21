@@ -19,3 +19,5 @@
 - Opening a topic with Làm bài/Làm lại starts the timer immediately and shows Nộp bài. Xem ví dụ is preview-only and does not start a new timer. Preserve any existing draft/deadline when resuming; hide redundant start controls while practicing.
 
 - Paper question lists show questions, translations, illustrations and choices without source-strand headings (Logical thinking, Number Theory, etc.) or per-question source captions. Keep the source metadata in content for classification and traceability.
+
+- Unify only question typography: Arial at 18px and line-height 1.5 for question text, translations, number sequences and choices. Preserve the existing colors, backgrounds, margins and layout; the owner explicitly canceled A4/paper restyling. Preserve mathematical content and diagram labels.
