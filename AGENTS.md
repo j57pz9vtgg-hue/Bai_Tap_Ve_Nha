@@ -53,3 +53,5 @@
 - Q12 is also added as a second teaching example within topic-01, paired with its supplied explanation. Preserve the original q1 example; the examples share one collapsible panel and do not create a second sequence topic.
 
 - After completing q7–12, the owner supplied paper 1 q13–17 with explanations and authorized the same topic workflow. Add topic-12 Đếm kết quả chẵn, lẻ (q13), topic-13 Điền dấu cộng, trừ (q14), topic-14 Cân bằng số lượng (q15), topic-15 Đếm hình vuông (q16), topic-16 Quy luật dãy hình (q17). Reuse paper1 teaching examples and merge the matching questions from papers2/3. Keep their supplied diagrams/solutions, default collapse and public example access. This stage has16 named topics/51 questions and24 unassigned.
+
+- After q13–17 is completed, use the owner’s q18–20 question/solution pairs as examples for topic-17 Đếm hình vuông theo hướng nhìn (q18), topic-18 Đếm đoạn thẳng (q19), topic-19 Đếm khối lập phương (q20). Merge the corresponding questions from all3 papers; front/right directions remain as supplied. Include the source solution diagrams. This stage has19 named topics/60 questions and15 unassigned.

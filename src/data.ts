@@ -26,6 +26,9 @@ const TOPIC_BY_SOURCE_NUMBER: Record<number, string> = {
   15: "topic-14",
   16: "topic-15",
   17: "topic-16",
+  18: "topic-17",
+  19: "topic-18",
+  20: "topic-19",
 };
 for (const question of ALL_QUESTIONS) {
   question.topicId =
@@ -190,6 +193,13 @@ export function getExercises(
       { id: "topic-14", title: "Cân bằng số lượng", sourceNumber: 15 },
       { id: "topic-15", title: "Đếm hình vuông", sourceNumber: 16 },
       { id: "topic-16", title: "Quy luật dãy hình", sourceNumber: 17 },
+      {
+        id: "topic-17",
+        title: "Đếm hình vuông theo hướng nhìn",
+        sourceNumber: 18,
+      },
+      { id: "topic-18", title: "Đếm đoạn thẳng", sourceNumber: 19 },
+      { id: "topic-19", title: "Đếm khối lập phương", sourceNumber: 20 },
     ].map(({ id, title, sourceNumber }) => ({
       id,
       title,
