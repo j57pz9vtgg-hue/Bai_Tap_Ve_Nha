@@ -29,6 +29,11 @@ const TOPIC_BY_SOURCE_NUMBER: Record<number, string> = {
   18: "topic-17",
   19: "topic-18",
   20: "topic-19",
+  21: "topic-20",
+  22: "topic-21",
+  23: "topic-22",
+  24: "topic-23",
+  25: "topic-24",
 };
 for (const question of ALL_QUESTIONS) {
   question.topicId =
@@ -200,6 +205,19 @@ export function getExercises(
       },
       { id: "topic-18", title: "Đếm đoạn thẳng", sourceNumber: 19 },
       { id: "topic-19", title: "Đếm khối lập phương", sourceNumber: 20 },
+      { id: "topic-20", title: "Sắp xếp số và tìm thứ hạng", sourceNumber: 21 },
+      {
+        id: "topic-21",
+        title: "Lập số chẵn không lặp chữ số",
+        sourceNumber: 22,
+      },
+      {
+        id: "topic-22",
+        title: "Lập hai số có tổng nhỏ nhất",
+        sourceNumber: 23,
+      },
+      { id: "topic-23", title: "Đếm số cách kết hợp", sourceNumber: 24 },
+      { id: "topic-24", title: "Mua hàng nhận quà tặng", sourceNumber: 25 },
     ].map(({ id, title, sourceNumber }) => ({
       id,
       title,
@@ -210,10 +228,12 @@ export function getExercises(
       exampleOnly: true,
     })),
     { id: "unassigned", title: "Chưa có chủ đề", category: "topic" as const },
-  ].map((topic) => ({
-    ...topic,
-    questionCount: ALL_QUESTIONS.filter((q) => q.topicId === topic.id).length,
-  }));
+  ]
+    .map((topic) => ({
+      ...topic,
+      questionCount: ALL_QUESTIONS.filter((q) => q.topicId === topic.id).length,
+    }))
+    .filter((topic) => topic.questionCount > 0);
   if (category === "qualifier") return exams;
   if (category === "topic") return topics;
   if (category === "all") return [...exams, ...topics];
