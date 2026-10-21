@@ -8,6 +8,7 @@ import { TIMO_GRADE2_QUALIFIER7 } from "./content/timo-grade2-qualifier7";
 import { TIMO_GRADE2_NATIONAL1 } from "./content/timo-grade2-national1";
 import { TIMO_GRADE2_NATIONAL2 } from "./content/timo-grade2-national2";
 import { TIMO_GRADE2_NATIONAL3 } from "./content/timo-grade2-national3";
+import { TIMO_GRADE2_NATIONAL4 } from "./content/timo-grade2-national4";
 const ALL_QUESTIONS = [
   ...TIMO_GRADE2_QUALIFIER1,
   ...TIMO_GRADE2_QUALIFIER2,
@@ -19,6 +20,7 @@ const ALL_QUESTIONS = [
   ...TIMO_GRADE2_NATIONAL1,
   ...TIMO_GRADE2_NATIONAL2,
   ...TIMO_GRADE2_NATIONAL3,
+  ...TIMO_GRADE2_NATIONAL4,
 ];
 // Classify the three supplied papers against the owner's teaching examples.
 // Keep stable topic IDs so existing attempts/results remain attached to topic 1.
@@ -65,7 +67,8 @@ for (const question of ALL_QUESTIONS) {
         TIMO_GRADE2_QUALIFIER7.includes(question) ||
         TIMO_GRADE2_NATIONAL1.includes(question) ||
         TIMO_GRADE2_NATIONAL2.includes(question) ||
-        TIMO_GRADE2_NATIONAL3.includes(question)
+        TIMO_GRADE2_NATIONAL3.includes(question) ||
+        TIMO_GRADE2_NATIONAL4.includes(question)
       ? (question.topicId ?? "unassigned")
       : "unassigned";
 }
@@ -83,6 +86,7 @@ export type Exercise = {
   questionCount?: number;
 };
 export type QuestionDiagram =
+  | `n4-${string}`
   | `n3-${string}`
   | `n2-${string}`
   | `n1-${string}`
@@ -253,6 +257,12 @@ export function getExercises(
       category: "national" as const,
       questionCount: TIMO_GRADE2_NATIONAL3.length,
     },
+    {
+      id: "national-04",
+      title: "Đề Quốc gia 04",
+      category: "national" as const,
+      questionCount: TIMO_GRADE2_NATIONAL4.length,
+    },
   ];
   const topics = [
     {
@@ -342,6 +352,7 @@ export function getQuestions(
   if (exercise.id === "national-01") return TIMO_GRADE2_NATIONAL1;
   if (exercise.id === "national-02") return TIMO_GRADE2_NATIONAL2;
   if (exercise.id === "national-03") return TIMO_GRADE2_NATIONAL3;
+  if (exercise.id === "national-04") return TIMO_GRADE2_NATIONAL4;
   if (exercise.category === "topic")
     return ALL_QUESTIONS.filter((q) => q.topicId === exercise.id);
   return [];

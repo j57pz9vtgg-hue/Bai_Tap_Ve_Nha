@@ -448,5 +448,105 @@ export function NationalIllustration({
         </SourceDrawing>
       );
   }
+  if (paper === 4) {
+    if (name === "table")
+      return (
+        <SourceTable
+          rows={[
+            [3, 2, 6],
+            [5, 4, 20],
+            [7, 6, "?"],
+            [9, 8, 72],
+          ]}
+        />
+      );
+    if (name === "letters")
+      return <div className="diagram-number-line">K、N、P、S、U、___</div>;
+    if (name === "sequence13")
+      return <div className="diagram-number-line">94、86、78、70、62、…</div>;
+    if (name === "operators")
+      return <div className="diagram-number-line">9 __ 18 __ 3 __ 7 = 23</div>;
+    if (name === "addition")
+      return <Addition top="A" bottom="B B" total="7 3" />;
+    if (name === "expressions")
+      return (
+        <div className="diagram-number-line">
+          99÷3，19+19，51−34，6×8，24+48，5×5，15+16
+        </div>
+      );
+    if (name === "squares")
+      return (
+        <Mesh
+          paths="M94 15H196V83H230V117H60V83H26V49H94Z M60 49V117 M94 15V117 M128 15V117 M162 15V83 M196 15V117 M26 49H196 M26 83H162 M196 83H230"
+          viewBox="0 0 255 140"
+        />
+      );
+    if (name === "segments") {
+      const l = [25, 50],
+        r = [225, 90],
+        t = [112, 28],
+        b = [145, 145],
+        a = [56, 123];
+      return (
+        <DotLines
+          lines={[
+            [l, r],
+            [t, a],
+            [l, b],
+            [t, b],
+            [a, b],
+          ]}
+          points={[
+            l,
+            r,
+            t,
+            b,
+            a,
+            intersection(l, r, t, a),
+            intersection(l, b, t, a),
+            intersection(l, r, t, b),
+          ]}
+        />
+      );
+    }
+    if (name === "polygon")
+      return (
+        <SourceDrawing
+          label="Đa giác lõm theo hình trong đề"
+          viewBox="0 0 205 155"
+        >
+          <path
+            d="M20 20 40 46 60 20 142 20 162 46 182 33 182 132 130 102 138 88 72 88 61 104 34 104 20 80Z"
+            fill="white"
+            stroke="#111"
+            strokeWidth="1.3"
+          />
+        </SourceDrawing>
+      );
+    if (name === "cubes")
+      return (
+        <SourceDrawing
+          label="Các khối lập phương, quan sát từ bên phải"
+          viewBox="0 0 300 240"
+        >
+          {[149, 109].map((y) => (
+            <SourceCube key={y} x={35} y={y} />
+          ))}
+          {[109, 149].map((x) => (
+            <SourceCube key={x} x={x} y={135} />
+          ))}
+          {[135, 95, 55].map((y) => (
+            <SourceCube key={y} x={169} y={y} />
+          ))}
+          {[135, 95].map((y) => (
+            <SourceCube key={y} x={209} y={y} />
+          ))}
+          <SourceCube x={62} y={122} />
+          <SourceCube x={48} y={176} />
+          <SourceCube x={88} y={176} />
+          <SourceCube x={195} y={149} />
+        </SourceDrawing>
+      );
+  }
   return null;
 }
