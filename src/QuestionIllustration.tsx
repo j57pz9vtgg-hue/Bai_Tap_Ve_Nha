@@ -1,3 +1,4 @@
+import { Paper3Illustration } from "./Paper3Illustration";
 import { Paper2Illustration } from "./Paper2Illustration";
 import type { QuestionDiagram } from "./data";
 
@@ -624,6 +625,13 @@ function FoodChoices({ solution = false }: { solution?: boolean }) {
 export const hasSolutionDiagram = (diagram?: QuestionDiagram) =>
   diagram !== undefined &&
   [
+    "p3-backpack",
+    "p3-chain",
+    "p3-squares",
+    "p3-shapes",
+    "p3-cubes-right",
+    "p3-segments",
+    "p3-cubes-count",
     "bell-equation",
     "operation-chain",
     "square-lines",
@@ -646,6 +654,14 @@ export function QuestionIllustration({
   solution = false,
 }: DiagramProps) {
   if (!diagram) return null;
+  if (diagram.startsWith("p3-")) {
+    if (solution && !hasSolutionDiagram(diagram)) return null;
+    return (
+      <div className={`question-illustration illustration-${diagram}`}>
+        <Paper3Illustration name={diagram.slice(3)} solution={solution} />
+      </div>
+    );
+  }
   if (diagram.startsWith("p2-")) {
     if (
       solution &&

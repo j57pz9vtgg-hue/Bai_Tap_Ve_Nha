@@ -1,6 +1,11 @@
 import { TIMO_GRADE2_QUALIFIER1 } from "./content/timo-grade2-qualifier1";
 import { TIMO_GRADE2_QUALIFIER2 } from "./content/timo-grade2-qualifier2";
-const ALL_QUESTIONS = [...TIMO_GRADE2_QUALIFIER1, ...TIMO_GRADE2_QUALIFIER2];
+import { TIMO_GRADE2_QUALIFIER3 } from "./content/timo-grade2-qualifier3";
+const ALL_QUESTIONS = [
+  ...TIMO_GRADE2_QUALIFIER1,
+  ...TIMO_GRADE2_QUALIFIER2,
+  ...TIMO_GRADE2_QUALIFIER3,
+];
 // Classification follows the owner’s newly supplied numeric-sequence example.
 for (const question of ALL_QUESTIONS) {
   if (question.sourceNumber === 1 || question.sourceNumber === 12)
@@ -19,6 +24,7 @@ export type Exercise = {
   questionCount?: number;
 };
 export type QuestionDiagram =
+  | `p3-${"sequence" | "suns" | "backpack" | "chain" | "addition" | "sequence12" | "operations" | "operators" | "squares" | "shapes" | "cubes-right" | "segments" | "cubes-count" | "numbers" | "routes"}`
   | `p2-${"sequence" | "flowers" | "tree" | "chain" | "addition" | "sequence12" | "operations" | "operators" | "squares" | "shapes" | "cubes-front" | "segments" | "cubes-count" | "numbers" | "routes"}`
   | "sequence-1"
   | "hat-groups"
@@ -127,6 +133,12 @@ export function getExercises(
       category: "qualifier" as const,
       questionCount: TIMO_GRADE2_QUALIFIER2.length,
     },
+    {
+      id: "qualifier-03",
+      title: "Đề vòng loại 03",
+      category: "qualifier" as const,
+      questionCount: TIMO_GRADE2_QUALIFIER3.length,
+    },
   ];
   const topics = [
     {
@@ -155,6 +167,7 @@ export function getQuestions(
   if (section !== "timo" || grade !== 2) return [];
   if (exercise.id === "qualifier-01") return TIMO_GRADE2_QUALIFIER1;
   if (exercise.id === "qualifier-02") return TIMO_GRADE2_QUALIFIER2;
+  if (exercise.id === "qualifier-03") return TIMO_GRADE2_QUALIFIER3;
   if (exercise.category === "topic")
     return ALL_QUESTIONS.filter((q) => q.topicId === exercise.id);
   return [];
