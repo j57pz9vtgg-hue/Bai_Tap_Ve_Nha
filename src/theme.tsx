@@ -2,11 +2,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 export const THEMES = [
   { id: "pixel", name: "Thế giới Pixel", hero: "pixel-hero" },
-  { id: "park", name: "Công viên khủng long", hero: "park-hero" },
-  { id: "island", name: "Đảo khủng long 3D", hero: "island-hero" },
-  { id: "museum", name: "Nhà khám phá khủng long", hero: "museum-hero" },
-  { id: "robot", name: "Robot", hero: "robot-lab-hero" },
-  { id: "cosmos", name: "Vũ trụ", hero: "cosmos-hero" },
   { id: "bunny", name: "Thỏ con", hero: "bunny-hero" },
 ] as const;
 export type LearningTheme = (typeof THEMES)[number]["id"];

@@ -31,3 +31,5 @@
 - Xem đáp án & lời giải opens a floating modal for the parent password. Cancel/close returns to the same paper with the inline score; only successful authentication reveals detailed solutions.
 
 - Exercise cards show Kết quả as correct/total câu đúng from the saved result (not Đã lưu), alongside saved elapsed time. This score summary is visible without a parent password; detailed solutions remain protected.
+
+- Available interface themes are only Thế giới Pixel and Thỏ con. The owner removed Công viên khủng long, Đảo khủng long 3D, Nhà khám phá khủng long, Robot and Vũ trụ. Saved selections of removed themes fall back to Pixel; do not restore those options.
