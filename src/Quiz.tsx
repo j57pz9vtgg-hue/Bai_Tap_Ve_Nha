@@ -222,7 +222,7 @@ export default function Quiz({
             </section>
           </div>
           <p>{questions.length} câu luyện tập cùng dạng từ bộ đề bạn đã gửi.</p>
-          <button className="start-button" onClick={start}>
+          <button className="primary-button" onClick={start}>
             Bắt đầu luyện tập <ArrowRight size={20} />
           </button>
         </section>
