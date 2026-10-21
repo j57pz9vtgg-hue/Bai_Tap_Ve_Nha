@@ -15,12 +15,7 @@ import {
   Palette,
   LogOut,
 } from "lucide-react";
-import {
-  Dialog,
-  ExerciseCard,
-  StudyFilters,
-  publicAsset,
-} from "./components";
+import { Dialog, ExerciseCard, StudyFilters, publicAsset } from "./components";
 import {
   CATEGORIES,
   getExercises,
@@ -152,7 +147,9 @@ export default function App() {
               ) : (
                 <BookOpen className="modern-brand-icon" size={44} />
               )}
-              <span>Góc học tập của bé</span>
+              <span>
+                Góc học tập <span className="brand-child">của bé</span>
+              </span>
               <span className="brand-spark" aria-hidden="true">
                 ✦
               </span>
@@ -214,6 +211,11 @@ export default function App() {
             />
           )}
         </div>
+        {theme === "bunny" && (
+          <span className="bunny-theme-label" aria-hidden="true">
+            CHỦ ĐỀ<strong>THỎ CON</strong>
+          </span>
+        )}
         <div className="page-content catalog-filter-bar">
           <StudyFilters
             grade={grade}
@@ -242,10 +244,25 @@ export default function App() {
           </p>
         ) : null}
         <section className="exercise-section" aria-labelledby="catalog-title">
-          <h2 id="catalog-title" className="visually-hidden">
+          <h2
+            id="catalog-title"
+            className={
+              theme === "bunny" ? "bunny-catalog-title" : "visually-hidden"
+            }
+          >
             {search.trim() ? "Kết quả tìm kiếm" : title}
           </h2>
-          <span className="visually-hidden" aria-live="polite">
+          {theme === "bunny" && (
+            <p className="bunny-catalog-subtitle">
+              Lớp {grade} • {isExam ? "Toán" : SECTION_LABELS[section]}
+            </p>
+          )}
+          <span
+            className={
+              theme === "bunny" ? "bunny-exercise-count" : "visually-hidden"
+            }
+            aria-live="polite"
+          >
             {exercises.length} {category === "topic" ? "chủ đề" : "đề"}
           </span>
           {exercises.length ? (

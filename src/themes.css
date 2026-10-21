@@ -203,7 +203,7 @@
   --theme-button-soft: #fff0f0;
   --theme-ordinal: #ffad67;
 }
-:root[data-theme="bunny"] {
+:root[data-theme="bunny"]:not([data-theme="pixel"]) {
   --theme-base: #fffcf2;
   --theme-accent: #55814b;
   --theme-action: linear-gradient(#ffa84b, #f68a2e);
@@ -332,19 +332,27 @@
 :root[data-theme="museum"] .exercise-card:nth-child(3n) .number-badge {
   background: linear-gradient(#ff9c68, #e35627);
 }
-:root[data-theme="bunny"] .exercise-card:nth-child(5n + 1) .number-badge {
+:root[data-theme="bunny"]:not([data-theme="pixel"])
+  .exercise-card:nth-child(5n + 1)
+  .number-badge {
   background: #bfdf8b;
 }
-:root[data-theme="bunny"] .exercise-card:nth-child(5n + 2) .number-badge {
+:root[data-theme="bunny"]:not([data-theme="pixel"])
+  .exercise-card:nth-child(5n + 2)
+  .number-badge {
   background: #9ed4a3;
 }
-:root[data-theme="bunny"] .exercise-card:nth-child(5n + 4) .number-badge {
+:root[data-theme="bunny"]:not([data-theme="pixel"])
+  .exercise-card:nth-child(5n + 4)
+  .number-badge {
   background: #f7b1b7;
 }
-:root[data-theme="bunny"] .exercise-card:nth-child(5n) .number-badge {
+:root[data-theme="bunny"]:not([data-theme="pixel"])
+  .exercise-card:nth-child(5n)
+  .number-badge {
   background: #abcec8;
 }
-:root[data-theme="bunny"] .number-badge > span {
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .number-badge > span {
   color: #2b4f4c;
 }
 :root[data-theme]:not([data-theme="pixel"]) .exercise-stats {
@@ -558,7 +566,7 @@
 :root[data-theme="cosmos"] {
   --theme-hero: url("/assets/cosmos-hero.webp");
 }
-:root[data-theme="bunny"] {
+:root[data-theme="bunny"]:not([data-theme="pixel"]) {
   --theme-hero: url("/assets/bunny-hero.webp");
 }
 :root[data-theme]:not([data-theme="pixel"]) .adventure-banner {
@@ -592,5 +600,371 @@
 @media (max-width: 760px) {
   :root[data-theme]:not([data-theme="pixel"]) .modern-hero {
     max-width: 100%;
+  }
+}
+
+/* The bunny garden uses a continuous illustrated masthead, never a blurred thumbnail. */
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .pixel-app {
+  background: #fffcf3 url("/assets/bunny-garden.webp") center bottom / 100% auto
+    no-repeat;
+  min-height: 100dvh;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .adventure-banner {
+  height: clamp(165px, 11vw, 215px);
+  padding: 0;
+  background: var(--theme-hero) center / cover no-repeat;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .adventure-banner::before,
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .modern-hero {
+  display: none;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .header-inner {
+  height: auto;
+  padding: 16px 28px;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .brand {
+  position: absolute;
+  left: 13%;
+  top: 29px;
+  width: 300px;
+  max-width: 23%;
+  justify-content: center;
+  text-align: center;
+  color: #527d47;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"])
+  .brand
+  > span:first-of-type {
+  font:
+    800 clamp(27px, 2.7vw, 44px)/1.05 "Baloo 2",
+    sans-serif;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .brand-child {
+  display: block;
+  color: #ef8d67;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .modern-brand-icon,
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .brand-spark {
+  display: none;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .header-tools {
+  margin: 0 0 0 auto;
+  gap: 8px;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .search-box {
+  width: clamp(190px, 19vw, 300px);
+  border-color: #93b69b;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .parent-button {
+  border-radius: 26px;
+  color: #284a39;
+  border-color: #9abc9d;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .appearance-button,
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .logout-button {
+  color: #4a7e55;
+  border-color: #c3d6b4;
+  width: 30px;
+  height: 32px;
+}
+.bunny-theme-label {
+  position: absolute;
+  left: 38%;
+  top: 49px;
+  color: #dc8955;
+  font-size: 17px;
+  font-weight: 800;
+  text-align: center;
+  transform: rotate(-5deg);
+}
+.bunny-theme-label strong {
+  display: block;
+  font: 800 25px/1.1 "Baloo 2";
+  color: #ef8d67;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .page-content {
+  padding-inline: 28px;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .study-filters {
+  background: #edf4dbf5;
+  border: 0;
+  box-shadow: none;
+  margin: 0;
+  padding: 12px clamp(16px, 6vw, 96px);
+  gap: 32px;
+  border-radius: 24px;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .catalog-filter-bar {
+  padding: 0 24px;
+  background: #fffcf3;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .filter-select select {
+  border-color: #a7c48f;
+  font-weight: 500;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .filter-field label {
+  color: #344a3b;
+  font-weight: 500;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .exercise-section {
+  position: relative;
+  padding-top: 18px;
+}
+.bunny-catalog-title {
+  margin: 0 0 0 14px;
+  color: #335f3b;
+  font: 800 34px/1.15 "Baloo 2";
+  padding-right: 110px;
+}
+.bunny-catalog-subtitle {
+  margin: 0 0 14px 14px;
+  color: #7f8885;
+  font-size: 18px;
+  font-weight: 600;
+}
+.bunny-exercise-count {
+  position: absolute;
+  right: 4px;
+  top: 26px;
+  border-radius: 45% 35%;
+  background: #deedbc;
+  padding: 6px 30px;
+  color: #335f3b;
+  font: 800 25px "Baloo 2";
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .exercise-grid {
+  gap: 14px;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .exercise-card {
+  min-height: 190px;
+  padding: 12px 15px;
+  box-shadow: 0 3px 5px #89763a12;
+  background: linear-gradient(#fff, #fffdf7);
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .exercise-name {
+  padding-right: 0;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .exercise-name h2 {
+  font-size: 14px;
+  color: #1f3046;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .exercise-card-art {
+  width: 106px;
+  height: 108px;
+  right: 8px;
+  top: 13px;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .exercise-top {
+  min-height: 61px;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .exercise-stats {
+  padding-right: 64px;
+  font-size: 12px;
+  color: #586071;
+  margin-top: 7px;
+  margin-bottom: 12px;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .exercise-stats dt {
+  min-width: 0;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .number-badge > span {
+  color: #254c39;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"])
+  .status:not(.done):not(.in-progress) {
+  background: #ff9c2f;
+  color: #fff;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .retry-button {
+  background: linear-gradient(#85c46b, #5ea54f);
+  color: white;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .view-result-button {
+  background: #edf5e5;
+  color: #325e35;
+  border-color: #a5c88d;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .world-footer {
+  height: 80px;
+}
+@media (max-width: 1100px) {
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .exercise-card-art {
+    width: 84px;
+    height: 90px;
+    top: 30px;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .brand {
+    left: 10%;
+    top: 40px;
+  }
+  .bunny-theme-label {
+    left: 39%;
+    top: 75px;
+  }
+}
+@media (max-width: 760px) {
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .site-header {
+    position: relative;
+    background: #f3f7e9;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .header-inner {
+    padding: 10px 14px;
+    min-height: 110px;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .brand {
+    position: static;
+    max-width: none;
+    width: auto;
+    text-align: left;
+    justify-content: flex-start;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"])
+    .brand
+    > span:first-of-type {
+    font-size: 25px;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .brand-child {
+    display: inline;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .header-tools {
+    width: 100%;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .search-box {
+    width: auto;
+    flex: 1;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .adventure-banner {
+    height: 112px;
+    background-size: auto 112px;
+  }
+  .bunny-theme-label {
+    display: none;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .catalog-filter-bar {
+    padding: 0 10px;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .study-filters {
+    padding: 10px;
+    gap: 10px;
+    border-radius: 15px;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"])
+    .page-content:not(.catalog-filter-bar) {
+    padding-inline: 12px;
+  }
+  .bunny-catalog-title {
+    font-size: 26px;
+    margin-left: 0;
+    padding-right: 60px;
+  }
+  .bunny-catalog-subtitle {
+    margin-left: 0;
+    font-size: 15px;
+  }
+  .bunny-exercise-count {
+    font-size: 18px;
+    padding: 4px 12px;
+    right: 0;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .exercise-card {
+    padding: 12px;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .exercise-card-art {
+    width: 85px;
+    height: 90px;
+    top: 29px;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .exercise-name h2 {
+    font-size: 13px;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .exercise-stats {
+    padding-right: 65px;
+  }
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .adventure-banner {
+  background-size: 100% 100%;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .brand {
+  left: 16%;
+  top: 52px;
+  width: 24%;
+  max-width: 24%;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"])
+  .brand
+  > span:first-of-type {
+  font-size: clamp(26px, 2.4vw, 39px);
+}
+@media (max-width: 760px) {
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .brand {
+    width: auto;
+    max-width: none;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"])
+    .brand
+    > span:first-of-type {
+    font-size: 25px;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .adventure-banner {
+    background-size: auto 155px;
+    background-position: center bottom;
+  }
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .exercise-stats {
+  font-size: 13px;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .exercise-name h2 {
+  font-size: 15px;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"])
+  .exercise-card:nth-child(6)
+  .number-badge,
+:root[data-theme="bunny"]:not([data-theme="pixel"])
+  .exercise-card:nth-child(14)
+  .number-badge {
+  background: #a3d6fa;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"])
+  .exercise-card:nth-child(9)
+  .number-badge {
+  background: #d5bcf3;
+}
+@media (max-width: 760px) {
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .exercise-stats {
+    font-size: 13px;
+  }
+}
+
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .adventure-banner {
+  background-size: 100% auto;
+  background-position: center;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"]) .brand {
+  left: 25%;
+  top: 45px;
+  width: 18%;
+  max-width: 18%;
+}
+:root[data-theme="bunny"]:not([data-theme="pixel"])
+  .brand
+  > span:first-of-type {
+  font-size: clamp(25px, 2.3vw, 36px);
+}
+.bunny-theme-label {
+  left: 44%;
+  top: 25px;
+}
+@media (max-width: 760px) {
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .brand {
+    width: auto;
+    max-width: none;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"])
+    .brand
+    > span:first-of-type {
+    font-size: 25px;
+  }
+  :root[data-theme="bunny"]:not([data-theme="pixel"]) .adventure-banner {
+    background-size: auto 330px;
   }
 }
