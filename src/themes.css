@@ -992,8 +992,8 @@
   text-align: left;
 }
 
-/* Crystal Island: pearlescent glass, faceted blue gems and a continuous illustrated sky. */
-:root[data-theme="crystal"] {
+/* Shared illustrated-world components; each theme supplies its own palette and artwork. */
+:root:is([data-theme="crystal"], [data-theme="cloud"]) {
   --theme-base: #eef5ff;
   --theme-accent: #164fce;
   --theme-action: linear-gradient(
@@ -1011,28 +1011,35 @@
   --theme-button-soft: #d5f9f0;
   --theme-ordinal: #609aff;
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"]) .pixel-app {
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+  .pixel-app {
   min-height: 100dvh;
   background: #eef5ff url("/assets/crystal-world.webp") center top / cover fixed
     no-repeat;
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"]) .catalog-masthead {
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+  .catalog-masthead {
   background: transparent;
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"]) .adventure-banner {
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+  .adventure-banner {
   height: clamp(165px, 13vw, 210px);
   padding: 0;
   background: var(--theme-hero) center top / cover no-repeat;
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"]) .adventure-banner::before,
-:root[data-theme="crystal"]:not([data-theme="pixel"]) .modern-hero {
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+  .adventure-banner::before,
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+  .modern-hero {
   display: none;
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"]) .header-inner {
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+  .header-inner {
   height: auto;
   padding: 18px 32px;
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"]) .brand {
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+  .brand {
   width: 340px;
   max-width: 30%;
   color: #0864d7;
@@ -1043,28 +1050,29 @@
     0 -2px white;
   gap: 6px;
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"])
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
   .brand
   > span:first-of-type {
   font-size: 31px;
   line-height: 1.05;
 }
-:root[data-theme="crystal"] .brand-child {
+:root:is([data-theme="crystal"], [data-theme="cloud"]) .brand-child {
   color: #9c43cc;
 }
-:root[data-theme="crystal"] .crystal-brand-icon {
+:root:is([data-theme="crystal"], [data-theme="cloud"]) .crystal-brand-icon {
   width: 76px;
   height: 76px;
   object-fit: contain;
   image-rendering: auto;
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"]) .header-tools {
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+  .header-tools {
   margin-top: 3px;
 }
-:root[data-theme="crystal"] .search-box,
-:root[data-theme="crystal"] .parent-button,
-:root[data-theme="crystal"] .appearance-button,
-:root[data-theme="crystal"] .logout-button {
+:root:is([data-theme="crystal"], [data-theme="cloud"]) .search-box,
+:root:is([data-theme="crystal"], [data-theme="cloud"]) .parent-button,
+:root:is([data-theme="crystal"], [data-theme="cloud"]) .appearance-button,
+:root:is([data-theme="crystal"], [data-theme="cloud"]) .logout-button {
   background: #ffffffdd;
   border: 2px solid #e1eeff;
   box-shadow:
@@ -1103,7 +1111,8 @@
 .crystal-theme-label strong {
   font-size: 22px;
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"]) .study-filters {
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+  .study-filters {
   background: transparent;
   border: 0;
   padding: 0;
@@ -1111,7 +1120,7 @@
   gap: 12px;
   box-shadow: none;
 }
-:root[data-theme="crystal"] .filter-field {
+:root:is([data-theme="crystal"], [data-theme="cloud"]) .filter-field {
   position: relative;
   background: #ffffffd9;
   border: 1px solid #bad3f4;
@@ -1122,12 +1131,14 @@
     inset 0 0 0 5px #e4edfc,
     0 4px 8px #5577c33d;
 }
-:root[data-theme="crystal"] .filter-field label {
+:root:is([data-theme="crystal"], [data-theme="cloud"]) .filter-field label {
   font-size: 12px;
   color: #223477;
   font-weight: 500;
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"]) .filter-select select {
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+  .filter-select
+  select {
   color: #091e63;
   background: linear-gradient(#fff, #f2f5ff);
   border: 1px solid #b7c8ed;
@@ -1151,14 +1162,19 @@
     0 2px 3px #8091d82e;
   filter: drop-shadow(0 2px 1px #c5bffc);
 }
-:root[data-theme="crystal"] .filter-field:nth-child(2) .crystal-filter-icon {
+:root:is([data-theme="crystal"], [data-theme="cloud"])
+  .filter-field:nth-child(2)
+  .crystal-filter-icon {
   color: #0088ea;
 }
-:root[data-theme="crystal"] .filter-field:nth-child(3) .crystal-filter-icon {
+:root:is([data-theme="crystal"], [data-theme="cloud"])
+  .filter-field:nth-child(3)
+  .crystal-filter-icon {
   color: #e8a322;
   background: linear-gradient(145deg, #e0ffe8, #acf0db);
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"]) .exercise-card {
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+  .exercise-card {
   background: linear-gradient(145deg, #fffffff5, #f4f8ffef 65%, #e8ebffef);
   border: 1px solid #b7cef1;
   border-radius: 17px;
@@ -1170,7 +1186,7 @@
   min-height: 195px;
   color: #11195c;
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"])
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
   .exercise-card
   .number-badge {
   width: 43px;
@@ -1189,7 +1205,7 @@
   );
   box-shadow: inset 0 0 0 3px #dff7ff;
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"])
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
   .exercise-card
   .number-badge
   > span {
@@ -1197,20 +1213,20 @@
   color: white;
   text-shadow: 0 2px 2px #284cbc;
 }
-:root[data-theme="crystal"] .exercise-name h2 {
+:root:is([data-theme="crystal"], [data-theme="cloud"]) .exercise-name h2 {
   font-weight: 800;
   color: #10195b;
 }
-:root[data-theme="crystal"] .status {
+:root:is([data-theme="crystal"], [data-theme="cloud"]) .status {
   background: #fff1d9;
   color: #d8660b;
   border-radius: 22px;
 }
-:root[data-theme="crystal"] .status.done {
+:root:is([data-theme="crystal"], [data-theme="cloud"]) .status.done {
   background: #d4f7e4;
   color: #08783e;
 }
-:root[data-theme="crystal"] .exercise-card-art {
+:root:is([data-theme="crystal"], [data-theme="cloud"]) .exercise-card-art {
   left: 15px;
   right: auto;
   top: 65px;
@@ -1218,14 +1234,17 @@
   height: 78px;
   clip-path: inset(0);
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"]) .exercise-stats {
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+  .exercise-stats {
   margin-left: 82px;
   padding-right: 0;
   font-size: 12px;
   margin-top: 14px;
   line-height: 1.6;
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"]) .card-actions > button {
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+  .card-actions
+  > button {
   border: 1px solid #89bcf5;
   border-radius: 12px;
   box-shadow:
@@ -1233,79 +1252,96 @@
     0 2px 4px #647bd34a;
   font-weight: 750;
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"])
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
   .card-actions
   .start-button {
   background: var(--theme-action);
   text-shadow: 0 1px 2px #1539c8;
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"]) .view-result-button {
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+  .view-result-button {
   background: linear-gradient(white, #d0eefe);
   color: #1341a8;
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"]) .retry-button {
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+  .retry-button {
   background: linear-gradient(#f4fff6, #bbf4e8);
   color: #104b88;
 }
-:root[data-theme="crystal"]:not([data-theme="pixel"]) .paper-world {
+:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+  .paper-world {
   background: #f0f5ff url("/assets/crystal-world.webp") center top / cover fixed;
 }
-:root[data-theme="crystal"] .paper-brand {
+:root:is([data-theme="crystal"], [data-theme="cloud"]) .paper-brand {
   color: #195bc8;
 }
-:root[data-theme="crystal"] .paper-brand > img {
+:root:is([data-theme="crystal"], [data-theme="cloud"]) .paper-brand > img {
   content: url("/assets/crystal-book.webp");
   image-rendering: auto;
 }
-:root[data-theme="crystal"] .paper-toolbar {
+:root:is([data-theme="crystal"], [data-theme="cloud"]) .paper-toolbar {
   background: #f3f9fff5;
   border-color: #b9d5f8;
 }
-:root[data-theme="crystal"] .paper-submit {
+:root:is([data-theme="crystal"], [data-theme="cloud"]) .paper-submit {
   background: var(--theme-action);
   color: white;
   border: 1px solid #91baff;
   box-shadow: inset 0 0 0 2px #ffffff88;
 }
-:root[data-theme="crystal"] .topic-example-intro {
+:root:is([data-theme="crystal"], [data-theme="cloud"]) .topic-example-intro {
   background: #fffefcf7;
   border-color: #c5baf4;
 }
 @media (max-width: 1100px) {
-  :root[data-theme="crystal"] .crystal-theme-label {
+  :root:is([data-theme="crystal"], [data-theme="cloud"]) .crystal-theme-label {
     left: 40%;
   }
-  :root[data-theme="crystal"] .filter-field {
+  :root:is([data-theme="crystal"], [data-theme="cloud"]) .filter-field {
     padding-left: 54px;
   }
-  :root[data-theme="crystal"] .crystal-filter-icon {
+  :root:is([data-theme="crystal"], [data-theme="cloud"]) .crystal-filter-icon {
     left: 10px;
     width: 34px;
     height: 38px;
   }
 }
 @media (max-width: 760px) {
-  :root[data-theme="crystal"]:not([data-theme="pixel"]) .site-header {
+  :root:is([data-theme="crystal"], [data-theme="cloud"]):not(
+      [data-theme="pixel"]
+    )
+    .site-header {
     position: relative;
   }
-  :root[data-theme="crystal"]:not([data-theme="pixel"]) .header-inner {
+  :root:is([data-theme="crystal"], [data-theme="cloud"]):not(
+      [data-theme="pixel"]
+    )
+    .header-inner {
     padding: 12px 16px;
     background: #eef5ffcc;
   }
-  :root[data-theme="crystal"]:not([data-theme="pixel"]) .brand {
+  :root:is([data-theme="crystal"], [data-theme="cloud"]):not(
+      [data-theme="pixel"]
+    )
+    .brand {
     max-width: none;
     width: auto;
   }
-  :root[data-theme="crystal"]:not([data-theme="pixel"])
+  :root:is([data-theme="crystal"], [data-theme="cloud"]):not(
+      [data-theme="pixel"]
+    )
     .brand
     > span:first-of-type {
     font-size: 24px;
   }
-  :root[data-theme="crystal"] .crystal-brand-icon {
+  :root:is([data-theme="crystal"], [data-theme="cloud"]) .crystal-brand-icon {
     width: 52px;
     height: 52px;
   }
-  :root[data-theme="crystal"]:not([data-theme="pixel"]) .adventure-banner {
+  :root:is([data-theme="crystal"], [data-theme="cloud"]):not(
+      [data-theme="pixel"]
+    )
+    .adventure-banner {
     height: 130px;
     background-size: auto 160px;
     background-position: center;
@@ -1320,38 +1356,279 @@
   .crystal-theme-label strong {
     font-size: 17px;
   }
-  :root[data-theme="crystal"]:not([data-theme="pixel"]) .study-filters {
+  :root:is([data-theme="crystal"], [data-theme="cloud"]):not(
+      [data-theme="pixel"]
+    )
+    .study-filters {
     margin: -8px 0 8px;
     gap: 10px;
   }
-  :root[data-theme="crystal"] .filter-field {
+  :root:is([data-theme="crystal"], [data-theme="cloud"]) .filter-field {
     padding: 10px;
   }
-  :root[data-theme="crystal"] .crystal-filter-icon {
+  :root:is([data-theme="crystal"], [data-theme="cloud"]) .crystal-filter-icon {
     display: none;
   }
-  :root[data-theme="crystal"] .exercise-card-art {
+  :root:is([data-theme="crystal"], [data-theme="cloud"]) .exercise-card-art {
     width: 80px;
     height: 80px;
     top: 60px;
   }
-  :root[data-theme="crystal"]:not([data-theme="pixel"]) .exercise-stats {
+  :root:is([data-theme="crystal"], [data-theme="cloud"]):not(
+      [data-theme="pixel"]
+    )
+    .exercise-stats {
     margin-left: 90px;
     font-size: 13px;
   }
-  :root[data-theme="crystal"]:not([data-theme="pixel"]) .pixel-app {
+  :root:is([data-theme="crystal"], [data-theme="cloud"]):not(
+      [data-theme="pixel"]
+    )
+    .pixel-app {
     background-size: auto 100dvh;
   }
 }
 
-:root[data-theme="crystal"] .brand-child {
+:root:is([data-theme="crystal"], [data-theme="cloud"]) .brand-child {
   display: block;
 }
-:root[data-theme="crystal"] .crystal-theme-label::after {
+:root:is([data-theme="crystal"], [data-theme="cloud"])
+  .crystal-theme-label::after {
   content: "";
   position: absolute;
   inset: 4px 8px;
   border-top: 1px solid #ffffffbd;
   border-bottom: 1px solid #bad9ff;
   pointer-events: none;
+}
+
+/* City Above the Clouds: sunrise clouds, golden medallions and blue enamel. */
+:root[data-theme="cloud"] {
+  --theme-base: #fff5ee;
+  --theme-accent: #1269c6;
+  --theme-action: linear-gradient(
+    180deg,
+    #89dcff 0%,
+    #209bff 20%,
+    #0776ee 65%,
+    #095bd8 90%,
+    #66b5ff 100%
+  );
+  --theme-action-ink: white;
+  --theme-sprites: url("/assets/cloud-sprites.webp");
+  --theme-hero: url("/assets/cloud-hero.webp");
+  --theme-edge: #e8cc9f;
+  --theme-button-soft: #c4f5e2;
+  --theme-ordinal: #efa521;
+}
+:root[data-theme="cloud"]:not([data-theme="pixel"]) .pixel-app {
+  background: #fff4ec url("/assets/cloud-world.webp") center top / cover fixed
+    no-repeat;
+}
+:root[data-theme="cloud"]:not([data-theme="pixel"]) .brand {
+  margin-top: 47px;
+  background: #fffdf4ed;
+  border-radius: 50px;
+  padding: 8px 15px 8px 4px;
+  width: 345px;
+  max-width: 29%;
+  color: #0552b0;
+  filter: drop-shadow(0 3px 3px #d2ac6e55);
+}
+:root[data-theme="cloud"]:not([data-theme="pixel"])
+  .brand
+  > span:first-of-type {
+  font-size: 28px;
+}
+:root[data-theme="cloud"] .brand-child {
+  color: #f2911a;
+}
+:root[data-theme="cloud"]:not([data-theme="pixel"]) .header-tools {
+  margin-top: 81px;
+}
+:root[data-theme="cloud"] .search-box,
+:root[data-theme="cloud"] .parent-button,
+:root[data-theme="cloud"] .appearance-button,
+:root[data-theme="cloud"] .logout-button {
+  background: #fffcf8f2;
+  border-color: #fff7ed;
+  box-shadow:
+    inset 0 0 0 1px #e9d7c5,
+    0 3px 7px #b786573b;
+}
+:root[data-theme="cloud"] .cloud-theme-label {
+  top: 101px;
+  left: 43%;
+  clip-path: none;
+  border-radius: 40px;
+  padding: 6px 23px 10px;
+  border-color: #fff7d8;
+  outline: 1px solid #e7b454;
+  background: linear-gradient(#fff8dc, #ffde9b 75%, #f5be62);
+  color: #904308;
+  text-shadow: 0 1px white;
+  box-shadow: inset 0 0 0 2px #e8a54e;
+  filter: drop-shadow(0 3px 2px #c3976866);
+}
+:root[data-theme="cloud"] .cloud-theme-label strong {
+  font-size: 18px;
+}
+:root[data-theme="cloud"] .cloud-theme-label::after {
+  border-color: #fff2c7;
+  border-radius: 24px;
+}
+:root[data-theme="cloud"] .filter-field {
+  background: #fffdf8ed;
+  border-color: #e2c392;
+  box-shadow:
+    inset 0 0 0 3px white,
+    inset 0 0 0 5px #f3e5cf,
+    0 4px 8px #ae82603b;
+  border-radius: 22px;
+}
+:root[data-theme="cloud"] .crystal-filter-icon,
+:root[data-theme="cloud"] .filter-field:nth-child(2) .crystal-filter-icon,
+:root[data-theme="cloud"] .filter-field:nth-child(3) .crystal-filter-icon {
+  color: #087bd4;
+  background: linear-gradient(145deg, #fff8ef, #f5e3cd);
+  box-shadow:
+    inset 2px 2px 3px white,
+    0 2px 3px #d6b58c33;
+  border-radius: 50%;
+  filter: drop-shadow(0 2px 1px #f1d8b5);
+}
+:root[data-theme="cloud"]:not([data-theme="pixel"]) .filter-select select {
+  border-color: #d8d1d6;
+  background: linear-gradient(#fff, #f2eef2);
+}
+:root[data-theme="cloud"]:not([data-theme="pixel"]) .exercise-card {
+  background: linear-gradient(145deg, #fffffff5, #faf7f4f2 70%, #fff5e8f2);
+  border-color: #e0bb7c;
+  border-radius: 22px;
+  box-shadow:
+    inset 0 0 0 3px white,
+    inset 0 0 0 5px #f8e9cb,
+    0 4px 7px #ad805e55;
+}
+:root[data-theme="cloud"]:not([data-theme="pixel"])
+  .exercise-card
+  .number-badge {
+  width: 45px;
+  height: 45px;
+  clip-path: none;
+  border-radius: 50%;
+  border: 2px solid #ffde76;
+  background: radial-gradient(
+    circle at 35% 25%,
+    #fff0b9,
+    #ffbe43 30%,
+    #e99b17 60%,
+    #c97c14 80%,
+    #ffd363 90%
+  );
+  box-shadow:
+    inset 0 0 0 2px #fff3b3,
+    inset 0 0 0 4px #eeb948,
+    0 2px 2px #b8793044;
+}
+:root[data-theme="cloud"]:not([data-theme="pixel"])
+  .exercise-card
+  .number-badge
+  > span {
+  color: #fffdf2;
+  text-shadow: 0 2px 1px #a25a13;
+  font-size: 28px;
+}
+:root[data-theme="cloud"] .status {
+  border-radius: 8px;
+  background: linear-gradient(#ffb951, #ff8b15);
+  color: white;
+  box-shadow: inset 0 0 0 1px #ffe7bf;
+}
+:root[data-theme="cloud"] .status.done {
+  color: white;
+  background: linear-gradient(#73cc63, #26a54d);
+  box-shadow: inset 0 0 0 1px #cbf0c7;
+}
+:root[data-theme="cloud"]:not([data-theme="pixel"]) .card-actions > button {
+  border-radius: 18px;
+  border-color: #9fc6f5;
+}
+:root[data-theme="cloud"]:not([data-theme="pixel"])
+  .card-actions
+  .start-button {
+  text-shadow: 0 1px 2px #1051ad;
+}
+:root[data-theme="cloud"]:not([data-theme="pixel"]) .view-result-button {
+  background: linear-gradient(white, #b7dcff);
+  color: #0756b7;
+}
+:root[data-theme="cloud"]:not([data-theme="pixel"]) .retry-button {
+  background: linear-gradient(#9befce, #17b88b 45%, #079568);
+  color: white;
+  border-color: #8bdec5;
+}
+:root[data-theme="cloud"]:not([data-theme="pixel"]) .paper-world {
+  background: #fff6ec url("/assets/cloud-world.webp") center top / cover fixed;
+}
+:root[data-theme="cloud"] .paper-brand {
+  color: #0866b3;
+}
+:root[data-theme="cloud"] .paper-brand > img {
+  content: url("/assets/cloud-book.webp");
+}
+:root[data-theme="cloud"] .paper-toolbar {
+  background: #fffaf3f5;
+  border-color: #ebd6b6;
+}
+:root[data-theme="cloud"] .topic-example-intro {
+  border-color: #e9ca92;
+  background: #fffdf5f7;
+}
+@media (max-width: 1100px) and (min-width: 761px) {
+  :root[data-theme="cloud"]:not([data-theme="pixel"]) .brand {
+    max-width: 30%;
+    width: 285px;
+  }
+  :root[data-theme="cloud"]:not([data-theme="pixel"])
+    .brand
+    > span:first-of-type {
+    font-size: 23px;
+  }
+  :root[data-theme="cloud"] .cloud-theme-label {
+    top: 22px;
+    left: 44%;
+  }
+}
+@media (max-width: 760px) {
+  :root[data-theme="cloud"]:not([data-theme="pixel"]) .header-inner {
+    background: #fff8edcc;
+  }
+  :root[data-theme="cloud"]:not([data-theme="pixel"]) .brand {
+    margin-top: 0;
+    width: auto;
+    max-width: none;
+    padding: 2px 12px 2px 2px;
+  }
+  :root[data-theme="cloud"]:not([data-theme="pixel"])
+    .brand
+    > span:first-of-type {
+    font-size: 23px;
+  }
+  :root[data-theme="cloud"]:not([data-theme="pixel"]) .header-tools {
+    margin-top: 0;
+  }
+  :root[data-theme="cloud"] .cloud-theme-label {
+    top: auto;
+    bottom: 15px;
+    left: auto !important;
+    right: 12px;
+    padding: 5px 14px 8px;
+  }
+  :root[data-theme="cloud"] .cloud-theme-label strong {
+    font-size: 14px;
+  }
+  :root[data-theme="cloud"]:not([data-theme="pixel"]) .pixel-app {
+    background-size: auto 100dvh;
+  }
 }

@@ -142,10 +142,10 @@ export default function App() {
                 setCategory(isExam ? "qualifier" : "all");
               }}
             >
-              {theme === "crystal" ? (
+              {theme === "crystal" || theme === "cloud" ? (
                 <img
                   className="crystal-brand-icon"
-                  src={publicAsset("crystal-book")}
+                  src={publicAsset(`${theme}-book`)}
                   alt=""
                 />
               ) : theme === "pixel" ? (
@@ -207,10 +207,15 @@ export default function App() {
           </div>
         </header>
         <div className="adventure-banner">
-          {theme === "crystal" && (
-            <div className="crystal-theme-label" aria-hidden="true">
+          {(theme === "crystal" || theme === "cloud") && (
+            <div
+              className={`crystal-theme-label ${theme === "cloud" ? "cloud-theme-label" : ""}`}
+              aria-hidden="true"
+            >
               <span>CHỦ ĐỀ</span>
-              <strong>ĐẢO PHA LÊ</strong>
+              <strong>
+                {theme === "cloud" ? "THÀNH PHỐ TRÊN MÂY" : "ĐẢO PHA LÊ"}
+              </strong>
             </div>
           )}
           <h1 className="banner-message">Học vui, chinh phục từng bài!</h1>
