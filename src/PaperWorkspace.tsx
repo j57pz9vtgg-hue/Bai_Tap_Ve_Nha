@@ -262,14 +262,7 @@ export function PaperWorkspace(p: Props) {
             </button>
           )}
         </header>
-        {p.reviewAccess && (
-          <section
-            className="paper-review-access"
-            aria-label="Mở lời giải chi tiết"
-          >
-            {p.reviewAccess}
-          </section>
-        )}
+        {p.reviewAccess}
         <article
           className={`exam-paper ${p.review ? "review-paper" : ""}`}
           aria-label={p.review ? "Đáp án và lời giải" : "Bài luyện tập Toán"}

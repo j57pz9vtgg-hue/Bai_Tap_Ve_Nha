@@ -24,6 +24,8 @@
 
 - Nộp bài submits directly without a confirmation step; freeze and save elapsed time on submission and show it with the parent-protected result. Preserve the parent result/answer gate.
 
-- After Nộp bài, show the score inline in the existing paper toolbar immediately after Đã trả lời, retain the question paper and frozen elapsed time, and lock answer inputs. The owner explicitly allows this score summary without a parent password. Detailed answer keys/worked solutions still require the parent password, entered inline only when requested. Do not open a separate results popup.
+- After Nộp bài, show the score inline in the existing paper toolbar immediately after Đã trả lời, retain the question paper and frozen elapsed time, and lock answer inputs. The owner explicitly allows this score summary without a parent password. Detailed answer keys/worked solutions still require the parent password, entered in a floating password dialog only when requested. Do not open a separate results popup.
 
 - Keep a visible Làm lại button immediately after Nộp bài in the paper toolbar. It starts a fresh attempt by clearing selections and resetting the timer, while preserving previously saved results until the next submission.
+
+- Xem đáp án & lời giải opens a floating modal for the parent password. Cancel/close returns to the same paper with the inline score; only successful authentication reveals detailed solutions.

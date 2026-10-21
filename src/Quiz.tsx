@@ -306,16 +306,22 @@ export default function Quiz({
           }}
           reviewAccess={
             reviewRequested && !resultUnlocked ? (
-              <ParentPassword
-                purpose="review"
-                onCancel={() => setReviewRequested(false)}
-                onSetup={onSetupPassword}
-                onUnlock={() => {
-                  setResultUnlocked(true);
-                  setReviewRequested(false);
-                  setStage("review");
-                }}
-              />
+              <Dialog
+                title="Mật khẩu phụ huynh"
+                className="parent-dialog password-settings-dialog"
+                onClose={() => setReviewRequested(false)}
+              >
+                <ParentPassword
+                  purpose="review"
+                  onCancel={() => setReviewRequested(false)}
+                  onSetup={onSetupPassword}
+                  onUnlock={() => {
+                    setResultUnlocked(true);
+                    setReviewRequested(false);
+                    setStage("review");
+                  }}
+                />
+              </Dialog>
             ) : null
           }
           elapsed={finished ? elapsedSeconds : 900 - remaining}
