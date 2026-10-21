@@ -10,6 +10,8 @@ export function TopicExample({
   exerciseId: string;
   onClose: () => void;
 }) {
+  if (exerciseId === "problem-type-1")
+    return <ProblemTypeOneExample onClose={onClose} />;
   return exerciseId === "date-problem" ? (
     <DateTopicExample onClose={onClose} />
   ) : (
@@ -170,6 +172,101 @@ function DateTopicExample({ onClose }: { onClose: () => void }) {
           )}
         </section>
       ))}
+      <p className="topic-awaiting">
+        Chưa có câu luyện tập cho chủ đề này. Các câu phù hợp sẽ được bổ sung từ
+        bộ đề bạn gửi.
+      </p>
+      <button className="primary-button" onClick={onClose}>
+        Về danh sách chủ đề
+      </button>
+    </Dialog>
+  );
+}
+
+// Exact question, bilingual steps and answer supplied by the owner.
+const animalSolution = [
+  ["Assume that all animals are rabbits", "Giả sử tất cả con vật đều là thỏ."],
+  [
+    "The number of legs in total are 36 x 4 = 144 (legs)",
+    "Khi đó, tổng số chân là: 36 x 4 = 144 (chân)",
+  ],
+  [
+    "Therefore, the excessive legs are 144 − 100 = 44 (legs)",
+    "Như vậy, số chân thừa là: 144 − 100 = 44 (chân)",
+  ],
+  [
+    "The number of chickens are 44 : 2 = 22 (chickens)",
+    "Số gà sẽ là: 44 : 2 = 22 (con gà)",
+  ],
+  [
+    "The number of rabbits are 36 − 22 = 14 (rabbits)",
+    "Số thỏ sẽ là: 36 − 22 = 14 (con thỏ)",
+  ],
+];
+function ProblemTypeOneExample({ onClose }: { onClose: () => void }) {
+  const [expanded, setExpanded] = useState(true);
+  return (
+    <Dialog
+      title="Dạng bài 1 (Problem type 1)"
+      className="topic-example-dialog"
+      onClose={onClose}
+    >
+      <p className="topic-source">TIMO · Lớp 2 · Luyện theo chủ đề</p>
+      <h1>
+        Dạng bài 1 <span>(Problem type 1)</span>
+      </h1>
+      <section aria-labelledby="animal-example-title">
+        <h2 id="animal-example-title">
+          <BookOpen size={23} /> Ví dụ
+        </h2>
+        <div className="age-example-question" lang="en">
+          <p>
+            There are 36 animals including chickens and rabbits on a farm. They
+            can count 100 legs in total.
+          </p>
+          <p>
+            How many chickens are there?
+            <br />
+            How many rabbits are there?
+          </p>
+        </div>
+        <div className="age-example-translation">
+          <p>
+            Có 36 con vật bao gồm con gà và thỏ trong một nông trại. Người ta
+            đếm được tổng số 100 cái chân.
+          </p>
+          <p>
+            Hỏi có bao nhiêu con gà?
+            <br />
+            Hỏi có bao nhiêu con thỏ?
+          </p>
+        </div>
+        <button
+          className="age-solution-toggle"
+          aria-expanded={expanded}
+          aria-controls="animal-solution"
+          onClick={() => setExpanded(!expanded)}
+        >
+          Lời giải của bài ví dụ{" "}
+          {expanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+        </button>
+        {expanded && (
+          <div id="animal-solution" className="age-solution date-solution">
+            <section>
+              <h3>Solution</h3>
+              {animalSolution.map(([english, vietnamese], i) => (
+                <div className="bilingual-solution-step" key={i}>
+                  <p lang="en">{english}</p>
+                  <p className="solution-translation">{vietnamese}</p>
+                </div>
+              ))}
+              <p lang="en">
+                <strong>Ans. 22 chickens. 14 rabbits</strong>
+              </p>
+            </section>
+          </div>
+        )}
+      </section>
       <p className="topic-awaiting">
         Chưa có câu luyện tập cho chủ đề này. Các câu phù hợp sẽ được bổ sung từ
         bộ đề bạn gửi.

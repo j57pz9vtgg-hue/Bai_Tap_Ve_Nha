@@ -98,6 +98,12 @@ export function getExercises(
         category: "topic",
         exampleOnly: true,
       },
+      {
+        id: "problem-type-1",
+        title: "Dạng bài 1 (Problem type 1)",
+        category: "topic",
+        exampleOnly: true,
+      },
     ];
   }
   return [];
