@@ -1,7 +1,7 @@
 import type { Question } from "../data";
 
 //25 owner-supplied written-response questions, with original vocabulary glosses.
-// No answer key or explanations supplied; never infer missing answers.
+// Answer key and explanations subsequently supplied by the owner; preserve received content.
 export const TIMO_GRADE2_NATIONAL2: Question[] = [
   {
     sourceNumber: 1,
@@ -11,7 +11,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "25",
+    explanation:
+      "Khi Evan sinh ra, mẹ anh ấy 25 tuổi. Do đó, mẹ nhiều hơn Evan 25 tuổi.\nEm gái sinh sau Evan 5 năm. Do đó, em gái ít hơn Evan 5 tuổi.\nKhi mẹ 55 tuổi thì tuổi của Evan là: 55 − 25 = 30 (tuổi).\nKhi Evan 30 tuổi thì tuổi của em gái là: 30 − 5 = 25 (tuổi).\nĐáp số: 25.",
     topicId: "topic-03",
     strand: "Logical thinking / Tư duy lô-gic",
   },
@@ -24,7 +26,10 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "Tuesday",
+    acceptedAnswers: ["Thứ Ba"],
+    explanation:
+      "Vì ngày 30/06 là thứ Sáu nên ngày 01/07 là thứ Bảy.\nNhận xét: Cứ sau 7 ngày, thứ trong tuần sẽ lặp lại.\nTa có: 1 + 7 = 8, 8 + 7 = 15, 15 + 7 = 22, 22 + 7 = 29.\nDo đó, các ngày 08/07, 15/07, 22/07, 29/07 đều là thứ Bảy.\nNgày 30/07 là Chủ nhật. Ngày 31/07 là thứ Hai. Ngày 01/08 là thứ Ba.\nDo đó, ngày 08/08 là thứ Ba.\nĐáp số: Tuesday.",
     topicId: "topic-05",
     strand: "Logical thinking / Tư duy lô-gic",
   },
@@ -36,7 +41,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "16",
+    explanation:
+      "Quy luật: Ở mỗi hàng ngang, các số ở 2 ô đầu tiên nhân với nhau thì được số ở ô thứ ba.\n2 × 3 = 6; 5 × 3 = 15; 4 × 4 = 16; 6 × 5 = 30.\nVậy số cần tìm là 16.\nĐáp số: 16.",
     topicId: "unassigned",
     strand: "Logical thinking / Tư duy lô-gic",
     diagram: "n2-table",
@@ -50,7 +57,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "T",
+    explanation:
+      "Ta viết bảng chữ cái tiếng Anh và khoanh tròn các chữ cái trong dãy đã cho.\nA B C D E F G H I J K L M N O P Q R S T U V W X Y Z\nQuy luật: Hai chữ cái liên tiếp trong dãy đã cho lần lượt cách nhau 3 chữ cái và 1 chữ cái trong bảng chữ cái tiếng Anh.\nTừ chữ P, ta cần cách ra 3 chữ cái nữa. Vậy chữ cái cần tìm là T.\nĐáp số: T.",
     topicId: "unassigned",
     strand: "Logical thinking / Tư duy lô-gic",
     diagram: "n2-letters",
@@ -64,7 +73,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "7",
+    explanation:
+      "Ngoài 9 đứa trẻ đứng sau Alice và Henry, hàng còn lại số đứa trẻ là: 18 − 9 = 9 (đứa trẻ).\n9 đứa trẻ này bao gồm Alice, Henry và 7 đứa trẻ đứng trước hai bạn.\nVậy có 7 đứa trẻ đứng trước Alice và Henry.\nĐáp số: 7.",
     topicId: "unassigned",
     strand: "Logical thinking / Tư duy lô-gic",
   },
@@ -76,7 +87,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "4",
+    explanation:
+      "15 − 8 − 9 + 12 − 6 = 7 − 9 + 12 − 6 = 7 + 12 − 9 − 6 = 19 − 9 − 6 = 10 − 6 = 4.\nĐáp số: 4.",
     topicId: "topic-08",
     strand: "Arithmetic / Số học",
   },
@@ -88,7 +101,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "2800",
+    explanation:
+      "35 × 2 × 8 × 5 = (7 × 5) × 2 × (4 × 2) × 5 = (7 × 4) × (5 × 2) × (5 × 2) = 28 × 10 × 10 = 2800.\nĐáp số: 2800.",
     topicId: "unassigned",
     strand: "Arithmetic / Số học",
   },
@@ -100,7 +115,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "360",
+    explanation:
+      "9 × 33 + 9 × 44 − 9 × 20 − 9 × 17 = 9 × (33 + 44 − 20 − 17) = 9 × 40 = 9 × 4 × 10 = 36 × 10 = 360.\nĐáp số: 360.",
     topicId: "unassigned",
     strand: "Arithmetic / Số học",
   },
@@ -112,7 +129,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "160",
+    explanation:
+      "2 + 36 + 4 + 38 + 16 + 34 + 5 + 25\n= (2 + 38) + (36 + 4) + (16 + 34) + (5 + 25)\n= 40 + 40 + 50 + 30\n= (40 + 40) + (50 + 30)\n= 80 + 80\n= 160.\nĐáp số: 160.",
     topicId: "topic-06",
     strand: "Arithmetic / Số học",
   },
@@ -125,7 +144,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "63",
+    explanation:
+      "Xét hàng trăm, ta có: B + 1 = 10. Do đó, hàng đơn vị là phép tính có nhớ.\nVì B + 1 = 10 nên B = 9.\nVì hàng đơn vị là phép tính có nhớ nên A + A = 14. Do đó, A = 7.\nVậy A × B = 7 × 9 = 63.\nĐáp số: 63.",
     topicId: "topic-10",
     strand: "Arithmetic / Số học",
     diagram: "n2-addition",
@@ -139,7 +160,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "1024",
+    explanation:
+      "Chọn chữ số nhỏ nhất khác 0 để làm hàng nghìn. Do đó, hàng nghìn là 1.\nChọn chữ số nhỏ nhất trong các chữ số còn lại để làm hàng trăm. Do đó, hàng trăm là 0.\nChọn chữ số nhỏ nhất trong các chữ số còn lại để làm hàng chục. Do đó, hàng chục là 2.\nChọn chữ số chẵn nhỏ nhất trong các chữ số còn lại để làm hàng đơn vị. Do đó, hàng đơn vị là 4.\nVậy số cần tìm là 1024.\nĐáp số: 1024.",
     topicId: "unassigned",
     strand: "Number Theory / Số học",
   },
@@ -152,7 +175,10 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "Odd",
+    acceptedAnswers: ["lẻ", "số lẻ"],
+    explanation:
+      "Ta tìm chữ số hàng đơn vị của từng phép tính nhân như sau:\n4 × 7 − 3 × 6 + 5 × 4 + 9 × 8 − 6 × 2 − 7 × 9\n↓          ↓          ↓          ↓          ↓          ↓\n8 − 8 + 0 + 2 − 2 − 3\nNhận thấy: 8 − 8 + 0 + 2 − 2 − 3 = 0 − 3.\nĐể tìm chữ số hàng đơn vị của phép tính, ta lấy 10 trừ 3 bằng 7.\nVì 7 là số lẻ nên kết quả của phép tính đã cho là số lẻ.\nĐáp số: Odd.",
     topicId: "unassigned",
     strand: "Number Theory / Số học",
   },
@@ -165,7 +191,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "70",
+    explanation:
+      "Quy luật: Các số trong dãy giảm dần 9 đơn vị.\n89 − 9 = 80; 80 − 9 = 71; 71 − 9 = 62; …\nSố thứ 5 của dãy là: 62 − 9 = 53.\nSố thứ 6 của dãy là: 53 − 9 = 44.\nSố thứ 7 của dãy là: 44 − 9 = 35.\nSố thứ 8 của dãy là: 35 − 9 = 26.\nSố thứ 9 của dãy là: 26 − 9 = 17.\nTổng của số thứ 5 và số thứ 9 là: 53 + 17 = 70.\nĐáp số: 70.",
     topicId: "topic-01",
     strand: "Number Theory / Số học",
     diagram: "n2-sequence13",
@@ -179,7 +207,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "19",
+    explanation:
+      "Gọi số bút chì màu ban đầu của Christine và Madison lần lượt là C và M.\nVì Christine cho Madison 12 chiếc bút chì màu và nhận từ Alexis 5 chiếc bút chì màu nên số bút chì màu lúc sau của Christine là: C − 12 + 5.\nVì Madison nhận từ Christine 12 chiếc bút chì màu nên số bút chì màu lúc sau của Madison là: M + 12.\nVì lúc sau họ có số bút chì màu bằng nhau nên ta có: C − 12 + 5 = M + 12.\nDo đó, C = M + 12 − 5 + 12 = M + 19.\nVậy ban đầu Christine có nhiều hơn Madison 19 chiếc bút chì màu.\nĐáp số: 19.",
     topicId: "topic-14",
     strand: "Number Theory / Số học",
   },
@@ -192,7 +222,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "15 + 3 + 7 − 24 = 1",
+    explanation:
+      "Ta có: 15 + 3 + 7 − 24 = 18 + 7 − 24 = 25 − 24 = 1.\nVậy phép tính đúng là: 15 + 3 + 7 − 24 = 1.\nĐáp số: 15 + 3 + 7 − 24 = 1.",
     topicId: "topic-13",
     strand: "Number Theory / Số học",
     diagram: "n2-operators",
@@ -205,7 +237,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "15",
+    explanation:
+      "Số mặt của một hình chóp bằng với số đỉnh của hình chóp đó.\nVì hình chóp đã cho có 15 đỉnh nên hình chóp đó có 15 mặt.\nĐáp số: 15.",
     topicId: "unassigned",
     strand: "Geometry / Hình học",
   },
@@ -217,7 +251,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "28",
+    explanation:
+      "Ta có hình vẽ đánh số như minh họa.\nCó 16 đoạn thẳng đơn là các đoạn được đánh số từ 1 đến 16.\nCó 8 đoạn thẳng được ghép bởi 2 đoạn thẳng đơn bao gồm: (1 + 2), (2 + 3), (4 + 5), (5 + 6), (7 + 8), (8 + 9), (10 + 11), (11 + 12).\nCó 4 đoạn thẳng được ghép bởi 3 đoạn thẳng đơn bao gồm: (1 + 2 + 3), (4 + 5 + 6), (7 + 8 + 9), (10 + 11 + 12).\nVậy hình đã cho có tất cả số đoạn thẳng là: 16 + 8 + 4 = 28 (đoạn thẳng).\nĐáp số: 28.",
     topicId: "topic-18",
     strand: "Geometry / Hình học",
     diagram: "n2-segments",
@@ -231,7 +267,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "7",
+    explanation:
+      "Ta đánh số tất cả các mặt hình vuông ở bên phải như hình minh họa.\nCó tất cả 11 mặt hình vuông ở bên phải.\nTuy nhiên, khi nhìn từ bên phải, mặt số 6 bị mặt số 1 che khuất, mặt số 7 bị mặt số 2 che khuất, mặt số 9 bị mặt số 4 che khuất và mặt số 10 bị mặt số 5 che khuất.\nVậy khi nhìn hình đã cho từ bên phải, ta chỉ có thể thấy được 7 mặt hình vuông.\nĐáp số: 7.",
     topicId: "topic-17",
     strand: "Geometry / Hình học",
     diagram: "n2-cubes",
@@ -244,7 +282,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "10",
+    explanation:
+      "Ta có hình vẽ đánh số như minh họa.\nVậy hình đã cho có tất cả 10 hình chữ nhật.\nĐáp số: 10.",
     topicId: "unassigned",
     strand: "Geometry / Hình học",
     diagram: "n2-rectangles",
@@ -257,7 +297,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "25",
+    explanation:
+      "Vì hình chóp đã cho có 48 cạnh nên hình chóp đó có 24 cạnh bên và 24 cạnh đáy.\nDo đó, đáy của hình chóp này là đa giác có 24 cạnh và 24 đỉnh.\nNgoài ra, hình chóp có 1 đỉnh nằm ngoài mặt đáy.\nVậy hình chóp đã cho có 25 đỉnh.\nĐáp số: 25.",
     topicId: "unassigned",
     strand: "Geometry / Hình học",
   },
@@ -270,7 +312,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "9740",
+    explanation:
+      "Chọn chữ số lớn nhất trong các chữ số đã cho để làm hàng nghìn. Do đó, hàng nghìn là 9.\nChọn chữ số lớn nhất trong các chữ số còn lại để làm hàng trăm. Do đó, hàng trăm là 7.\nChọn chữ số lớn nhất trong các chữ số còn lại để làm hàng chục. Do đó, hàng chục là 4.\nVì số cần tạo là số chẵn nên hàng đơn vị là 0.\nVậy số chẵn lớn nhất có 4 chữ số tạo được là 9740.\nĐáp số: 9740.",
     topicId: "unassigned",
     strand: "Combinatorics / Tổ hợp",
   },
@@ -282,7 +326,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "80",
+    explanation:
+      "Các số có chứa chữ số 1 trong các số từ 1 đến 100 là: 1, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 31, 41, 51, 61, 71, 81, 91, 100.\nDo đó, trong các số từ 1 đến 100, có 20 số có chứa chữ số 1.\nTừ 1 đến 100 có tất cả 100 số.\nVậy trong các số từ 1 đến 100, các số không chứa chữ số 1: 100 − 20 = 80 (số).\nĐáp số: 80.",
     topicId: "unassigned",
     strand: "Combinatorics / Tổ hợp",
   },
@@ -295,7 +341,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "2",
+    explanation:
+      "Gọi 2 số tạo được là A và B, với A > B.\nĐể hiệu A − B là nhỏ nhất, ta cần chọn 2 chữ số có hiệu nhỏ nhất để làm chữ số hàng chục của A và B. Do đó, 2 chữ số hàng chục là 9 và 8 hoặc 8 và 7.\nTrường hợp 1: Hàng chục của A là 9, hàng chục của B là 8. Còn lại các chữ số: 3, 5, 7, 1. Chọn chữ số lẻ nhỏ nhất làm hàng đơn vị của A và chữ số lẻ lớn nhất làm hàng đơn vị của B. Do đó, A = 91 và B = 87. Khi đó, A − B = 91 − 87 = 4.\nTrường hợp 2: Hàng chục của A là 8, hàng chục của B là 7. Còn lại các chữ số: 3, 9, 5, 1. Chọn chữ số lẻ nhỏ nhất làm hàng đơn vị của A và chữ số lẻ lớn nhất làm hàng đơn vị của B. Do đó, A = 81 và B = 79. Khi đó, A − B = 81 − 79 = 2.\nTa so sánh hai trường hợp và tìm được hiệu nhỏ nhất là 2.\nĐáp số: 2.",
     topicId: "unassigned",
     strand: "Combinatorics / Tổ hợp",
   },
@@ -308,7 +356,9 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "5",
+    explanation:
+      "Tổng số tiền Jayden có là: 1 × 8 + 2 × 3 + 5 × 5 = 8 + 6 + 25 = 39 (đô-la).\nTa có: 39 = 7 + 7 + 7 + 7 + 7 + 4 = 7 × 5 + 4.\nVậy Jayden có thể mua được nhiều nhất 5 cái bát.\nĐáp số: 5.",
     topicId: "unassigned",
     strand: "Combinatorics / Tổ hợp",
   },
@@ -321,8 +371,10 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
-    topicId: "unassigned",
+    correctText: "1",
+    explanation:
+      "Ta thực hiện các phép tính và được kết quả như sau:\n100 : 4 = 25, 15 × 4 = 60, 6 × 7 = 42, 3 × 9 = 27, 2 × 10 = 20, 4 × 17 = 68, 60 : 3 = 20.\nCác kết quả ở giữa 25 và 55 bao gồm: 42, 27.\nVì chỉ có 42 là số chẵn nên ta tìm được 1 kết quả là số chẵn ở giữa 25 và 55.\nĐáp số: 1.",
+    topicId: "topic-12",
     strand: "Combinatorics / Tổ hợp",
     diagram: "n2-expressions",
   },

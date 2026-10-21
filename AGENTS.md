@@ -85,3 +85,7 @@
 - Qualifier7 now has25 supplied answers and worked explanations: B,D,A,C,B,A,B,C,A,B,A,B,C,D,C,A,A,B,D,A,D,C,A,D,D. All answers match choices; reviewed topics unchanged (q1,2,5,9,11,12,15,18,21,23,25 unassigned). Include supplied fifth arrow group, numbered square pieces (merged center piece11), right-view cube and16 numbered simple segments in parent review.
 
 - National1 key received (owner called it international but images say HEAT ROUND/quốc gia and match national1):25 explicit text keys and supplied worked solutions in its existing source file. Text grading uses correctText and owner-supplied aliases, normalizes case/spacing/Unicode math typography only, never evaluates expressions or invents alternate answers. Parent-only explanations include numbered cubes/segments/polygon. Other national papers remain unscored until their own received keys are applied sequentially. TopicIds reviewed; no new suitable examples for unassigned questions.
+
+- National2 now has25 owner-supplied text keys/explanations and source numbered segment/cube/rectangle solution diagrams. Preserve all reviewed topicIds (unknown topics unassigned), Tuesday/Thứ Ba and Odd/số lẻ aliases. No mismatch found between supplied question conditions and keys.
+
+- National2 q25 is reviewed into topic12 (counting even expression results, with the source25–55 condition retained); other topic mappings are preserved.

@@ -630,6 +630,9 @@ function FoodChoices({ solution = false }: { solution?: boolean }) {
 export const hasSolutionDiagram = (diagram?: QuestionDiagram) =>
   diagram !== undefined &&
   [
+    "n2-segments",
+    "n2-cubes",
+    "n2-rectangles",
     "n1-cubes",
     "n1-segments",
     "n1-polygon",

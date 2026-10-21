@@ -66,10 +66,12 @@ function DotLines({
   lines,
   points,
   viewBox = "0 0 260 180",
+  labels,
 }: {
   lines: number[][][];
   points: number[][];
   viewBox?: string;
+  labels?: number[][];
 }) {
   return (
     <SourceDrawing
@@ -83,6 +85,11 @@ function DotLines({
       </g>
       {points.map(([x, y], i) => (
         <circle key={i} cx={x} cy={y} r="4" />
+      ))}
+      {labels?.map(([x, y, n]) => (
+        <text key={n} x={x} y={y} fontSize="13" textAnchor="middle">
+          {n}
+        </text>
       ))}
     </SourceDrawing>
   );
@@ -346,6 +353,85 @@ export function NationalIllustration({
         />
       );
   }
+  if (paper === 2 && name === "rectangles" && solution)
+    return (
+      <SourceDrawing
+        label="Mười hình chữ nhật được đánh số trong năm hình minh họa"
+        viewBox="0 0 550 280"
+      >
+        {[0, 1, 2, 3, 4].map((i) => (
+          <g
+            key={i}
+            transform={`translate(${15 + (i < 3 ? i * 180 : (i - 3) * 200 + 70)} ${i < 3 ? 15 : 155})`}
+          >
+            <rect width="160" height="96" fill="white" stroke="#333" />
+            {i === 0 ? (
+              <>
+                <path
+                  d="M40 0V96M80 0V96M120 0V42M80 42H160"
+                  stroke="#555"
+                  fill="none"
+                />
+                {[
+                  [20, 55, 1],
+                  [60, 55, 2],
+                  [100, 27, 3],
+                  [140, 27, 4],
+                  [120, 74, 5],
+                ].map(([x, y, n]) => (
+                  <text key={n} x={x} y={y} textAnchor="middle" fontSize="16">
+                    {n}
+                  </text>
+                ))}
+              </>
+            ) : i === 1 ? (
+              <>
+                <rect width="80" height="96" fill="#bbb" stroke="#333" />
+                <rect x="80" width="80" height="96" fill="#bbb" stroke="#333" />
+                <text x="40" y="55" textAnchor="middle">
+                  6
+                </text>
+                <text x="120" y="55" textAnchor="middle">
+                  7
+                </text>
+              </>
+            ) : i === 2 ? (
+              <>
+                <path
+                  d="M40 0V96M80 0V96M80 42H160"
+                  stroke="#555"
+                  fill="none"
+                />
+                <rect x="80" width="80" height="42" fill="#bbb" stroke="#333" />
+                <text x="120" y="28" textAnchor="middle">
+                  8
+                </text>
+              </>
+            ) : i === 3 ? (
+              <>
+                <rect
+                  x="40"
+                  width="120"
+                  height="96"
+                  fill="#bbb"
+                  stroke="#333"
+                />
+                <text x="100" y="55" textAnchor="middle">
+                  9
+                </text>
+              </>
+            ) : (
+              <>
+                <rect width="160" height="96" fill="#bbb" stroke="#333" />
+                <text x="80" y="55" textAnchor="middle">
+                  10
+                </text>
+              </>
+            )}
+          </g>
+        ))}
+      </SourceDrawing>
+    );
   if (paper === 2) {
     if (name === "table")
       return (
@@ -407,7 +493,29 @@ export function NationalIllustration({
             [points[9], points[6]],
           ]}
           points={points}
-          viewBox="0 0 210 180"
+          labels={
+            solution
+              ? [
+                  [55, 15, 1],
+                  [105, 15, 2],
+                  [155, 15, 3],
+                  [55, 176, 4],
+                  [105, 176, 5],
+                  [155, 176, 6],
+                  [24, 45, 7],
+                  [24, 95, 8],
+                  [24, 145, 9],
+                  [188, 45, 10],
+                  [188, 95, 11],
+                  [188, 145, 12],
+                  [60, 48, 13],
+                  [151, 48, 14],
+                  [60, 140, 15],
+                  [151, 140, 16],
+                ]
+              : undefined
+          }
+          viewBox="0 0 210 185"
         />
       );
     }
@@ -434,6 +542,27 @@ export function NationalIllustration({
           <SourceCube x={73} y={137} size={30} depth={10} />
           <SourceCube x={160} y={138} size={30} depth={10} />
           <SourceCube x={150} y={148} size={30} depth={10} />
+          {solution && (
+            <g fontSize="13" textAnchor="middle">
+              {[
+                [185, 166, 1],
+                [195, 156, 2],
+                [205, 146, 3],
+                [205, 116, 4],
+                [175, 86, 5],
+                [68, 166, 6],
+                [108, 156, 7],
+                [78, 124, 8],
+                [87, 116, 9],
+                [87, 86, 10],
+                [87, 56, 11],
+              ].map(([x, y, n]) => (
+                <text key={n} x={x} y={y}>
+                  {n}
+                </text>
+              ))}
+            </g>
+          )}
         </SourceDrawing>
       );
   }
