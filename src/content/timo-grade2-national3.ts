@@ -163,7 +163,7 @@ export const TIMO_GRADE2_NATIONAL3: Question[] = [
     correct: null,
     correctText: "14",
     explanation:
-      "Wendy cho Alan 10 chiếc bút chì và nhận từ Fred 6 chiếc bút chì nên số bút chì của Wendy giảm đi là: 10 − 6 = 4 chiếc bút chì.\nAlan nhận từ Wendy 10 chiếc bút chì nên số bút chì của Alan tăng thêm 10 chiếc bút chì.\nNếu sau 3 bạn có số bút chì bằng nhau nên ta có phép tính: Wendy − 4 = Alan + 10.\nLúc đầu Wendy có nhiều hơn Alan số bút chì là: 4 + 10 = 14 chiếc bút chì.\nĐáp số: 14.",
+      "Wendy cho Alan 10 chiếc bút chì và nhận từ Fred 6 chiếc bút chì nên số bút chì của Wendy giảm đi là: 10 − 6 = 4 chiếc bút chì.\nAlan nhận từ Wendy 10 chiếc bút chì nên số bút chì của Alan tăng thêm 10 chiếc bút chì.\nLúc sau 3 bạn có số bút chì bằng nhau nên ta có phép tính: Wendy − 4 = Alan + 10.\nLúc đầu Wendy có nhiều hơn Alan số bút chì là: 4 + 10 = 14 chiếc bút chì.\nĐáp số: 14.",
     topicId: "topic-14",
     strand: "Number Theory / Số học",
   },
@@ -307,9 +307,9 @@ export const TIMO_GRADE2_NATIONAL3: Question[] = [
   {
     sourceNumber: 21,
     sourcePaper: "Đề số 3 · Vòng quốc gia TIMO lớp 2",
-    text: "What is the greatest 4-digit number composed of digits 0, 8, 6, 9 or 2? (Each digit can only be used once)",
+    text: "What is the greatest 4-digit odd number composed of digits 0, 8, 6, 9 or 2? (Each digit can only be used once)",
     translation:
-      "Greatest: Lớn nhất; 4-digit odd number: Số lẻ có 4 chữ số; Composed of: Bao gồm; Digit: Chữ số; Once: Một lần. Lưu ý: Chú giải và lời giải được cung cấp yêu cầu số lẻ; câu tiếng Anh gốc thiếu từ “odd”.",
+      "Greatest: Lớn nhất; 4-digit odd number: Số lẻ có 4 chữ số; Composed of: Bao gồm; Digit: Chữ số; Once: Một lần.",
     options: [],
     answerFormat: "text",
     correct: null,

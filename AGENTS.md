@@ -91,3 +91,9 @@
 - National2 q25 is reviewed into topic12 (counting even expression results, with the source25–55 condition retained); other topic mappings are preserved.
 
 - National3 now has25 supplied keys/solutions and numbered square/line/cube diagrams. Q25 reviewed into topic12; other reviewed topics preserved. Source discrepancy q21: English lacks “odd”, while original vocabulary and now supplied reasoning require an odd4-digit number, answer8629. Preserve English and explicitly note the supplied odd condition in the visible glossary; do not silently substitute the unconstrained largest number. Report this discrepancy to owner.
+
+- National4 now has all25 supplied keys/solutions and numbered geometry drawings. Source q21 has the same English omission as national3: vocabulary/solution require odd, answer9845. Preserve original English and show the odd-condition clarification in the glossary; report both source discrepancies. Other reviewed topicIds retained; no fabricated topics.
+
+- Owner correction: national3 q21 source explicitly says “greatest4-digit odd number”. Earlier claim of an English source omission was our transcription error, not a source discrepancy. Correct English in content to “4-digit odd number”, remove the omission note, keep supplied8629. Do not report national3 q21 as a source mismatch. The new crop supersedes the earlier transcription.
+
+- Do not repeat unsupported source-omission claims for national3/4 q21. National3 fresh crop explicitly contains “odd”; national4 English is also aligned with its explicit supplied odd vocabulary and reasoning. Both app questions say4-digit odd number, keep8629/9845, and remove omission warnings. Exact known prior draft strings are refreshed to corrected source wording without losing selections/time. Historical submitted snapshots remain unchanged.

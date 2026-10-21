@@ -746,6 +746,36 @@ export function NationalIllustration({
           99÷3，19+19，51−34，6×8，24+48，5×5，15+16
         </div>
       );
+    if (name === "squares" && solution)
+      return (
+        <SourceDrawing
+          label="Các mảnh hình vuông được đánh số1 đến11"
+          viewBox="0 0 255 140"
+        >
+          <path
+            d="M94 15H196V83H230V117H60V83H26V49H94Z M60 49V117 M94 15V117 M128 15V117 M162 15V83 M196 15V117 M26 49H196 M26 83H162 M196 83H230"
+            fill="none"
+            stroke="#111"
+          />
+          {[
+            [43, 73, 1],
+            [77, 73, 2],
+            [77, 107, 3],
+            [111, 39, 4],
+            [111, 73, 5],
+            [111, 107, 6],
+            [145, 39, 7],
+            [145, 73, 8],
+            [179, 39, 9],
+            [179, 98, 10],
+            [213, 107, 11],
+          ].map(([x, y, n]) => (
+            <text key={n} x={x} y={y} fontSize="16" textAnchor="middle">
+              {n}
+            </text>
+          ))}
+        </SourceDrawing>
+      );
     if (name === "squares")
       return (
         <Mesh
@@ -768,6 +798,23 @@ export function NationalIllustration({
             [t, b],
             [a, b],
           ]}
+          labels={
+            solution
+              ? [
+                  [55, 46, 1],
+                  [102, 60, 2],
+                  [185, 77, 3],
+                  [109, 44, 4],
+                  [127, 51, 5],
+                  [55, 79, 6],
+                  [84, 82, 7],
+                  [151, 113, 8],
+                  [65, 111, 9],
+                  [114, 122, 10],
+                  [94, 143, 11],
+                ]
+              : undefined
+          }
           points={[
             l,
             r,
@@ -793,6 +840,29 @@ export function NationalIllustration({
             stroke="#111"
             strokeWidth="1.3"
           />
+          {solution && (
+            <g fontSize="12" textAnchor="middle">
+              {[
+                [16, 13],
+                [40, 61],
+                [59, 13],
+                [142, 13],
+                [163, 61],
+                [185, 27],
+                [187, 144],
+                [128, 117],
+                [141, 83],
+                [71, 83],
+                [61, 118],
+                [30, 118],
+                [12, 83],
+              ].map(([x, y], i) => (
+                <text key={i} x={x} y={y}>
+                  {i + 1}
+                </text>
+              ))}
+            </g>
+          )}
         </SourceDrawing>
       );
     if (name === "cubes")
@@ -817,6 +887,25 @@ export function NationalIllustration({
           <SourceCube x={48} y={176} />
           <SourceCube x={88} y={176} />
           <SourceCube x={195} y={149} />
+          {solution && (
+            <g fontSize="14" textAnchor="middle">
+              {[
+                [242, 170, 1],
+                [256, 156, 2],
+                [256, 116, 3],
+                [216, 76, 4],
+                [135, 202, 5],
+                [106, 174, 6],
+                [109, 143, 7],
+                [82, 108, 8],
+                [156, 156, 9],
+              ].map(([x, y, n]) => (
+                <text key={n} x={x} y={y}>
+                  {n}
+                </text>
+              ))}
+            </g>
+          )}
         </SourceDrawing>
       );
   }

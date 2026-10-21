@@ -444,7 +444,14 @@ export function refreshSuppliedQuestions(questions: Question[]): Question[] {
         (current) =>
           current.sourcePaper === saved.sourcePaper &&
           current.sourceNumber === saved.sourceNumber &&
-          current.text === saved.text &&
+          (current.text === saved.text ||
+            (current.sourceNumber === 21 &&
+              ((current.sourcePaper === "Đề số 3 · Vòng quốc gia TIMO lớp 2" &&
+                saved.text ===
+                  "What is the greatest 4-digit number composed of digits 0, 8, 6, 9 or 2? (Each digit can only be used once)") ||
+                (current.sourcePaper === "Đề số 4 · Vòng quốc gia TIMO lớp 2" &&
+                  saved.text ===
+                    "What is the greatest 4-digit number composed of digits 0, 8, 5, 9 or 4? (Each digit can only be used once)")))) &&
           JSON.stringify(current.options) === JSON.stringify(saved.options),
       ) ?? saved,
   );

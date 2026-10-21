@@ -1,7 +1,7 @@
 import type { Question } from "../data";
 
 //25 owner-supplied written-response questions, with original vocabulary glosses.
-// No answer key or explanations supplied; never infer missing answers.
+// Answer key and explanations subsequently supplied by the owner; preserve received content.
 export const TIMO_GRADE2_NATIONAL4: Question[] = [
   {
     sourceNumber: 1,
@@ -11,7 +11,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "27",
+    explanation:
+      "Khi Ethan sinh ra, mẹ 28 tuổi nên mẹ hơn Ethan 28 tuổi.\nKhi mẹ 56 tuổi, tuổi của Ethan là: 56 − 28 = 28 (tuổi).\nEm gái sinh sau Ethan 1 năm nên em gái kém Ethan 1 tuổi.\nTuổi của em gái là: 28 − 1 = 27 (tuổi).\nĐáp số: 27.",
     topicId: "topic-03",
     strand: "Logical thinking / Tư duy lô-gic",
   },
@@ -24,7 +26,10 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "Tuesday",
+    acceptedAnswers: ["Thứ Ba"],
+    explanation:
+      "Cứ sau 7 ngày thì thứ trong tuần sẽ lặp lại.\nDo đó, các ngày thứ Sáu tiếp theo trong tháng 5 là ngày 14, ngày 21, ngày 28.\nNgày 29 tháng 5 là thứ Bảy. Ngày 30 tháng 5 là Chủ nhật. Ngày 31 tháng 5 là thứ Hai.\nVậy ngày 1 tháng 6 là thứ Ba.\nĐáp số: Tuesday.",
     topicId: "topic-05",
     strand: "Logical thinking / Tư duy lô-gic",
   },
@@ -37,7 +42,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "42",
+    explanation:
+      "Quy luật: Trong mỗi hàng, số ở ô thứ 3 bằng các số ở 2 ô đầu tiên nhân với nhau.\n3 × 2 = 6; 5 × 4 = 20; 7 × 6 = 42; 9 × 8 = 72.\nVậy số còn thiếu là 42.\nĐáp số: 42.",
     topicId: "unassigned",
     strand: "Logical thinking / Tư duy lô-gic",
     diagram: "n4-table",
@@ -51,7 +58,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "X",
+    explanation:
+      "Quy luật: 2 chữ cái liên tiếp trong dãy lần lượt cách nhau 2 chữ cái và 1 chữ cái trong bảng chữ cái tiếng Anh.\n… K L M N O P Q R S T U V W X Y Z.\nVậy chữ cái cần tìm là X.\nĐáp số: X.",
     topicId: "unassigned",
     strand: "Logical thinking / Tư duy lô-gic",
     diagram: "n4-letters",
@@ -65,7 +74,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "16",
+    explanation:
+      "Có 10 đứa trẻ đứng trước Eleanor nên Eleanor là đứa trẻ thứ 11 trong hàng.\nSố đứa trẻ đứng sau Eleanor là: 27 − 11 = 16 (đứa trẻ).\nĐáp số: 16.",
     topicId: "unassigned",
     strand: "Logical thinking / Tư duy lô-gic",
   },
@@ -77,7 +88,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "7",
+    explanation:
+      "1 − 3 + 5 − 7 + 9 − 11 + 13 = 1 + (5 − 3) + (9 − 7) + (13 − 11) = 1 + 2 + 2 + 2 = 1 + 6 = 7.\nĐáp số: 7.",
     topicId: "topic-08",
     strand: "Arithmetic / Số học",
   },
@@ -89,7 +102,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "490",
+    explanation:
+      "7 × 2 × 7 × 5 = (7 × 7) × (2 × 5) = 49 × 10 = 490.\nĐáp số: 490.",
     topicId: "unassigned",
     strand: "Arithmetic / Số học",
   },
@@ -102,7 +117,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "1",
+    explanation:
+      "Trường hợp 1: Hàng đơn vị là phép cộng không nhớ 1.\nDựa vào hàng chục, ta có B = 7. Khi đó ta có A + BB = A + 77 > 73 (loại).\nTrường hợp 2: Hàng đơn vị là phép cộng có nhớ 1.\nDựa vào hàng chục, ta có B + 1 = 7, suy ra B = 6.\nVì A + BB = 73 nên A = 73 − BB = 73 − 66 = 7 (thỏa mãn).\nVậy A − B = 7 − 6 = 1.\nĐáp số: 1.",
     topicId: "topic-10",
     strand: "Arithmetic / Số học",
     diagram: "n4-addition",
@@ -115,7 +132,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "800",
+    explanation:
+      "8 × 49 + 8 × 67 − 8 × 11 − 8 × 5 = 8 × (49 + 67 − 11 − 5) = 8 × (116 − 11 − 5) = 8 × 100 = 800.\nĐáp số: 800.",
     topicId: "unassigned",
     strand: "Arithmetic / Số học",
   },
@@ -127,7 +146,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "168",
+    explanation:
+      "14 + 16 + 18 + 20 + 22 + 24 + 26 + 28 = (14 + 26) + (16 + 24) + (18 + 22) + 20 + 28\n= 40 + 40 + 40 + 20 + 28 = 120 + 20 + 28 = 168.\nĐáp số: 168.",
     topicId: "topic-06",
     strand: "Arithmetic / Số học",
   },
@@ -140,7 +161,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "19",
+    explanation:
+      "Hannah cho Peter 5 bút chì và Lucy cho Peter 9 bút chì thì Peter đã nhận được tất cả số bút chì là: 5 + 9 = 14 (bút chì).\nNhận thấy, Hannah cho đi 5 bút chì thì bằng với Peter nhận được 14 bút chì.\nVậy ban đầu Hannah có nhiều hơn Peter là: 5 + 14 = 19 (bút chì).\nĐáp số: 19.",
     topicId: "topic-14",
     strand: "Number Theory / Số học",
   },
@@ -153,7 +176,10 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "Odd",
+    acceptedAnswers: ["lẻ", "số lẻ"],
+    explanation:
+      "5 × 5 + 9 × 7 − 4 × 4 + 8 × 8 − 7 × 1 − 2 × 6 = 25 + 63 − 16 + 64 − 7 − 12 = 117.\nVì 117 là số lẻ nên kết quả của phép tính đã cho là số lẻ.\nĐáp số: Odd.",
     topicId: "unassigned",
     strand: "Number Theory / Số học",
   },
@@ -166,7 +192,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "84",
+    explanation:
+      "Quy luật: Các số trong dãy giảm dần 8 đơn vị.\n94 − 8 = 86; 86 − 8 = 78; 78 − 8 = 70; 70 − 8 = 62; …\nSố thứ 6 là: 62 − 8 = 54.\nSố thứ 7 là: 54 − 8 = 46.\nSố thứ 8 là: 46 − 8 = 38.\nTổng của số thứ 7 và số thứ 8 là: 46 + 38 = 84.\nĐáp số: 84.",
     topicId: "topic-01",
     strand: "Number Theory / Số học",
     diagram: "n4-sequence13",
@@ -179,7 +207,8 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "101",
+    explanation: "Số lẻ nhỏ nhất có 3 chữ số là 101.\nĐáp số: 101.",
     topicId: "unassigned",
     strand: "Number Theory / Số học",
   },
@@ -192,7 +221,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "9 + 18 + 3 − 7 = 23",
+    explanation:
+      "Ta có: 9 + 18 + 3 − 7 = 27 + 3 − 7 = 30 − 7 = 23.\nĐáp số: 9 + 18 + 3 − 7 = 23.",
     topicId: "topic-13",
     strand: "Number Theory / Số học",
     diagram: "n4-operators",
@@ -205,7 +236,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "14",
+    explanation:
+      "Ta đánh số các mảnh như hình minh họa.\nHình vuông đơn vị: có 10 hình là 1, 2, 3, 4, 5, 6, 7, 8, 9 và 11.\nHình vuông có kích cỡ bằng 4 hình vuông đơn vị ghép lại: có 3 hình là (2, 3, 5, 6), (4, 5, 7, 8) và (8, 10).\nHình vuông có kích cỡ bằng 9 hình vuông đơn vị ghép lại: có 1 hình là (4, 5, 6, 7, 8, 9, 10).\nVậy có tất cả 10 + 3 + 1 = 14 (hình vuông).\nĐáp số: 14.",
     topicId: "topic-15",
     strand: "Geometry / Hình học",
     diagram: "n4-squares",
@@ -218,7 +251,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "19",
+    explanation:
+      "Ta đánh dấu các đoạn thẳng như hình minh họa.\nĐoạn thẳng đơn: có 11 đoạn thẳng là 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 và 11.\nĐoạn thẳng được ghép bởi 2 đoạn thẳng đơn: có 6 đoạn thẳng là (1, 2), (2, 3), (4, 7), (7, 9), (5, 8) và (6, 10).\nĐoạn thẳng được ghép bởi 3 đoạn thẳng đơn: có 2 đoạn thẳng là (1, 2, 3) và (4, 7, 9).\nVậy có tất cả 11 + 6 + 2 = 19 (đoạn thẳng).\nĐáp số: 19.",
     topicId: "topic-18",
     strand: "Geometry / Hình học",
     diagram: "n4-segments",
@@ -232,7 +267,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "8",
+    explanation:
+      "Quan sát hình vẽ ta thấy có 9 mặt bên phải, được đánh số như hình minh họa.\nTuy nhiên khi nhìn từ bên phải sang, hình vuông số 9 bị hình vuông số 1 che khuất.\nVậy khi nhìn từ bên phải sang, ta chỉ nhìn thấy 8 hình vuông nhỏ.\nĐáp số: 8.",
     topicId: "topic-17",
     strand: "Geometry / Hình học",
     diagram: "n4-cubes",
@@ -245,7 +282,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "13",
+    explanation:
+      "Hình đa giác đã cho có 13 đỉnh tương ứng với 13 góc trong, được đánh số như hình minh họa.\nĐáp số: 13.",
     topicId: "unassigned",
     strand: "Geometry / Hình học",
     diagram: "n4-polygon",
@@ -258,20 +297,24 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "11",
+    explanation:
+      "Hình lăng trụ có 18 đỉnh nên mỗi đáy có 18 : 2 = 9 đỉnh.\nDo đó, hình lăng trụ đã cho có 9 mặt bên và 2 mặt đáy.\nVậy hình lăng trụ có 9 + 2 = 11 mặt.\nĐáp số: 11.",
     topicId: "unassigned",
     strand: "Geometry / Hình học",
   },
   {
     sourceNumber: 21,
     sourcePaper: "Đề số 4 · Vòng quốc gia TIMO lớp 2",
-    text: "What is the greatest 4-digit number composed of digits 0, 8, 5, 9 or 4? (Each digit can only be used once)",
+    text: "What is the greatest 4-digit odd number composed of digits 0, 8, 5, 9 or 4? (Each digit can only be used once)",
     translation:
       "Greatest: Lớn nhất; 4-digit odd number: Số lẻ có 4 chữ số; Composed of: Bao gồm; Digit: Chữ số; Once: Một lần.",
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "9845",
+    explanation:
+      "Số cần lập là số lớn nhất nên ta chọn chữ số hàng nghìn là 9.\nSố cần lập là số lẻ nên ta chọn chữ số hàng đơn vị là 5.\nTa chọn chữ số hàng trăm và hàng chục lần lượt là 8 và 4.\nVậy số lẻ lớn nhất có 4 chữ số lập được từ các chữ số đề bài cho là 9845.\nĐáp số: 9845.",
     topicId: "unassigned",
     strand: "Combinatorics / Tổ hợp",
   },
@@ -284,7 +327,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "16",
+    explanation:
+      "Cô giáo có thể chia cho John số bút là: 1, 2, 3, 4, 5, …, 15 hoặc 16 cái bút, Bella sẽ nhận số bút còn lại.\nVậy có 16 cách để chia bút.\nĐáp số: 16.",
     topicId: "unassigned",
     strand: "Combinatorics / Tổ hợp",
   },
@@ -297,7 +342,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "6",
+    explanation:
+      "Ta chọn 2 chữ số có hiệu nhỏ nhất để làm hàng chục. Có 2 cặp thỏa mãn là (1, 2) và (7, 8).\nTrường hợp 1: Chọn cặp (1, 2) làm hàng chục. Còn lại các chữ số 0, 5, 7, 8. Chọn chữ số lớn nhất có thể để làm hàng đơn vị của số nhỏ hơn (là 7). Chọn chữ số lẻ nhỏ nhất có thể để làm hàng đơn vị của số lớn hơn (là 5). Khi đó ta có 2 số là 17 và 25, hiệu là 25 − 17 = 8.\nTrường hợp 2: Chọn cặp (7, 8) làm hàng chục. Còn lại các chữ số 2, 0, 5, 1. Chọn chữ số lẻ lớn nhất có thể để làm hàng đơn vị của số nhỏ hơn (là 5). Chọn chữ số lẻ nhỏ nhất có thể để làm hàng đơn vị của số lớn hơn (là 1). Khi đó ta có 2 số là 75 và 81, hiệu là 81 − 75 = 6.\nVậy hiệu nhỏ nhất có thể là 6.\nĐáp số: 6.",
     topicId: "unassigned",
     strand: "Combinatorics / Tổ hợp",
   },
@@ -310,7 +357,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "5",
+    explanation:
+      "Tổng số tiền Natalie có là: 1 + 1 + 1 + 2 + 2 + 2 + 2 + 5 + 5 = 21 (đô).\nTa có: 21 = 4 + 4 + 4 + 4 + 4 + 1.\nVì 21 có thể tách thành tổng của nhiều nhất 5 số 4 nên Natalie có thể mua được nhiều nhất 5 cái cốc.\nĐáp số: 5.",
     topicId: "unassigned",
     strand: "Combinatorics / Tổ hợp",
   },
@@ -323,7 +372,9 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "4",
+    explanation:
+      "Ta có kết quả các phép tính như sau:\n99 : 3 = 33; 19 + 19 = 38; 51 − 34 = 17; 6 × 8 = 48; 24 + 48 = 72; 5 × 5 = 25; 15 + 16 = 31.\nTrong đó có 4 số nằm giữa 30 và 50 là: 33, 38, 48, 31.\nĐáp số: 4.",
     topicId: "unassigned",
     strand: "Combinatorics / Tổ hợp",
     diagram: "n4-expressions",
