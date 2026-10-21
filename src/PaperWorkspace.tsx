@@ -8,6 +8,11 @@ import {
 } from "lucide-react";
 import { getExercises, SECTION_LABELS } from "./data";
 import { publicAsset } from "./components";
+import {
+  QuestionIllustration,
+  ShapeIcon,
+  hasSolutionDiagram,
+} from "./QuestionIllustration";
 import type { Exercise, Question, Section } from "./data";
 
 type Props = {
@@ -108,6 +113,7 @@ export function PaperWorkspace(p: Props) {
                     const next = getExercises(
                       p.section,
                       e.target.value as "qualifier" | "national" | "topic",
+                      p.grade,
                     )[0];
                     if (next) configure(p.grade, p.section, next);
                   }}
@@ -126,13 +132,13 @@ export function PaperWorkspace(p: Props) {
                   disabled={p.started}
                   value={p.exercise.id}
                   onChange={(e) => {
-                    const next = getExercises(p.section, "topic").find(
+                    const next = getExercises(p.section, "topic", p.grade).find(
                       (x) => x.id === e.target.value,
                     );
                     if (next) configure(p.grade, p.section, next);
                   }}
                 >
-                  {getExercises(p.section, "topic").map((x) => (
+                  {getExercises(p.section, "topic", p.grade).map((x) => (
                     <option key={x.id} value={x.id}>
                       {x.title}
                     </option>
@@ -141,7 +147,11 @@ export function PaperWorkspace(p: Props) {
               </label>
             </div>
             {!p.started && (
-              <button className="topic-start" onClick={p.onStart}>
+              <button
+                className="topic-start"
+                onClick={p.onStart}
+                disabled={!p.questions.length}
+              >
                 <Play size={22} />
                 Bắt đầu luyện tập
               </button>
@@ -158,7 +168,7 @@ export function PaperWorkspace(p: Props) {
               </span>
             )}
             <div>
-              <h2>{topic ? "Bài luyện tập" : p.exercise.title}</h2>
+              <h2>{p.exercise.title}</h2>
               {!topic && (
                 <small>
                   {SECTION_LABELS[p.section]} • Lớp {p.grade} • Toán
@@ -191,7 +201,11 @@ export function PaperWorkspace(p: Props) {
               Hoàn tất
             </button>
           ) : (
-            <button className="paper-submit" onClick={p.onStart}>
+            <button
+              className="paper-submit"
+              onClick={p.onStart}
+              disabled={!p.questions.length}
+            >
               <Play size={20} />
               Bắt đầu
             </button>
@@ -203,7 +217,13 @@ export function PaperWorkspace(p: Props) {
         >
           {!topic && (
             <div className="paper-heading">
-              <h1>{p.review ? "ĐÁP ÁN & LỜI GIẢI" : "BÀI LUYỆN TẬP TOÁN"}</h1>
+              <h1>
+                {p.review
+                  ? "ĐÁP ÁN & LỜI GIẢI"
+                  : p.exercise.id === "qualifier-01"
+                    ? "ĐỀ SỐ 1"
+                    : p.exercise.title}
+              </h1>
               <p>Đề bài • {p.questions.length} câu</p>
               <div>
                 {p.review
@@ -221,6 +241,10 @@ export function PaperWorkspace(p: Props) {
                   : "paper-question-row"
               }
             >
+              {q.strand &&
+                (i === 0 || p.questions[i - 1].strand !== q.strand) && (
+                  <h2 className="paper-source-strand">{q.strand}</h2>
+                )}
               <fieldset
                 className="paper-question"
                 disabled={!p.started || p.review}
@@ -228,7 +252,18 @@ export function PaperWorkspace(p: Props) {
                 <legend>
                   <strong>Câu {i + 1}.</strong> {q.text}
                 </legend>
-                <div className="paper-options">
+                {q.translation && (
+                  <p className="question-translation">{q.translation}</p>
+                )}
+                {topic && q.sourcePaper && (
+                  <p className="question-source">
+                    {q.sourcePaper} · Câu {q.sourceNumber}
+                  </p>
+                )}
+                <QuestionIllustration diagram={q.diagram} />
+                <div
+                  className={`paper-options ${q.options.some((option) => option.length > 18) ? "long-options" : ""}`}
+                >
                   {q.options.map((option, j) => (
                     <label
                       key={j}
@@ -241,7 +276,21 @@ export function PaperWorkspace(p: Props) {
                         onChange={() => p.onAnswer(i, j)}
                       />
                       <span>
-                        {"ABCD"[j]}. {option}
+                        {"ABCD"[j]}.{" "}
+                        {q.diagram === "shape-pattern" ? (
+                          <>
+                            <svg
+                              className="option-shape"
+                              viewBox="-17 -17 34 34"
+                              aria-hidden="true"
+                            >
+                              <ShapeIcon index={j} />
+                            </svg>
+                            <span className="visually-hidden">{option}</span>
+                          </>
+                        ) : (
+                          option
+                        )}
                       </span>
                     </label>
                   ))}
@@ -255,7 +304,11 @@ export function PaperWorkspace(p: Props) {
                   <strong className="review-answer-heading">
                     Lời giải câu {i + 1}
                   </strong>
-                  <b>Đáp án {"ABCD"[q.correct]}.</b> {q.explanation}
+                  <b>Đáp án {"ABCD"[q.correct]}.</b>
+                  {hasSolutionDiagram(q.diagram) && (
+                    <QuestionIllustration diagram={q.diagram} solution />
+                  )}
+                  <p className="supplied-explanation">{q.explanation}</p>
                   {p.answers[i] === undefined && (
                     <span> Bé chưa trả lời câu này.</span>
                   )}

@@ -1,3 +1,4 @@
+import { TIMO_GRADE2_QUALIFIER1 } from "./content/timo-grade2-qualifier1";
 export type Section =
   "home" | "timo" | "asmo" | "toan" | "vietnamese" | "esl" | "math" | "science";
 export type Category = "all" | "qualifier" | "national" | "topic";
@@ -7,8 +8,31 @@ export type Exercise = {
   category: Category;
   topic?: number;
   exampleOnly?: boolean;
+  questionCount?: number;
 };
+export type QuestionDiagram =
+  | "sequence-1"
+  | "hat-groups"
+  | "bell-equation"
+  | "operation-chain"
+  | "letter-addition"
+  | "sequence-12"
+  | "operation-boxes"
+  | "missing-operators"
+  | "square-lines"
+  | "shape-pattern"
+  | "cubes-front"
+  | "boat-segments"
+  | "cubes-count"
+  | "descending-numbers"
+  | "food-choices";
 export type Question = {
+  translation?: string;
+  diagram?: QuestionDiagram;
+  strand?: string;
+  topicId?: string;
+  sourcePaper?: string;
+  sourceNumber?: number;
   text: string;
   options: string[];
   correct: number | null;
@@ -73,62 +97,43 @@ export const CATEGORIES = [
   },
 ];
 
-// Only original exercises and answer keys supplied by the owner may be added here.
-// The catalog stays empty until real source material is provided.
+// Content and answer keys are accepted only from the owner.
 export function getExercises(
   section: Section,
   category: Category,
-  grade: number = 2,
+  grade = 2,
 ): Exercise[] {
-  if (
-    section === "timo" &&
-    grade === 2 &&
-    (category === "topic" || category === "all")
-  ) {
-    return [
-      {
-        id: "age-problem",
-        title: "Bài toán về tuổi (Age problem)",
-        category: "topic",
-        exampleOnly: true,
-      },
-      {
-        id: "date-problem",
-        title: "Bài toán về ngày tháng (Date Problem)",
-        category: "topic",
-        exampleOnly: true,
-      },
-      {
-        id: "problem-type-1",
-        title: "Dạng bài 1 (Problem type 1)",
-        category: "topic",
-        exampleOnly: true,
-      },
-      {
-        id: "number-sequence-pattern",
-        title: "Dãy số có quy luật (Number sequence with pattern)",
-        category: "topic",
-        exampleOnly: true,
-      },
-      {
-        id: "figure-sequence-pattern",
-        title: "Dãy hình có quy luật (Figure sequence with pattern)",
-        category: "topic",
-        exampleOnly: true,
-      },
-    ];
-  }
+  if (section !== "timo" || grade !== 2) return [];
+  const exam: Exercise = {
+    id: "qualifier-01",
+    title: "Đề vòng loại 01",
+    category: "qualifier",
+    questionCount: TIMO_GRADE2_QUALIFIER1.length,
+  };
+  const topics = [
+    { id: "unassigned", title: "Chưa có chủ đề", category: "topic" as const },
+  ].map((topic) => ({
+    ...topic,
+    questionCount: TIMO_GRADE2_QUALIFIER1.filter((q) => q.topicId === topic.id)
+      .length,
+  }));
+  if (category === "qualifier") return [exam];
+  if (category === "topic") return topics;
+  if (category === "all") return [exam, ...topics];
   return [];
 }
 
 export function getQuestions(
-  _grade: number,
-  _section: Section,
-  _exercise: Exercise,
+  grade: number,
+  section: Section,
+  exercise: Exercise,
 ): Question[] {
+  if (section !== "timo" || grade !== 2) return [];
+  if (exercise.id === "qualifier-01") return TIMO_GRADE2_QUALIFIER1;
+  if (exercise.category === "topic")
+    return TIMO_GRADE2_QUALIFIER1.filter((q) => q.topicId === exercise.id);
   return [];
 }
-
 export const getPracticeQuestions = getQuestions;
 
 export function storageId(section: Section, grade: number, exerciseId: string) {

@@ -36,7 +36,7 @@ Sau đó build và xuất bản lại. Khi cấu hình thay đổi, phiên đăn
 ## Chức năng
 
 - Chọn lớp 1–5, chương trình TIMO/ASMO hoặc Báo bài của trường, môn học, nội dung luyện tập. Banner và bộ lọc cố định khi cuộn.
-- Danh mục hiện trống: đã xóa toàn bộ đề, câu hỏi, đáp án và bài giải minh họa. Chỉ thêm tài liệu thật do chủ ứng dụng cung cấp.
+- Đề vòng loại TIMO lớp 2 hiện có Đề số 1, gồm 25 câu và đáp án/lời giải do chủ ứng dụng cung cấp. Các câu tạm ở nhóm Chưa có chủ đề.
 - Báo bài của trường có Toán, Tiếng Việt, ESL, Math và Science.
 - Mỗi bài có 15 phút; tự lưu câu trả lời, tiếp tục bài đang làm và tự nộp khi hết giờ.
 - Trang làm đề giới hạn chiều ngang A4. Hộp kết quả gọn hơn. Phần xem lại có hai cột câu hỏi/lời giải trên máy tính và xếp dọc trên điện thoại; không còn các ghi chú cuối đề đã bỏ.
@@ -44,9 +44,13 @@ Sau đó build và xuất bản lại. Khi cấu hình thay đổi, phiên đăn
 
 ## Dữ liệu
 
-Chỉ ghi nhận đề, đáp án và lời giải do chủ ứng dụng gửi. Không tự giải, suy luận hay điền đáp án thiếu. Câu chưa được cung cấp đáp án dùng `correct: null`; bài thiếu đáp án không được chấm điểm. Xem quy tắc bắt buộc trong `AGENTS.md`. Danh mục dữ liệu ở `src/data.ts` hiện trống.
+Đã nhập **Đề số 1 – Vòng loại TIMO lớp 2**, gồm 25 câu song ngữ, lựa chọn, hình đề bài và 25 đáp án/lời giải do chủ ứng dụng cung cấp. Dữ liệu nguồn nằm ở `src/content/timo-grade2-qualifier1.ts`. Hình vẽ được tái tạo bằng SVG trong `src/QuestionIllustration.tsx`; các chú thích lời giải chỉ hiển thị sau mật khẩu phụ huynh.
 
-Giữ khóa `dino-homework:v1`. Lần đầu mở bản cập nhật bỏ nội dung mẫu, ứng dụng xóa kết quả và bài làm thử cũ một lần bằng dấu `homework-real-content-reset:v1`, giữ lớp đã chọn, mật khẩu và giao diện. Xóa dữ liệu trình duyệt sẽ xóa kết quả và mật khẩu phụ huynh.
+Theo yêu cầu mới nhất, 5 chủ đề và toàn bộ ví dụ cũ đã bị xóa. Tất cả 25 câu tạm nằm trong **Chưa có chủ đề**, chờ chủ ứng dụng gửi lại danh mục chủ đề mới. Không tự phục hồi các chủ đề cũ.
+
+Chỉ ghi nhận đề, đáp án và lời giải do chủ ứng dụng gửi. Không tự giải, suy luận hay điền đáp án thiếu. Câu chưa được cung cấp đáp án dùng `correct: null`; bài thiếu đáp án không được chấm điểm. Xem quy tắc bắt buộc trong `AGENTS.md`.
+
+Giữ khóa `dino-homework:v1`. Dấu `homework-real-content-reset:v1` chỉ xóa dữ liệu minh họa cũ một lần; không xóa các bài thật đã lưu, mật khẩu hoặc giao diện. Xóa dữ liệu trình duyệt sẽ xóa kết quả và mật khẩu phụ huynh.
 
 ## GitHub Pages
 

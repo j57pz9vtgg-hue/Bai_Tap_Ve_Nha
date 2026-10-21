@@ -151,6 +151,7 @@ export default function Quiz({
     else onClose();
   };
   const start = () => {
+    if (!questions.length) return;
     setDeadline(Date.now() + 15 * 60 * 1000);
     setRemaining(900);
     setStarted(true);
@@ -196,8 +197,8 @@ export default function Quiz({
             <span>Lớp {grade}</span>
           </div>
           <p className="sample-notice">
-            Bài luyện tập mẫu, không phải đề thi chính thức. Kết quả chỉ lưu
-            trên trình duyệt này.
+            Nội dung được nhập từ bộ đề bạn cung cấp. Bài làm được lưu trên
+            trình duyệt này.
           </p>
           <button className="start-button" onClick={start}>
             Bắt đầu làm bài
@@ -297,9 +298,7 @@ export default function Quiz({
         >
           <div className="quiz-header">
             <div>
-              <span className="quiz-eyebrow">
-                Lớp {grade} · Bài luyện tập mẫu
-              </span>
+              <span className="quiz-eyebrow">Lớp {grade} · Bài tập</span>
               <h2>{exercise.title}</h2>
             </div>
             <span

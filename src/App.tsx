@@ -26,7 +26,6 @@ import {
 } from "./data";
 import type { Category, Draft, Exercise, Result, Section } from "./data";
 
-import { TopicExample } from "./TopicExample";
 import { ThemePicker } from "./ThemePicker";
 import { THEMES, useLearningTheme } from "./theme";
 import { useAppAccess } from "./AccessGate";
@@ -335,12 +334,7 @@ export default function App() {
           />
         </Dialog>
       )}
-      {selection?.exercise.exampleOnly ? (
-        <TopicExample
-          exerciseId={selection.exercise.id}
-          onClose={() => setSelection(null)}
-        />
-      ) : selection ? (
+      {selection ? (
         <Suspense
           fallback={
             <div className="loading-overlay" role="status">

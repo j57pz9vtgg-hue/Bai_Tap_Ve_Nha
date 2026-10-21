@@ -309,7 +309,9 @@ export function ExerciseCard({
       {exercise.exampleOnly ? (
         <p className="exercise-stats">
           TIMO · Lớp 2<br />
-          Chưa có câu luyện tập
+          {exercise.questionCount
+            ? `${exercise.questionCount} câu luyện tập`
+            : "Chưa có câu luyện tập"}
         </p>
       ) : (
         <dl className="exercise-stats">
