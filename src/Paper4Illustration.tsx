@@ -49,9 +49,11 @@ export function SourceCube({
 export function SymbolStrip({
   symbols,
   label,
+  continuation = true,
 }: {
   symbols: string[];
   label: string;
+  continuation?: boolean;
 }) {
   return (
     <SourceDrawing label={label} viewBox={`0 0 ${symbols.length * 34 + 28} 65`}>
@@ -60,9 +62,11 @@ export function SymbolStrip({
           {s}
         </text>
       ))}
-      <text x={symbols.length * 34 + 2} y="43" fontSize="24">
-        …
-      </text>
+      {continuation && (
+        <text x={symbols.length * 34 + 2} y="43" fontSize="24">
+          …
+        </text>
+      )}
     </SourceDrawing>
   );
 }

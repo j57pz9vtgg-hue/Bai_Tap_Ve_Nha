@@ -2,11 +2,13 @@ import { TIMO_GRADE2_QUALIFIER1 } from "./content/timo-grade2-qualifier1";
 import { TIMO_GRADE2_QUALIFIER2 } from "./content/timo-grade2-qualifier2";
 import { TIMO_GRADE2_QUALIFIER3 } from "./content/timo-grade2-qualifier3";
 import { TIMO_GRADE2_QUALIFIER4 } from "./content/timo-grade2-qualifier4";
+import { TIMO_GRADE2_QUALIFIER5 } from "./content/timo-grade2-qualifier5";
 const ALL_QUESTIONS = [
   ...TIMO_GRADE2_QUALIFIER1,
   ...TIMO_GRADE2_QUALIFIER2,
   ...TIMO_GRADE2_QUALIFIER3,
   ...TIMO_GRADE2_QUALIFIER4,
+  ...TIMO_GRADE2_QUALIFIER5,
 ];
 // Classify the three supplied papers against the owner's teaching examples.
 // Keep stable topic IDs so existing attempts/results remain attached to topic 1.
@@ -47,7 +49,8 @@ const CLASSIFIED_PAPERS = new Set([
 for (const question of ALL_QUESTIONS) {
   question.topicId = CLASSIFIED_PAPERS.has(question.sourcePaper ?? "")
     ? (TOPIC_BY_SOURCE_NUMBER[question.sourceNumber ?? 0] ?? "unassigned")
-    : TIMO_GRADE2_QUALIFIER4.includes(question)
+    : TIMO_GRADE2_QUALIFIER4.includes(question) ||
+        TIMO_GRADE2_QUALIFIER5.includes(question)
       ? (question.topicId ?? "unassigned")
       : "unassigned";
 }
@@ -65,6 +68,7 @@ export type Exercise = {
   questionCount?: number;
 };
 export type QuestionDiagram =
+  | `p5-${"shapes" | "sequence" | "addition" | "sequence10" | "sequence11" | "numbers14" | "equation" | "cubes-count" | "cubes-top" | "triangles" | "circles" | "stars" | "numbers22"}`
   | `p4-${"shapes" | "sequence" | "bird" | "flower" | "addition" | "sequence11" | "numbers14" | "operators" | "cubes-count" | "cubes-right" | "squares" | "segments" | "arrows" | "cakes" | "numbers22"}`
   | `p3-${"sequence" | "suns" | "backpack" | "chain" | "addition" | "sequence12" | "operations" | "operators" | "squares" | "shapes" | "cubes-right" | "segments" | "cubes-count" | "numbers" | "routes"}`
   | `p2-${"sequence" | "flowers" | "tree" | "chain" | "addition" | "sequence12" | "operations" | "operators" | "squares" | "shapes" | "cubes-front" | "segments" | "cubes-count" | "numbers" | "routes"}`
@@ -187,6 +191,12 @@ export function getExercises(
       category: "qualifier" as const,
       questionCount: TIMO_GRADE2_QUALIFIER4.length,
     },
+    {
+      id: "qualifier-05",
+      title: "Đề vòng loại 05",
+      category: "qualifier" as const,
+      questionCount: TIMO_GRADE2_QUALIFIER5.length,
+    },
   ];
   const topics = [
     {
@@ -269,6 +279,7 @@ export function getQuestions(
   if (exercise.id === "qualifier-02") return TIMO_GRADE2_QUALIFIER2;
   if (exercise.id === "qualifier-03") return TIMO_GRADE2_QUALIFIER3;
   if (exercise.id === "qualifier-04") return TIMO_GRADE2_QUALIFIER4;
+  if (exercise.id === "qualifier-05") return TIMO_GRADE2_QUALIFIER5;
   if (exercise.category === "topic")
     return ALL_QUESTIONS.filter((q) => q.topicId === exercise.id);
   return [];
