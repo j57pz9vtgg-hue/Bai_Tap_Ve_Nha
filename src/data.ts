@@ -110,6 +110,12 @@ export function getExercises(
         category: "topic",
         exampleOnly: true,
       },
+      {
+        id: "figure-sequence-pattern",
+        title: "Dãy hình có quy luật (Figure sequence with pattern)",
+        category: "topic",
+        exampleOnly: true,
+      },
     ];
   }
   return [];

@@ -1242,3 +1242,80 @@
   flex-wrap: wrap;
   gap: 6px;
 }
+
+.pattern-arrow {
+  width: 25px;
+  height: 28px;
+  display: inline-block;
+  vertical-align: middle;
+  flex: 0 0 auto;
+}
+.pattern-arrow-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  vertical-align: middle;
+}
+.figure-pattern-sequence {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 20px 8px;
+  background: #f3f6e7;
+  border-radius: 9px;
+  margin: 12px 0;
+}
+.pattern-grouped-arrows {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1px;
+  margin-block: 12px;
+}
+.pattern-grouped-arrows > span {
+  display: inline-flex;
+  align-items: center;
+}
+.pattern-grouped-arrows .pattern-arrow {
+  width: 13px;
+  height: 20px;
+}
+.compact-topic-dialog .figure-method {
+  padding: 12px;
+  border: 1px solid #8dad3f;
+  background: #f0f5d8;
+  min-width: 0;
+}
+.compact-topic-dialog .figure-method + .figure-method {
+  padding-left: 12px;
+  border: 1px solid #8dad3f;
+}
+.figure-method > div + div {
+  border-top: 1px solid #8dad3f;
+  margin-top: 12px;
+  padding-top: 10px;
+}
+.compact-topic-dialog .figure-pattern-solution {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  gap: 14px;
+}
+.figure-method .source-book-equation {
+  gap: 2px;
+}
+.figure-method .pattern-arrow {
+  width: 17px;
+  height: 22px;
+}
+.figure-method .pattern-grouped-arrows .pattern-arrow {
+  width: 13px;
+  height: 20px;
+}
+@media (max-width: 760px) {
+  .figure-method + .figure-method {
+    margin-top: 8px;
+  }
+}

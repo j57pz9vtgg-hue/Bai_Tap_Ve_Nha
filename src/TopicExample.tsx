@@ -11,6 +11,8 @@ export function TopicExample({
   exerciseId: string;
   onClose: () => void;
 }) {
+  if (exerciseId === "figure-sequence-pattern")
+    return <FigurePatternExample onClose={onClose} />;
   if (exerciseId === "number-sequence-pattern")
     return <SequencePatternExample onClose={onClose} />;
   if (exerciseId === "problem-type-1")
@@ -502,6 +504,181 @@ function SequencePatternExample({ onClose }: { onClose: () => void }) {
                 <p className="source-book-equation">
                   Step 3: <CoveredBook /> = 6 + 16 = 22.
                 </p>
+              </section>
+            </div>
+          )}
+        </div>
+      </section>
+      <p className="topic-awaiting">
+        Chưa có câu luyện tập cho chủ đề này. Các câu phù hợp sẽ được bổ sung từ
+        bộ đề bạn gửi.
+      </p>
+      <button className="primary-button" onClick={onClose}>
+        Về danh sách chủ đề
+      </button>
+    </Dialog>
+  );
+}
+
+// Outlined arrows and all steps match the supplied Figure sequence example.
+function PatternArrow({ direction }: { direction: "right" | "up" | "down" }) {
+  const rotation = direction === "up" ? -90 : direction === "down" ? 90 : 0;
+  return (
+    <svg
+      className="pattern-arrow"
+      viewBox="0 0 30 30"
+      role="img"
+      aria-label={
+        direction === "up"
+          ? "Mũi tên lên"
+          : direction === "down"
+            ? "Mũi tên xuống"
+            : "Mũi tên phải"
+      }
+    >
+      <path
+        d="M3 10h15V4l10 11-10 11v-6H3z"
+        fill="#f3f6e7"
+        stroke="#252b20"
+        strokeWidth="1.6"
+        strokeLinejoin="miter"
+        transform={`rotate(${rotation} 15 15)`}
+      />
+    </svg>
+  );
+}
+function ArrowGroup() {
+  return (
+    <span className="pattern-arrow-group">
+      <PatternArrow direction="right" />
+      <PatternArrow direction="up" />
+      <PatternArrow direction="down" />
+    </span>
+  );
+}
+function GroupedArrows() {
+  return (
+    <div
+      className="pattern-grouped-arrows"
+      aria-label="Bốn nhóm mũi tên phải, lên, xuống lặp lại"
+    >
+      {[0, 1, 2, 3].map((i) => (
+        <span key={i}>
+          (<ArrowGroup />)
+        </span>
+      ))}
+      <span>...</span>
+    </div>
+  );
+}
+function FigurePatternExample({ onClose }: { onClose: () => void }) {
+  const [expanded, setExpanded] = useState(true);
+  return (
+    <Dialog
+      title="Dãy hình có quy luật (Figure sequence with pattern)"
+      className="topic-example-dialog compact-topic-dialog"
+      onClose={onClose}
+    >
+      <p className="topic-source">TIMO · Lớp 2 · Luyện theo chủ đề</p>
+      <h1>
+        Dãy hình có quy luật <span>(Figure sequence with pattern)</span>
+      </h1>
+      <section
+        className="compact-example-layout"
+        aria-labelledby="figure-example-title"
+      >
+        <div className="compact-example-question">
+          <h2 id="figure-example-title">
+            <BookOpen size={23} /> Ví dụ
+          </h2>
+          <p className="age-example-question" lang="en">
+            Refer to the pattern below.
+          </p>
+          <div
+            className="figure-pattern-sequence"
+            aria-label="Dãy hình: phải, lên, xuống; phải, lên, xuống; phải, lên, xuống; phải, lên, xuống; …"
+          >
+            {[0, 1, 2, 3].map((i) => (
+              <ArrowGroup key={i} />
+            ))}
+            <span>...</span>
+          </div>
+          <div className="age-example-question" lang="en">
+            <p>a) Find the next figure</p>
+            <p>
+              b) Find the 2021<sup>st</sup> figure
+            </p>
+          </div>
+        </div>
+        <div className="compact-example-answer">
+          <button
+            className="age-solution-toggle"
+            aria-expanded={expanded}
+            aria-controls="figure-pattern-solution"
+            onClick={() => setExpanded(!expanded)}
+          >
+            Lời giải của bài ví dụ{" "}
+            {expanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+          </button>
+          {expanded && (
+            <div
+              id="figure-pattern-solution"
+              className="age-solution figure-pattern-solution"
+              lang="en"
+            >
+              <section className="figure-method">
+                <h3>a) Find the next figure</h3>
+                <div>
+                  <p>
+                    <strong>Step 1:</strong> Find the pattern
+                  </p>
+                  <GroupedArrows />
+                  <p className="source-book-equation">
+                    The group (<ArrowGroup />) repeats.
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <strong>Step 2:</strong> Find the next figure
+                  </p>
+                  <p className="source-book-equation">
+                    The next figure is <PatternArrow direction="right" />.
+                  </p>
+                </div>
+              </section>
+              <section className="figure-method">
+                <h3>
+                  b) Find the 2021<sup>st</sup> figure
+                </h3>
+                <div>
+                  <p>
+                    <strong>Step 1:</strong> Find the pattern
+                  </p>
+                  <GroupedArrows />
+                  <p className="source-book-equation">
+                    The group (<ArrowGroup />) repeats.
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <strong>Step 2:</strong> There are 3 figures in a group.
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <strong>Step 3:</strong> 2021 : 3 = 673 (remainder 2)
+                  </p>
+                  <p className="source-book-equation">
+                    2 remaining figures are: <PatternArrow direction="right" />
+                    <PatternArrow direction="up" />
+                  </p>
+                </div>
+                <div>
+                  <p className="source-book-equation">
+                    <strong>Step 4:</strong> 2021<sup>st</sup> figure is{" "}
+                    <PatternArrow direction="up" />.
+                  </p>
+                </div>
               </section>
             </div>
           )}
