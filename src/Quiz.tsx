@@ -16,8 +16,8 @@ import { Dialog, formatDuration } from "./components";
 import { publicAsset } from "./components";
 import { ParentPassword } from "./ParentPassword";
 import { PaperWorkspace } from "./PaperWorkspace";
-import { getPracticeQuestions, getQuestions } from "./data";
-import type { Draft, Exercise, Result, Section } from "./data";
+import { getPracticeQuestions, getQuestions, hasStudentAnswer } from "./data";
+import type { Draft, Exercise, Result, Section, StudentAnswer } from "./data";
 
 type QuizProps = {
   previewOnly?: boolean;
@@ -61,7 +61,7 @@ export default function Quiz({
   const [started, setStarted] = useState(
     Boolean(initialResult || (!previewOnly && (draft || isTopic))),
   );
-  const [answers, setAnswers] = useState<Record<number, number>>(
+  const [answers, setAnswers] = useState<Record<number, StudentAnswer>>(
     initialResult?.answers ?? draft?.answers ?? {},
   );
   const [index, setIndex] = useState(draft?.index ?? 0);
@@ -89,7 +89,7 @@ export default function Quiz({
       : questions.filter((q, i) => answers[i] === q.correct).length;
   const total =
     reviewingSaved && initialResult ? initialResult.total : questions.length;
-  const answered = Object.keys(answers).length;
+  const answered = Object.values(answers).filter(hasStudentAnswer).length;
   const current = questions[index];
   const finished = stage === "result" || stage === "review";
 
@@ -403,7 +403,7 @@ export default function Quiz({
                   Lời giải
                 </strong>
                 <p>{current.explanation}</p>
-                {answers[index] === undefined ? (
+                {!hasStudentAnswer(answers[index]) ? (
                   <small>Bé chưa trả lời câu này.</small>
                 ) : null}
               </div>
@@ -442,7 +442,7 @@ export default function Quiz({
             {questions.map((_, i) => (
               <button
                 key={i}
-                className={`${answers[i] !== undefined ? "answered" : ""} ${i === index ? "current-question" : ""}`}
+                className={`${hasStudentAnswer(answers[i]) ? "answered" : ""} ${i === index ? "current-question" : ""}`}
                 aria-label={`Đến câu ${i + 1}`}
                 aria-current={i === index ? "step" : undefined}
                 onClick={() => setIndex(i)}

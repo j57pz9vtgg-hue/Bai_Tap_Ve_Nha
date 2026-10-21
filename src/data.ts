@@ -5,6 +5,7 @@ import { TIMO_GRADE2_QUALIFIER4 } from "./content/timo-grade2-qualifier4";
 import { TIMO_GRADE2_QUALIFIER5 } from "./content/timo-grade2-qualifier5";
 import { TIMO_GRADE2_QUALIFIER6 } from "./content/timo-grade2-qualifier6";
 import { TIMO_GRADE2_QUALIFIER7 } from "./content/timo-grade2-qualifier7";
+import { TIMO_GRADE2_NATIONAL1 } from "./content/timo-grade2-national1";
 const ALL_QUESTIONS = [
   ...TIMO_GRADE2_QUALIFIER1,
   ...TIMO_GRADE2_QUALIFIER2,
@@ -13,6 +14,7 @@ const ALL_QUESTIONS = [
   ...TIMO_GRADE2_QUALIFIER5,
   ...TIMO_GRADE2_QUALIFIER6,
   ...TIMO_GRADE2_QUALIFIER7,
+  ...TIMO_GRADE2_NATIONAL1,
 ];
 // Classify the three supplied papers against the owner's teaching examples.
 // Keep stable topic IDs so existing attempts/results remain attached to topic 1.
@@ -56,7 +58,8 @@ for (const question of ALL_QUESTIONS) {
     : TIMO_GRADE2_QUALIFIER4.includes(question) ||
         TIMO_GRADE2_QUALIFIER5.includes(question) ||
         TIMO_GRADE2_QUALIFIER6.includes(question) ||
-        TIMO_GRADE2_QUALIFIER7.includes(question)
+        TIMO_GRADE2_QUALIFIER7.includes(question) ||
+        TIMO_GRADE2_NATIONAL1.includes(question)
       ? (question.topicId ?? "unassigned")
       : "unassigned";
 }
@@ -74,6 +77,7 @@ export type Exercise = {
   questionCount?: number;
 };
 export type QuestionDiagram =
+  | `n1-${string}`
   | `p7-${"letters" | "sequence3" | "arrow-groups" | "flowers" | "addition" | "sequence13" | "squares" | "cubes-right" | "cube" | "segments" | "shapes" | "books" | "magic-grid"}`
   | `p6-${"sequence2" | "cross-groups" | "equation9" | "sequence12" | "operators" | "squares" | "shapes" | "cubes-side" | "sequence23"}`
   | `p5-${"shapes" | "sequence" | "addition" | "sequence10" | "sequence11" | "numbers14" | "equation" | "cubes-count" | "cubes-top" | "triangles" | "circles" | "stars" | "numbers22"}`
@@ -95,7 +99,11 @@ export type QuestionDiagram =
   | "cubes-count"
   | "descending-numbers"
   | "food-choices";
+export type StudentAnswer = number | string;
+export const hasStudentAnswer = (value: StudentAnswer | undefined) =>
+  value !== undefined && (typeof value !== "string" || value.trim().length > 0);
 export type Question = {
+  answerFormat?: "text";
   translation?: string;
   diagram?: QuestionDiagram;
   strand?: string;
@@ -115,12 +123,12 @@ export type Result = {
   total: number;
   date: string;
   section: Section;
-  answers?: Record<number, number>;
+  answers?: Record<number, StudentAnswer>;
   elapsedSeconds?: number;
   questions?: Question[];
 };
 export type Draft = {
-  answers: Record<number, number>;
+  answers: Record<number, StudentAnswer>;
   index: number;
   deadline: number;
   questions?: Question[];
@@ -218,6 +226,14 @@ export function getExercises(
       questionCount: TIMO_GRADE2_QUALIFIER7.length,
     },
   ];
+  const nationals = [
+    {
+      id: "national-01",
+      title: "Đề Quốc gia 01",
+      category: "national" as const,
+      questionCount: TIMO_GRADE2_NATIONAL1.length,
+    },
+  ];
   const topics = [
     {
       id: "topic-01",
@@ -284,8 +300,9 @@ export function getExercises(
     }))
     .filter((topic) => topic.questionCount > 0);
   if (category === "qualifier") return exams;
+  if (category === "national") return nationals;
   if (category === "topic") return topics;
-  if (category === "all") return [...exams, ...topics];
+  if (category === "all") return [...exams, ...nationals, ...topics];
   return [];
 }
 
@@ -302,6 +319,7 @@ export function getQuestions(
   if (exercise.id === "qualifier-05") return TIMO_GRADE2_QUALIFIER5;
   if (exercise.id === "qualifier-06") return TIMO_GRADE2_QUALIFIER6;
   if (exercise.id === "qualifier-07") return TIMO_GRADE2_QUALIFIER7;
+  if (exercise.id === "national-01") return TIMO_GRADE2_NATIONAL1;
   if (exercise.category === "topic")
     return ALL_QUESTIONS.filter((q) => q.topicId === exercise.id);
   return [];

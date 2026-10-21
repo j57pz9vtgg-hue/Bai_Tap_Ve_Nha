@@ -1161,3 +1161,25 @@
   min-height: 46px;
   white-space: nowrap;
 }
+
+.paper-short-answer {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0 8px;
+  font: inherit;
+  color: #07577b;
+}
+.paper-short-answer input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #a8cfe6;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font: inherit;
+  color: #08315c;
+  background: white;
+}
+.paper-short-answer input:focus-visible {
+  outline: 2px solid #008cb9;
+  outline-offset: 2px;
+}

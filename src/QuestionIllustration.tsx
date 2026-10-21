@@ -1,3 +1,4 @@
+import { NationalIllustration } from "./NationalIllustration";
 import { Paper7Illustration } from "./Paper7Illustration";
 import { Paper6Illustration } from "./Paper6Illustration";
 import { Paper5Illustration } from "./Paper5Illustration";
@@ -658,6 +659,18 @@ export function QuestionIllustration({
   solution = false,
 }: DiagramProps) {
   if (!diagram) return null;
+  if (/^n\d+-/.test(diagram)) {
+    if (solution) return null;
+    const dash = diagram.indexOf("-");
+    return (
+      <div className={`question-illustration illustration-${diagram}`}>
+        <NationalIllustration
+          paper={Number(diagram.slice(1, dash))}
+          name={diagram.slice(dash + 1)}
+        />
+      </div>
+    );
+  }
   if (diagram.startsWith("p7-")) {
     if (solution) return null;
     return (

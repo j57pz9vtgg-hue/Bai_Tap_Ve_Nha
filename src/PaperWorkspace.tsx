@@ -9,14 +9,14 @@ import {
   Play,
   Send,
 } from "lucide-react";
-import { getExercises, SECTION_LABELS } from "./data";
+import { getExercises, SECTION_LABELS, hasStudentAnswer } from "./data";
 import { publicAsset } from "./components";
 import {
   QuestionIllustration,
   ShapeIcon,
   hasSolutionDiagram,
 } from "./QuestionIllustration";
-import type { Exercise, Question, Section } from "./data";
+import type { Exercise, Question, Section, StudentAnswer } from "./data";
 
 type Props = {
   submitted?: boolean;
@@ -29,12 +29,12 @@ type Props = {
   grade: number;
   section: Section;
   questions: Question[];
-  answers: Record<number, number>;
+  answers: Record<number, StudentAnswer>;
   started: boolean;
   review: boolean;
   elapsed: number;
   inert: boolean;
-  onAnswer: (question: number, answer: number) => void;
+  onAnswer: (question: number, answer: StudentAnswer) => void;
   onStart: () => void;
   onSubmit: () => void;
   onClose: () => void;
@@ -42,8 +42,8 @@ type Props = {
 };
 export function PaperWorkspace(p: Props) {
   const topic = p.exercise.category === "topic";
-  const answered = p.questions.filter(
-    (_, i) => p.answers[i] !== undefined,
+  const answered = p.questions.filter((_, i) =>
+    hasStudentAnswer(p.answers[i]),
   ).length;
   const clock = `${String(Math.floor(p.elapsed / 60)).padStart(2, "0")}:${String(p.elapsed % 60).padStart(2, "0")}`;
   const configure = (grade: number, section: Section, exercise = p.exercise) =>
@@ -304,51 +304,65 @@ export function PaperWorkspace(p: Props) {
                   <p className="question-translation">{q.translation}</p>
                 )}
                 <QuestionIllustration diagram={q.diagram} />
-                <div
-                  className={`paper-options ${q.options.some((option) => option.length > 18) ? "long-options" : ""}`}
-                >
-                  {q.options.map((option, j) => (
-                    <label
-                      key={j}
-                      className={`${p.review && q.correct === j ? "paper-correct" : ""} ${p.review && p.answers[i] === j && q.correct !== j ? "paper-wrong" : ""}`}
-                    >
-                      <input
-                        type="radio"
-                        name={`paper-question-${i}`}
-                        checked={p.answers[i] === j}
-                        onChange={() => p.onAnswer(i, j)}
-                      />
-                      <span>
-                        {"ABCD"[j]}.{" "}
-                        {q.diagram === "p2-shapes" ? (
-                          <>
-                            <svg
-                              className="option-shape"
-                              viewBox="-17 -17 34 34"
-                              aria-hidden="true"
-                            >
-                              <Paper2Shape index={[1, 2, 0, 3][j]} />
-                            </svg>
-                            <span className="visually-hidden">{option}</span>
-                          </>
-                        ) : q.diagram === "shape-pattern" ? (
-                          <>
-                            <svg
-                              className="option-shape"
-                              viewBox="-17 -17 34 34"
-                              aria-hidden="true"
-                            >
-                              <ShapeIcon index={j} />
-                            </svg>
-                            <span className="visually-hidden">{option}</span>
-                          </>
-                        ) : (
-                          option
-                        )}
-                      </span>
-                    </label>
-                  ))}
-                </div>
+                {q.answerFormat === "text" ? (
+                  <label className="paper-short-answer">
+                    Câu trả lời của bé
+                    <input
+                      type="text"
+                      aria-label={`Câu trả lời câu ${i + 1}`}
+                      autoComplete="off"
+                      maxLength={250}
+                      value={p.answers[i] ?? ""}
+                      onChange={(e) => p.onAnswer(i, e.target.value)}
+                    />
+                  </label>
+                ) : (
+                  <div
+                    className={`paper-options ${q.options.some((option) => option.length > 18) ? "long-options" : ""}`}
+                  >
+                    {q.options.map((option, j) => (
+                      <label
+                        key={j}
+                        className={`${p.review && q.correct === j ? "paper-correct" : ""} ${p.review && p.answers[i] === j && q.correct !== j ? "paper-wrong" : ""}`}
+                      >
+                        <input
+                          type="radio"
+                          name={`paper-question-${i}`}
+                          checked={p.answers[i] === j}
+                          onChange={() => p.onAnswer(i, j)}
+                        />
+                        <span>
+                          {"ABCD"[j]}.{" "}
+                          {q.diagram === "p2-shapes" ? (
+                            <>
+                              <svg
+                                className="option-shape"
+                                viewBox="-17 -17 34 34"
+                                aria-hidden="true"
+                              >
+                                <Paper2Shape index={[1, 2, 0, 3][j]} />
+                              </svg>
+                              <span className="visually-hidden">{option}</span>
+                            </>
+                          ) : q.diagram === "shape-pattern" ? (
+                            <>
+                              <svg
+                                className="option-shape"
+                                viewBox="-17 -17 34 34"
+                                aria-hidden="true"
+                              >
+                                <ShapeIcon index={j} />
+                              </svg>
+                              <span className="visually-hidden">{option}</span>
+                            </>
+                          ) : (
+                            option
+                          )}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                )}
               </fieldset>
               {p.review && q.correct !== null && (
                 <aside
@@ -363,7 +377,7 @@ export function PaperWorkspace(p: Props) {
                     <QuestionIllustration diagram={q.diagram} solution />
                   )}
                   <p className="supplied-explanation">{q.explanation}</p>
-                  {p.answers[i] === undefined && (
+                  {!hasStudentAnswer(p.answers[i]) && (
                     <span> Bé chưa trả lời câu này.</span>
                   )}
                 </aside>
