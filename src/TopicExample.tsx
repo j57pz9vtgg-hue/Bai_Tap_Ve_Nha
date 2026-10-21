@@ -1,24 +1,19 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { QuestionIllustration } from "./QuestionIllustration";
-import { ParentPassword } from "./ParentPassword";
 import type { Exercise } from "./data";
 export function TopicExample({
   exercise,
   showSignal = 0,
   hasDraft,
   onPractice,
-  onSetupPassword,
 }: {
   exercise: Exercise;
   showSignal?: number;
   hasDraft: boolean;
   onPractice: () => void;
-  onSetupPassword: () => void;
 }) {
   const [expanded, setExpanded] = useState(true);
-  const [exampleUnlocked, setExampleUnlocked] = useState(false);
-  const [showExampleGate, setShowExampleGate] = useState(false);
   useEffect(() => {
     if (showSignal) setExpanded(true);
   }, [showSignal]);
@@ -53,26 +48,7 @@ export function TopicExample({
             </section>
             <section>
               <h3>Lời giải ví dụ</h3>
-              {exampleUnlocked ? (
-                <p className="supplied-explanation">{example.explanation}</p>
-              ) : showExampleGate ? (
-                <ParentPassword
-                  purpose="review"
-                  onCancel={() => setShowExampleGate(false)}
-                  onSetup={onSetupPassword}
-                  onUnlock={() => {
-                    setExampleUnlocked(true);
-                    setShowExampleGate(false);
-                  }}
-                />
-              ) : (
-                <button
-                  className="primary-button"
-                  onClick={() => setShowExampleGate(true)}
-                >
-                  Xem lời giải ví dụ
-                </button>
-              )}
+              <p className="supplied-explanation">{example.explanation}</p>
             </section>
           </div>
           <p>

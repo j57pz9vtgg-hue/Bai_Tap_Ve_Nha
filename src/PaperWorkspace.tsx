@@ -18,7 +18,6 @@ import {
 import type { Exercise, Question, Section } from "./data";
 
 type Props = {
-  onSetupPassword: () => void;
   hasDraft?: boolean;
   exercise: Exercise;
   grade: number;
@@ -167,7 +166,6 @@ export function PaperWorkspace(p: Props) {
             key={p.exercise.id}
             exercise={p.exercise}
             hasDraft={Boolean(p.hasDraft)}
-            onSetupPassword={p.onSetupPassword}
             onPractice={() => {
               p.onStart();
               document

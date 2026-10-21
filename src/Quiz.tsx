@@ -288,7 +288,6 @@ export default function Quiz({
           }
           inert={stage === "confirm" || confirmLeave}
           onAnswer={(q, a) => setAnswers((prev) => ({ ...prev, [q]: a }))}
-          onSetupPassword={onSetupPassword}
           hasDraft={Boolean(draft)}
           onStart={() => {
             if (draft && !started) setStarted(true);
