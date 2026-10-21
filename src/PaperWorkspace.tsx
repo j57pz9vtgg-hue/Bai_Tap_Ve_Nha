@@ -1,3 +1,4 @@
+import { TopicExample } from "./TopicExample";
 import { Paper2Shape } from "./Paper2Illustration";
 import {
   ArrowLeft,
@@ -17,6 +18,8 @@ import {
 import type { Exercise, Question, Section } from "./data";
 
 type Props = {
+  onSetupPassword: () => void;
+  hasDraft?: boolean;
   exercise: Exercise;
   grade: number;
   section: Section;
@@ -147,7 +150,7 @@ export function PaperWorkspace(p: Props) {
                 </select>
               </label>
             </div>
-            {!p.started && (
+            {!p.started && !p.exercise.example && (
               <button
                 className="topic-start"
                 onClick={p.onStart}
@@ -159,7 +162,24 @@ export function PaperWorkspace(p: Props) {
             )}
           </section>
         )}
-        <header className="paper-toolbar">
+        {topic && p.exercise.example && !p.review && (
+          <TopicExample
+            key={p.exercise.id}
+            exercise={p.exercise}
+            hasDraft={Boolean(p.hasDraft)}
+            onSetupPassword={p.onSetupPassword}
+            onPractice={() => {
+              p.onStart();
+              document
+                .getElementById("topic-practice-toolbar")
+                ?.scrollIntoView({ behavior: "smooth", block: "start" });
+            }}
+          />
+        )}
+        <header
+          id={topic ? "topic-practice-toolbar" : undefined}
+          className="paper-toolbar"
+        >
           <div className="paper-title">
             {topic ? (
               <ChartNoAxesColumnIncreasing size={32} />

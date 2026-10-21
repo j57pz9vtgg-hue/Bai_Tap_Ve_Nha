@@ -1,4 +1,3 @@
-import { QuestionIllustration } from "./QuestionIllustration";
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
@@ -71,8 +70,6 @@ export default function Quiz({
   const [stage, setStage] = useState<"work" | "confirm" | "result" | "review">(
     initialResult ? "result" : "work",
   );
-  const [exampleUnlocked, setExampleUnlocked] = useState(false);
-  const [showExampleGate, setShowExampleGate] = useState(false);
   const [resultUnlocked, setResultUnlocked] = useState(false);
   const [confirmLeave, setConfirmLeave] = useState(false);
   const submitted = useRef(Boolean(initialResult));
@@ -178,64 +175,7 @@ export default function Quiz({
       onClose={requestClose}
       className={`quiz-dialog ${stage === "result" ? "result-dialog" : ""} ${isPaper && ((started && stage !== "result") || (isTopic && stage !== "result")) ? "paper-dialog" : ""}`}
     >
-      {!started && isTopic && exercise.example ? (
-        <section className="topic-example-intro">
-          <h2>{exercise.title}</h2>
-          <div className="topic-example-columns">
-            <section>
-              <h3>Ví dụ</h3>
-              <p>{exercise.example.text}</p>
-              <p className="question-translation">
-                {exercise.example.translation}
-              </p>
-              <QuestionIllustration diagram={exercise.example.diagram} />
-              <div className="topic-example-options">
-                {exercise.example.options.map((option, i) => (
-                  <span key={i}>
-                    {"ABCD"[i]}. {option}
-                  </span>
-                ))}
-              </div>
-            </section>
-            <section>
-              <h3>Lời giải ví dụ</h3>
-              {exampleUnlocked ? (
-                <p className="supplied-explanation">
-                  {exercise.example.explanation}
-                </p>
-              ) : showExampleGate ? (
-                <ParentPassword
-                  purpose="review"
-                  onCancel={() => setShowExampleGate(false)}
-                  onSetup={onSetupPassword}
-                  onUnlock={() => {
-                    setExampleUnlocked(true);
-                    setShowExampleGate(false);
-                  }}
-                />
-              ) : (
-                <button
-                  className="primary-button"
-                  onClick={() => setShowExampleGate(true)}
-                >
-                  Xem lời giải ví dụ
-                </button>
-              )}
-            </section>
-          </div>
-          <p>{questions.length} câu luyện tập cùng dạng từ bộ đề bạn đã gửi.</p>
-          <button
-            className="primary-button"
-            onClick={() => {
-              if (draft) setStarted(true);
-              else start();
-            }}
-          >
-            {draft ? "Tiếp tục luyện tập" : "Bắt đầu luyện tập"}{" "}
-            <ArrowRight size={20} />
-          </button>
-        </section>
-      ) : !started && !isTopic ? (
+      {!started && !isTopic ? (
         <div className="quiz-intro">
           <img
             src={publicAsset("pixel-hero")}
@@ -348,7 +288,12 @@ export default function Quiz({
           }
           inert={stage === "confirm" || confirmLeave}
           onAnswer={(q, a) => setAnswers((prev) => ({ ...prev, [q]: a }))}
-          onStart={start}
+          onSetupPassword={onSetupPassword}
+          hasDraft={Boolean(draft)}
+          onStart={() => {
+            if (draft && !started) setStarted(true);
+            else if (!started) start();
+          }}
           onSubmit={() => setStage("confirm")}
           onClose={requestClose}
           onConfigure={onConfigure}

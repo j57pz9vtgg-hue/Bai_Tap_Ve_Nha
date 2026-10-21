@@ -1035,3 +1035,63 @@
     padding: 16px;
   }
 }
+
+.topic-world .topic-example-intro {
+  max-width: none;
+  margin: 12px 0;
+  padding: 0 20px 16px;
+  background: #fffef8;
+  border: 1px solid #ffcf62;
+  border-radius: 14px;
+}
+.topic-example-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 14px 0;
+  color: #064b7c;
+  text-align: left;
+}
+.topic-example-heading h2 {
+  flex: 1;
+  margin: 0;
+  font-size: 24px;
+}
+.topic-example-heading span {
+  font-size: 15px;
+}
+.topic-world .topic-example-columns {
+  margin: 0 0 12px;
+  gap: 20px;
+}
+.topic-world .topic-example-columns > section {
+  padding: 12px;
+  background: transparent;
+  border: 0;
+}
+.topic-world .topic-example-columns > section + section {
+  border-left: 1px solid #f4d89f;
+  border-radius: 0;
+}
+.topic-world .topic-example-intro > .primary-button {
+  display: flex;
+  margin: 10px auto 0;
+}
+#topic-practice-toolbar {
+  scroll-margin-top: 12px;
+}
+@media (max-width: 700px) {
+  .topic-world .topic-example-intro {
+    padding: 0 12px 12px;
+  }
+  .topic-world .topic-example-columns > section + section {
+    border-left: 0;
+    border-top: 1px solid #f4d89f;
+  }
+  .topic-example-heading h2 {
+    font-size: 20px;
+  }
+}
