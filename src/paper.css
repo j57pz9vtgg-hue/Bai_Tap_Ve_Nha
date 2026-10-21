@@ -1203,3 +1203,42 @@
     padding-block: 10px;
   }
 }
+
+.covered-book {
+  width: 34px;
+  height: 29px;
+  display: inline-block;
+  vertical-align: middle;
+  flex: 0 0 auto;
+}
+.source-circled {
+  border: 2px solid #e8331b;
+  border-radius: 50%;
+  padding: 2px 5px;
+  white-space: nowrap;
+  line-height: 2;
+}
+.source-red {
+  color: #d53018;
+}
+.source-number-sequence {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 22px;
+  padding: 18px 8px;
+  margin: 12px 0;
+  background: #f3f6e7;
+  border-radius: 9px;
+}
+.source-sequence-calculations {
+  text-align: center;
+}
+.compact-topic-dialog .age-solution .source-book-equation {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}

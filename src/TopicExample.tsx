@@ -11,6 +11,8 @@ export function TopicExample({
   exerciseId: string;
   onClose: () => void;
 }) {
+  if (exerciseId === "number-sequence-pattern")
+    return <SequencePatternExample onClose={onClose} />;
   if (exerciseId === "problem-type-1")
     return <ProblemTypeOneExample onClose={onClose} />;
   return exerciseId === "date-problem" ? (
@@ -395,6 +397,111 @@ function ProblemTypeOneExample({ onClose }: { onClose: () => void }) {
                     <strong>Ans. 24 rabbits</strong>
                   </p>
                 </div>
+              </section>
+            </div>
+          )}
+        </div>
+      </section>
+      <p className="topic-awaiting">
+        Chưa có câu luyện tập cho chủ đề này. Các câu phù hợp sẽ được bổ sung từ
+        bộ đề bạn gửi.
+      </p>
+      <button className="primary-button" onClick={onClose}>
+        Về danh sách chủ đề
+      </button>
+    </Dialog>
+  );
+}
+
+// The book symbol and all calculations reproduce the owner's supplied example.
+function CoveredBook() {
+  return (
+    <svg
+      className="covered-book"
+      viewBox="0 0 42 34"
+      role="img"
+      aria-label="Quyển sách che số"
+    >
+      <g fill="#f3f6e7" stroke="#34392c" strokeWidth="1" strokeLinejoin="round">
+        <path d="M3 7h3v-3h12l3 2 3-2h12v3h3v23H24l-3-2-3 2H3z" />
+        <path d="M6 4v23h12l3 1 3-1h12V4M9 3v22c5-1 9 0 12 3V6c-3-3-7-4-12-3z" />
+        <path d="M21 6c3-3 7-4 12-3v22c-5-1-9 0-12 3M21 6v22" />
+      </g>
+    </svg>
+  );
+}
+function SequencePatternExample({ onClose }: { onClose: () => void }) {
+  const [expanded, setExpanded] = useState(true);
+  return (
+    <Dialog
+      title="Dãy số có quy luật (Number sequence with pattern)"
+      className="topic-example-dialog compact-topic-dialog"
+      onClose={onClose}
+    >
+      <p className="topic-source">TIMO · Lớp 2 · Luyện theo chủ đề</p>
+      <h1>
+        Dãy số có quy luật <span>(Number sequence with pattern)</span>
+      </h1>
+      <section
+        className="compact-example-layout"
+        aria-labelledby="sequence-example-title"
+      >
+        <div className="compact-example-question">
+          <h2 id="sequence-example-title">
+            <BookOpen size={23} /> Ví dụ
+          </h2>
+          <p className="age-example-question" lang="en">
+            Refer to the <span className="source-circled">pattern</span> below.
+            Find the <span className="source-circled">number</span> covered by{" "}
+            <span className="source-circled">the book</span>?
+          </p>
+          <div
+            className="source-number-sequence"
+            aria-label="1, 2, 4, 7, 11, 16, quyển sách che số, …"
+          >
+            <span>1, 2, 4, 7, 11, 16,</span> <CoveredBook />
+            <span>, …</span>
+          </div>
+          <p className="age-example-translation">
+            Quan sát <span className="source-red">quy luật</span> dưới đây. Tìm{" "}
+            <span className="source-red">số</span> bị che bởi{" "}
+            <span className="source-red">quyển sách</span>?
+          </p>
+        </div>
+        <div className="compact-example-answer">
+          <button
+            className="age-solution-toggle"
+            aria-expanded={expanded}
+            aria-controls="sequence-pattern-solution"
+            onClick={() => setExpanded(!expanded)}
+          >
+            Lời giải của bài ví dụ{" "}
+            {expanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+          </button>
+          {expanded && (
+            <div
+              id="sequence-pattern-solution"
+              className="age-solution date-solution"
+            >
+              <section lang="en">
+                <h3>Solution</h3>
+                <p>Step 1: Find the difference of 2 consecutive numbers</p>
+                <div className="source-sequence-calculations">
+                  <p>2 − 1 = 1</p>
+                  <p>4 − 2 = 2</p>
+                  <p>7 − 4 = 3</p>
+                  <p>11 − 7 = 4</p>
+                  <p>16 − 11 = 5</p>
+                </div>
+                <p>
+                  Step 2: Find the pattern: The difference increases 1 unit.
+                </p>
+                <p className="source-book-equation">
+                  <CoveredBook /> − 16 = 6
+                </p>
+                <p className="source-book-equation">
+                  Step 3: <CoveredBook /> = 6 + 16 = 22.
+                </p>
               </section>
             </div>
           )}

@@ -104,6 +104,12 @@ export function getExercises(
         category: "topic",
         exampleOnly: true,
       },
+      {
+        id: "number-sequence-pattern",
+        title: "Dãy số có quy luật (Number sequence with pattern)",
+        category: "topic",
+        exampleOnly: true,
+      },
     ];
   }
   return [];
