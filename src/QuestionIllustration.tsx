@@ -630,6 +630,13 @@ function FoodChoices({ solution = false }: { solution?: boolean }) {
 export const hasSolutionDiagram = (diagram?: QuestionDiagram) =>
   diagram !== undefined &&
   [
+    "p4-shapes",
+    "p4-cubes-count",
+    "p4-cubes-right",
+    "p4-squares",
+    "p4-segments",
+    "p4-arrows",
+    "p4-cakes",
     "p3-backpack",
     "p3-chain",
     "p3-squares",
@@ -696,10 +703,10 @@ export function QuestionIllustration({
     );
   }
   if (diagram.startsWith("p4-")) {
-    if (solution) return null;
+    if (solution && !hasSolutionDiagram(diagram)) return null;
     return (
       <div className={`question-illustration illustration-${diagram}`}>
-        <Paper4Illustration name={diagram.slice(3)} />
+        <Paper4Illustration name={diagram.slice(3)} solution={solution} />
       </div>
     );
   }

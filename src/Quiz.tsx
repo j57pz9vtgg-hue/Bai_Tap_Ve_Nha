@@ -16,7 +16,12 @@ import { Dialog, formatDuration } from "./components";
 import { publicAsset } from "./components";
 import { ParentPassword } from "./ParentPassword";
 import { PaperWorkspace } from "./PaperWorkspace";
-import { getPracticeQuestions, getQuestions, hasStudentAnswer } from "./data";
+import {
+  getPracticeQuestions,
+  getQuestions,
+  hasStudentAnswer,
+  refreshSuppliedQuestions,
+} from "./data";
 import type { Draft, Exercise, Result, Section, StudentAnswer } from "./data";
 
 type QuizProps = {
@@ -55,7 +60,9 @@ export default function Quiz({
     initialResult
       ? (initialResult.questions ?? getQuestions(grade, section, exercise))
       : draft
-        ? (draft.questions ?? getQuestions(grade, section, exercise))
+        ? refreshSuppliedQuestions(
+            draft.questions ?? getQuestions(grade, section, exercise),
+          )
         : getPracticeQuestions(grade, section, exercise),
   );
   const [started, setStarted] = useState(

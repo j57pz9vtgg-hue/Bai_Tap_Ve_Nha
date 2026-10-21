@@ -133,7 +133,13 @@ function Cake({ x, y }: { x: number; y: number }) {
     </g>
   );
 }
-export function Paper4Illustration({ name }: { name: string }) {
+export function Paper4Illustration({
+  name,
+  solution = false,
+}: {
+  name: string;
+  solution?: boolean;
+}) {
   if (
     name === "sequence" ||
     name === "sequence11" ||
@@ -153,6 +159,22 @@ export function Paper4Illustration({ name }: { name: string }) {
           }[name]
         }
       </div>
+    );
+  if (solution && name === "shapes")
+    return (
+      <SourceDrawing
+        label="Nhóm bốn hình vuông, cộng, tam giác, vuông lặp lại"
+        viewBox="0 0 590 80"
+      >
+        {Array.from({ length: 4 }, (_, i) => (
+          <g key={i} transform={`translate(${12 + i * 140} 15)`}>
+            <rect width="130" height="46" rx="9" fill="none" stroke="#111" />
+            <text x="65" y="32" textAnchor="middle" fontSize="26">
+              □ ✚ ▲ □
+            </text>
+          </g>
+        ))}
+      </SourceDrawing>
     );
   if (name === "shapes")
     return (
@@ -216,6 +238,24 @@ export function Paper4Illustration({ name }: { name: string }) {
         <SourceCube x={130} y={68} />
         <SourceCube x={50} y={108} />
         <SourceCube x={90} y={108} />
+        {solution && (
+          <g fontSize="16" textAnchor="middle">
+            {[
+              [70, 135, "1"],
+              [110, 135, "2"],
+              [84, 82, "3"],
+              [111, 101, "4"],
+              [118, 60, "5"],
+              [124, 100, "6"],
+              [141, 64, "7"],
+              [150, 96, "8"],
+            ].map(([x, y, t]) => (
+              <text key={t} x={x} y={y}>
+                {t}
+              </text>
+            ))}
+          </g>
+        )}
       </SourceDrawing>
     );
   if (name === "cubes-right")
@@ -230,6 +270,23 @@ export function Paper4Illustration({ name }: { name: string }) {
         <SourceCube x={100} y={115} />
         <SourceCube x={46} y={135} />
         <SourceCube x={86} y={135} />
+        {solution && (
+          <g fontSize="16" textAnchor="middle">
+            {[
+              [130, 161, "1"],
+              [107, 95, "2"],
+              [108, 135, "3"],
+              [147, 139, "4"],
+              [123, 111, "5"],
+              [147, 53, "6"],
+              [187, 95, "7"],
+            ].map(([x, y, t]) => (
+              <text key={t} x={x} y={y}>
+                {t}
+              </text>
+            ))}
+          </g>
+        )}
       </SourceDrawing>
     );
   if (name === "squares") {
@@ -244,6 +301,7 @@ export function Paper4Illustration({ name }: { name: string }) {
       [3, 3],
       [4, 3],
       [1, 4],
+      [2, 4],
       [3, 4],
       [1, 5],
       [3, 5],
@@ -254,16 +312,27 @@ export function Paper4Illustration({ name }: { name: string }) {
         viewBox="0 0 210 245"
       >
         {cells.map(([x, y], i) => (
-          <rect
-            key={i}
-            x={25 + x * 30}
-            y={15 + y * 30}
-            width="30"
-            height="30"
-            fill="white"
-            stroke="#111"
-            strokeWidth="1.5"
-          />
+          <g key={i}>
+            <rect
+              x={25 + x * 30}
+              y={15 + y * 30}
+              width="30"
+              height="30"
+              fill="white"
+              stroke="#111"
+              strokeWidth="1.5"
+            />
+            {solution && (
+              <text
+                x={40 + x * 30}
+                y={36 + y * 30}
+                fontSize="18"
+                textAnchor="middle"
+              >
+                {i + 1}
+              </text>
+            )}
+          </g>
         ))}
       </SourceDrawing>
     );
@@ -289,13 +358,35 @@ export function Paper4Illustration({ name }: { name: string }) {
         ].map(([x, y], i) => (
           <circle key={i} cx={x} cy={y} r="3.2" />
         ))}
+        {solution && (
+          <g fontSize="16" textAnchor="middle">
+            {[
+              [130, 52, "1"],
+              [187, 78, "2"],
+              [100, 114, "3"],
+              [157, 141, "4"],
+              [180, 46, "5"],
+              [146, 101, "6"],
+              [112, 150, "7"],
+            ].map(([x, y, t]) => (
+              <text key={t} x={x} y={y}>
+                {t}
+              </text>
+            ))}
+          </g>
+        )}
       </SourceDrawing>
     );
   if (name === "arrows")
     return (
       <SymbolStrip
         label="Mũi tên sang phải và lên trên theo thứ tự đã cho"
-        symbols={["⇨", "⇧", "⇨", "⇨", "⇧", "⇨", "⇨", "⇧"]}
+        symbols={
+          solution
+            ? ["⇨", "⇧", "⇨", "⇨", "⇧", "⇨", "⇨", "⇧", "⇨", "⇨"]
+            : ["⇨", "⇧", "⇨", "⇨", "⇧", "⇨", "⇨", "⇧"]
+        }
+        continuation={!solution}
       />
     );
   if (name === "cakes")
@@ -307,6 +398,14 @@ export function Paper4Illustration({ name }: { name: string }) {
         {Array.from({ length: 12 }, (_, i) => (
           <Cake key={i} x={20 + (i % 6) * 58} y={8 + Math.floor(i / 6) * 58} />
         ))}
+        {solution && (
+          <path
+            d="M188 0V133M5 62H377"
+            fill="none"
+            stroke="#4663ee"
+            strokeWidth="3"
+          />
+        )}
       </SourceDrawing>
     );
   return null;

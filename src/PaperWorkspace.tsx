@@ -280,7 +280,9 @@ export function PaperWorkspace(p: Props) {
               <div>
                 {p.review
                   ? "Đối chiếu câu trả lời và xem lời giải cho từng câu."
-                  : "Chọn một đáp án cho mỗi câu hỏi."}
+                  : p.questions.some((q) => q.answerFormat === "text")
+                    ? "Viết câu trả lời cho mỗi câu hỏi."
+                    : "Chọn một đáp án cho mỗi câu hỏi."}
               </div>
             </div>
           )}

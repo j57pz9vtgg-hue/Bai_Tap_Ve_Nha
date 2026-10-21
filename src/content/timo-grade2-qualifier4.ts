@@ -1,7 +1,7 @@
 import type { Question } from "../data";
 
-// Owner-supplied images contain questions 1–23 only. No answer key or explanations supplied.
-// Do not invent questions 24–25, missing keys or worked solutions.
+// Owner supplied questions1–23, then the complete answer/solution sheets.
+// Questions24–25 are still absent; their supplied solutions are recorded separately below.
 export const TIMO_GRADE2_QUALIFIER4: Question[] = [
   {
     sourceNumber: 1,
@@ -12,8 +12,9 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["20", "10", "15", "5"],
     strand: "Logical thinking / Tư duy lô-gic",
     topicId: "topic-02",
-    correct: null,
-    explanation: null,
+    correct: 0,
+    explanation:
+      "Tổng số cây trong khu vườn là: 15 + 5 = 20 (cái cây).\nĐáp số: A.",
   },
   {
     sourceNumber: 2,
@@ -29,8 +30,9 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     ],
     strand: "Logical thinking / Tư duy lô-gic",
     topicId: "topic-05",
-    correct: null,
-    explanation: null,
+    correct: 2,
+    explanation:
+      "Hôm qua là thứ Sáu. Vậy hôm nay là thứ Bảy.\n1 ngày nữa là Chủ nhật. 2 ngày nữa là thứ Hai. 3 ngày nữa là thứ Ba.\nĐáp số: C.",
   },
   {
     sourceNumber: 3,
@@ -40,8 +42,9 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["□", "✚", "▲", "▼"],
     strand: "Logical thinking / Tư duy lô-gic",
     topicId: "topic-16",
-    correct: null,
-    explanation: null,
+    correct: 0,
+    explanation:
+      "Quy luật: Nhóm 4 hình (□ ✚ ▲ □) lặp lại.\nVậy hình cần tìm là □.\nĐáp số: A.",
     diagram: "p4-shapes",
   },
   {
@@ -53,8 +56,9 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["42", "3", "52", "2"],
     strand: "Logical thinking / Tư duy lô-gic",
     topicId: "topic-03",
-    correct: null,
-    explanation: null,
+    correct: 3,
+    explanation:
+      "Vì khi Lucy sinh ra, mẹ cô bé 25 tuổi nên mẹ hơn Lucy 25 tuổi.\nSố tuổi của Lucy hiện tại là: 27 − 25 = 2 (tuổi).\nĐáp số: D.",
   },
   {
     sourceNumber: 5,
@@ -64,8 +68,9 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["6", "12", "13", "11"],
     strand: "Logical thinking / Tư duy lô-gic",
     topicId: "topic-01",
-    correct: null,
-    explanation: null,
+    correct: 1,
+    explanation:
+      "Quy luật: Tách dãy số đã cho thành 2 dãy nhỏ đan xen nhau.\n+ Dãy thứ nhất: Dãy tăng dần 1 đơn vị: 1, 2, 3, 4, 5, …\n+ Dãy thứ hai: Dãy giảm dần 2 đơn vị: 20, 18, 16, 14, …\nSố cần tìm là số tiếp theo của dãy thứ hai.\nVậy số cần tìm là: 14 − 2 = 12.\nĐáp số: B.",
     diagram: "p4-sequence",
   },
   {
@@ -76,8 +81,8 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["40", "45", "30", "35"],
     strand: "Arithmetic / Số học",
     topicId: "topic-06",
-    correct: null,
-    explanation: null,
+    correct: 3,
+    explanation: "3 + 25 + 7 = (3 + 7) + 25 = 10 + 25 = 35.\nĐáp số: D.",
   },
   {
     sourceNumber: 7,
@@ -87,8 +92,9 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["10", "15", "20", "25"],
     strand: "Arithmetic / Số học",
     topicId: "topic-08",
-    correct: null,
-    explanation: null,
+    correct: 0,
+    explanation:
+      "50 − 45 + 40 − 35 = (50 − 45) + (40 − 35) = 5 + 5 = 10.\nĐáp số: A.",
   },
   {
     sourceNumber: 8,
@@ -98,8 +104,8 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["9", "53", "11", "21"],
     strand: "Arithmetic / Số học",
     topicId: "topic-07",
-    correct: null,
-    explanation: null,
+    correct: 2,
+    explanation: "Số bị che là: 32 − 21 = 11.\nĐáp số: C.",
     diagram: "p4-bird",
   },
   {
@@ -110,8 +116,9 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["9", "19", "29", "39"],
     strand: "Arithmetic / Số học",
     topicId: "topic-07",
-    correct: null,
-    explanation: null,
+    correct: 2,
+    explanation:
+      "Bông hoa − 10 = 15 + 4\nBông hoa − 10 = 19\nBông hoa = 19 + 10\nBông hoa = 29.\nĐáp số: C.",
     diagram: "p4-flower",
   },
   {
@@ -123,8 +130,9 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["2", "8", "9", "7"],
     strand: "Arithmetic / Số học",
     topicId: "topic-10",
-    correct: null,
-    explanation: null,
+    correct: 1,
+    explanation:
+      "Dựa vào phép tính hàng đơn vị, ta thấy đây là phép cộng có nhớ (nhớ 1).\nDựa vào phép tính hàng chục, ta có X + 1 = 3 nên X = 2.\nXX + Y = 30 nên Y = 30 − XX = 30 − 22 = 8 (thỏa mãn).\nĐáp số: B.",
     diagram: "p4-addition",
   },
   {
@@ -136,8 +144,9 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["15", "13", "12", "16"],
     strand: "Number Theory / Lý thuyết số",
     topicId: "topic-01",
-    correct: null,
-    explanation: null,
+    correct: 3,
+    explanation:
+      "Quy luật: Các số trong dãy tăng dần 3 đơn vị.\n1 + 3 = 4; 4 + 3 = 7; 7 + 3 = 10; …\nSố thứ 5 của dãy là: 10 + 3 = 13.\nSố thứ 6 của dãy là: 13 + 3 = 16.\nĐáp số: D.",
     diagram: "p4-sequence11",
   },
   {
@@ -148,8 +157,8 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["99", "98", "10", "11"],
     strand: "Number Theory / Lý thuyết số",
     topicId: "unassigned",
-    correct: null,
-    explanation: null,
+    correct: 0,
+    explanation: "Số lẻ lớn nhất có 2 chữ số là 99.\nĐáp số: A.",
   },
   {
     sourceNumber: 13,
@@ -160,8 +169,9 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["3", "4", "5", "6"],
     strand: "Number Theory / Lý thuyết số",
     topicId: "topic-14",
-    correct: null,
-    explanation: null,
+    correct: 0,
+    explanation:
+      "Tổng số học sinh của 2 lớp là: 22 + 28 = 50 (học sinh).\nTa có: 50 = 25 + 25.\nDo đó, khi 2 lớp có số học sinh bằng nhau, mỗi lớp có 25 học sinh.\nVậy số học sinh cần chuyển từ lớp 2B sang lớp 2A để 2 lớp có số học sinh bằng nhau là:\n28 − 25 = 3 (học sinh).\nĐáp số: A.",
   },
   {
     sourceNumber: 14,
@@ -171,8 +181,9 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["5", "4", "6", "3"],
     strand: "Number Theory / Lý thuyết số",
     topicId: "unassigned",
-    correct: null,
-    explanation: null,
+    correct: 1,
+    explanation:
+      "Các số chẵn lớn hơn 20 là: 22, 52, 70, 54.\nVậy có 4 số chẵn thỏa mãn đề bài.\nĐáp số: B.",
     diagram: "p4-numbers14",
   },
   {
@@ -188,8 +199,8 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     ],
     strand: "Number Theory / Lý thuyết số",
     topicId: "topic-13",
-    correct: null,
-    explanation: null,
+    correct: 3,
+    explanation: "Ta có: 5 + 3 + 2 − 4 = 8 + 2 − 4 = 10 − 4 = 6.\nĐáp số: D.",
     diagram: "p4-operators",
   },
   {
@@ -201,8 +212,9 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["6", "7", "8", "9"],
     strand: "Geometry / Hình học",
     topicId: "topic-19",
-    correct: null,
-    explanation: null,
+    correct: 2,
+    explanation:
+      "Ta đánh số các khối lập phương như hình minh họa.\nVậy cần ít nhất là 8 khối lập phương.\nĐáp số: C.",
     diagram: "p4-cubes-count",
   },
   {
@@ -214,8 +226,9 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["6", "7", "8", "9"],
     strand: "Geometry / Hình học",
     topicId: "topic-17",
-    correct: null,
-    explanation: null,
+    correct: 1,
+    explanation:
+      "Ta đánh số các hình vuông thấy được khi nhìn hình đã cho từ bên phải như hình minh họa.\nVậy có thể thấy ít nhất 7 hình vuông khi nhìn hình đã cho từ bên phải.\nĐáp số: B.",
     diagram: "p4-cubes-right",
   },
   {
@@ -226,8 +239,9 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["15", "16", "17", "14"],
     strand: "Geometry / Hình học",
     topicId: "topic-15",
-    correct: null,
-    explanation: null,
+    correct: 2,
+    explanation:
+      "Ta đánh số các hình vuông như hình minh họa.\nHình vuông đơn vị: có 14 hình là 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 và 14.\nHình vuông được ghép bởi 4 hình vuông đơn vị: có 3 hình là (2, 3, 4, 5), (6, 7, 10, 11) và (7, 8, 11, 12).\nVậy có tất cả: 14 + 3 = 17 hình vuông.\nĐáp số: C.",
     diagram: "p4-squares",
   },
   {
@@ -238,8 +252,9 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["12", "11", "8", "7"],
     strand: "Geometry / Hình học",
     topicId: "topic-18",
-    correct: null,
-    explanation: null,
+    correct: 0,
+    explanation:
+      "Ta đánh số các đoạn thẳng như hình minh họa.\nĐoạn thẳng đơn: có 7 đoạn là 1, 2, 3, 4, 5, 6 và 7.\nĐoạn thẳng được ghép bởi 2 đoạn thẳng đơn: có 4 đoạn là (1, 2), (3, 4), (5, 6) và (6, 7).\nĐoạn thẳng được ghép bởi 3 đoạn thẳng đơn: có 1 đoạn là (5, 6, 7).\nVậy có tất cả: 7 + 4 + 1 = 12 (đoạn thẳng).\nĐáp số: A.",
     diagram: "p4-segments",
   },
   {
@@ -251,8 +266,9 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["6", "8", "9", "7"],
     strand: "Geometry / Hình học",
     topicId: "topic-16",
-    correct: null,
-    explanation: null,
+    correct: 3,
+    explanation:
+      "Quy luật: Nhóm 3 hình (⇨ ⇧ ⇨) lặp lại.\nLiệt kê tiếp đến hình thứ 10, ta được dãy hình: ⇨ ⇧ ⇨ ⇨ ⇧ ⇨ ⇨ ⇧ ⇨ ⇨.\nTrong dãy hình trên, có 7 mũi tên chỉ sang phải.\nĐáp số: D.",
     diagram: "p4-arrows",
   },
   {
@@ -264,8 +280,9 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["2", "6", "4", "3"],
     strand: "Combinatorics / Tổ hợp",
     topicId: "unassigned",
-    correct: null,
-    explanation: null,
+    correct: 3,
+    explanation:
+      "Ta có cách chia đều số bánh vào 4 hộp như hình minh họa.\nVậy 1 hộp có 3 miếng bánh.\nĐáp số: D.",
     diagram: "p4-cakes",
   },
   {
@@ -276,8 +293,9 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["16", "27", "22", "34"],
     strand: "Combinatorics / Tổ hợp",
     topicId: "topic-20",
-    correct: null,
-    explanation: null,
+    correct: 2,
+    explanation:
+      "Các số được sắp xếp theo thứ tự từ bé đến lớn như sau: 11, 16, 22, 27, 34, 45, 67, 73.\nSố bé thứ ba là 22.\nĐáp số: C.",
     diagram: "p4-numbers22",
   },
   {
@@ -289,7 +307,27 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     options: ["7", "6", "5", "8"],
     strand: "Combinatorics / Tổ hợp",
     topicId: "topic-21",
-    correct: null,
-    explanation: null,
+    correct: 0,
+    explanation:
+      "Số cần lập là số chẵn nên chữ số hàng đơn vị là 0, 2 hoặc 4.\n+ Nếu chữ số hàng đơn vị là 0, ta lập được các số: 10, 20, 40. Có 3 số.\n+ Nếu chữ số hàng đơn vị là 2, ta lập được các số: 12, 42. Có 2 số.\n+ Nếu chữ số hàng đơn vị là 4, ta lập được các số: 14, 24. Có 2 số.\nVậy có 3 + 2 + 2 = 7 số thỏa mãn đề bài.\nĐáp số: A.",
   },
 ];
+
+// Retain owner-supplied answers without fabricating the missing question statements/choices.
+// These records are not exercises and cannot be scored until the owner supplies the questions.
+export const TIMO_GRADE2_QUALIFIER4_PENDING_SOLUTIONS = [
+  {
+    sourceNumber: 24,
+    answer: "B",
+    status: "missing-question",
+    explanation:
+      "Cách 1: Chọn bạn thứ nhất chơi ván cờ: có 5 cách. Chọn bạn thứ hai chơi ván cờ: có 4 cách. Vậy số cách chọn ra 2 bạn là: 5 × 4 = 20 cách. Tuy nhiên các cặp được chọn như trên sẽ được tính 2 lần nên số cách khác nhau để chọn ra 2 bạn trong số 5 bạn là: 20 : 2 = 10 (cách).\nCách 2: Amy chơi 4 ván với 4 bạn còn lại. Ben chơi 3 ván với 3 bạn còn lại (trừ Amy). Cindy chơi 2 ván với 2 bạn còn lại (trừ Amy và Ben). Dan chơi 1 ván với 1 bạn còn lại (là Erik). Vậy có tất cả 4 + 3 + 2 + 1 = 10 ván cờ.\nĐáp số: B.",
+  },
+  {
+    sourceNumber: 25,
+    answer: "B",
+    status: "missing-question",
+    explanation:
+      "Muốn tổng lớn nhất thì hai số hạng phải lớn nhất có thể.\nTa sẽ chọn 2 chữ số lớn nhất có thể để làm các chữ số hàng chục (là 6 và 7).\nChọn 2 chữ số còn lại làm hàng đơn vị (là 1, 4).\nKhi đó, ta có 2 số là 61 và 74 (hoặc 64 và 71).\nTổng cần tìm là: 61 + 74 = 64 + 71 = 135.\nĐáp số: B.",
+  },
+] as const;

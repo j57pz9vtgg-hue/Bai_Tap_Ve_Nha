@@ -432,3 +432,18 @@ export function readSaved(): Saved {
   }
   return { version: 1, grade: 2, results: {}, drafts: {} };
 }
+
+// Refresh received source content for unfinished attempts without changing question order.
+// A matching prompt and choices preserve the meaning of each saved selection.
+export function refreshSuppliedQuestions(questions: Question[]): Question[] {
+  return questions.map(
+    (saved) =>
+      ALL_QUESTIONS.find(
+        (current) =>
+          current.sourcePaper === saved.sourcePaper &&
+          current.sourceNumber === saved.sourceNumber &&
+          current.text === saved.text &&
+          JSON.stringify(current.options) === JSON.stringify(saved.options),
+      ) ?? saved,
+  );
+}
