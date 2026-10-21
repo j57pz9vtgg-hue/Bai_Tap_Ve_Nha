@@ -65,7 +65,7 @@ export function PaperWorkspace(p: Props) {
         </button>
       </div>
       <div className="paper-shell">
-        {topic && (
+        {topic && !p.started && (
           <section className="topic-setup" aria-label="Chọn nội dung luyện tập">
             <div className="topic-filters">
               <label>
