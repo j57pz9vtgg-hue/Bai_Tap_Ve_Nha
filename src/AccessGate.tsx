@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import type { FormEvent, ReactNode } from "react";
 import { BookOpen, Eye, EyeOff, LockKeyhole } from "lucide-react";
 import { APP_ACCESS } from "./accessConfig";
@@ -14,6 +14,29 @@ function hasAccess(
     return false;
   }
 }
+async function verifyPassword(password: string) {
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(password),
+    "PBKDF2",
+    false,
+    ["deriveBits"],
+  );
+  const salt = Uint8Array.from(APP_ACCESS.salt.match(/.{2}/g)!, (x) =>
+    parseInt(x, 16),
+  );
+  const digest = Array.from(
+    new Uint8Array(
+      await crypto.subtle.deriveBits(
+        { name: "PBKDF2", hash: "SHA-256", iterations: 210000, salt },
+        key,
+        256,
+      ),
+    ),
+    (x) => x.toString(16).padStart(2, "0"),
+  ).join("");
+  return digest === APP_ACCESS.digest;
+}
 const AccessContext = createContext({ logout: () => {} });
 export const useAppAccess = () => useContext(AccessContext);
 export function AccessGate({ children }: { children: ReactNode }) {
@@ -27,16 +50,73 @@ export function AccessGate({ children }: { children: ReactNode }) {
   const [visible, setVisible] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
+  const [rememberMessage, setRememberMessage] = useState("");
+  const rememberRevision = useRef(0);
+  function clearRememberedAccess() {
+    rememberRevision.current++;
+    try {
+      localStorage.removeItem(REMEMBER_KEY);
+    } catch {
+      /* Storage may be blocked. */
+    }
+  }
+  function changePassword(value: string) {
+    clearRememberedAccess();
+    setPassword(value);
+    setError("");
+    setRememberMessage(
+      remember
+        ? value
+          ? "Đang xác nhận để ghi nhớ…"
+          : "Nhập mật khẩu để ghi nhớ."
+        : "",
+    );
+  }
+  function changeRemember(value: boolean) {
+    clearRememberedAccess();
+    setRemember(value);
+    setError("");
+    setRememberMessage(
+      value
+        ? password
+          ? "Đang xác nhận để ghi nhớ…"
+          : "Nhập mật khẩu để ghi nhớ."
+        : "",
+    );
+  }
+  useEffect(() => {
+    if (!remember || !password || unlocked || busy) return;
+    let active = true;
+    const revision = rememberRevision.current;
+    const timer = window.setTimeout(async () => {
+      try {
+        const valid = await verifyPassword(password);
+        if (!active || revision !== rememberRevision.current) return;
+        if (!valid) {
+          setRememberMessage("Mật khẩu chưa đúng, chưa ghi nhớ đăng nhập.");
+          return;
+        }
+        localStorage.setItem(REMEMBER_KEY, APP_ACCESS.digest);
+        setRememberMessage("Đã ghi nhớ đăng nhập.");
+      } catch {
+        if (active && revision === rememberRevision.current)
+          setRememberMessage(
+            "Chưa thể ghi nhớ đăng nhập trên trình duyệt này.",
+          );
+      }
+    }, 300);
+    return () => {
+      active = false;
+      window.clearTimeout(timer);
+    };
+  }, [remember, password, unlocked, busy]);
   function logout() {
+    clearRememberedAccess();
+    setRememberMessage("");
     try {
       sessionStorage.removeItem(SESSION_KEY);
     } catch {
       /* In-memory lock still applies. */
-    }
-    try {
-      localStorage.removeItem(REMEMBER_KEY);
-    } catch {
-      /* The current page still locks if browser storage is unavailable. */
     }
     setUnlocked(false);
     setRemember(false);
@@ -47,30 +127,11 @@ export function AccessGate({ children }: { children: ReactNode }) {
   async function login(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (busy) return;
+    rememberRevision.current++;
     setBusy(true);
     setError("");
     try {
-      const key = await crypto.subtle.importKey(
-        "raw",
-        new TextEncoder().encode(password),
-        "PBKDF2",
-        false,
-        ["deriveBits"],
-      );
-      const salt = Uint8Array.from(APP_ACCESS.salt.match(/.{2}/g)!, (x) =>
-        parseInt(x, 16),
-      );
-      const digest = Array.from(
-        new Uint8Array(
-          await crypto.subtle.deriveBits(
-            { name: "PBKDF2", hash: "SHA-256", iterations: 210000, salt },
-            key,
-            256,
-          ),
-        ),
-        (x) => x.toString(16).padStart(2, "0"),
-      ).join("");
-      if (digest !== APP_ACCESS.digest) {
+      if (!(await verifyPassword(password))) {
         setError("Mật khẩu vào ứng dụng chưa đúng. Vui lòng nhập lại.");
         return;
       }
@@ -121,7 +182,7 @@ export function AccessGate({ children }: { children: ReactNode }) {
               required
               maxLength={128}
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => changePassword(e.target.value)}
               disabled={busy}
             />
             <button
@@ -137,11 +198,16 @@ export function AccessGate({ children }: { children: ReactNode }) {
             <input
               type="checkbox"
               checked={remember}
-              onChange={(e) => setRemember(e.target.checked)}
+              onChange={(e) => changeRemember(e.target.checked)}
               disabled={busy}
             />
             <span>Ghi nhớ đăng nhập</span>
           </label>
+          {remember && rememberMessage && (
+            <p className="remember-feedback" role="status">
+              {rememberMessage}
+            </p>
+          )}
           {error && (
             <p role="alert" className="password-error">
               {error}

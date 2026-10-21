@@ -983,3 +983,11 @@
     background-size: auto 330px;
   }
 }
+
+.access-card .remember-feedback {
+  margin: -4px 0 2px;
+  color: #3c6c65;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
+}
