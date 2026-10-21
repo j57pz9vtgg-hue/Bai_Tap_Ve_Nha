@@ -29,3 +29,5 @@
 - Keep a visible Làm lại button immediately after Nộp bài in the paper toolbar. It starts a fresh attempt by clearing selections and resetting the timer, while preserving previously saved results until the next submission.
 
 - Xem đáp án & lời giải opens a floating modal for the parent password. Cancel/close returns to the same paper with the inline score; only successful authentication reveals detailed solutions.
+
+- Exercise cards show Kết quả as correct/total câu đúng from the saved result (not Đã lưu), alongside saved elapsed time. This score summary is visible without a parent password; detailed solutions remain protected.

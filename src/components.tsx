@@ -309,7 +309,7 @@ export function ExerciseCard({
       <dl className="exercise-stats">
         <div>
           <dt>Kết quả:</dt>
-          <dd>{result ? "Đã lưu" : "—"}</dd>
+          <dd>{result ? `${result.score}/${result.total} câu đúng` : "—"}</dd>
         </div>
         <div>
           <dt>Thời gian:</dt>
