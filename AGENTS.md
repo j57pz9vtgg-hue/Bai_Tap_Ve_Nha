@@ -99,3 +99,5 @@
 - Do not repeat unsupported source-omission claims for national3/4 q21. National3 fresh crop explicitly contains “odd”; national4 English is also aligned with its explicit supplied odd vocabulary and reasoning. Both app questions say4-digit odd number, keep8629/9845, and remove omission warnings. Exact known prior draft strings are refreshed to corrected source wording without losing selections/time. Historical submitted snapshots remain unchanged.
 
 - National5 now has25 supplied keys/solutions and numbered line/square/cube/circle diagrams. Reviewed topics unchanged. Stored q13 question has “−2×2”; supplied solution uses “−2×3”, changes that to “−6” and gets202. Preserve supplied Even answer, quote solution faithfully and flag differing expressions for comparison with the original question; do not blame a multiplication error or silently alter the question.
+
+- National6 now has25 explicitly supplied text answers and worked solutions; all reviewed topics retained. Include13 numbered unit squares, right-view cubes and11 circle pieces in parent solutions only. Keep owner-provided evenness reasoning without inventing a replacement proof.

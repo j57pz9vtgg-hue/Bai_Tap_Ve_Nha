@@ -1,7 +1,7 @@
 import type { Question } from "../data";
 
 //25 owner-supplied written-response questions, with original vocabulary glosses.
-// No answer key or explanations supplied; never infer missing answers.
+// Answer key and explanations subsequently supplied by the owner; preserve received content.
 export const TIMO_GRADE2_NATIONAL6: Question[] = [
   {
     sourceNumber: 1,
@@ -12,7 +12,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "76",
+    explanation:
+      "Số 68 có 1 chữ số đúng nhưng sai vị trí. (1)\nSố 17 có 1 chữ số đúng nhưng sai vị trí. (2)\nSố 79 có 1 chữ số đúng và đúng vị trí. (3)\nTừ (2) và (3), ta được số 7 đúng và nằm ở vị trí hàng chục.\nTừ (1), ta được số 6 đúng và nằm ở vị trí hàng đơn vị.\nVậy số cần tìm là 76.\nĐáp số: 76.",
     topicId: "unassigned",
     strand: "Logical thinking / Tư duy lô-gic",
   },
@@ -24,7 +26,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "57",
+    explanation:
+      "Vì khi Bruce sinh ra, mẹ bạn ấy 29 tuổi nên mẹ hơn Bruce 29 tuổi.\nKhi Bruce 28 tuổi thì tuổi của mẹ là: 28 + 29 = 57 (tuổi).\nĐáp số: 57.",
     topicId: "topic-03",
     strand: "Logical thinking / Tư duy lô-gic",
   },
@@ -36,7 +40,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "75",
+    explanation:
+      "Quy luật: Khoảng cách giữa hai số liên tiếp tăng dần 3 đơn vị.\n12 + 3 = 15; 15 + 6 = 21; 21 + 9 = 30; 30 + 12 = 42; 42 + 15 = 57; …\nVậy số cần điền vào chỗ trống là: 57 + 18 = 75.\nĐáp số: 75.",
     topicId: "topic-01",
     strand: "Logical thinking / Tư duy lô-gic",
     diagram: "n6-sequence3",
@@ -50,7 +56,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "D",
+    explanation:
+      "Ta có bảng chữ cái tiếng Anh: A B C D E F G H I J K L M N O P Q R …\nQuy luật: Các chữ cái trong dãy được sắp xếp theo thứ tự ngược với bảng chữ cái tiếng Anh. Hai chữ cái liên tiếp trong dãy cách nhau 2 chữ cái trong bảng chữ cái.\nVậy chữ cái cần điền vào chỗ trống là D.\nĐáp số: D.",
     topicId: "unassigned",
     strand: "Logical thinking / Tư duy lô-gic",
     diagram: "n6-letters",
@@ -63,7 +71,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "49",
+    explanation:
+      "Quy luật: Số hình ※ trong mỗi nhóm bằng số thứ tự của nhóm nhân với chính nó.\nNhóm 1: có 1 × 1 = 1 hình ※.\nNhóm 2: có 2 × 2 = 4 hình ※.\nNhóm 3: có 3 × 3 = 9 hình ※.\nNhóm 4: có 4 × 4 = 16 hình ※.\nVậy nhóm 7 có 7 × 7 = 49 hình ※.\nĐáp số: 49.",
     topicId: "topic-04",
     strand: "Logical thinking / Tư duy lô-gic",
     diagram: "n6-cross-groups",
@@ -76,7 +86,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "20",
+    explanation:
+      "37 + 13 − 68 − 13 + 51 = (13 − 13) + 37 + 51 − 68 = 0 + 88 − 68 = 20.\nĐáp số: 20.",
     topicId: "topic-08",
     strand: "Arithmetic / Số học",
   },
@@ -88,7 +100,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "139",
+    explanation:
+      "24 + 62 + 16 + 29 + 8 = (24 + 16) + (62 + 8) + 29 = 40 + 70 + 29 = 139.\nĐáp số: 139.",
     topicId: "topic-06",
     strand: "Arithmetic / Số học",
   },
@@ -100,7 +114,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "1130",
+    explanation:
+      "1 × 113 + 2 × 113 + 3 × 113 + 4 × 113 = (1 + 2 + 3 + 4) × 113 = 10 × 113 = 1130.\nĐáp số: 1130.",
     topicId: "unassigned",
     strand: "Arithmetic / Số học",
   },
@@ -112,7 +128,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "9",
+    explanation:
+      "Trường hợp 1: Phép cộng ở hàng đơn vị là phép cộng không nhớ. Dựa vào hàng chục, ta có A + A = 7 (không có số nào thỏa mãn).\nTrường hợp 2: Phép cộng ở hàng đơn vị là phép cộng có nhớ (nhớ 1). Dựa vào hàng chục, ta có A + A + 1 = 7 nên A = 3.\nAA + AB = 72 nên AB = 72 − AA = 72 − 33 = 39. Suy ra B = 9 (thỏa mãn).\nĐáp số: 9.",
     topicId: "topic-10",
     strand: "Arithmetic / Số học",
     diagram: "n6-addition9",
@@ -126,7 +144,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "20",
+    explanation:
+      "X : 2 + 9 = 19\nX : 2 = 19 − 9\nX : 2 = 10\nX = 10 × 2\nX = 20.\nĐáp số: 20.",
     topicId: "topic-07",
     strand: "Arithmetic / Số học",
     diagram: "n6-blank",
@@ -140,7 +160,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "15",
+    explanation:
+      "Các số chẵn có 2 chữ số chia hết cho 3 là:\n12, 18, 24, 30, 36, 42, 48, 54, 60, 66, 72, 78, 84, 90, 96.\nVậy có tất cả 15 số thỏa mãn.\nĐáp số: 15.",
     topicId: "unassigned",
     strand: "Number Theory / Số học",
   },
@@ -153,7 +175,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "15 + 8 − 6 − 1 = 16",
+    explanation:
+      "Lần lượt thay các dấu cộng, trừ và kiểm tra, ta có 15 + 8 − 6 − 1 = 16.\nĐáp số: 15 + 8 − 6 − 1 = 16.",
     topicId: "topic-13",
     strand: "Number Theory / Số học",
     diagram: "n6-operators12",
@@ -167,7 +191,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "6 × 4 + 3 + 2 = 29",
+    explanation:
+      "Lần lượt thay các dấu cộng, nhân và kiểm tra, ta có 6 × 4 + 3 + 2 = 29.\nĐáp số: 6 × 4 + 3 + 2 = 29.",
     topicId: "unassigned",
     strand: "Number Theory / Số học",
     diagram: "n6-operators13",
@@ -180,7 +206,10 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "Even",
+    acceptedAnswers: ["chẵn", "số chẵn"],
+    explanation:
+      "Vì A là số lẻ nên ta có thể coi A = 1.\nKhi đó A × (A + 1) × (A + 2) = 1 × (1 + 1) × (1 + 2) = 1 × 2 × 3 = 6.\nVì 6 là số chẵn nên A × (A + 1) × (A + 2) là số chẵn.\nĐáp số: Even.",
     topicId: "unassigned",
     strand: "Number Theory / Số học",
   },
@@ -192,7 +221,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "17",
+    explanation:
+      "Trường hợp 1: Hàng đơn vị là phép cộng không nhớ. Xét hàng đơn vị, ta có A + B = 7. Mà ở hàng chục, ta có A + B = C8 (loại).\nTrường hợp 2: Hàng đơn vị là phép cộng có nhớ 1. Xét hàng đơn vị, ta có A + B = 17. Xét hàng chục và hàng trăm, ta có B + A + 1 = C8.\nTa tìm được A = 8, B = 9, C = 1 hoặc A = 9, B = 8, C = 1 (thỏa mãn).\nVậy A + B = 17.\nĐáp số: 17.",
     topicId: "topic-10",
     strand: "Number Theory / Số học",
     diagram: "n6-addition15",
@@ -205,7 +236,10 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "□",
+    acceptedAnswers: ["☐", "▫"],
+    explanation:
+      "Quy luật: Nhóm 4 hình (● ▲ ● □) lặp lại.\nVậy hình cần điền vào chỗ trống là □.\nĐáp số: □.",
     topicId: "topic-16",
     strand: "Geometry / Hình học",
     diagram: "n6-shapes",
@@ -218,7 +252,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "15",
+    explanation:
+      "Ta đánh số các hình vuông như hình minh họa.\nHình vuông đơn vị: có 13 hình là 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 và 13.\nHình vuông được ghép bởi 4 hình vuông đơn vị: có 2 hình là (2, 5, 3, 6) và (5, 7, 6, 8).\nTổng số hình vuông là: 13 + 2 = 15 hình.\nĐáp số: 15.",
     topicId: "topic-15",
     strand: "Geometry / Hình học",
     diagram: "n6-squares",
@@ -232,7 +268,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "15",
+    explanation:
+      "Trong một hình tam giác, tổng độ dài hai cạnh bất kỳ luôn lớn hơn độ dài cạnh còn lại.\nTổng độ dài hai cạnh đã cho là: 10 + 6 = 16 (cm).\nVậy cạnh còn lại có độ dài lớn nhất là 15 (cm).\nĐáp số: 15.",
     topicId: "unassigned",
     strand: "Geometry / Hình học",
   },
@@ -245,7 +283,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "9",
+    explanation:
+      "Ta đánh số các hình vuông thấy được khi nhìn hình đã cho từ bên phải như hình minh họa.\nVậy có thể thấy ít nhất 9 hình vuông khi nhìn hình đã cho từ bên phải.\nĐáp số: 9.",
     topicId: "topic-17",
     strand: "Geometry / Hình học",
     diagram: "n6-cubes",
@@ -258,8 +298,11 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
       "At most: Nhiều nhất; Pieces: Mảnh; Formed: Tạo ra bởi; Line: Đường thẳng; Circle: Đường tròn.",
     options: [],
     answerFormat: "text",
+    diagram: "n6-circle-pieces",
     correct: null,
-    explanation: null,
+    correctText: "11",
+    explanation:
+      "Ta có thể tạo ra nhiều nhất là 11 mảnh như hình minh họa.\nĐáp số: 11.",
     topicId: "unassigned",
     strand: "Geometry / Hình học",
   },
@@ -272,7 +315,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "9",
+    explanation:
+      "Vì số cần lập là số lẻ nên chữ số tận cùng có thể là 3, 5, 7.\nCác số có tận cùng là 3: 53, 73, 83.\nCác số có tận cùng là 5: 35, 75, 85.\nCác số có tận cùng là 7: 37, 57, 87.\nVậy có tất cả 9 số thỏa mãn đề bài.\nĐáp số: 9.",
     topicId: "unassigned",
     strand: "Combinatorics / Tổ hợp",
   },
@@ -285,7 +330,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "8750",
+    explanation:
+      "Ta chọn chữ số lớn nhất có thể để làm hàng nghìn (là 8).\nVì số cần tạo là số chẵn nên chọn chữ số 0 làm hàng đơn vị.\nChọn chữ số lớn nhất có thể trong các chữ số còn lại (3, 5, 7) để làm hàng trăm (là 7).\nChọn chữ số lớn nhất có thể trong các chữ số còn lại (3, 5) để làm hàng chục (là 5).\nVậy số có 4 chữ số lớn nhất được tạo thành từ các chữ số đã cho là 8750.\nĐáp số: 8750.",
     topicId: "unassigned",
     strand: "Combinatorics / Tổ hợp",
   },
@@ -298,7 +345,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "504",
+    explanation:
+      "Chọn 1 vận động viên để trao giải vàng: có 9 cách.\nChọn 1 vận động viên để trao giải bạc: có 8 cách.\nChọn 1 vận động viên để trao giải đồng: có 7 cách.\nCó tất cả: 9 × 8 × 7 = 504 cách.\nĐáp số: 504.",
     topicId: "unassigned",
     strand: "Combinatorics / Tổ hợp",
   },
@@ -310,7 +359,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "10",
+    explanation:
+      "Tổng số tiền của Chris là: 10 × $1 + 9 × $2 + 3 × $5 = $43.\nNhận thấy: $43 = $4 × 10 + $3.\nVậy Chris có thể mua được nhiều nhất là 10 quyển sách.\nĐáp số: 10.",
     topicId: "unassigned",
     strand: "Combinatorics / Tổ hợp",
   },
@@ -322,7 +373,9 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     options: [],
     answerFormat: "text",
     correct: null,
-    explanation: null,
+    correctText: "20198462",
+    explanation:
+      "Số 2020345 có 7 chữ số, các số còn lại đều có 8 chữ số.\nTa so sánh các số có 8 chữ số lần lượt từ trái sang phải để tìm được số lớn nhất.\nTa có: 20198462 > 20196951 > 20186421 > 2020345.\nVậy số cần tìm là 20198462.\nĐáp số: 20198462.",
     topicId: "topic-20",
     strand: "Combinatorics / Tổ hợp",
     diagram: "n6-numbers",

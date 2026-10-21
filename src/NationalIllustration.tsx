@@ -1127,6 +1127,37 @@ export function NationalIllustration({
       );
   }
   if (paper === 6) {
+    if (name === "circle-pieces")
+      return solution ? (
+        <SourceDrawing
+          label="Bốn đường thẳng chia hình tròn thành11 mảnh được đánh số"
+          viewBox="0 0 235 235"
+        >
+          <circle cx="115" cy="110" r="88" fill="none" stroke="#777" />
+          <path
+            d="M40 15 175 215M115 15 125 215M15 145 215 35M15 80 210 195"
+            fill="none"
+            stroke="#555"
+          />
+          {[
+            [32, 104, 1],
+            [63, 69, 2],
+            [103, 43, 3],
+            [144, 43, 4],
+            [62, 156, 5],
+            [96, 119, 6],
+            [116, 96, 7],
+            [167, 105, 8],
+            [127, 155, 9],
+            [162, 197, 10],
+            [132, 196, 11],
+          ].map(([x, y, n]) => (
+            <text key={n} x={x} y={y} fontSize="15" textAnchor="middle">
+              {n}
+            </text>
+          ))}
+        </SourceDrawing>
+      ) : null;
     if (name === "sequence3")
       return (
         <div className="diagram-number-line">12、15、21、30、42、57、___</div>
@@ -1285,6 +1316,25 @@ export function NationalIllustration({
             <SourceCube key={x} x={x} y={166} />
           ))}
           <SourceCube x={150} y={152} />
+          {solution && (
+            <g fontSize="14" textAnchor="middle">
+              {[
+                [237, 119, 1],
+                [237, 159, 2],
+                [197, 159, 3],
+                [187, 173, 4],
+                [183, 188, 5],
+                [157, 137, 6],
+                [157, 97, 7],
+                [143, 111, 8],
+                [143, 151, 9],
+              ].map(([x, y, n]) => (
+                <text key={n} x={x} y={y}>
+                  {n}
+                </text>
+              ))}
+            </g>
+          )}
         </SourceDrawing>
       );
   }
