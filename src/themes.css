@@ -993,7 +993,14 @@
 }
 
 /* Shared illustrated-world components; each theme supplies its own palette and artwork. */
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"]) {
+:root:is(
+  [data-theme="crystal"],
+  [data-theme="cloud"],
+  [data-theme="forest"],
+  [data-theme="magic"],
+  [data-theme="treasure"],
+  [data-theme="cars"]
+) {
   --theme-base: #eef5ff;
   --theme-accent: #164fce;
   --theme-action: linear-gradient(
@@ -1014,7 +1021,10 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .pixel-app {
   min-height: 100dvh;
@@ -1024,7 +1034,10 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .catalog-masthead {
   background: transparent;
@@ -1032,7 +1045,10 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .adventure-banner {
   height: clamp(165px, 13vw, 210px);
@@ -1042,13 +1058,19 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .adventure-banner::before,
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .modern-hero {
   display: none;
@@ -1056,7 +1078,10 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .header-inner {
   height: auto;
@@ -1065,7 +1090,10 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .brand {
   width: 340px;
@@ -1081,18 +1109,35 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .brand
   > span:first-of-type {
   font-size: 31px;
   line-height: 1.05;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .brand-child {
   color: #9c43cc;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .crystal-brand-icon {
   width: 76px;
   height: 76px;
@@ -1102,18 +1147,49 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .header-tools {
   margin-top: 3px;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .search-box,
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .parent-button,
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .appearance-button,
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .logout-button {
   background: #ffffffdd;
   border: 2px solid #e1eeff;
@@ -1156,7 +1232,10 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .study-filters {
   background: transparent;
@@ -1166,7 +1245,14 @@
   gap: 12px;
   box-shadow: none;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .filter-field {
   position: relative;
   background: #ffffffd9;
@@ -1178,7 +1264,14 @@
     inset 0 0 0 5px #e4edfc,
     0 4px 8px #5577c33d;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .filter-field
   label {
   font-size: 12px;
@@ -1188,7 +1281,10 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .filter-select
   select {
@@ -1215,12 +1311,26 @@
     0 2px 3px #8091d82e;
   filter: drop-shadow(0 2px 1px #c5bffc);
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .filter-field:nth-child(2)
   .crystal-filter-icon {
   color: #0088ea;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .filter-field:nth-child(3)
   .crystal-filter-icon {
   color: #e8a322;
@@ -1229,7 +1339,10 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .exercise-card {
   background: linear-gradient(145deg, #fffffff5, #f4f8ffef 65%, #e8ebffef);
@@ -1246,7 +1359,10 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .exercise-card
   .number-badge {
@@ -1269,7 +1385,10 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .exercise-card
   .number-badge
@@ -1278,24 +1397,52 @@
   color: white;
   text-shadow: 0 2px 2px #284cbc;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .exercise-name
   h2 {
   font-weight: 800;
   color: #10195b;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .status {
   background: #fff1d9;
   color: #d8660b;
   border-radius: 22px;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .status.done {
   background: #d4f7e4;
   color: #08783e;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .exercise-card-art {
   left: 15px;
   right: auto;
@@ -1307,7 +1454,10 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .exercise-stats {
   margin-left: 82px;
@@ -1319,7 +1469,10 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .card-actions
   > button {
@@ -1333,7 +1486,10 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .card-actions
   .start-button {
@@ -1343,7 +1499,10 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .view-result-button {
   background: linear-gradient(white, #d0eefe);
@@ -1352,7 +1511,10 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .retry-button {
   background: linear-gradient(#f4fff6, #bbf4e8);
@@ -1361,48 +1523,107 @@
 :root:is(
     [data-theme="crystal"],
     [data-theme="cloud"],
-    [data-theme="forest"]
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
   ):not([data-theme="pixel"])
   .paper-world {
   background: #f0f5ff url("/assets/crystal-world.webp") center top / cover fixed;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .paper-brand {
   color: #195bc8;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .paper-brand
   > img {
   content: url("/assets/crystal-book.webp");
   image-rendering: auto;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .paper-toolbar {
   background: #f3f9fff5;
   border-color: #b9d5f8;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .paper-submit {
   background: var(--theme-action);
   color: white;
   border: 1px solid #91baff;
   box-shadow: inset 0 0 0 2px #ffffff88;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .topic-example-intro {
   background: #fffefcf7;
   border-color: #c5baf4;
 }
 @media (max-width: 1100px) {
-  :root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  :root:is(
+      [data-theme="crystal"],
+      [data-theme="cloud"],
+      [data-theme="forest"],
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"]
+    )
     .crystal-theme-label {
     left: 40%;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  :root:is(
+      [data-theme="crystal"],
+      [data-theme="cloud"],
+      [data-theme="forest"],
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"]
+    )
     .filter-field {
     padding-left: 54px;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  :root:is(
+      [data-theme="crystal"],
+      [data-theme="cloud"],
+      [data-theme="forest"],
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"]
+    )
     .crystal-filter-icon {
     left: 10px;
     width: 34px;
@@ -1413,7 +1634,10 @@
   :root:is(
       [data-theme="crystal"],
       [data-theme="cloud"],
-      [data-theme="forest"]
+      [data-theme="forest"],
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"]
     ):not([data-theme="pixel"])
     .site-header {
     position: relative;
@@ -1421,7 +1645,10 @@
   :root:is(
       [data-theme="crystal"],
       [data-theme="cloud"],
-      [data-theme="forest"]
+      [data-theme="forest"],
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"]
     ):not([data-theme="pixel"])
     .header-inner {
     padding: 12px 16px;
@@ -1430,7 +1657,10 @@
   :root:is(
       [data-theme="crystal"],
       [data-theme="cloud"],
-      [data-theme="forest"]
+      [data-theme="forest"],
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"]
     ):not([data-theme="pixel"])
     .brand {
     max-width: none;
@@ -1439,13 +1669,23 @@
   :root:is(
       [data-theme="crystal"],
       [data-theme="cloud"],
-      [data-theme="forest"]
+      [data-theme="forest"],
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"]
     ):not([data-theme="pixel"])
     .brand
     > span:first-of-type {
     font-size: 24px;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  :root:is(
+      [data-theme="crystal"],
+      [data-theme="cloud"],
+      [data-theme="forest"],
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"]
+    )
     .crystal-brand-icon {
     width: 52px;
     height: 52px;
@@ -1453,7 +1693,10 @@
   :root:is(
       [data-theme="crystal"],
       [data-theme="cloud"],
-      [data-theme="forest"]
+      [data-theme="forest"],
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"]
     ):not([data-theme="pixel"])
     .adventure-banner {
     height: 130px;
@@ -1473,21 +1716,45 @@
   :root:is(
       [data-theme="crystal"],
       [data-theme="cloud"],
-      [data-theme="forest"]
+      [data-theme="forest"],
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"]
     ):not([data-theme="pixel"])
     .study-filters {
     margin: -8px 0 8px;
     gap: 10px;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  :root:is(
+      [data-theme="crystal"],
+      [data-theme="cloud"],
+      [data-theme="forest"],
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"]
+    )
     .filter-field {
     padding: 10px;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  :root:is(
+      [data-theme="crystal"],
+      [data-theme="cloud"],
+      [data-theme="forest"],
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"]
+    )
     .crystal-filter-icon {
     display: none;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  :root:is(
+      [data-theme="crystal"],
+      [data-theme="cloud"],
+      [data-theme="forest"],
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"]
+    )
     .exercise-card-art {
     width: 80px;
     height: 80px;
@@ -1496,7 +1763,10 @@
   :root:is(
       [data-theme="crystal"],
       [data-theme="cloud"],
-      [data-theme="forest"]
+      [data-theme="forest"],
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"]
     ):not([data-theme="pixel"])
     .exercise-stats {
     margin-left: 90px;
@@ -1505,18 +1775,35 @@
   :root:is(
       [data-theme="crystal"],
       [data-theme="cloud"],
-      [data-theme="forest"]
+      [data-theme="forest"],
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"]
     ):not([data-theme="pixel"])
     .pixel-app {
     background-size: auto 100dvh;
   }
 }
 
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .brand-child {
   display: block;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"],
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  )
   .crystal-theme-label::after {
   content: "";
   position: absolute;
@@ -2052,5 +2339,345 @@
   }
   :root[data-theme="forest"]:not([data-theme="pixel"]) .pixel-app {
     background-size: auto 100dvh;
+  }
+}
+
+/* Owner-supplied museum, magic, treasure and motoring interfaces. */
+:root[data-theme="magic"] {
+  --theme-base: #f4f0ff;
+  --theme-accent: #5e2bc4;
+  --theme-action: linear-gradient(#9258ef, #7040dc);
+  --theme-action-ink: white;
+  --theme-button-soft: #eae0ff;
+  --theme-edge: #ded0fa;
+  --theme-sprites: url("/assets/magic-sprites.webp");
+}
+:root[data-theme="treasure"] {
+  --theme-base: #fff5de;
+  --theme-accent: #00788d;
+  --theme-action: linear-gradient(#ff9628, #ff7919);
+  --theme-action-ink: white;
+  --theme-button-soft: #d8eef5;
+  --theme-edge: #eedfc1;
+  --theme-sprites: url("/assets/treasure-sprites.webp");
+}
+:root[data-theme="cars"] {
+  --theme-base: #eaf8ff;
+  --theme-accent: #0065dc;
+  --theme-action: linear-gradient(#ffa214, #ff8700);
+  --theme-action-ink: white;
+  --theme-button-soft: #fff5e7;
+  --theme-edge: #bde6ff;
+  --theme-sprites: url("/assets/cars-sprites.webp");
+}
+:root[data-theme="museum"] {
+  --theme-sprites: url("/assets/museum-sprites.webp");
+}
+
+:root[data-theme="magic"]:not([data-theme="pixel"]) .pixel-app,
+:root[data-theme="magic"]:not([data-theme="pixel"]) .paper-world {
+  background: var(--theme-base) url("/assets/magic-world.webp") center top /
+    cover fixed;
+}
+:root[data-theme="magic"]:not([data-theme="pixel"]) .adventure-banner {
+  background: url("/assets/magic-hero.webp") center / cover;
+  height: 190px;
+}
+:root[data-theme="magic"] .paper-brand img {
+  content: url("/assets/magic-book.webp");
+}
+
+:root[data-theme="treasure"]:not([data-theme="pixel"]) .pixel-app,
+:root[data-theme="treasure"]:not([data-theme="pixel"]) .paper-world {
+  background: var(--theme-base) url("/assets/treasure-world.webp") center top /
+    cover fixed;
+}
+:root[data-theme="treasure"]:not([data-theme="pixel"]) .adventure-banner {
+  background: url("/assets/treasure-hero.webp") center / cover;
+  height: 190px;
+}
+:root[data-theme="treasure"] .paper-brand img {
+  content: url("/assets/treasure-book.webp");
+}
+
+:root[data-theme="cars"]:not([data-theme="pixel"]) .pixel-app,
+:root[data-theme="cars"]:not([data-theme="pixel"]) .paper-world {
+  background: var(--theme-base) url("/assets/cars-world.webp") center top /
+    cover fixed;
+}
+:root[data-theme="cars"]:not([data-theme="pixel"]) .adventure-banner {
+  background: url("/assets/cars-hero.webp") center / cover;
+  height: 190px;
+}
+:root[data-theme="cars"] .paper-brand img {
+  content: url("/assets/cars-book.webp");
+}
+
+:root[data-theme="museum"]:not([data-theme="pixel"]) .pixel-app,
+:root[data-theme="museum"]:not([data-theme="pixel"]) .paper-world {
+  background: var(--theme-base) url("/assets/museum-world.webp") center top /
+    cover fixed;
+}
+:root[data-theme="museum"]:not([data-theme="pixel"]) .adventure-banner {
+  background: url("/assets/museum-hero.webp") center / cover;
+  height: 190px;
+}
+:root[data-theme="museum"] .paper-brand img {
+  content: url("/assets/museum-book.webp");
+}
+
+:root:is(
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  ):not([data-theme="pixel"])
+  .study-filters {
+  background: #ffffffeb;
+  border: 1px solid var(--theme-edge);
+  border-radius: 20px;
+  padding: 18px 24px;
+  gap: 24px;
+  margin: 0 0 18px;
+  box-shadow: 0 5px 15px #283f6810;
+}
+:root:is(
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  ):not([data-theme="pixel"])
+  .filter-field {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+:root:is(
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  ):not([data-theme="pixel"])
+  .exercise-card {
+  background: #ffffffed;
+  border: 1px solid var(--theme-edge);
+  border-radius: 16px;
+  min-height: 185px;
+  padding: 13px 14px 12px;
+  box-shadow: 0 4px 12px #293c6310;
+}
+:root:is(
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  ):not([data-theme="pixel"])
+  .exercise-card
+  .number-badge {
+  clip-path: none;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: linear-gradient(#ffa623, #ff8200);
+  box-shadow: none;
+  color: white;
+  font-size: 21px;
+}
+:root:is(
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  ):not([data-theme="pixel"])
+  .exercise-card.is-complete
+  .number-badge {
+  background: linear-gradient(#48c36b, #1a9c49);
+}
+:root:is([data-theme="magic"], [data-theme="treasure"], [data-theme="cars"])
+  .exercise-card-art {
+  left: auto;
+  right: 10px;
+  top: 12px;
+  width: 55px;
+  height: 55px;
+}
+:root:is([data-theme="magic"], [data-theme="treasure"], [data-theme="cars"])
+  .exercise-card
+  h3 {
+  padding-right: 45px;
+}
+:root:is(
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  ):not([data-theme="pixel"])
+  .exercise-stats {
+  margin-left: 0;
+  padding-right: 0;
+  font-size: 14px;
+}
+:root:is(
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  ):not([data-theme="pixel"])
+  .card-actions
+  button {
+  box-shadow: none;
+  border-radius: 10px;
+}
+:root:is(
+    [data-theme="magic"],
+    [data-theme="treasure"],
+    [data-theme="cars"]
+  ):not([data-theme="pixel"])
+  .card-actions
+  .play-button {
+  background: var(--theme-action);
+  color: white;
+  border-color: transparent;
+}
+:root[data-theme="magic"] .magic-theme-label {
+  background: linear-gradient(#7844cb, #50229b);
+  border-color: #f8cf64;
+  color: #ffe77d;
+  clip-path: none;
+  border-radius: 22px 22px 35px 35px;
+  left: 44%;
+  top: 20px;
+}
+:root[data-theme="magic"]:not([data-theme="pixel"]) .brand {
+  color: #411174;
+  text-shadow: 0 2px white;
+}
+:root[data-theme="treasure"] .treasure-theme-label {
+  background: repeating-linear-gradient(
+    0deg,
+    #865020 0 24px,
+    #a46a32 25px 49px
+  );
+  border-color: #673918;
+  clip-path: none;
+  border-radius: 12px;
+  left: 43%;
+  top: 15px;
+  color: #ffe27b;
+  transform: rotate(-3deg);
+}
+:root[data-theme="treasure"]:not([data-theme="pixel"]) .brand {
+  background: #fff1ceee;
+  border: 3px solid #d9a365;
+  border-radius: 20px;
+  padding: 10px;
+  color: #075878;
+  font-size: 27px;
+  max-width: 29%;
+}
+:root[data-theme="cars"] .cars-theme-label {
+  background: linear-gradient(#1684ed, #0052be);
+  border: 3px solid white;
+  outline: 2px solid #0076da;
+  clip-path: none;
+  border-radius: 10px;
+  left: 24%;
+  top: 15px;
+  transform: rotate(-4deg);
+  color: #fff35e;
+}
+:root[data-theme="cars"]:not([data-theme="pixel"]) .brand-child {
+  color: #ff7900;
+}
+:root[data-theme="museum"]:not([data-theme="pixel"]) .adventure-banner::before,
+:root[data-theme="museum"] .modern-hero {
+  display: none;
+}
+:root[data-theme="museum"]:not([data-theme="pixel"]) .header-inner {
+  height: 190px;
+  padding-top: 45px;
+}
+:root[data-theme="museum"]:not([data-theme="pixel"]) .brand {
+  color: #092e50;
+  text-shadow: 0 2px #fff9;
+}
+:root[data-theme="museum"]:not([data-theme="pixel"]) .study-filters {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  gap: 18px;
+  margin-top: 18px;
+}
+:root[data-theme="museum"]:not([data-theme="pixel"]) .filter-field {
+  background: #ffffffbc;
+  border: 1px solid #dbdcd9;
+  border-radius: 12px;
+  padding: 10px;
+}
+:root[data-theme="museum"]:not([data-theme="pixel"]) .exercise-card {
+  border-radius: 12px;
+}
+@media (max-width: 760px) {
+  :root:is(
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"],
+      [data-theme="museum"]
+    ):not([data-theme="pixel"])
+    .adventure-banner {
+    height: 135px;
+  }
+  :root:is(
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"],
+      [data-theme="museum"]
+    ):not([data-theme="pixel"])
+    .header-inner {
+    height: auto;
+    padding: 14px 16px;
+    background: #ffffffd9;
+  }
+  :root:is(
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"],
+      [data-theme="museum"]
+    ):not([data-theme="pixel"])
+    .brand {
+    max-width: 100%;
+    width: auto;
+    font-size: 24px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+  :root:is([data-theme="magic"], [data-theme="treasure"], [data-theme="cars"])
+    .crystal-theme-label {
+    left: auto;
+    right: 14px;
+    top: auto;
+    bottom: 12px;
+    min-width: 145px;
+    padding: 8px 12px;
+  }
+  :root:is([data-theme="magic"], [data-theme="treasure"], [data-theme="cars"])
+    .crystal-theme-label
+    strong {
+    font-size: 19px;
+  }
+  :root:is(
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"]
+    ):not([data-theme="pixel"])
+    .study-filters {
+    padding: 12px;
+    gap: 12px;
+  }
+  :root:is(
+      [data-theme="magic"],
+      [data-theme="treasure"],
+      [data-theme="cars"]
+    ):not([data-theme="pixel"])
+    .exercise-stats {
+    margin-left: 0;
+    padding-right: 0;
   }
 }

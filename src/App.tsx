@@ -144,7 +144,7 @@ export default function App() {
             >
               {theme === "crystal" ||
               theme === "cloud" ||
-              theme === "forest" ? (
+              ["forest", "magic", "treasure", "cars"].includes(theme) ? (
                 <img
                   className="crystal-brand-icon"
                   src={publicAsset(`${theme}-book`)}
@@ -209,18 +209,18 @@ export default function App() {
           </div>
         </header>
         <div className="adventure-banner">
-          {(theme === "crystal" || theme === "cloud" || theme === "forest") && (
+          {["crystal", "cloud", "forest", "magic", "treasure", "cars"].includes(
+            theme,
+          ) && (
             <div
-              className={`crystal-theme-label ${theme === "cloud" ? "cloud-theme-label" : theme === "forest" ? "forest-theme-label" : ""}`}
+              className={`crystal-theme-label ${theme}-theme-label`}
               aria-hidden="true"
             >
               <span>CHỦ ĐỀ</span>
               <strong>
-                {theme === "forest"
-                  ? "RỪNG ĐOM ĐÓM"
-                  : theme === "cloud"
-                    ? "THÀNH PHỐ TRÊN MÂY"
-                    : "ĐẢO PHA LÊ"}
+                {THEMES.find(
+                  (item) => item.id === theme,
+                )?.name.toLocaleUpperCase("vi")}
               </strong>
             </div>
           )}

@@ -32,10 +32,12 @@
 
 - Exercise cards show Kết quả as correct/total câu đúng from the saved result (not Đã lưu), alongside saved elapsed time. This score summary is visible without a parent password; detailed solutions remain protected.
 
-- Available interface themes are Thế giới Pixel, Thỏ con, Đảo pha lê (crystal), Thành phố trên mây (cloud), and Rừng đom đóm (forest). The owner removed Công viên khủng long, Đảo khủng long 3D, Nhà khám phá khủng long, Robot and Vũ trụ. Saved selections of removed themes fall back to Pixel; do not restore those options.
+- Available interface themes are Thế giới Pixel, Thỏ con, Đảo pha lê (crystal), Thành phố trên mây (cloud), Rừng đom đóm (forest), Nhà khám phá khủng long (museum), Phép thuật (magic), Kho báu (treasure), and Ô tô (cars). The owner removed Công viên khủng long, Đảo khủng long 3D, Robot and Vũ trụ. Saved selections of removed themes fall back to Pixel; do not restore those options.
 
 - Đảo pha lê follows the owner’s crystal-island reference using generated crystal-world/hero/sprites/book assets. Preserve the removed catalog heading/count row and real-content-only policy: reference demo cards/scores are decorative examples and must not be imported as exercises/results.
 
 - Thành phố trên mây follows the owner’s warm pink/gold cloud-city reference with cloud-world/hero/sprites/book artwork, gold coin badges, warm borders and blue actions. Retain only real exercises and the owner-requested hidden catalog heading/count row.
 
 - Rừng đom đóm follows the owner’s forest reference with generated forest-world/hero/sprites/book and wooden sign assets, woodland mascots, green/ivory surfaces and amber actions. Keep real content only and retain the hidden redundant catalog row.
+
+- The owner explicitly requested restoring the museum theme and adding magic, treasure and cars from supplied references. Use their generated artwork, preserve real data and hidden catalog headings, and keep the existing practice/authentication flows.

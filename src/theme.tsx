@@ -6,6 +6,10 @@ export const THEMES = [
   { id: "crystal", name: "Đảo pha lê", hero: "crystal-hero" },
   { id: "cloud", name: "Thành phố trên mây", hero: "cloud-hero" },
   { id: "forest", name: "Rừng đom đóm", hero: "forest-hero" },
+  { id: "museum", name: "Nhà khám phá khủng long", hero: "museum-hero" },
+  { id: "magic", name: "Phép thuật", hero: "magic-hero" },
+  { id: "treasure", name: "Kho báu", hero: "treasure-hero" },
+  { id: "cars", name: "Ô tô", hero: "cars-hero" },
 ] as const;
 export type LearningTheme = (typeof THEMES)[number]["id"];
 const KEY = "homework-interface:v3";
