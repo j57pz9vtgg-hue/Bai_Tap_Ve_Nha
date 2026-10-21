@@ -17,6 +17,7 @@ import {
 import type { Exercise, Question, Section } from "./data";
 
 type Props = {
+  embedded?: boolean;
   exercise: Exercise;
   grade: number;
   section: Section;
@@ -51,18 +52,20 @@ export function PaperWorkspace(p: Props) {
       className={`paper-world ${topic ? "topic-world" : ""}`}
       inert={p.inert}
     >
-      <div className="paper-brand">
-        <img src={publicAsset("pixel-book")} alt="" />
-        <strong>
-          Góc học tập <em>của bé</em>
-        </strong>
-        <button className="text-button" onClick={p.onClose}>
-          <ArrowLeft size={18} />
-          Về danh sách
-        </button>
-      </div>
+      {!p.embedded && (
+        <div className="paper-brand">
+          <img src={publicAsset("pixel-book")} alt="" />
+          <strong>
+            Góc học tập <em>của bé</em>
+          </strong>
+          <button className="text-button" onClick={p.onClose}>
+            <ArrowLeft size={18} />
+            Về danh sách
+          </button>
+        </div>
+      )}
       <div className="paper-shell">
-        {topic && (
+        {topic && !p.embedded && (
           <section className="topic-setup" aria-label="Chọn nội dung luyện tập">
             <div className="topic-filters">
               <label>
@@ -169,7 +172,7 @@ export function PaperWorkspace(p: Props) {
               </span>
             )}
             <div>
-              <h2>{p.exercise.title}</h2>
+              <h2>{p.embedded ? "Bài luyện tập" : p.exercise.title}</h2>
               {!topic && (
                 <small>
                   {SECTION_LABELS[p.section]} • Lớp {p.grade} • Toán

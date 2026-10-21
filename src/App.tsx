@@ -1,3 +1,4 @@
+import { TopicExample } from "./TopicExample";
 import {
   lazy,
   Suspense,
@@ -69,6 +70,10 @@ export default function App() {
   const [search, setSearch] = useState("");
   const [parentOpen, setParentOpen] = useState(false);
   const [selection, setSelection] = useState<Selection | null>(null);
+  const [selectedTopicId, setSelectedTopicId] = useState("topic-01");
+  const [exampleSignal, setExampleSignal] = useState(0);
+  const [practiceSignal, setPracticeSignal] = useState(0);
+  const [practiceRound, setPracticeRound] = useState(0);
   const [storageError, setStorageError] = useState(false);
   const grade = saved.grade;
   const isExam = section === "timo" || section === "asmo";
@@ -83,6 +88,19 @@ export default function App() {
       .toLowerCase();
   const exercises = getExercises(section, category, grade).filter((e) =>
     normalized(e.title).includes(normalized(search.trim())),
+  );
+  const topicOptions = getExercises(section, "topic", grade);
+  const inlineTopic =
+    category === "topic"
+      ? (topicOptions.find((t) => t.id === selectedTopicId) ?? topicOptions[0])
+      : undefined;
+  const inlineId = inlineTopic ? storageId(section, grade, inlineTopic.id) : "";
+  const saveInlineDraft = useCallback(
+    (draft: Draft) => {
+      if (inlineId)
+        setSaved((s) => ({ ...s, drafts: { ...s.drafts, [inlineId]: draft } }));
+    },
+    [inlineId],
   );
   const categoryTitle =
     category === "all"
@@ -234,6 +252,38 @@ export default function App() {
               setSearch("");
             }}
           />
+          {category === "topic" && topicOptions.length > 0 && (
+            <div className="inline-topic-selector">
+              <label htmlFor="catalog-topic">Chọn chủ đề</label>
+              <select
+                id="catalog-topic"
+                value={inlineTopic?.id ?? ""}
+                onChange={(e) => {
+                  setSelectedTopicId(e.target.value);
+                  setPracticeSignal(0);
+                }}
+              >
+                {topicOptions.map((t) => (
+                  <option key={t.id} value={t.id}>
+                    {t.title}
+                  </option>
+                ))}
+              </select>
+              {inlineTopic?.example && (
+                <button
+                  className="secondary-button"
+                  onClick={() => {
+                    setExampleSignal((n) => n + 1);
+                    document
+                      .querySelector(".topic-example-intro")
+                      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                >
+                  <BookOpen size={22} /> Ví dụ bài mẫu
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
       <main id="main-content" className="page-content">
@@ -265,7 +315,46 @@ export default function App() {
           >
             {exercises.length} {category === "topic" ? "chủ đề" : "đề"}
           </span>
-          {exercises.length ? (
+          {inlineTopic ? (
+            <div className="inline-topic-page">
+              <TopicExample
+                showSignal={exampleSignal}
+                key={`${section}:${grade}:${inlineTopic.id}`}
+                exercise={inlineTopic}
+                hasDraft={Boolean(saved.drafts[inlineId])}
+                onSetupPassword={() => setParentOpen(true)}
+                onPractice={() => {
+                  setPracticeSignal((n) => n + 1);
+                  document
+                    .getElementById("inline-practice")
+                    ?.scrollIntoView({ behavior: "smooth", block: "start" });
+                }}
+              />
+              <div id="inline-practice">
+                <Suspense
+                  fallback={<p role="status">Đang chuẩn bị bài tập…</p>}
+                >
+                  <Quiz
+                    key={`${inlineId}:${practiceRound}`}
+                    embedded
+                    startSignal={practiceSignal}
+                    exercise={inlineTopic}
+                    grade={grade}
+                    section={section}
+                    id={inlineId}
+                    draft={saved.drafts[inlineId]}
+                    onSave={saveInlineDraft}
+                    onFinish={finish}
+                    onClose={() => {
+                      setPracticeSignal(0);
+                      setPracticeRound((n) => n + 1);
+                    }}
+                    onSetupPassword={() => setParentOpen(true)}
+                  />
+                </Suspense>
+              </div>
+            </div>
+          ) : exercises.length ? (
             <div className="exercise-grid">
               {exercises.map((exercise, index) => {
                 const id = storageId(section, grade, exercise.id);
@@ -282,9 +371,19 @@ export default function App() {
                     }
                     result={saved.results[id]}
                     hasDraft={Boolean(saved.drafts[id])}
-                    onOpen={() =>
-                      setSelection({ exercise, section, grade, mode: "play" })
-                    }
+                    onOpen={() => {
+                      if (exercise.category === "topic") {
+                        setCategory("topic");
+                        setSelectedTopicId(exercise.id);
+                        setPracticeSignal(0);
+                      } else
+                        setSelection({
+                          exercise,
+                          section,
+                          grade,
+                          mode: "play",
+                        });
+                    }}
                     onView={() =>
                       setSelection({ exercise, section, grade, mode: "result" })
                     }
