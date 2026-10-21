@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BookOpen, ChevronDown, ChevronUp } from "lucide-react";
 import { Dialog } from "./components";
+import { FarmIllustration } from "./FarmIllustration";
 
 // Transcribed exclusively from the owner's supplied Age problem example.
 export function TopicExample({
@@ -204,68 +205,176 @@ const animalSolution = [
   ],
 ];
 function ProblemTypeOneExample({ onClose }: { onClose: () => void }) {
+  const [activeExample, setActiveExample] = useState(1);
   const [expanded, setExpanded] = useState(true);
+  const [secondExpanded, setSecondExpanded] = useState(true);
   return (
     <Dialog
       title="Dạng bài 1 (Problem type 1)"
-      className="topic-example-dialog"
+      className="topic-example-dialog compact-topic-dialog"
       onClose={onClose}
     >
       <p className="topic-source">TIMO · Lớp 2 · Luyện theo chủ đề</p>
       <h1>
         Dạng bài 1 <span>(Problem type 1)</span>
       </h1>
-      <section aria-labelledby="animal-example-title">
-        <h2 id="animal-example-title">
-          <BookOpen size={23} /> Ví dụ
-        </h2>
-        <div className="age-example-question" lang="en">
-          <p>
-            There are 36 animals including chickens and rabbits on a farm. They
-            can count 100 legs in total.
-          </p>
-          <p>
-            How many chickens are there?
-            <br />
-            How many rabbits are there?
-          </p>
-        </div>
-        <div className="age-example-translation">
-          <p>
-            Có 36 con vật bao gồm con gà và thỏ trong một nông trại. Người ta
-            đếm được tổng số 100 cái chân.
-          </p>
-          <p>
-            Hỏi có bao nhiêu con gà?
-            <br />
-            Hỏi có bao nhiêu con thỏ?
-          </p>
-        </div>
+      <div className="example-tabs" role="group" aria-label="Chọn ví dụ">
         <button
-          className="age-solution-toggle"
-          aria-expanded={expanded}
-          aria-controls="animal-solution"
-          onClick={() => setExpanded(!expanded)}
+          aria-pressed={activeExample === 1}
+          onClick={() => setActiveExample(1)}
         >
-          Lời giải của bài ví dụ{" "}
-          {expanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+          Ví dụ 1 · Problem type 1
         </button>
-        {expanded && (
-          <div id="animal-solution" className="age-solution date-solution">
-            <section>
-              <h3>Solution</h3>
-              {animalSolution.map(([english, vietnamese], i) => (
-                <div className="bilingual-solution-step" key={i}>
-                  <p lang="en">{english}</p>
-                  <p className="solution-translation">{vietnamese}</p>
-                </div>
-              ))}
-              <p lang="en">
-                <strong>Ans. 22 chickens. 14 rabbits</strong>
-              </p>
-            </section>
+        <button
+          aria-pressed={activeExample === 2}
+          onClick={() => setActiveExample(2)}
+        >
+          Ví dụ 2 · Problem type 2
+        </button>
+      </div>
+      <section
+        className="compact-example-layout"
+        hidden={activeExample !== 1}
+        aria-labelledby="animal-example-title"
+      >
+        <div className="compact-example-question">
+          <h2 id="animal-example-title">
+            <BookOpen size={23} /> Ví dụ 1 · Problem type 1
+          </h2>
+          <div className="age-example-question" lang="en">
+            <p>
+              There are 36 animals including chickens and rabbits on a farm.
+              They can count 100 legs in total.
+            </p>
+            <p>
+              How many chickens are there?
+              <br />
+              How many rabbits are there?
+            </p>
           </div>
-        )}
+          <div className="age-example-translation">
+            <p>
+              Có 36 con vật bao gồm con gà và thỏ trong một nông trại. Người ta
+              đếm được tổng số 100 cái chân.
+            </p>
+            <p>
+              Hỏi có bao nhiêu con gà?
+              <br />
+              Hỏi có bao nhiêu con thỏ?
+            </p>
+          </div>
+          <FarmIllustration />
+        </div>
+        <div className="compact-example-answer">
+          <button
+            className="age-solution-toggle"
+            aria-expanded={expanded}
+            aria-controls="animal-solution"
+            onClick={() => setExpanded(!expanded)}
+          >
+            Lời giải ví dụ 1{" "}
+            {expanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+          </button>
+          {expanded && (
+            <div
+              id="animal-solution"
+              className="age-solution animal-illustrated-solution"
+            >
+              <section>
+                <h3>Solution</h3>
+                {animalSolution.map(([english, vietnamese], i) => (
+                  <div className="bilingual-solution-step" key={i}>
+                    <p lang="en">{english}</p>
+                    <p className="solution-translation">{vietnamese}</p>
+                  </div>
+                ))}
+                <p lang="en">
+                  <strong>Ans. 22 chickens. 14 rabbits</strong>
+                </p>
+              </section>
+              <FarmIllustration solution />
+            </div>
+          )}
+        </div>
+      </section>
+      <section
+        className="compact-example-layout"
+        hidden={activeExample !== 2}
+        aria-labelledby="animal-example-two-title"
+      >
+        <div className="compact-example-question">
+          <h2 id="animal-example-two-title">
+            <BookOpen size={23} /> Ví dụ 2 · Problem type 2
+          </h2>
+          <p className="age-example-question" lang="en">
+            There are some chickens and rabbits on the farm. The number of
+            chickens is 14 more than the number of rabbits. If there are 172
+            legs in total, how many rabbits are there?
+          </p>
+          <p className="age-example-translation">
+            Có một số con gà và thỏ trên một trang trại. Số gà nhiều hơn số thỏ
+            14 con. Nếu tổng số chân là 172 thì hỏi có bao nhiêu con thỏ?
+          </p>
+        </div>
+        <div className="compact-example-answer">
+          <button
+            className="age-solution-toggle"
+            aria-expanded={secondExpanded}
+            aria-controls="animal-solution-two"
+            onClick={() => setSecondExpanded(!secondExpanded)}
+          >
+            Lời giải ví dụ 2{" "}
+            {secondExpanded ? (
+              <ChevronUp size={20} />
+            ) : (
+              <ChevronDown size={20} />
+            )}
+          </button>
+          {secondExpanded && (
+            <div
+              id="animal-solution-two"
+              className="age-solution date-solution"
+            >
+              <section>
+                <h3>Solution</h3>
+                <div className="bilingual-solution-step">
+                  <p lang="en">Let a be the number of rabbits.</p>
+                  <p className="solution-translation">Gọi a là số thỏ.</p>
+                </div>
+                <div className="bilingual-solution-step">
+                  <p lang="en">The number of chickens: a + 14 (chickens)</p>
+                  <p className="solution-translation">
+                    Số gà là a + 14 (con gà)
+                  </p>
+                </div>
+                <div className="bilingual-solution-step">
+                  <p lang="en">The number of rabbit’s legs: a x 4 (legs)</p>
+                  <p className="solution-translation">
+                    Số chân thỏ là a x 4 (chân)
+                  </p>
+                </div>
+                <div className="bilingual-solution-step">
+                  <p lang="en">
+                    The number of chicken’s legs: 2 x (a + 14) (legs)
+                  </p>
+                  <p className="solution-translation">
+                    Số chân gà là 2 x (a + 14) (chân)
+                  </p>
+                </div>
+                <div lang="en">
+                  <p>We have: a x 4 + 2 x (a + 14) = 172</p>
+                  <p>a x 4 + 2 x a + 2 x 14 = 172</p>
+                  <p>6 x a = 172 − 28</p>
+                  <p>6 x a = 144</p>
+                  <p>a = 24</p>
+                  <p>
+                    <strong>Ans. 24 rabbits</strong>
+                  </p>
+                </div>
+              </section>
+            </div>
+          )}
+        </div>
       </section>
       <p className="topic-awaiting">
         Chưa có câu luyện tập cho chủ đề này. Các câu phù hợp sẽ được bổ sung từ

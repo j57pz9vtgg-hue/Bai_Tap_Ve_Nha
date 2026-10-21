@@ -274,7 +274,13 @@ export default function App() {
                   <ExerciseCard
                     key={id}
                     exercise={exercise}
-                    index={index}
+                    index={
+                      exercise.category === "topic"
+                        ? getExercises(section, category, grade).findIndex(
+                            (item) => item.id === exercise.id,
+                          )
+                        : index
+                    }
                     result={saved.results[id]}
                     hasDraft={Boolean(saved.drafts[id])}
                     onOpen={() =>

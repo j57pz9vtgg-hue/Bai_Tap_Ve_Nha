@@ -251,7 +251,10 @@ export function ExerciseCard({
 }) {
   const { theme } = useLearningTheme();
   const artIndex = index % 16;
-  const number = Number(exercise.id.match(/-(\d+)$/)?.[1] ?? index + 1);
+  const number =
+    exercise.category === "topic"
+      ? index + 1
+      : Number(exercise.id.match(/-(\d+)$/)?.[1] ?? index + 1);
   return (
     <article className={`exercise-card ${result ? "is-complete" : ""}`}>
       <div className="exercise-top">
