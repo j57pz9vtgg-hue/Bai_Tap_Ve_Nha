@@ -1,3 +1,4 @@
+import { Paper4Illustration } from "./Paper4Illustration";
 import { Paper3Illustration } from "./Paper3Illustration";
 import { Paper2Illustration } from "./Paper2Illustration";
 import type { QuestionDiagram } from "./data";
@@ -654,6 +655,14 @@ export function QuestionIllustration({
   solution = false,
 }: DiagramProps) {
   if (!diagram) return null;
+  if (diagram.startsWith("p4-")) {
+    if (solution) return null;
+    return (
+      <div className={`question-illustration illustration-${diagram}`}>
+        <Paper4Illustration name={diagram.slice(3)} />
+      </div>
+    );
+  }
   if (diagram.startsWith("p3-")) {
     if (solution && !hasSolutionDiagram(diagram)) return null;
     return (
