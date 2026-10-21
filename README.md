@@ -32,6 +32,8 @@ printf '%s' "$app_password" | npm run configure-access
 unset app_password
 ```
 
+Khi chuyển từ bản ghi nhớ tự đăng nhập cũ sang bản điền sẵn mật khẩu mới, nhập mật khẩu và chọn Ghi nhớ một lần để lưu lại. Từ đó, đăng xuất vẫn giữ mật khẩu được điền sẵn.
+
 Sau đó build và xuất bản lại. Khi cấu hình thay đổi, phiên đăng nhập cũ hết hiệu lực. Mật khẩu phụ huynh không thay đổi theo cấu hình này.
 
 ## Chức năng
