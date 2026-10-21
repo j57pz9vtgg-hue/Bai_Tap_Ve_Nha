@@ -21,6 +21,11 @@ const TOPIC_BY_SOURCE_NUMBER: Record<number, string> = {
   9: "topic-09",
   10: "topic-10",
   11: "topic-11",
+  13: "topic-12",
+  14: "topic-13",
+  15: "topic-14",
+  16: "topic-15",
+  17: "topic-16",
 };
 for (const question of ALL_QUESTIONS) {
   question.topicId =
@@ -180,6 +185,11 @@ export function getExercises(
       { id: "topic-09", title: "Tính ngược theo sơ đồ", sourceNumber: 9 },
       { id: "topic-10", title: "Tìm chữ số trong phép cộng", sourceNumber: 10 },
       { id: "topic-11", title: "Đếm số theo tổng chữ số", sourceNumber: 11 },
+      { id: "topic-12", title: "Đếm kết quả chẵn, lẻ", sourceNumber: 13 },
+      { id: "topic-13", title: "Điền dấu cộng, trừ", sourceNumber: 14 },
+      { id: "topic-14", title: "Cân bằng số lượng", sourceNumber: 15 },
+      { id: "topic-15", title: "Đếm hình vuông", sourceNumber: 16 },
+      { id: "topic-16", title: "Quy luật dãy hình", sourceNumber: 17 },
     ].map(({ id, title, sourceNumber }) => ({
       id,
       title,

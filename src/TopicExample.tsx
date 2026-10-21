@@ -3,6 +3,7 @@ import { ArrowRight, BookOpen } from "lucide-react";
 import {
   QuestionIllustration,
   hasSolutionDiagram,
+  ShapeIcon,
 } from "./QuestionIllustration";
 import type { Exercise } from "./data";
 export function TopicExample({
@@ -51,7 +52,19 @@ export function TopicExample({
                 <div className="topic-example-options">
                   {example.options.map((option, i) => (
                     <span key={i}>
-                      {"ABCD"[i]}. {option}
+                      {"ABCD"[i]}.{" "}
+                      {example.diagram === "shape-pattern" ? (
+                        <svg
+                          className="option-shape"
+                          viewBox="-17 -17 34 34"
+                          role="img"
+                          aria-label={option}
+                        >
+                          <ShapeIcon index={i} />
+                        </svg>
+                      ) : (
+                        option
+                      )}
                     </span>
                   ))}
                 </div>
