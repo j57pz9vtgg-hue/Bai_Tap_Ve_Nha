@@ -76,6 +76,7 @@ export default function Quiz({
   const [stage, setStage] = useState<"work" | "result" | "review">(
     initialResult ? "result" : "work",
   );
+  const [reviewRequested, setReviewRequested] = useState(false);
   const [resultUnlocked, setResultUnlocked] = useState(false);
   const [elapsedSeconds, setElapsedSeconds] = useState(
     initialResult?.elapsedSeconds ?? 0,
@@ -172,6 +173,7 @@ export default function Quiz({
     submitted.current = false;
     setReviewingSaved(false);
     setResultUnlocked(false);
+    setReviewRequested(false);
     setQuestions(getPracticeQuestions(grade, section, exercise));
     setAnswers({});
     setIndex(0);
@@ -183,7 +185,7 @@ export default function Quiz({
     <Dialog
       title={exercise.title}
       onClose={requestClose}
-      className={`quiz-dialog ${stage === "result" ? "result-dialog" : ""} ${isPaper && ((started && stage !== "result") || (isTopic && stage !== "result")) ? "paper-dialog" : ""}`}
+      className={`quiz-dialog ${!isPaper && stage === "result" ? "result-dialog" : ""} ${isPaper && (started || isTopic) ? "paper-dialog" : ""}`}
     >
       {!started && !isTopic ? (
         <div className="quiz-intro">
@@ -217,7 +219,7 @@ export default function Quiz({
             <ArrowRight size={20} />
           </button>
         </div>
-      ) : stage === "result" && !resultUnlocked ? (
+      ) : !isPaper && stage === "result" && !resultUnlocked ? (
         <div className="result-lock">
           <ParentPassword
             purpose="review"
@@ -226,7 +228,7 @@ export default function Quiz({
             onUnlock={() => setResultUnlocked(true)}
           />
         </div>
-      ) : stage === "result" ? (
+      ) : !isPaper && stage === "result" ? (
         <div className="result-view">
           <div className="result-trophy">
             <Trophy size={64} />
@@ -295,6 +297,27 @@ export default function Quiz({
           answers={answers}
           started={started}
           review={stage === "review"}
+          submitted={finished}
+          score={score}
+          onRestart={restart}
+          onReview={() => {
+            if (resultUnlocked) setStage("review");
+            else setReviewRequested(true);
+          }}
+          reviewAccess={
+            reviewRequested && !resultUnlocked ? (
+              <ParentPassword
+                purpose="review"
+                onCancel={() => setReviewRequested(false)}
+                onSetup={onSetupPassword}
+                onUnlock={() => {
+                  setResultUnlocked(true);
+                  setReviewRequested(false);
+                  setStage("review");
+                }}
+              />
+            ) : null
+          }
           elapsed={finished ? elapsedSeconds : 900 - remaining}
           inert={confirmLeave}
           onAnswer={(q, a) => setAnswers((prev) => ({ ...prev, [q]: a }))}

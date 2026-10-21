@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { TopicExample } from "./TopicExample";
 import { Paper2Shape } from "./Paper2Illustration";
 import {
@@ -18,6 +19,11 @@ import {
 import type { Exercise, Question, Section } from "./data";
 
 type Props = {
+  submitted?: boolean;
+  score?: number;
+  onReview?: () => void;
+  onRestart?: () => void;
+  reviewAccess?: ReactNode;
   hasDraft?: boolean;
   exercise: Exercise;
   grade: number;
@@ -200,7 +206,7 @@ export function PaperWorkspace(p: Props) {
             <Clock3 />
             <div>
               <small>
-                {p.review ? "Thời gian làm bài" : "Thời gian đã làm"}
+                {p.submitted ? "Thời gian làm bài" : "Thời gian đã làm"}
               </small>
               <strong>{clock}</strong>
             </div>
@@ -214,8 +220,33 @@ export function PaperWorkspace(p: Props) {
               </strong>
             </div>
           </div>
-          {p.started && !p.review ? (
-            submit
+          {p.submitted && (
+            <div className="paper-stat paper-result" role="status">
+              <FileCheck2 />
+              <div>
+                <small>Kết quả</small>
+                <strong>
+                  {p.score}/{p.questions.length} câu đúng
+                </strong>
+              </div>
+            </div>
+          )}
+          {p.submitted && !p.review ? (
+            <div className="paper-result-actions">
+              <button className="paper-submit" onClick={p.onReview}>
+                Xem đáp án & lời giải
+              </button>
+              <button className="secondary-button" onClick={p.onRestart}>
+                Làm lại
+              </button>
+            </div>
+          ) : p.started && !p.review ? (
+            <div className="paper-result-actions">
+              {submit}
+              <button className="secondary-button" onClick={p.onRestart}>
+                Làm lại
+              </button>
+            </div>
           ) : p.review ? (
             <button className="paper-submit" onClick={p.onClose}>
               Hoàn tất
@@ -231,6 +262,14 @@ export function PaperWorkspace(p: Props) {
             </button>
           )}
         </header>
+        {p.reviewAccess && (
+          <section
+            className="paper-review-access"
+            aria-label="Mở lời giải chi tiết"
+          >
+            {p.reviewAccess}
+          </section>
+        )}
         <article
           className={`exam-paper ${p.review ? "review-paper" : ""}`}
           aria-label={p.review ? "Đáp án và lời giải" : "Bài luyện tập Toán"}
@@ -263,7 +302,7 @@ export function PaperWorkspace(p: Props) {
             >
               <fieldset
                 className="paper-question"
-                disabled={!p.started || p.review}
+                disabled={!p.started || p.review || p.submitted}
               >
                 <legend>
                   <strong>Câu {i + 1}.</strong> {q.text}
@@ -338,7 +377,7 @@ export function PaperWorkspace(p: Props) {
               )}
             </div>
           ))}
-          {p.started && !p.review && (
+          {p.started && !p.review && !p.submitted && (
             <footer className="paper-end">{submit}</footer>
           )}
         </article>

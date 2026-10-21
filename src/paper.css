@@ -1125,3 +1125,39 @@
   justify-content: center;
   gap: 8px;
 }
+.paper-result strong {
+  color: #15744d;
+}
+.paper-result-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.paper-result-actions .paper-submit {
+  font-size: 15px;
+  padding: 10px 14px;
+}
+.paper-review-access {
+  max-width: 560px;
+  background: white;
+  padding: 20px;
+  border: 1px solid #c5e9ff;
+  border-radius: 12px;
+  margin: 16px auto;
+}
+@media (max-width: 760px) {
+  .paper-result-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .paper-result {
+    flex: 1;
+  }
+}
+
+.paper-result-actions .secondary-button {
+  padding: 10px 14px;
+  min-height: 46px;
+  white-space: nowrap;
+}

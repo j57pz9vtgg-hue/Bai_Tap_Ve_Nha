@@ -23,3 +23,7 @@
 - Unify only question typography: Arial at 18px and line-height 1.5 for question text, translations, number sequences and choices. Preserve the existing colors, backgrounds, margins and layout; the owner explicitly canceled A4/paper restyling. Preserve mathematical content and diagram labels.
 
 - Nộp bài submits directly without a confirmation step; freeze and save elapsed time on submission and show it with the parent-protected result. Preserve the parent result/answer gate.
+
+- After Nộp bài, show the score inline in the existing paper toolbar immediately after Đã trả lời, retain the question paper and frozen elapsed time, and lock answer inputs. The owner explicitly allows this score summary without a parent password. Detailed answer keys/worked solutions still require the parent password, entered inline only when requested. Do not open a separate results popup.
+
+- Keep a visible Làm lại button immediately after Nộp bài in the paper toolbar. It starts a fresh attempt by clearing selections and resetting the timer, while preserving previously saved results until the next submission.
