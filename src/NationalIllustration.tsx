@@ -188,13 +188,13 @@ export function NationalIllustration({
           label="Các cột khối lập phương và hàng khối nằm ngang, quan sát từ trên"
           viewBox="0 0 410 250"
         >
-          <SourceCube x={70} y={48} />
-          <SourceCube x={70} y={88} />
           <SourceCube x={70} y={128} />
-          <SourceCube x={136} y={62} />
+          <SourceCube x={70} y={88} />
+          <SourceCube x={70} y={48} />
           <SourceCube x={136} y={102} />
-          <SourceCube x={164} y={76} />
+          <SourceCube x={136} y={62} />
           <SourceCube x={164} y={116} />
+          <SourceCube x={164} y={76} />
           <SourceCube x={245} y={76} />
           <SourceCube x={110} y={128} />
           {[204, 244, 284, 324].map((x) => (
@@ -341,16 +341,16 @@ export function NationalIllustration({
           label="Các khối lập phương, quan sát từ bên phải"
           viewBox="0 0 300 230"
         >
-          {[39, 69, 99, 129].map((y) => (
+          {[129, 99, 69, 39].map((y) => (
             <SourceCube key={y} x={52} y={y} size={30} depth={10} />
           ))}
           {[83, 113].map((x) => (
             <SourceCube key={x} x={x} y={127} size={30} depth={10} />
           ))}
-          {[68, 98, 128].map((y) => (
+          {[128, 98, 68].map((y) => (
             <SourceCube key={y} x={140} y={y} size={30} depth={10} />
           ))}
-          {[98, 128].map((y) => (
+          {[128, 98].map((y) => (
             <SourceCube key={y} x={170} y={y} size={30} depth={10} />
           ))}
           <SourceCube x={43} y={108} size={30} depth={10} />
