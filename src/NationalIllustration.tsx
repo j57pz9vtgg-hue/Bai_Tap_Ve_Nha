@@ -866,5 +866,80 @@ export function NationalIllustration({
         </SourceDrawing>
       );
   }
+  if (paper === 7) {
+    if (name === "shapes")
+      return (
+        <SymbolStrip
+          label="Dãy hình tròn rỗng, tam giác rỗng, vuông rỗng lặp lại"
+          symbols={["○", "△", "□", "○", "△", "□", "○", "△", "□"]}
+        />
+      );
+    if (name === "letters")
+      return <div className="diagram-number-line">A、E、I、M、___</div>;
+    if (name === "sequence13")
+      return <div className="diagram-number-line">12、21、30、39、48、…</div>;
+    if (name === "operators")
+      return <div className="diagram-number-line">7 __ 4 __ 5 __ 3 = 13</div>;
+    if (name === "addition")
+      return <Addition top="B" bottom="A B" total="6 6" />;
+    if (name === "expressions")
+      return (
+        <div className="diagram-number-line">
+          15+13，19−7，14−9，5+9，19−10，11−8，17−9，3+7，18−7
+        </div>
+      );
+    if (name === "squares")
+      return (
+        <SourceDrawing
+          label="Hàng trên năm ô vuông, hàng dưới bốn ô vuông thẳng bên trái"
+          viewBox="0 0 240 125"
+        >
+          {Array.from({ length: 9 }, (_, i) => (
+            <rect
+              key={i}
+              x={20 + (i < 5 ? i : i - 5) * 38}
+              y={20 + (i < 5 ? 0 : 38)}
+              width="38"
+              height="38"
+              fill="white"
+              stroke="#333"
+              strokeWidth="1"
+            />
+          ))}
+        </SourceDrawing>
+      );
+    if (name === "segments") {
+      const a = [25, 45],
+        b = [20, 120],
+        c = [230, 28],
+        d = [225, 126],
+        o = intersection(a, d, b, c),
+        e = [170, 28 + ((120 - 28) * (230 - 170)) / (230 - 20)];
+      return (
+        <DotLines
+          lines={[
+            [a, d],
+            [b, c],
+          ]}
+          points={[a, b, c, d, o, e]}
+          viewBox="0 0 260 155"
+        />
+      );
+    }
+    if (name === "cubes")
+      return (
+        <SourceDrawing
+          label="Các khối lập phương, quan sát từ bên cạnh"
+          viewBox="0 0 245 220"
+        >
+          <SourceCube x={75} y={108} size={38} depth={13} />
+          <SourceCube x={75} y={70} size={38} depth={13} />
+          <SourceCube x={113} y={108} size={38} depth={13} />
+          <SourceCube x={62} y={121} size={38} depth={13} />
+          <SourceCube x={100} y={134} size={38} depth={13} />
+          <SourceCube x={138} y={134} size={38} depth={13} />
+        </SourceDrawing>
+      );
+  }
   return null;
 }
