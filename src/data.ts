@@ -1,6 +1,11 @@
 import { TIMO_GRADE2_QUALIFIER1 } from "./content/timo-grade2-qualifier1";
 import { TIMO_GRADE2_QUALIFIER2 } from "./content/timo-grade2-qualifier2";
 const ALL_QUESTIONS = [...TIMO_GRADE2_QUALIFIER1, ...TIMO_GRADE2_QUALIFIER2];
+// Classification follows the owner’s newly supplied numeric-sequence example.
+for (const question of ALL_QUESTIONS) {
+  if (question.sourceNumber === 1 || question.sourceNumber === 12)
+    question.topicId = "topic-01";
+}
 export type Section =
   "home" | "timo" | "asmo" | "toan" | "vietnamese" | "esl" | "math" | "science";
 export type Category = "all" | "qualifier" | "national" | "topic";
@@ -10,6 +15,7 @@ export type Exercise = {
   category: Category;
   topic?: number;
   exampleOnly?: boolean;
+  example?: Question;
   questionCount?: number;
 };
 export type QuestionDiagram =
@@ -123,6 +129,13 @@ export function getExercises(
     },
   ];
   const topics = [
+    {
+      id: "topic-01",
+      title: "Chủ đề 1",
+      category: "topic" as const,
+      example: TIMO_GRADE2_QUALIFIER1[0],
+      exampleOnly: true,
+    },
     { id: "unassigned", title: "Chưa có chủ đề", category: "topic" as const },
   ].map((topic) => ({
     ...topic,
