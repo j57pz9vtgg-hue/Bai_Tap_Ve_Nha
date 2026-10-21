@@ -2064,7 +2064,7 @@
   height: 180px;
 }
 :root[data-theme="forest"]:not([data-theme="pixel"]) .brand {
-  margin-left: 175px;
+  margin-left: 240px;
   margin-top: -8px;
   width: 310px;
   max-width: 27%;
