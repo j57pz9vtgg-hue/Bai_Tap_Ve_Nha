@@ -630,6 +630,12 @@ function FoodChoices({ solution = false }: { solution?: boolean }) {
 export const hasSolutionDiagram = (diagram?: QuestionDiagram) =>
   diagram !== undefined &&
   [
+    "p5-inverse",
+    "p5-cubes-count",
+    "p5-cubes-top",
+    "p5-triangles",
+    "p5-max-squares",
+    "p5-flowers-table",
     "p4-chess",
     "p4-shapes",
     "p4-cubes-count",
@@ -696,10 +702,15 @@ export function QuestionIllustration({
     );
   }
   if (diagram.startsWith("p5-")) {
-    if (solution) return null;
+    if (
+      ["p5-inverse", "p5-max-squares", "p5-flowers-table"].includes(diagram) &&
+      !solution
+    )
+      return null;
+    if (solution && !hasSolutionDiagram(diagram)) return null;
     return (
       <div className={`question-illustration illustration-${diagram}`}>
-        <Paper5Illustration name={diagram.slice(3)} />
+        <Paper5Illustration name={diagram.slice(3)} solution={solution} />
       </div>
     );
   }
