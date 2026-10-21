@@ -1,5 +1,4 @@
-import type { ReactNode } from "react";
-import { createPortal } from "react-dom";
+import { QuestionIllustration } from "./QuestionIllustration";
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
@@ -32,8 +31,6 @@ type QuizProps = {
   onFinish: (result: Result) => void;
   onClose: () => void;
   onSetupPassword: () => void;
-  embedded?: boolean;
-  startSignal?: number;
   onConfigure?: (grade: number, section: Section, exercise: Exercise) => void;
 };
 
@@ -49,8 +46,6 @@ export default function Quiz({
   onClose,
   onSetupPassword,
   onConfigure,
-  embedded = false,
-  startSignal = 0,
 }: QuizProps) {
   const [reviewingSaved, setReviewingSaved] = useState(Boolean(initialResult));
   const isPaper = section === "timo" || section === "asmo";
@@ -63,9 +58,7 @@ export default function Quiz({
         : getPracticeQuestions(grade, section, exercise),
   );
   const [started, setStarted] = useState(
-    Boolean(
-      initialResult || (draft && (embedded || !(isTopic && exercise.example))),
-    ),
+    Boolean(initialResult || (draft && !(isTopic && exercise.example))),
   );
   const [answers, setAnswers] = useState<Record<number, number>>(
     initialResult?.answers ?? draft?.answers ?? {},
@@ -78,6 +71,8 @@ export default function Quiz({
   const [stage, setStage] = useState<"work" | "confirm" | "result" | "review">(
     initialResult ? "result" : "work",
   );
+  const [exampleUnlocked, setExampleUnlocked] = useState(false);
+  const [showExampleGate, setShowExampleGate] = useState(false);
   const [resultUnlocked, setResultUnlocked] = useState(false);
   const [confirmLeave, setConfirmLeave] = useState(false);
   const submitted = useRef(Boolean(initialResult));
@@ -166,13 +161,6 @@ export default function Quiz({
     setRemaining(900);
     setStarted(true);
   };
-  useEffect(() => {
-    if (startSignal && !started) {
-      setDeadline(Date.now() + 15 * 60 * 1000);
-      setRemaining(900);
-      setStarted(true);
-    }
-  }, [startSignal, started]);
   const restart = () => {
     submitted.current = false;
     setReviewingSaved(false);
@@ -184,11 +172,70 @@ export default function Quiz({
     start();
   };
 
-  const renderOverlay = (node: ReactNode) =>
-    embedded ? createPortal(node, document.body) : node;
-  const content = (
-    <>
-      {!started && !isTopic ? (
+  return (
+    <Dialog
+      title={exercise.title}
+      onClose={requestClose}
+      className={`quiz-dialog ${stage === "result" ? "result-dialog" : ""} ${isPaper && ((started && stage !== "result") || (isTopic && stage !== "result")) ? "paper-dialog" : ""}`}
+    >
+      {!started && isTopic && exercise.example ? (
+        <section className="topic-example-intro">
+          <h2>{exercise.title}</h2>
+          <div className="topic-example-columns">
+            <section>
+              <h3>Ví dụ</h3>
+              <p>{exercise.example.text}</p>
+              <p className="question-translation">
+                {exercise.example.translation}
+              </p>
+              <QuestionIllustration diagram={exercise.example.diagram} />
+              <div className="topic-example-options">
+                {exercise.example.options.map((option, i) => (
+                  <span key={i}>
+                    {"ABCD"[i]}. {option}
+                  </span>
+                ))}
+              </div>
+            </section>
+            <section>
+              <h3>Lời giải ví dụ</h3>
+              {exampleUnlocked ? (
+                <p className="supplied-explanation">
+                  {exercise.example.explanation}
+                </p>
+              ) : showExampleGate ? (
+                <ParentPassword
+                  purpose="review"
+                  onCancel={() => setShowExampleGate(false)}
+                  onSetup={onSetupPassword}
+                  onUnlock={() => {
+                    setExampleUnlocked(true);
+                    setShowExampleGate(false);
+                  }}
+                />
+              ) : (
+                <button
+                  className="primary-button"
+                  onClick={() => setShowExampleGate(true)}
+                >
+                  Xem lời giải ví dụ
+                </button>
+              )}
+            </section>
+          </div>
+          <p>{questions.length} câu luyện tập cùng dạng từ bộ đề bạn đã gửi.</p>
+          <button
+            className="primary-button"
+            onClick={() => {
+              if (draft) setStarted(true);
+              else start();
+            }}
+          >
+            {draft ? "Tiếp tục luyện tập" : "Bắt đầu luyện tập"}{" "}
+            <ArrowRight size={20} />
+          </button>
+        </section>
+      ) : !started && !isTopic ? (
         <div className="quiz-intro">
           <img
             src={publicAsset("pixel-hero")}
@@ -287,7 +334,6 @@ export default function Quiz({
         </div>
       ) : isPaper ? (
         <PaperWorkspace
-          embedded={embedded}
           exercise={exercise}
           grade={grade}
           section={section}
@@ -301,10 +347,7 @@ export default function Quiz({
               : 900 - remaining
           }
           inert={stage === "confirm" || confirmLeave}
-          onAnswer={(q, a) => {
-            if (!started) start();
-            setAnswers((prev) => ({ ...prev, [q]: a }));
-          }}
+          onAnswer={(q, a) => setAnswers((prev) => ({ ...prev, [q]: a }))}
           onStart={start}
           onSubmit={() => setStage("confirm")}
           onClose={requestClose}
@@ -439,71 +482,53 @@ export default function Quiz({
           ) : null}
         </div>
       )}
-      {stage === "confirm"
-        ? renderOverlay(
-            <div className={`quiz-confirm ${embedded ? "inline-confirm" : ""}`}>
-              <div
-                role="alertdialog"
-                aria-modal="true"
-                aria-labelledby="submit-title"
-              >
-                <Send className="confirm-icon" size={35} />
-                <h3 id="submit-title">Bé muốn nộp bài chứ?</h3>
-                <p>
-                  {answered === questions.length
-                    ? "Bé đã trả lời tất cả câu hỏi. Cùng xem kết quả nào!"
-                    : `Bé còn ${questions.length - answered} câu chưa trả lời. Bé có muốn kiểm tra lại không?`}
-                </p>
-                <button className="primary-button" autoFocus onClick={finish}>
-                  Nộp bài và xem kết quả
-                </button>
-                <button
-                  className="text-button"
-                  onClick={() => setStage("work")}
-                >
-                  Quay lại làm bài
-                </button>
-              </div>
-            </div>,
-          )
-        : null}
-      {confirmLeave
-        ? renderOverlay(
-            <div className={`quiz-confirm ${embedded ? "inline-confirm" : ""}`}>
-              <div
-                role="alertdialog"
-                aria-modal="true"
-                aria-labelledby="leave-title"
-              >
-                <h3 id="leave-title">Tạm dừng cuộc phiêu lưu?</h3>
-                <p>
-                  Câu trả lời đã được lưu. Đồng hồ vẫn tiếp tục chạy, bé nhớ
-                  quay lại trước khi hết giờ nhé.
-                </p>
-                <button className="primary-button" autoFocus onClick={onClose}>
-                  Lưu và về danh sách
-                </button>
-                <button
-                  className="text-button"
-                  onClick={() => setConfirmLeave(false)}
-                >
-                  Tiếp tục làm bài
-                </button>
-              </div>
-            </div>,
-          )
-        : null}
-    </>
-  );
-  if (embedded)
-    return <section className="inline-topic-workspace">{content}</section>;
-  return (
-    <Dialog
-      title={exercise.title}
-      onClose={requestClose}
-      className={`quiz-dialog ${stage === "result" ? "result-dialog" : ""} ${isPaper && ((started && stage !== "result") || (isTopic && stage !== "result")) ? "paper-dialog" : ""}`}
-    >
-      {content}
+      {stage === "confirm" ? (
+        <div className="quiz-confirm">
+          <div
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="submit-title"
+          >
+            <Send className="confirm-icon" size={35} />
+            <h3 id="submit-title">Bé muốn nộp bài chứ?</h3>
+            <p>
+              {answered === questions.length
+                ? "Bé đã trả lời tất cả câu hỏi. Cùng xem kết quả nào!"
+                : `Bé còn ${questions.length - answered} câu chưa trả lời. Bé có muốn kiểm tra lại không?`}
+            </p>
+            <button className="primary-button" autoFocus onClick={finish}>
+              Nộp bài và xem kết quả
+            </button>
+            <button className="text-button" onClick={() => setStage("work")}>
+              Quay lại làm bài
+            </button>
+          </div>
+        </div>
+      ) : null}
+      {confirmLeave ? (
+        <div className="quiz-confirm">
+          <div
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="leave-title"
+          >
+            <h3 id="leave-title">Tạm dừng cuộc phiêu lưu?</h3>
+            <p>
+              Câu trả lời đã được lưu. Đồng hồ vẫn tiếp tục chạy, bé nhớ quay
+              lại trước khi hết giờ nhé.
+            </p>
+            <button className="primary-button" autoFocus onClick={onClose}>
+              Lưu và về danh sách
+            </button>
+            <button
+              className="text-button"
+              onClick={() => setConfirmLeave(false)}
+            >
+              Tiếp tục làm bài
+            </button>
+          </div>
+        </div>
+      ) : null}
     </Dialog>
   );
 }
