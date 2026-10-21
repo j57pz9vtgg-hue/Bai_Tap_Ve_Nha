@@ -41,3 +41,5 @@
 - Rừng đom đóm follows the owner’s forest reference with generated forest-world/hero/sprites/book and wooden sign assets, woodland mascots, green/ivory surfaces and amber actions. Keep real content only and retain the hidden redundant catalog row.
 
 - The owner explicitly requested restoring the museum theme and adding magic, treasure and cars from supplied references. Use their generated artwork, preserve real data and hidden catalog headings, and keep the existing practice/authentication flows.
+
+- Place theme-name badges in a compact right-aligned caption below the hero, outside the artwork, across illustrated themes. Do not overlay castles, faces or other main scenery, on desktop or mobile.
