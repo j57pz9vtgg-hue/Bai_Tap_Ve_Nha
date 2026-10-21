@@ -140,6 +140,69 @@ export function Paper4Illustration({
   name: string;
   solution?: boolean;
 }) {
+  if (name === "chess") {
+    if (!solution) return null;
+    const points = [
+      [100, 28],
+      [174, 75],
+      [146, 156],
+      [54, 156],
+      [26, 75],
+    ];
+    const names = ["Amy", "Ben", "Cindy", "Dan", "Erik"];
+    const colors = ["#5c7ce5", "#ef9539", "#72ac49", "#d55760"];
+    return (
+      <SourceDrawing
+        label="Bốn bước ghép cặp chơi cờ: Amy, rồi Ben, Cindy và Dan"
+        viewBox="0 0 430 425"
+      >
+        {[0, 1, 2, 3].map((step) => (
+          <g
+            key={step}
+            transform={`translate(${(step % 2) * 215} ${Math.floor(step / 2) * 210})`}
+          >
+            {Array.from({ length: step + 1 }, (_, from) =>
+              Array.from({ length: 4 - from }, (_, k) => {
+                const to = from + k + 1;
+                return (
+                  <line
+                    key={`${from}-${to}`}
+                    x1={points[from][0]}
+                    y1={points[from][1]}
+                    x2={points[to][0]}
+                    y2={points[to][1]}
+                    stroke={colors[from]}
+                    strokeWidth="1.8"
+                  />
+                );
+              }),
+            )}
+            {points.map(([x, y], i) => (
+              <text
+                key={i}
+                x={x + (i === 1 ? 12 : i === 4 ? -12 : 0)}
+                y={y + (i === 0 ? -10 : i === 2 || i === 3 ? 18 : 4)}
+                textAnchor="middle"
+                fontSize="14"
+              >
+                {names[i]}
+              </text>
+            ))}
+            <text x="100" y="202" textAnchor="middle" fontSize="14">
+              {
+                [
+                  "Amy: 4 ván",
+                  "Ben: thêm 3 ván",
+                  "Cindy: thêm 2 ván",
+                  "Dan: thêm 1 ván",
+                ][step]
+              }
+            </text>
+          </g>
+        ))}
+      </SourceDrawing>
+    );
+  }
   if (
     name === "sequence" ||
     name === "sequence11" ||

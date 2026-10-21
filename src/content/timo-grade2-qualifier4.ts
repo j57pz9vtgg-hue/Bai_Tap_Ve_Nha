@@ -1,7 +1,6 @@
 import type { Question } from "../data";
 
-// Owner supplied questions1–23, then the complete answer/solution sheets.
-// Questions24–25 are still absent; their supplied solutions are recorded separately below.
+// All25 owner-supplied questions and their previously supplied answer/solution sheets.
 export const TIMO_GRADE2_QUALIFIER4: Question[] = [
   {
     sourceNumber: 1,
@@ -311,23 +310,31 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     explanation:
       "Số cần lập là số chẵn nên chữ số hàng đơn vị là 0, 2 hoặc 4.\n+ Nếu chữ số hàng đơn vị là 0, ta lập được các số: 10, 20, 40. Có 3 số.\n+ Nếu chữ số hàng đơn vị là 2, ta lập được các số: 12, 42. Có 2 số.\n+ Nếu chữ số hàng đơn vị là 4, ta lập được các số: 14, 24. Có 2 số.\nVậy có 3 + 2 + 2 = 7 số thỏa mãn đề bài.\nĐáp số: A.",
   },
-];
-
-// Retain owner-supplied answers without fabricating the missing question statements/choices.
-// These records are not exercises and cannot be scored until the owner supplies the questions.
-export const TIMO_GRADE2_QUALIFIER4_PENDING_SOLUTIONS = [
   {
     sourceNumber: 24,
-    answer: "B",
-    status: "missing-question",
+    sourcePaper: "Đề số 4 · Vòng loại TIMO lớp 2",
+    text: "There are five friends including Amy, Ben, Cindy, Dan, Erik joining a chess lesson. Every 2 friends play with each other exactly one match. How many matches are there in the lesson?",
+    translation:
+      "Có 5 bạn gồm Amy, Ben, Cindy, Dan, Erik tham gia một buổi học cờ vua. Cứ hai bạn bất kì chơi với nhau đúng một ván cờ. Hỏi có tất cả bao nhiêu ván cờ trong buổi học đó?",
+    options: ["20", "10", "15", "5"],
+    strand: "Combinatorics / Tổ hợp",
+    topicId: "unassigned",
+    correct: 1,
     explanation:
       "Cách 1: Chọn bạn thứ nhất chơi ván cờ: có 5 cách. Chọn bạn thứ hai chơi ván cờ: có 4 cách. Vậy số cách chọn ra 2 bạn là: 5 × 4 = 20 cách. Tuy nhiên các cặp được chọn như trên sẽ được tính 2 lần nên số cách khác nhau để chọn ra 2 bạn trong số 5 bạn là: 20 : 2 = 10 (cách).\nCách 2: Amy chơi 4 ván với 4 bạn còn lại. Ben chơi 3 ván với 3 bạn còn lại (trừ Amy). Cindy chơi 2 ván với 2 bạn còn lại (trừ Amy và Ben). Dan chơi 1 ván với 1 bạn còn lại (là Erik). Vậy có tất cả 4 + 3 + 2 + 1 = 10 ván cờ.\nĐáp số: B.",
+    diagram: "p4-chess",
   },
   {
     sourceNumber: 25,
-    answer: "B",
-    status: "missing-question",
+    sourcePaper: "Đề số 4 · Vòng loại TIMO lớp 2",
+    text: "Teacher writes 4 digits 1, 4, 6, and 7 on the board. Find the largest sum of two 2-digit numbers formed by those digits without repetition.",
+    translation:
+      "Cô giáo viết 4 chữ số 1, 4, 6 và 7 trên bảng. Tìm tổng lớn nhất có thể của hai số có 2 chữ số tạo từ các chữ số đã cho biết rằng không có chữ số nào bị lặp lại.",
+    options: ["117", "135", "153", "76"],
+    strand: "Combinatorics / Tổ hợp",
+    topicId: "unassigned",
+    correct: 1,
     explanation:
       "Muốn tổng lớn nhất thì hai số hạng phải lớn nhất có thể.\nTa sẽ chọn 2 chữ số lớn nhất có thể để làm các chữ số hàng chục (là 6 và 7).\nChọn 2 chữ số còn lại làm hàng đơn vị (là 1, 4).\nKhi đó, ta có 2 số là 61 và 74 (hoặc 64 và 71).\nTổng cần tìm là: 61 + 74 = 64 + 71 = 135.\nĐáp số: B.",
   },
-] as const;
+];

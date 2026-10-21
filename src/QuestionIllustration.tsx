@@ -630,6 +630,7 @@ function FoodChoices({ solution = false }: { solution?: boolean }) {
 export const hasSolutionDiagram = (diagram?: QuestionDiagram) =>
   diagram !== undefined &&
   [
+    "p4-chess",
     "p4-shapes",
     "p4-cubes-count",
     "p4-cubes-right",
@@ -703,6 +704,7 @@ export function QuestionIllustration({
     );
   }
   if (diagram.startsWith("p4-")) {
+    if (diagram === "p4-chess" && !solution) return null;
     if (solution && !hasSolutionDiagram(diagram)) return null;
     return (
       <div className={`question-illustration illustration-${diagram}`}>

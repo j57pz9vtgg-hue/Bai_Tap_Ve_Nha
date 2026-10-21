@@ -105,7 +105,7 @@ export type QuestionDiagram =
   | `p7-${"letters" | "sequence3" | "arrow-groups" | "flowers" | "addition" | "sequence13" | "squares" | "cubes-right" | "cube" | "segments" | "shapes" | "books" | "magic-grid"}`
   | `p6-${"sequence2" | "cross-groups" | "equation9" | "sequence12" | "operators" | "squares" | "shapes" | "cubes-side" | "sequence23"}`
   | `p5-${"shapes" | "sequence" | "addition" | "sequence10" | "sequence11" | "numbers14" | "equation" | "cubes-count" | "cubes-top" | "triangles" | "circles" | "stars" | "numbers22"}`
-  | `p4-${"shapes" | "sequence" | "bird" | "flower" | "addition" | "sequence11" | "numbers14" | "operators" | "cubes-count" | "cubes-right" | "squares" | "segments" | "arrows" | "cakes" | "numbers22"}`
+  | `p4-${"chess" | "shapes" | "sequence" | "bird" | "flower" | "addition" | "sequence11" | "numbers14" | "operators" | "cubes-count" | "cubes-right" | "squares" | "segments" | "arrows" | "cakes" | "numbers22"}`
   | `p3-${"sequence" | "suns" | "backpack" | "chain" | "addition" | "sequence12" | "operations" | "operators" | "squares" | "shapes" | "cubes-right" | "segments" | "cubes-count" | "numbers" | "routes"}`
   | `p2-${"sequence" | "flowers" | "tree" | "chain" | "addition" | "sequence12" | "operations" | "operators" | "squares" | "shapes" | "cubes-front" | "segments" | "cubes-count" | "numbers" | "routes"}`
   | "sequence-1"
