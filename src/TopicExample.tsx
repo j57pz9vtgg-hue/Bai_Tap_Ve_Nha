@@ -6,11 +6,13 @@ export function TopicExample({
   exercise,
   showSignal = 0,
   hasDraft,
+  practicing = false,
   onPractice,
 }: {
   exercise: Exercise;
   showSignal?: number;
   hasDraft: boolean;
+  practicing?: boolean;
   onPractice: () => void;
 }) {
   const [expanded, setExpanded] = useState(true);
@@ -55,10 +57,12 @@ export function TopicExample({
             {exercise.questionCount ?? 0} câu luyện tập cùng dạng từ bộ đề bạn
             đã gửi.
           </p>
-          <button className="primary-button" onClick={onPractice}>
-            {hasDraft ? "Tiếp tục luyện tập" : "Bắt đầu luyện tập"}{" "}
-            <ArrowRight size={20} />
-          </button>
+          {!practicing && (
+            <button className="primary-button" onClick={onPractice}>
+              {hasDraft ? "Tiếp tục luyện tập" : "Bắt đầu luyện tập"}{" "}
+              <ArrowRight size={20} />
+            </button>
+          )}
         </>
       )}
     </section>

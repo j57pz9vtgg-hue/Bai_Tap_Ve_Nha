@@ -166,6 +166,7 @@ export function PaperWorkspace(p: Props) {
             key={p.exercise.id}
             exercise={p.exercise}
             hasDraft={Boolean(p.hasDraft)}
+            practicing={p.started}
             onPractice={() => {
               p.onStart();
               document

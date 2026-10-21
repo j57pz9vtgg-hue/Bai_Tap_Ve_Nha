@@ -20,6 +20,7 @@ import { getPracticeQuestions, getQuestions } from "./data";
 import type { Draft, Exercise, Result, Section } from "./data";
 
 type QuizProps = {
+  previewOnly?: boolean;
   exercise: Exercise;
   grade: number;
   section: Section;
@@ -35,6 +36,7 @@ type QuizProps = {
 
 export default function Quiz({
   exercise,
+  previewOnly = false,
   grade,
   section,
   id,
@@ -57,13 +59,17 @@ export default function Quiz({
         : getPracticeQuestions(grade, section, exercise),
   );
   const [started, setStarted] = useState(
-    Boolean(initialResult || (draft && !(isTopic && exercise.example))),
+    Boolean(initialResult || (!previewOnly && (draft || isTopic))),
   );
   const [answers, setAnswers] = useState<Record<number, number>>(
     initialResult?.answers ?? draft?.answers ?? {},
   );
   const [index, setIndex] = useState(draft?.index ?? 0);
-  const [deadline, setDeadline] = useState(draft?.deadline ?? 0);
+  const [deadline, setDeadline] = useState(
+    () =>
+      draft?.deadline ??
+      (isTopic && !previewOnly && !initialResult ? Date.now() + 900000 : 0),
+  );
   const [remaining, setRemaining] = useState(
     draft ? Math.max(0, Math.ceil((draft.deadline - Date.now()) / 1000)) : 900,
   );

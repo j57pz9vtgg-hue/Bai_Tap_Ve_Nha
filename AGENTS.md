@@ -15,3 +15,5 @@
 - On the existing topic practice screen, place the supplied example in a collapsible Bài mẫu panel directly below Chọn chủ đề and above the practice toolbar. Preserve the catalog and the existing workspace filters/layout. Do not move topic practice to the catalog page.
 
 - The owner explicitly allows viewing Bài mẫu and its supplied solution without a parent password. This exception applies only to topic teaching examples; practice/exam results, answer keys and worked solutions remain parent-password protected.
+
+- Opening a topic with Làm bài/Làm lại starts the timer immediately and shows Nộp bài. Xem ví dụ is preview-only and does not start a new timer. Preserve any existing draft/deadline when resuming; hide redundant start controls while practicing.

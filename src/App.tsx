@@ -36,7 +36,7 @@ type Selection = {
   exercise: Exercise;
   section: Section;
   grade: number;
-  mode: "play" | "result";
+  mode: "play" | "result" | "example";
 };
 
 export default function App() {
@@ -283,7 +283,15 @@ export default function App() {
                     result={saved.results[id]}
                     hasDraft={Boolean(saved.drafts[id])}
                     onOpen={() =>
-                      setSelection({ exercise, section, grade, mode: "play" })
+                      setSelection({
+                        exercise,
+                        section,
+                        grade,
+                        mode:
+                          exercise.exampleOnly && !saved.results[id]
+                            ? "example"
+                            : "play",
+                      })
                     }
                     onView={() =>
                       setSelection({ exercise, section, grade, mode: "result" })
@@ -353,11 +361,12 @@ export default function App() {
                 mode: "play",
               })
             }
+            previewOnly={selection.mode === "example"}
             exercise={selection.exercise}
             grade={selection.grade}
             section={selection.section}
             draft={
-              selection.mode === "play" ? saved.drafts[exerciseId] : undefined
+              selection.mode !== "result" ? saved.drafts[exerciseId] : undefined
             }
             initialResult={
               selection.mode === "result"
