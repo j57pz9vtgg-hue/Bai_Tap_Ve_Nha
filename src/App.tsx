@@ -244,23 +244,11 @@ export default function App() {
           </p>
         ) : null}
         <section className="exercise-section" aria-labelledby="catalog-title">
-          <h2
-            id="catalog-title"
-            className={
-              theme === "bunny" ? "bunny-catalog-title" : "visually-hidden"
-            }
-          >
+          <h2 id="catalog-title" className="visually-hidden">
             {search.trim() ? "Kết quả tìm kiếm" : title}
           </h2>
-          {theme === "bunny" && (
-            <p className="bunny-catalog-subtitle">
-              Lớp {grade} • {isExam ? "Toán" : SECTION_LABELS[section]}
-            </p>
-          )}
           <span
-            className={
-              theme === "bunny" ? "bunny-exercise-count" : "visually-hidden"
-            }
+            className="visually-hidden"
             aria-live="polite"
           >
             {exercises.length} {category === "topic" ? "chủ đề" : "đề"}
