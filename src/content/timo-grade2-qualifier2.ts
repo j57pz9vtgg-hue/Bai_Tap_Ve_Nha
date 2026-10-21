@@ -141,7 +141,7 @@ export const TIMO_GRADE2_QUALIFIER2: Question[] = [
     sourcePaper: "Đề số 2 · Vòng loại TIMO lớp 2",
     text: "How many 2-digit numbers with 2 digits adding up to 14 are there?",
     translation:
-      "Hỏi có bao nhiêu số có 2 chữ số mà khi cộng 2 chữ số đó lại thì được kết quả là 14?",
+      "Hỏi có bao nhiêu số lẻ có 2 chữ số mà khi cộng 2 chữ số đó lại thì được kết quả là 14?",
     options: ["3", "5", "7", "8"],
     strand: "Number Theory / Lý thuyết số",
     topicId: "unassigned",
