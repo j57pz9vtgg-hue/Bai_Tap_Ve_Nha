@@ -592,6 +592,38 @@ export function NationalIllustration({
           99÷3，19×2，51÷3，6×8，24×3，5×5，62÷2
         </div>
       );
+    if (name === "squares" && solution)
+      return (
+        <SourceDrawing
+          label="Mười ba mảnh hình vuông ghép được đánh số theo lời giải"
+          viewBox="0 0 275 145"
+        >
+          <path
+            d="M50 20H220V54H254V122H50Z M16 54H50 M16 54V88H186 M50 20V122 M84 20V122 M118 20V122 M152 20V54 M152 88V122 M186 20V88 M220 20V122 M118 54H254 M220 88H254"
+            fill="none"
+            stroke="#111"
+          />
+          {[
+            [33, 77, 1],
+            [67, 61, 2],
+            [101, 61, 3],
+            [135, 43, 4],
+            [169, 43, 5],
+            [203, 43, 6],
+            [153, 77, 7],
+            [67, 110, 8],
+            [101, 110, 9],
+            [135, 110, 10],
+            [203, 96, 11],
+            [237, 77, 12],
+            [237, 110, 13],
+          ].map(([x, y, n]) => (
+            <text key={n} x={x} y={y} fontSize="16" textAnchor="middle">
+              {n}
+            </text>
+          ))}
+        </SourceDrawing>
+      );
     if (name === "squares")
       return (
         <Mesh
@@ -615,6 +647,21 @@ export function NationalIllustration({
             [b, d],
             [d, r],
           ]}
+          labels={
+            solution
+              ? [
+                  [55, 45, 1],
+                  [90, 39, 2],
+                  [115, 63, 3],
+                  [158, 51, 4],
+                  [187, 82, 5],
+                  [65, 93, 6],
+                  [151, 118, 7],
+                  [190, 126, 8],
+                  [96, 145, 9],
+                ]
+              : undefined
+          }
           points={[
             l,
             r,
@@ -650,6 +697,26 @@ export function NationalIllustration({
           <SourceCube x={70} y={130} size={35} depth={12} />
           <SourceCube x={58} y={177} size={35} depth={12} />
           <SourceCube x={93} y={177} size={35} depth={12} />
+          {solution && (
+            <g fontSize="13" textAnchor="middle">
+              {[
+                [135, 200, 1],
+                [112, 150, 2],
+                [125, 164, 3],
+                [140, 148, 4],
+                [192, 141, 5],
+                [87, 98, 6],
+                [87, 63, 7],
+                [207, 87, 8],
+                [242, 122, 9],
+                [242, 157, 10],
+              ].map(([x, y, n]) => (
+                <text key={n} x={x} y={y}>
+                  {n}
+                </text>
+              ))}
+            </g>
+          )}
         </SourceDrawing>
       );
   }

@@ -89,3 +89,5 @@
 - National2 now has25 owner-supplied text keys/explanations and source numbered segment/cube/rectangle solution diagrams. Preserve all reviewed topicIds (unknown topics unassigned), Tuesday/Thứ Ba and Odd/số lẻ aliases. No mismatch found between supplied question conditions and keys.
 
 - National2 q25 is reviewed into topic12 (counting even expression results, with the source25–55 condition retained); other topic mappings are preserved.
+
+- National3 now has25 supplied keys/solutions and numbered square/line/cube diagrams. Q25 reviewed into topic12; other reviewed topics preserved. Source discrepancy q21: English lacks “odd”, while original vocabulary and now supplied reasoning require an odd4-digit number, answer8629. Preserve English and explicitly note the supplied odd condition in the visible glossary; do not silently substitute the unconstrained largest number. Report this discrepancy to owner.
