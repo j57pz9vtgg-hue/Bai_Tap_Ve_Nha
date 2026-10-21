@@ -261,10 +261,6 @@ export function PaperWorkspace(p: Props) {
                   : "paper-question-row"
               }
             >
-              {q.strand &&
-                (i === 0 || p.questions[i - 1].strand !== q.strand) && (
-                  <h2 className="paper-source-strand">{q.strand}</h2>
-                )}
               <fieldset
                 className="paper-question"
                 disabled={!p.started || p.review}
@@ -274,11 +270,6 @@ export function PaperWorkspace(p: Props) {
                 </legend>
                 {q.translation && (
                   <p className="question-translation">{q.translation}</p>
-                )}
-                {topic && q.sourcePaper && (
-                  <p className="question-source">
-                    {q.sourcePaper} · Câu {q.sourceNumber}
-                  </p>
                 )}
                 <QuestionIllustration diagram={q.diagram} />
                 <div
