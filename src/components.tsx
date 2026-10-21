@@ -152,7 +152,7 @@ export function StudyFilters({
   return (
     <div className="study-filters" aria-label="Bộ lọc bài tập">
       <div className="filter-field">
-        {(theme === "crystal" || theme === "cloud") && (
+        {(theme === "crystal" || theme === "cloud" || theme === "forest") && (
           <span className="crystal-filter-icon" aria-hidden="true">
             <GraduationCap size={29} />
           </span>
@@ -174,7 +174,7 @@ export function StudyFilters({
         </div>
       </div>
       <div className="filter-field">
-        {(theme === "crystal" || theme === "cloud") && (
+        {(theme === "crystal" || theme === "cloud" || theme === "forest") && (
           <span className="crystal-filter-icon" aria-hidden="true">
             <BookOpen size={29} />
           </span>
@@ -196,7 +196,7 @@ export function StudyFilters({
         </div>
       </div>
       <div className="filter-field">
-        {(theme === "crystal" || theme === "cloud") && (
+        {(theme === "crystal" || theme === "cloud" || theme === "forest") && (
           <span className="crystal-filter-icon" aria-hidden="true">
             <Blocks size={29} />
           </span>
@@ -221,7 +221,7 @@ export function StudyFilters({
         </div>
       </div>
       <div className="filter-field">
-        {(theme === "crystal" || theme === "cloud") && (
+        {(theme === "crystal" || theme === "cloud" || theme === "forest") && (
           <span className="crystal-filter-icon" aria-hidden="true">
             <ClipboardList size={29} />
           </span>
@@ -299,7 +299,10 @@ export function ExerciseCard({
             <path d="M11 7h15v2H12v4H9v9H7V12h3V9h1z" fill="#ffffff88" />
           </svg>
           <span>
-            {theme === "pixel" || theme === "crystal" || theme === "cloud"
+            {theme === "pixel" ||
+            theme === "crystal" ||
+            theme === "cloud" ||
+            theme === "forest"
               ? number
               : String(number).padStart(2, "0")}
           </span>

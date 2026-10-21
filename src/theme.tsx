@@ -5,6 +5,7 @@ export const THEMES = [
   { id: "bunny", name: "Thỏ con", hero: "bunny-hero" },
   { id: "crystal", name: "Đảo pha lê", hero: "crystal-hero" },
   { id: "cloud", name: "Thành phố trên mây", hero: "cloud-hero" },
+  { id: "forest", name: "Rừng đom đóm", hero: "forest-hero" },
 ] as const;
 export type LearningTheme = (typeof THEMES)[number]["id"];
 const KEY = "homework-interface:v3";

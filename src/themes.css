@@ -993,7 +993,7 @@
 }
 
 /* Shared illustrated-world components; each theme supplies its own palette and artwork. */
-:root:is([data-theme="crystal"], [data-theme="cloud"]) {
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"]) {
   --theme-base: #eef5ff;
   --theme-accent: #164fce;
   --theme-action: linear-gradient(
@@ -1011,34 +1011,62 @@
   --theme-button-soft: #d5f9f0;
   --theme-ordinal: #609aff;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .pixel-app {
   min-height: 100dvh;
   background: #eef5ff url("/assets/crystal-world.webp") center top / cover fixed
     no-repeat;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .catalog-masthead {
   background: transparent;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .adventure-banner {
   height: clamp(165px, 13vw, 210px);
   padding: 0;
   background: var(--theme-hero) center top / cover no-repeat;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .adventure-banner::before,
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .modern-hero {
   display: none;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .header-inner {
   height: auto;
   padding: 18px 32px;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .brand {
   width: 340px;
   max-width: 30%;
@@ -1050,29 +1078,43 @@
     0 -2px white;
   gap: 6px;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .brand
   > span:first-of-type {
   font-size: 31px;
   line-height: 1.05;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]) .brand-child {
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  .brand-child {
   color: #9c43cc;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]) .crystal-brand-icon {
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  .crystal-brand-icon {
   width: 76px;
   height: 76px;
   object-fit: contain;
   image-rendering: auto;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .header-tools {
   margin-top: 3px;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]) .search-box,
-:root:is([data-theme="crystal"], [data-theme="cloud"]) .parent-button,
-:root:is([data-theme="crystal"], [data-theme="cloud"]) .appearance-button,
-:root:is([data-theme="crystal"], [data-theme="cloud"]) .logout-button {
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  .search-box,
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  .parent-button,
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  .appearance-button,
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  .logout-button {
   background: #ffffffdd;
   border: 2px solid #e1eeff;
   box-shadow:
@@ -1111,7 +1153,11 @@
 .crystal-theme-label strong {
   font-size: 22px;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .study-filters {
   background: transparent;
   border: 0;
@@ -1120,7 +1166,8 @@
   gap: 12px;
   box-shadow: none;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]) .filter-field {
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  .filter-field {
   position: relative;
   background: #ffffffd9;
   border: 1px solid #bad3f4;
@@ -1131,12 +1178,18 @@
     inset 0 0 0 5px #e4edfc,
     0 4px 8px #5577c33d;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]) .filter-field label {
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  .filter-field
+  label {
   font-size: 12px;
   color: #223477;
   font-weight: 500;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .filter-select
   select {
   color: #091e63;
@@ -1162,18 +1215,22 @@
     0 2px 3px #8091d82e;
   filter: drop-shadow(0 2px 1px #c5bffc);
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"])
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
   .filter-field:nth-child(2)
   .crystal-filter-icon {
   color: #0088ea;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"])
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
   .filter-field:nth-child(3)
   .crystal-filter-icon {
   color: #e8a322;
   background: linear-gradient(145deg, #e0ffe8, #acf0db);
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .exercise-card {
   background: linear-gradient(145deg, #fffffff5, #f4f8ffef 65%, #e8ebffef);
   border: 1px solid #b7cef1;
@@ -1186,7 +1243,11 @@
   min-height: 195px;
   color: #11195c;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .exercise-card
   .number-badge {
   width: 43px;
@@ -1205,7 +1266,11 @@
   );
   box-shadow: inset 0 0 0 3px #dff7ff;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .exercise-card
   .number-badge
   > span {
@@ -1213,20 +1278,25 @@
   color: white;
   text-shadow: 0 2px 2px #284cbc;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]) .exercise-name h2 {
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  .exercise-name
+  h2 {
   font-weight: 800;
   color: #10195b;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]) .status {
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  .status {
   background: #fff1d9;
   color: #d8660b;
   border-radius: 22px;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]) .status.done {
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  .status.done {
   background: #d4f7e4;
   color: #08783e;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]) .exercise-card-art {
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  .exercise-card-art {
   left: 15px;
   right: auto;
   top: 65px;
@@ -1234,7 +1304,11 @@
   height: 78px;
   clip-path: inset(0);
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .exercise-stats {
   margin-left: 82px;
   padding-right: 0;
@@ -1242,7 +1316,11 @@
   margin-top: 14px;
   line-height: 1.6;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .card-actions
   > button {
   border: 1px solid #89bcf5;
@@ -1252,95 +1330,131 @@
     0 2px 4px #647bd34a;
   font-weight: 750;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .card-actions
   .start-button {
   background: var(--theme-action);
   text-shadow: 0 1px 2px #1539c8;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .view-result-button {
   background: linear-gradient(white, #d0eefe);
   color: #1341a8;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .retry-button {
   background: linear-gradient(#f4fff6, #bbf4e8);
   color: #104b88;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]):not([data-theme="pixel"])
+:root:is(
+    [data-theme="crystal"],
+    [data-theme="cloud"],
+    [data-theme="forest"]
+  ):not([data-theme="pixel"])
   .paper-world {
   background: #f0f5ff url("/assets/crystal-world.webp") center top / cover fixed;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]) .paper-brand {
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  .paper-brand {
   color: #195bc8;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]) .paper-brand > img {
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  .paper-brand
+  > img {
   content: url("/assets/crystal-book.webp");
   image-rendering: auto;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]) .paper-toolbar {
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  .paper-toolbar {
   background: #f3f9fff5;
   border-color: #b9d5f8;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]) .paper-submit {
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  .paper-submit {
   background: var(--theme-action);
   color: white;
   border: 1px solid #91baff;
   box-shadow: inset 0 0 0 2px #ffffff88;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"]) .topic-example-intro {
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  .topic-example-intro {
   background: #fffefcf7;
   border-color: #c5baf4;
 }
 @media (max-width: 1100px) {
-  :root:is([data-theme="crystal"], [data-theme="cloud"]) .crystal-theme-label {
+  :root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+    .crystal-theme-label {
     left: 40%;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"]) .filter-field {
+  :root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+    .filter-field {
     padding-left: 54px;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"]) .crystal-filter-icon {
+  :root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+    .crystal-filter-icon {
     left: 10px;
     width: 34px;
     height: 38px;
   }
 }
 @media (max-width: 760px) {
-  :root:is([data-theme="crystal"], [data-theme="cloud"]):not(
-      [data-theme="pixel"]
-    )
+  :root:is(
+      [data-theme="crystal"],
+      [data-theme="cloud"],
+      [data-theme="forest"]
+    ):not([data-theme="pixel"])
     .site-header {
     position: relative;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"]):not(
-      [data-theme="pixel"]
-    )
+  :root:is(
+      [data-theme="crystal"],
+      [data-theme="cloud"],
+      [data-theme="forest"]
+    ):not([data-theme="pixel"])
     .header-inner {
     padding: 12px 16px;
     background: #eef5ffcc;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"]):not(
-      [data-theme="pixel"]
-    )
+  :root:is(
+      [data-theme="crystal"],
+      [data-theme="cloud"],
+      [data-theme="forest"]
+    ):not([data-theme="pixel"])
     .brand {
     max-width: none;
     width: auto;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"]):not(
-      [data-theme="pixel"]
-    )
+  :root:is(
+      [data-theme="crystal"],
+      [data-theme="cloud"],
+      [data-theme="forest"]
+    ):not([data-theme="pixel"])
     .brand
     > span:first-of-type {
     font-size: 24px;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"]) .crystal-brand-icon {
+  :root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+    .crystal-brand-icon {
     width: 52px;
     height: 52px;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"]):not(
-      [data-theme="pixel"]
-    )
+  :root:is(
+      [data-theme="crystal"],
+      [data-theme="cloud"],
+      [data-theme="forest"]
+    ):not([data-theme="pixel"])
     .adventure-banner {
     height: 130px;
     background-size: auto 160px;
@@ -1356,43 +1470,53 @@
   .crystal-theme-label strong {
     font-size: 17px;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"]):not(
-      [data-theme="pixel"]
-    )
+  :root:is(
+      [data-theme="crystal"],
+      [data-theme="cloud"],
+      [data-theme="forest"]
+    ):not([data-theme="pixel"])
     .study-filters {
     margin: -8px 0 8px;
     gap: 10px;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"]) .filter-field {
+  :root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+    .filter-field {
     padding: 10px;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"]) .crystal-filter-icon {
+  :root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+    .crystal-filter-icon {
     display: none;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"]) .exercise-card-art {
+  :root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+    .exercise-card-art {
     width: 80px;
     height: 80px;
     top: 60px;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"]):not(
-      [data-theme="pixel"]
-    )
+  :root:is(
+      [data-theme="crystal"],
+      [data-theme="cloud"],
+      [data-theme="forest"]
+    ):not([data-theme="pixel"])
     .exercise-stats {
     margin-left: 90px;
     font-size: 13px;
   }
-  :root:is([data-theme="crystal"], [data-theme="cloud"]):not(
-      [data-theme="pixel"]
-    )
+  :root:is(
+      [data-theme="crystal"],
+      [data-theme="cloud"],
+      [data-theme="forest"]
+    ):not([data-theme="pixel"])
     .pixel-app {
     background-size: auto 100dvh;
   }
 }
 
-:root:is([data-theme="crystal"], [data-theme="cloud"]) .brand-child {
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
+  .brand-child {
   display: block;
 }
-:root:is([data-theme="crystal"], [data-theme="cloud"])
+:root:is([data-theme="crystal"], [data-theme="cloud"], [data-theme="forest"])
   .crystal-theme-label::after {
   content: "";
   position: absolute;
@@ -1629,6 +1753,304 @@
     font-size: 14px;
   }
   :root[data-theme="cloud"]:not([data-theme="pixel"]) .pixel-app {
+    background-size: auto 100dvh;
+  }
+}
+
+/* Firefly Forest: natural wooden signs, amber lantern light and fresh foliage. */
+:root[data-theme="forest"] {
+  --theme-base: #f4f8eb;
+  --theme-accent: #285e48;
+  --theme-action: linear-gradient(#ffe885, #ffc344 38%, #ffb72c 72%, #f3a51f);
+  --theme-action-ink: #392506;
+  --theme-sprites: url("/assets/forest-sprites.webp");
+  --theme-hero: url("/assets/forest-hero.webp");
+  --theme-edge: #dfe8d8;
+  --theme-button-soft: #f4e6ca;
+  --theme-ordinal: #c99c57;
+}
+:root[data-theme="forest"]:not([data-theme="pixel"]) .pixel-app {
+  background: #f4f8eb url("/assets/forest-world.webp") center top / cover fixed
+    no-repeat;
+}
+:root[data-theme="forest"]:not([data-theme="pixel"]) .adventure-banner {
+  height: 180px;
+}
+:root[data-theme="forest"]:not([data-theme="pixel"]) .brand {
+  margin-left: 175px;
+  margin-top: -8px;
+  width: 310px;
+  max-width: 27%;
+  min-height: 127px;
+  justify-content: center;
+  text-align: center;
+  padding: 24px 24px 13px;
+  background: url("/assets/forest-logo-sign.webp") center / 100% 100% no-repeat;
+  color: #fff2c6;
+  text-shadow: 0 2px 2px #703e18;
+  filter: drop-shadow(0 3px 2px #102f2966);
+}
+:root[data-theme="forest"]:not([data-theme="pixel"])
+  .brand
+  > span:first-of-type {
+  font-size: 30px;
+}
+:root[data-theme="forest"] .brand-child {
+  color: #fff0c2;
+}
+:root[data-theme="forest"] .crystal-brand-icon,
+:root[data-theme="forest"] .brand-spark {
+  display: none;
+}
+:root[data-theme="forest"]:not([data-theme="pixel"]) .header-tools {
+  margin-top: 60px;
+}
+:root[data-theme="forest"] .search-box,
+:root[data-theme="forest"] .parent-button,
+:root[data-theme="forest"] .appearance-button,
+:root[data-theme="forest"] .logout-button {
+  border: 1px solid #e6efdf;
+  background: #fffffff0;
+  color: #174a47;
+  box-shadow: 0 3px 7px #112b2526;
+}
+:root[data-theme="forest"] .forest-theme-label {
+  top: 27px;
+  left: 35%;
+  min-width: 220px;
+  min-height: 93px;
+  justify-content: center;
+  padding: 23px 23px 13px;
+  background: url("/assets/forest-theme-sign.webp") center / 100% 100% no-repeat;
+  border: 0;
+  outline: 0;
+  border-radius: 0;
+  clip-path: none;
+  color: #fff7ce;
+  text-shadow: 0 2px 2px #17361b;
+  filter: drop-shadow(0 2px 3px #122b2166);
+}
+:root[data-theme="forest"] .forest-theme-label strong {
+  font-size: 21px;
+}
+:root[data-theme="forest"] .forest-theme-label::after {
+  display: none;
+}
+:root[data-theme="forest"]:not([data-theme="pixel"]) .study-filters {
+  background: #f7faeff0;
+  padding: 12px;
+  margin-top: -3px;
+  border-radius: 22px;
+  box-shadow: 0 3px 10px #263f2226;
+  gap: 18px;
+}
+:root[data-theme="forest"] .filter-field {
+  background: #ffffffe8;
+  border: 1px solid #e4eadf;
+  border-radius: 15px;
+  box-shadow: 0 3px 8px #5c785d19;
+}
+:root[data-theme="forest"] .filter-field label {
+  color: #36536a;
+}
+:root[data-theme="forest"] .crystal-filter-icon,
+:root[data-theme="forest"] .filter-field:nth-child(2) .crystal-filter-icon,
+:root[data-theme="forest"] .filter-field:nth-child(3) .crystal-filter-icon {
+  color: #228a65;
+  background: linear-gradient(145deg, #effaf2, #c5e8d6);
+  box-shadow: inset 1px 1px 3px white;
+  filter: drop-shadow(0 2px 1px #c2dcc7);
+  border-radius: 50%;
+}
+:root[data-theme="forest"] .filter-field:nth-child(4) .crystal-filter-icon {
+  color: #7359da;
+  background: #eee8fc;
+}
+:root[data-theme="forest"]:not([data-theme="pixel"]) .filter-select select {
+  border-color: #dce5df;
+  background: #fcfdfb;
+}
+:root[data-theme="forest"]:not([data-theme="pixel"]) .exercise-card {
+  min-height: 185px;
+  background: linear-gradient(#ffffffed, #fbfdf6f2);
+  border: 1px solid #fff;
+  border-radius: 20px;
+  box-shadow: 0 5px 12px #3e703323;
+  padding: 13px 15px 12px;
+}
+:root[data-theme="forest"]:not([data-theme="pixel"])
+  .exercise-card
+  .number-badge {
+  width: 43px;
+  height: 46px;
+  border: 1px solid #dab075;
+  border-radius: 45%;
+  clip-path: polygon(
+    25% 0,
+    75% 0,
+    94% 18%,
+    100% 50%,
+    90% 82%,
+    68% 100%,
+    30% 100%,
+    8% 80%,
+    0 45%,
+    8% 18%
+  );
+  background: #c6964e url("/assets/forest-logo-sign.webp") center / 180px 80px;
+  box-shadow:
+    inset 2px 2px 2px #ffe5a6,
+    0 2px 2px #89613744;
+}
+:root[data-theme="forest"]:not([data-theme="pixel"])
+  .exercise-card
+  .number-badge
+  > span {
+  font-size: 30px;
+  color: #fff0cb;
+  text-shadow: 0 2px 2px #8c541a;
+}
+:root[data-theme="forest"] .exercise-card-art {
+  right: 7px;
+  left: auto;
+  top: 53px;
+  width: 83px;
+  height: 83px;
+}
+:root[data-theme="forest"]:not([data-theme="pixel"]) .exercise-stats {
+  margin-left: 0;
+  padding-right: 72px;
+  margin-top: 13px;
+  margin-bottom: 14px;
+  font-size: 12px;
+}
+:root[data-theme="forest"] .status {
+  color: #e77a19;
+  background: #fff1dd;
+  box-shadow: none;
+}
+:root[data-theme="forest"] .status.done {
+  color: #1d7f30;
+  background: #e2f6dc;
+}
+:root[data-theme="forest"]:not([data-theme="pixel"]) .card-actions > button {
+  border-radius: 16px;
+  border: 1px solid #ffdf85;
+  box-shadow:
+    inset 0 2px 2px #ffffffc4,
+    0 2px 4px #a68e4e22;
+}
+:root[data-theme="forest"]:not([data-theme="pixel"])
+  .card-actions
+  .start-button {
+  color: #392608;
+  text-shadow: none;
+}
+:root[data-theme="forest"]:not([data-theme="pixel"]) .view-result-button {
+  background: linear-gradient(#e4f6e9, #b8dfcb);
+  color: #14513d;
+  border-color: #b5d9c3;
+}
+:root[data-theme="forest"]:not([data-theme="pixel"]) .retry-button {
+  background: linear-gradient(#fff8e6, #e9d5ad);
+  color: #62431d;
+  border-color: #f0dfbd;
+}
+:root[data-theme="forest"]:not([data-theme="pixel"]) .paper-world {
+  background: #f4f8eb url("/assets/forest-world.webp") center top / cover fixed;
+}
+:root[data-theme="forest"] .paper-brand {
+  color: #2b664e;
+}
+:root[data-theme="forest"] .paper-brand > img {
+  content: url("/assets/forest-book.webp");
+}
+:root[data-theme="forest"] .paper-toolbar {
+  background: #f6fbf1f5;
+  border-color: #d6e3ce;
+}
+:root[data-theme="forest"] .paper-submit {
+  color: #392506;
+  border-color: #ebd38f;
+}
+:root[data-theme="forest"] .topic-example-intro {
+  background: #fffef5f5;
+  border-color: #cfdbb8;
+}
+@media (max-width: 1100px) and (min-width: 761px) {
+  :root[data-theme="forest"]:not([data-theme="pixel"]) .brand {
+    margin-left: 70px;
+    width: 250px;
+    max-width: 28%;
+    min-height: 110px;
+    padding: 20px;
+  }
+  :root[data-theme="forest"]:not([data-theme="pixel"])
+    .brand
+    > span:first-of-type {
+    font-size: 24px;
+  }
+  :root[data-theme="forest"] .forest-theme-label {
+    left: 37%;
+    top: 20px;
+    min-width: 175px;
+    min-height: 83px;
+  }
+  :root[data-theme="forest"] .forest-theme-label strong {
+    font-size: 17px;
+  }
+}
+@media (max-width: 760px) {
+  :root[data-theme="forest"]:not([data-theme="pixel"]) .header-inner {
+    background: #123f2bea;
+  }
+  :root[data-theme="forest"]:not([data-theme="pixel"]) .brand {
+    margin: 0;
+    width: 250px;
+    max-width: 85%;
+    min-height: 86px;
+    padding: 15px 25px 10px;
+  }
+  :root[data-theme="forest"]:not([data-theme="pixel"])
+    .brand
+    > span:first-of-type {
+    font-size: 23px;
+  }
+  :root[data-theme="forest"]:not([data-theme="pixel"]) .header-tools {
+    margin-top: 0;
+  }
+  :root[data-theme="forest"]:not([data-theme="pixel"]) .adventure-banner {
+    height: 125px;
+    background-size: auto 145px;
+    background-position: center;
+  }
+  :root[data-theme="forest"] .forest-theme-label {
+    top: auto;
+    bottom: 10px;
+    left: auto !important;
+    right: 12px;
+    min-width: 180px;
+    min-height: 80px;
+    padding: 20px 18px 12px;
+  }
+  :root[data-theme="forest"] .forest-theme-label strong {
+    font-size: 17px;
+  }
+  :root[data-theme="forest"]:not([data-theme="pixel"]) .study-filters {
+    padding: 10px;
+    gap: 10px;
+    margin-top: -3px;
+  }
+  :root[data-theme="forest"] .exercise-card-art {
+    width: 88px;
+    height: 88px;
+  }
+  :root[data-theme="forest"]:not([data-theme="pixel"]) .exercise-stats {
+    padding-right: 90px;
+    margin-left: 0;
+    font-size: 13px;
+  }
+  :root[data-theme="forest"]:not([data-theme="pixel"]) .pixel-app {
     background-size: auto 100dvh;
   }
 }
