@@ -1118,3 +1118,10 @@
 .exam-paper svg text {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.result-duration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}

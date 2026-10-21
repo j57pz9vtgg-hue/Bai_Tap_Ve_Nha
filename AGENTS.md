@@ -21,3 +21,5 @@
 - Paper question lists show questions, translations, illustrations and choices without source-strand headings (Logical thinking, Number Theory, etc.) or per-question source captions. Keep the source metadata in content for classification and traceability.
 
 - Unify only question typography: Arial at 18px and line-height 1.5 for question text, translations, number sequences and choices. Preserve the existing colors, backgrounds, margins and layout; the owner explicitly canceled A4/paper restyling. Preserve mathematical content and diagram labels.
+
+- Nộp bài submits directly without a confirmation step; freeze and save elapsed time on submission and show it with the parent-protected result. Preserve the parent result/answer gate.

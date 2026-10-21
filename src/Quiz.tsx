@@ -12,7 +12,7 @@ import {
   Trophy,
   X,
 } from "lucide-react";
-import { Dialog } from "./components";
+import { Dialog, formatDuration } from "./components";
 import { publicAsset } from "./components";
 import { ParentPassword } from "./ParentPassword";
 import { PaperWorkspace } from "./PaperWorkspace";
@@ -73,10 +73,13 @@ export default function Quiz({
   const [remaining, setRemaining] = useState(
     draft ? Math.max(0, Math.ceil((draft.deadline - Date.now()) / 1000)) : 900,
   );
-  const [stage, setStage] = useState<"work" | "confirm" | "result" | "review">(
+  const [stage, setStage] = useState<"work" | "result" | "review">(
     initialResult ? "result" : "work",
   );
   const [resultUnlocked, setResultUnlocked] = useState(false);
+  const [elapsedSeconds, setElapsedSeconds] = useState(
+    initialResult?.elapsedSeconds ?? 0,
+  );
   const [confirmLeave, setConfirmLeave] = useState(false);
   const submitted = useRef(Boolean(initialResult));
   const score =
@@ -107,6 +110,11 @@ export default function Quiz({
       return;
     }
     submitted.current = true;
+    const elapsed = Math.min(
+      900,
+      Math.max(0, Math.floor((Date.now() - (deadline - 900000)) / 1000)),
+    );
+    setElapsedSeconds(elapsed);
     onFinish({
       id,
       title: exercise.title,
@@ -117,10 +125,7 @@ export default function Quiz({
       section,
       answers,
       questions,
-      elapsedSeconds: Math.min(
-        900,
-        Math.max(0, Math.floor((Date.now() - (deadline - 900000)) / 1000)),
-      ),
+      elapsedSeconds: elapsed,
     });
     setStage("result");
   }
@@ -154,7 +159,6 @@ export default function Quiz({
 
   const requestClose = () => {
     if (confirmLeave) setConfirmLeave(false);
-    else if (stage === "confirm") setStage("work");
     else if (started && !finished) setConfirmLeave(true);
     else onClose();
   };
@@ -238,6 +242,10 @@ export default function Quiz({
             <span> / {total}</span>
           </div>
           <p>Câu trả lời đúng</p>
+          <p className="result-duration">
+            <Clock3 size={18} aria-hidden="true" /> Thời gian làm bài:{" "}
+            {formatDuration(elapsedSeconds)}
+          </p>
           <div className="result-facts">
             <span>
               <CheckCircle2 size={20} />
@@ -287,26 +295,22 @@ export default function Quiz({
           answers={answers}
           started={started}
           review={stage === "review"}
-          elapsed={
-            finished
-              ? (initialResult?.elapsedSeconds ?? 900 - remaining)
-              : 900 - remaining
-          }
-          inert={stage === "confirm" || confirmLeave}
+          elapsed={finished ? elapsedSeconds : 900 - remaining}
+          inert={confirmLeave}
           onAnswer={(q, a) => setAnswers((prev) => ({ ...prev, [q]: a }))}
           hasDraft={Boolean(draft)}
           onStart={() => {
             if (draft && !started) setStarted(true);
             else if (!started) start();
           }}
-          onSubmit={() => setStage("confirm")}
+          onSubmit={finish}
           onClose={requestClose}
           onConfigure={onConfigure}
         />
       ) : (
         <div
           className={`quiz-workspace ${stage === "review" ? "is-review" : ""}`}
-          inert={stage === "confirm" || confirmLeave}
+          inert={confirmLeave}
         >
           <div className="quiz-header">
             <div>
@@ -399,10 +403,7 @@ export default function Quiz({
                 <Check size={18} />
               </button>
             ) : (
-              <button
-                className="primary-button"
-                onClick={() => setStage("confirm")}
-              >
+              <button className="primary-button" onClick={finish}>
                 Nộp bài
                 <Send size={17} />
               </button>
@@ -422,39 +423,13 @@ export default function Quiz({
             ))}
           </div>
           {stage !== "review" ? (
-            <button
-              className="text-button submit-link"
-              onClick={() => setStage("confirm")}
-            >
+            <button className="text-button submit-link" onClick={finish}>
               Nộp bài sớm
               <Send size={15} />
             </button>
           ) : null}
         </div>
       )}
-      {stage === "confirm" ? (
-        <div className="quiz-confirm">
-          <div
-            role="alertdialog"
-            aria-modal="true"
-            aria-labelledby="submit-title"
-          >
-            <Send className="confirm-icon" size={35} />
-            <h3 id="submit-title">Bé muốn nộp bài chứ?</h3>
-            <p>
-              {answered === questions.length
-                ? "Bé đã trả lời tất cả câu hỏi. Cùng xem kết quả nào!"
-                : `Bé còn ${questions.length - answered} câu chưa trả lời. Bé có muốn kiểm tra lại không?`}
-            </p>
-            <button className="primary-button" autoFocus onClick={finish}>
-              Nộp bài và xem kết quả
-            </button>
-            <button className="text-button" onClick={() => setStage("work")}>
-              Quay lại làm bài
-            </button>
-          </div>
-        </div>
-      ) : null}
       {confirmLeave ? (
         <div className="quiz-confirm">
           <div
