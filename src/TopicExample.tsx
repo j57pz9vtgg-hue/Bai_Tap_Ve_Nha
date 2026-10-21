@@ -15,7 +15,7 @@ export function TopicExample({
   practicing?: boolean;
   onPractice: () => void;
 }) {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   useEffect(() => {
     if (showSignal) setExpanded(true);
   }, [showSignal]);
