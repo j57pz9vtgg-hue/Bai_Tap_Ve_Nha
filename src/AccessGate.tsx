@@ -2,6 +2,11 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 import type { FormEvent, ReactNode } from "react";
 import { BookOpen, Eye, EyeOff, LockKeyhole } from "lucide-react";
 import { APP_ACCESS } from "./accessConfig";
+import {
+  clearRememberedPassword,
+  loadRememberedPassword,
+  saveRememberedPassword,
+} from "./rememberedPassword";
 const SESSION_KEY = "homework-access-session:v1";
 const REMEMBER_KEY = "homework-access-remember:v1";
 function hasAccess(
@@ -40,10 +45,8 @@ async function verifyPassword(password: string) {
 const AccessContext = createContext({ logout: () => {} });
 export const useAppAccess = () => useContext(AccessContext);
 export function AccessGate({ children }: { children: ReactNode }) {
-  const [unlocked, setUnlocked] = useState(
-    () =>
-      hasAccess("localStorage", REMEMBER_KEY) ||
-      hasAccess("sessionStorage", SESSION_KEY),
+  const [unlocked, setUnlocked] = useState(() =>
+    hasAccess("sessionStorage", SESSION_KEY),
   );
   const [remember, setRemember] = useState(false);
   const [password, setPassword] = useState("");
@@ -52,13 +55,45 @@ export function AccessGate({ children }: { children: ReactNode }) {
   const [error, setError] = useState("");
   const [rememberMessage, setRememberMessage] = useState("");
   const rememberRevision = useRef(0);
-  function clearRememberedAccess() {
-    rememberRevision.current++;
+  const savedPassword = useRef("");
+  useEffect(() => {
+    // Remove grants from the old auto-login feature. Remembering now only prefills the form.
     try {
       localStorage.removeItem(REMEMBER_KEY);
     } catch {
-      /* Storage may be blocked. */
+      /* Browser storage may be unavailable. */
     }
+    if (unlocked) return;
+    let active = true;
+    const revision = rememberRevision.current;
+    void (async () => {
+      try {
+        const stored = await loadRememberedPassword();
+        if (!stored || !active || revision !== rememberRevision.current) return;
+        const valid = await verifyPassword(stored);
+        if (!active || revision !== rememberRevision.current) return;
+        if (!valid) {
+          await clearRememberedPassword();
+          return;
+        }
+        savedPassword.current = stored;
+        setPassword(stored);
+        setRemember(true);
+        setRememberMessage(
+          "Đã điền mật khẩu đã lưu. Bấm Đăng nhập để vào ứng dụng.",
+        );
+      } catch {
+        /* The login form remains available if device storage is blocked. */
+      }
+    })();
+    return () => {
+      active = false;
+    };
+  }, [unlocked]);
+  function clearRememberedAccess() {
+    rememberRevision.current++;
+    savedPassword.current = "";
+    void clearRememberedPassword().catch(() => {});
   }
   function changePassword(value: string) {
     clearRememberedAccess();
@@ -67,8 +102,8 @@ export function AccessGate({ children }: { children: ReactNode }) {
     setRememberMessage(
       remember
         ? value
-          ? "Đang xác nhận để ghi nhớ…"
-          : "Nhập mật khẩu để ghi nhớ."
+          ? "Đang xác nhận để lưu mật khẩu…"
+          : "Nhập mật khẩu để lưu."
         : "",
     );
   }
@@ -79,13 +114,14 @@ export function AccessGate({ children }: { children: ReactNode }) {
     setRememberMessage(
       value
         ? password
-          ? "Đang xác nhận để ghi nhớ…"
-          : "Nhập mật khẩu để ghi nhớ."
+          ? "Đang xác nhận để lưu mật khẩu…"
+          : "Nhập mật khẩu để lưu."
         : "",
     );
   }
   useEffect(() => {
     if (!remember || !password || unlocked || busy) return;
+    if (password === savedPassword.current) return;
     let active = true;
     const revision = rememberRevision.current;
     const timer = window.setTimeout(async () => {
@@ -93,16 +129,19 @@ export function AccessGate({ children }: { children: ReactNode }) {
         const valid = await verifyPassword(password);
         if (!active || revision !== rememberRevision.current) return;
         if (!valid) {
-          setRememberMessage("Mật khẩu chưa đúng, chưa ghi nhớ đăng nhập.");
+          setRememberMessage("Mật khẩu chưa đúng, chưa lưu mật khẩu.");
           return;
         }
-        localStorage.setItem(REMEMBER_KEY, APP_ACCESS.digest);
-        setRememberMessage("Đã ghi nhớ đăng nhập.");
+        const saved = await saveRememberedPassword(
+          password,
+          () => active && revision === rememberRevision.current,
+        );
+        if (!saved || !active || revision !== rememberRevision.current) return;
+        savedPassword.current = password;
+        setRememberMessage("Đã lưu mật khẩu. Bạn vẫn cần bấm Đăng nhập.");
       } catch {
         if (active && revision === rememberRevision.current)
-          setRememberMessage(
-            "Chưa thể ghi nhớ đăng nhập trên trình duyệt này.",
-          );
+          setRememberMessage("Chưa thể lưu mật khẩu trên trình duyệt này.");
       }
     }, 300);
     return () => {
@@ -111,7 +150,7 @@ export function AccessGate({ children }: { children: ReactNode }) {
     };
   }, [remember, password, unlocked, busy]);
   function logout() {
-    clearRememberedAccess();
+    rememberRevision.current++;
     setRememberMessage("");
     try {
       sessionStorage.removeItem(SESSION_KEY);
@@ -141,8 +180,13 @@ export function AccessGate({ children }: { children: ReactNode }) {
         /* Access remains valid until this page reloads. */
       }
       try {
-        if (remember) localStorage.setItem(REMEMBER_KEY, APP_ACCESS.digest);
-        else localStorage.removeItem(REMEMBER_KEY);
+        const revision = rememberRevision.current;
+        if (remember)
+          await saveRememberedPassword(
+            password,
+            () => revision === rememberRevision.current,
+          );
+        else await clearRememberedPassword();
       } catch {
         /* A blocked persistent store does not prevent this login. */
       }
