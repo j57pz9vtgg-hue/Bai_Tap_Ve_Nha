@@ -306,25 +306,16 @@ export function ExerciseCard({
           />
         </span>
       </div>
-      {exercise.exampleOnly ? (
-        <p className="exercise-stats">
-          TIMO · Lớp 2<br />
-          {exercise.questionCount
-            ? `${exercise.questionCount} câu luyện tập`
-            : "Chưa có câu luyện tập"}
-        </p>
-      ) : (
-        <dl className="exercise-stats">
-          <div>
-            <dt>Kết quả:</dt>
-            <dd>{result ? "Đã lưu" : "—"}</dd>
-          </div>
-          <div>
-            <dt>Thời gian:</dt>
-            <dd>{formatDuration(result?.elapsedSeconds)}</dd>
-          </div>
-        </dl>
-      )}
+      <dl className="exercise-stats">
+        <div>
+          <dt>Kết quả:</dt>
+          <dd>{result ? "Đã lưu" : "—"}</dd>
+        </div>
+        <div>
+          <dt>Thời gian:</dt>
+          <dd>{formatDuration(result?.elapsedSeconds)}</dd>
+        </div>
+      </dl>
       {theme !== "pixel" && (
         <span
           className="exercise-card-art"
