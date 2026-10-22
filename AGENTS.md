@@ -101,3 +101,5 @@
 - National5 now has25 supplied keys/solutions and numbered line/square/cube/circle diagrams. Reviewed topics unchanged. Stored q13 question has “−2×2”; supplied solution uses “−2×3”, changes that to “−6” and gets202. Preserve supplied Even answer, quote solution faithfully and flag differing expressions for comparison with the original question; do not blame a multiplication error or silently alter the question.
 
 - National6 now has25 explicitly supplied text answers and worked solutions; all reviewed topics retained. Include13 numbered unit squares, right-view cubes and11 circle pieces in parent solutions only. Keep owner-provided evenness reasoning without inventing a replacement proof.
+
+- National7 now has25 supplied keys/solutions; reviewed topics unchanged, no new topics invented. Parent diagrams include numbered square/cube/segments and the illustrative6–8–10 triangle. Source q25 discrepancy: question says3 $2 coins, solution computes2 $2 coins and total$30; preserve supplied key5 and flag exact coin-count mismatch without inventing a replacement solution. All350 received questions now have owner-provided keys (175 qualifier MCQ,175 national text).

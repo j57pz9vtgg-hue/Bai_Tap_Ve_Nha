@@ -1339,6 +1339,26 @@ export function NationalIllustration({
       );
   }
   if (paper === 7) {
+    if (name === "right-triangle")
+      return solution ? (
+        <SourceDrawing
+          label="Tam giác vuông minh họa có hai cạnh6 và8, cạnh dài nhất10"
+          viewBox="0 0 245 180"
+        >
+          <path d="M50 20V140H210Z" fill="none" stroke="#555" />
+          <g fontSize="17" textAnchor="middle">
+            <text x="36" y="88">
+              6
+            </text>
+            <text x="130" y="163">
+              8
+            </text>
+            <text x="142" y="76">
+              10
+            </text>
+          </g>
+        </SourceDrawing>
+      ) : null;
     if (name === "shapes")
       return (
         <SymbolStrip
@@ -1394,6 +1414,17 @@ export function NationalIllustration({
             [b, c],
           ]}
           points={[a, b, c, d, o, e]}
+          labels={
+            solution
+              ? [
+                  [55, 54, 1],
+                  [140, 65, 2],
+                  [199, 46, 3],
+                  [55, 112, 4],
+                  [180, 116, 5],
+                ]
+              : undefined
+          }
           viewBox="0 0 260 155"
         />
       );
@@ -1410,6 +1441,20 @@ export function NationalIllustration({
           <SourceCube x={62} y={121} size={38} depth={13} />
           <SourceCube x={100} y={134} size={38} depth={13} />
           <SourceCube x={138} y={134} size={38} depth={13} />
+          {solution && (
+            <g fontSize="15" textAnchor="middle">
+              {[
+                [120, 92, 1],
+                [120, 130, 2],
+                [158, 130, 3],
+                [183, 158, 4],
+              ].map(([x, y, n]) => (
+                <text key={n} x={x} y={y}>
+                  {n}
+                </text>
+              ))}
+            </g>
+          )}
         </SourceDrawing>
       );
   }
