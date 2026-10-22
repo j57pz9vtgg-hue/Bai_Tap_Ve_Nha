@@ -177,7 +177,6 @@ export function PaperWorkspace(p: Props) {
           <TopicExample
             key={p.exercise.id}
             exercise={p.exercise}
-            questionCount={p.questions.length}
             hasDraft={Boolean(p.hasDraft)}
             practicing={p.started}
             onPractice={() => {

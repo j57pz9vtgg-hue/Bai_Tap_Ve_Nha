@@ -10,14 +10,12 @@ export function TopicExample({
   exercise,
   showSignal = 0,
   hasDraft,
-  questionCount,
   practicing = false,
   onPractice,
 }: {
   exercise: Exercise;
   showSignal?: number;
   hasDraft: boolean;
-  questionCount: number;
   practicing?: boolean;
   onPractice: () => void;
 }) {
@@ -82,10 +80,6 @@ export function TopicExample({
               </section>
             </div>
           ))}
-          <p>
-            {questionCount} câu luyện tập cùng dạng từ bộ đề bạn
-            đã gửi.
-          </p>
           {!practicing && (
             <button className="primary-button" onClick={onPractice}>
               {hasDraft ? "Tiếp tục luyện tập" : "Bắt đầu luyện tập"}{" "}
