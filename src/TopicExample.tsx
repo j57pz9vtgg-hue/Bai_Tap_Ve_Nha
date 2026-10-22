@@ -10,12 +10,14 @@ export function TopicExample({
   exercise,
   showSignal = 0,
   hasDraft,
+  questionCount,
   practicing = false,
   onPractice,
 }: {
   exercise: Exercise;
   showSignal?: number;
   hasDraft: boolean;
+  questionCount: number;
   practicing?: boolean;
   onPractice: () => void;
 }) {
@@ -81,7 +83,7 @@ export function TopicExample({
             </div>
           ))}
           <p>
-            {exercise.questionCount ?? 0} câu luyện tập cùng dạng từ bộ đề bạn
+            {questionCount} câu luyện tập cùng dạng từ bộ đề bạn
             đã gửi.
           </p>
           {!practicing && (
