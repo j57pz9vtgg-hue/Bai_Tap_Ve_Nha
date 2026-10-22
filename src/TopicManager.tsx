@@ -72,11 +72,12 @@ export default function TopicManager({
     setOnlyUnassigned(false);
     setOnlySelected(false);
   }
-  function persist(next: UserTopic[]) {
+  function persist(next: UserTopic[], nextTopic?: UserTopic) {
     try {
       saveUserTopics(next);
       setTopics(next);
-      setDraft(null);
+      if (nextTopic) edit(nextTopic);
+      else setDraft(null);
       setError("");
       onSaved();
     } catch {
@@ -85,7 +86,7 @@ export default function TopicManager({
       );
     }
   }
-  function save() {
+  function save(nextTopic?: UserTopic) {
     if (!draft) return;
     const title = draft.title.trim();
     if (!title) {
@@ -107,6 +108,7 @@ export default function TopicManager({
       topics.some((t) => t.id === draft.id)
         ? topics.map((t) => (t.id === draft.id ? next : t))
         : [...topics, next],
+      nextTopic,
     );
   }
   function toggleQuestion(q: Question) {
@@ -184,15 +186,47 @@ export default function TopicManager({
         </>
       ) : (
         <>
-          <label className="topic-field">
-            Tên chủ đề
-            <input
-              autoFocus
-              maxLength={120}
-              value={draft.title}
-              onChange={(e) => setDraft({ ...draft, title: e.target.value })}
-            />
-          </label>
+          <div className="topic-name-fields">
+            <label className="topic-field">
+              Chọn chủ đề
+              <select
+                aria-label="Chọn chủ đề để chỉnh sửa"
+                value={draft.id}
+                onChange={(e) => {
+                  const nextTopic = topics.find((t) => t.id === e.target.value);
+                  if (!nextTopic) return;
+                  if (
+                    !draft.title.trim() &&
+                    !draft.questionIds.length &&
+                    !draft.examples.length
+                  )
+                    edit(nextTopic);
+                  else save(nextTopic);
+                }}
+              >
+                {!topics.some((t) => t.id === draft.id) && (
+                  <option value={draft.id}>Chủ đề mới</option>
+                )}
+                {topics.map((t) => (
+                  <option key={t.id} value={t.id}>
+                    {t.title}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="topic-field">
+              Tên chủ đề
+              <input
+                autoFocus
+                maxLength={120}
+                value={draft.title}
+                onChange={(e) => setDraft({ ...draft, title: e.target.value })}
+              />
+            </label>
+          </div>
+          <p className="topic-switch-note">
+            Khi chuyển chủ đề, các thay đổi hiện tại sẽ được lưu trước.
+          </p>
           <section className="topic-examples-editor">
             <h3>Bài mẫu ({draft.examples.length})</h3>
             <p>
@@ -328,7 +362,7 @@ export default function TopicManager({
             {!visible.length && <p>Không có câu hỏi phù hợp với bộ lọc.</p>}
           </div>
           <footer className="topic-editor-footer">
-            <button className="primary-button" onClick={save}>
+            <button className="primary-button" onClick={() => save()}>
               Lưu chủ đề
             </button>
             <button
