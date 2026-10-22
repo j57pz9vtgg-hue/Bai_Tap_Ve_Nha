@@ -1,3 +1,4 @@
+import { questionId, resolveUserTopics } from "./topicStore";
 import { TIMO_GRADE2_QUALIFIER1 } from "./content/timo-grade2-qualifier1";
 import { TIMO_GRADE2_QUALIFIER2 } from "./content/timo-grade2-qualifier2";
 import { TIMO_GRADE2_QUALIFIER3 } from "./content/timo-grade2-qualifier3";
@@ -93,6 +94,7 @@ export type Exercise = {
   example?: Question;
   examples?: Question[];
   questionCount?: number;
+  questionIds?: string[];
 };
 export type QuestionDiagram =
   | `n7-${string}`
@@ -296,71 +298,7 @@ export function getExercises(
       questionCount: TIMO_GRADE2_NATIONAL7.length,
     },
   ];
-  const topics = [
-    {
-      id: "topic-01",
-      title: "Dãy số và quy luật",
-      category: "topic" as const,
-      example: TIMO_GRADE2_QUALIFIER1[0],
-      examples: [TIMO_GRADE2_QUALIFIER1[0], TIMO_GRADE2_QUALIFIER1[11]],
-      exampleOnly: true,
-    },
-    ...[
-      { id: "topic-02", title: "Bài toán cộng có lời văn", sourceNumber: 2 },
-      { id: "topic-03", title: "Bài toán tính tuổi", sourceNumber: 3 },
-      { id: "topic-04", title: "Quy luật số lượng hình", sourceNumber: 4 },
-      { id: "topic-05", title: "Ngày và thứ trong tuần", sourceNumber: 5 },
-      { id: "topic-06", title: "Tính tổng bằng cách ghép số", sourceNumber: 6 },
-      {
-        id: "topic-07",
-        title: "Tìm số bị che trong phép tính",
-        sourceNumber: 7,
-      },
-      { id: "topic-08", title: "Tính biểu thức cộng, trừ", sourceNumber: 8 },
-      { id: "topic-09", title: "Tính ngược theo sơ đồ", sourceNumber: 9 },
-      { id: "topic-10", title: "Tìm chữ số trong phép cộng", sourceNumber: 10 },
-      { id: "topic-11", title: "Đếm số theo tổng chữ số", sourceNumber: 11 },
-      { id: "topic-12", title: "Đếm kết quả chẵn, lẻ", sourceNumber: 13 },
-      { id: "topic-13", title: "Điền dấu cộng, trừ", sourceNumber: 14 },
-      { id: "topic-14", title: "Cân bằng số lượng", sourceNumber: 15 },
-      { id: "topic-15", title: "Đếm hình vuông", sourceNumber: 16 },
-      { id: "topic-16", title: "Quy luật dãy hình", sourceNumber: 17 },
-      {
-        id: "topic-17",
-        title: "Đếm hình vuông theo hướng nhìn",
-        sourceNumber: 18,
-      },
-      { id: "topic-18", title: "Đếm đoạn thẳng", sourceNumber: 19 },
-      { id: "topic-19", title: "Đếm khối lập phương", sourceNumber: 20 },
-      { id: "topic-20", title: "Sắp xếp số và tìm thứ hạng", sourceNumber: 21 },
-      {
-        id: "topic-21",
-        title: "Lập số chẵn không lặp chữ số",
-        sourceNumber: 22,
-      },
-      {
-        id: "topic-22",
-        title: "Lập hai số có tổng nhỏ nhất",
-        sourceNumber: 23,
-      },
-      { id: "topic-23", title: "Đếm số cách kết hợp", sourceNumber: 24 },
-      { id: "topic-24", title: "Mua hàng nhận quà tặng", sourceNumber: 25 },
-    ].map(({ id, title, sourceNumber }) => ({
-      id,
-      title,
-      category: "topic" as const,
-      example: TIMO_GRADE2_QUALIFIER1.find(
-        (q) => q.sourceNumber === sourceNumber,
-      ),
-      exampleOnly: true,
-    })),
-    { id: "unassigned", title: "Chưa có chủ đề", category: "topic" as const },
-  ]
-    .map((topic) => ({
-      ...topic,
-      questionCount: ALL_QUESTIONS.filter((q) => q.topicId === topic.id).length,
-    }))
-    .filter((topic) => topic.questionCount > 0);
+  const topics = resolveUserTopics(ALL_QUESTIONS);
   if (category === "qualifier") return exams;
   if (category === "national") return nationals;
   if (category === "topic") return topics;
@@ -388,8 +326,13 @@ export function getQuestions(
   if (exercise.id === "national-05") return TIMO_GRADE2_NATIONAL5;
   if (exercise.id === "national-06") return TIMO_GRADE2_NATIONAL6;
   if (exercise.id === "national-07") return TIMO_GRADE2_NATIONAL7;
-  if (exercise.category === "topic")
+  if (exercise.category === "topic") {
+    if (exercise.questionIds) {
+      const selected = new Set(exercise.questionIds);
+      return ALL_QUESTIONS.filter((q) => selected.has(questionId(q)));
+    }
     return ALL_QUESTIONS.filter((q) => q.topicId === exercise.id);
+  }
   return [];
 }
 export const getPracticeQuestions = getQuestions;

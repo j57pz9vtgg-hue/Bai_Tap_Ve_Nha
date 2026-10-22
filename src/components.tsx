@@ -373,7 +373,11 @@ export function ExerciseCard({
           </>
         ) : (
           <button className="start-button" onClick={onOpen}>
-            {hasDraft ? "Tiếp tục" : "Làm bài"}
+            {exercise.category === "topic" && exercise.questionCount === 0
+              ? "Chọn câu hỏi"
+              : hasDraft
+                ? "Tiếp tục"
+                : "Làm bài"}
           </button>
         )}
       </div>

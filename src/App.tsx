@@ -32,6 +32,7 @@ import { useAppAccess } from "./AccessGate";
 import { ParentPassword } from "./ParentPassword";
 
 const Quiz = lazy(() => import("./Quiz"));
+const TopicManager = lazy(() => import("./TopicManager"));
 type Selection = {
   exercise: Exercise;
   section: Section;
@@ -43,6 +44,8 @@ export default function App() {
   const { theme } = useLearningTheme();
   const { logout } = useAppAccess();
   const [appearanceOpen, setAppearanceOpen] = useState(false);
+  const [topicManagerOpen, setTopicManagerOpen] = useState(false);
+  const [, refreshTopics] = useState(0);
   const mastheadRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const element = mastheadRef.current;
@@ -253,6 +256,17 @@ export default function App() {
           <span className="visually-hidden" aria-live="polite">
             {exercises.length} {category === "topic" ? "chủ đề" : "đề"}
           </span>
+          {category === "topic" && section === "timo" && grade === 2 && (
+            <div className="topic-manage-entry">
+              <button
+                className="primary-button"
+                onClick={() => setTopicManagerOpen(true)}
+              >
+                Tạo / quản lý chủ đề
+              </button>
+              <p>Tự chọn bài mẫu và các câu luyện tập từ bộ đề có sẵn.</p>
+            </div>
+          )}
           {exercises.length ? (
             <div className="exercise-grid">
               {exercises.map((exercise, index) => {
@@ -271,12 +285,14 @@ export default function App() {
                     result={saved.results[id]}
                     hasDraft={Boolean(saved.drafts[id])}
                     onOpen={() =>
-                      setSelection({
-                        exercise,
-                        section,
-                        grade,
-                        mode: "play",
-                      })
+                      exercise.questionCount === 0
+                        ? setTopicManagerOpen(true)
+                        : setSelection({
+                            exercise,
+                            section,
+                            grade,
+                            mode: "play",
+                          })
                     }
                     onView={() =>
                       setSelection({ exercise, section, grade, mode: "result" })
@@ -326,6 +342,20 @@ export default function App() {
             onCancel={() => setParentOpen(false)}
           />
         </Dialog>
+      )}
+      {topicManagerOpen && (
+        <Suspense
+          fallback={
+            <div className="loading-overlay" role="status">
+              Đang mở quản lý chủ đề…
+            </div>
+          }
+        >
+          <TopicManager
+            onClose={() => setTopicManagerOpen(false)}
+            onSaved={() => refreshTopics((v) => v + 1)}
+          />
+        </Suspense>
       )}
       {selection ? (
         <Suspense
