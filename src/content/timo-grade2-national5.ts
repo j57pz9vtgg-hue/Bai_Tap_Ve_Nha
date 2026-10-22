@@ -183,7 +183,7 @@ export const TIMO_GRADE2_NATIONAL5: Question[] = [
   {
     sourceNumber: 13,
     sourcePaper: "Đề số 5 · Vòng quốc gia TIMO lớp 2",
-    text: "Determine the result of 7 × 8 + 8 × 9 + 9 × 10 − 1 × 1 − 2 × 2 − 3 × 3 is odd or even.",
+    text: "Determine the result of 7 × 8 + 8 × 9 + 9 × 10 − 1 × 1 − 2 × 3 − 3 × 3 is odd or even.",
     translation: "Determine: Xác định; Result: Kết quả; Odd: Lẻ; Even: Chẵn.",
     options: [],
     answerFormat: "text",
@@ -191,7 +191,7 @@ export const TIMO_GRADE2_NATIONAL5: Question[] = [
     correctText: "Even",
     acceptedAnswers: ["chẵn", "số chẵn"],
     explanation:
-      "7 × 8 + 8 × 9 + 9 × 10 − 1 × 1 − 2 × 3 − 3 × 3\n= 56 + 72 + 90 − 1 − 6 − 9 = 218 − 1 − 6 − 9 = 202.\nVì 202 là số chẵn nên kết quả của phép tính đã cho là số chẵn.\nLưu ý đối chiếu: bản chép câu hỏi đang lưu ghi “−2 × 2”, trong khi lời giải được cung cấp dùng “−2 × 3” rồi thay bằng “−6”. Hai biểu thức khác nhau. Giữ nguyên đáp án Even được cung cấp; cần đối chiếu lại hạng tử này với đề gốc.\nĐáp số: Even.",
+      "7 × 8 + 8 × 9 + 9 × 10 − 1 × 1 − 2 × 3 − 3 × 3\n= 56 + 72 + 90 − 1 − 6 − 9 = 218 − 1 − 6 − 9 = 202.\nVì 202 là số chẵn nên kết quả của phép tính đã cho là số chẵn.\nĐáp số: Even.",
     topicId: "unassigned",
     strand: "Number Theory / Số học",
   },

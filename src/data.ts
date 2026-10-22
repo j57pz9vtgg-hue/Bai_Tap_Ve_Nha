@@ -435,10 +435,32 @@ export function readSaved(): Saved {
   return { version: 1, grade: 2, results: {}, drafts: {} };
 }
 
+// Correct only these exact known transcription mistakes in saved review snapshots.
+// Keep all saved grades, responses, time, order and other historical question fields.
+export function correctStoredTranscriptions(questions: Question[]): Question[] {
+  return questions.map((saved) => {
+    const correctedPaper5 =
+      saved.sourcePaper === "Đề số 5 · Vòng quốc gia TIMO lớp 2" &&
+      saved.sourceNumber === 13 &&
+      saved.text ===
+        "Determine the result of 7 × 8 + 8 × 9 + 9 × 10 − 1 × 1 − 2 × 2 − 3 × 3 is odd or even.";
+    const correctedPaper7 =
+      saved.sourcePaper === "Đề số 7 · Vòng quốc gia TIMO lớp 2" &&
+      saved.sourceNumber === 25 &&
+      saved.text ===
+        "Peter has 6 $1 coins, 3 $2 coins and 4 $5 coins. At most how many souvenir(s) can he buy for a souvenir costed $6?";
+    if (!correctedPaper5 && !correctedPaper7) return saved;
+    const current = (
+      correctedPaper5 ? TIMO_GRADE2_NATIONAL5 : TIMO_GRADE2_NATIONAL7
+    ).find((q) => q.sourceNumber === saved.sourceNumber)!;
+    return { ...saved, text: current.text, explanation: current.explanation };
+  });
+}
+
 // Refresh received source content for unfinished attempts without changing question order.
 // A matching prompt and choices preserve the meaning of each saved selection.
 export function refreshSuppliedQuestions(questions: Question[]): Question[] {
-  return questions.map(
+  return correctStoredTranscriptions(questions).map(
     (saved) =>
       ALL_QUESTIONS.find(
         (current) =>

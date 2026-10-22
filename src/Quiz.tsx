@@ -23,6 +23,7 @@ import {
   hasProvidedAnswer,
   isCorrectAnswer,
   refreshSuppliedQuestions,
+  correctStoredTranscriptions,
 } from "./data";
 import type { Draft, Exercise, Result, Section, StudentAnswer } from "./data";
 
@@ -60,7 +61,9 @@ export default function Quiz({
   const isTopic = isPaper && exercise.category === "topic";
   const [questions, setQuestions] = useState(() =>
     initialResult
-      ? (initialResult.questions ?? getQuestions(grade, section, exercise))
+      ? correctStoredTranscriptions(
+          initialResult.questions ?? getQuestions(grade, section, exercise),
+        )
       : draft
         ? refreshSuppliedQuestions(
             draft.questions ?? getQuestions(grade, section, exercise),

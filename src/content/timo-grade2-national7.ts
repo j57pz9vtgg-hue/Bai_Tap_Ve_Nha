@@ -362,14 +362,14 @@ export const TIMO_GRADE2_NATIONAL7: Question[] = [
   {
     sourceNumber: 25,
     sourcePaper: "Đề số 7 · Vòng quốc gia TIMO lớp 2",
-    text: "Peter has 6 $1 coins, 3 $2 coins and 4 $5 coins. At most how many souvenir(s) can he buy for a souvenir costed $6?",
+    text: "Peter has 6 $1 coins, 2 $2 coins and 4 $5 coins. At most how many souvenir(s) can he buy for a souvenir costed $6?",
     translation: "Coins: Đồng xu; Souvenir: Quà lưu niệm; At most: Nhiều nhất.",
     options: [],
     answerFormat: "text",
     correct: null,
     correctText: "5",
     explanation:
-      "Tổng số tiền của Peter là: 6 × $1 + 2 × $2 + 4 × $5 = $30.\nVì $30 = $6 × 5 nên Peter có thể mua nhiều nhất 5 món quà lưu niệm.\nLưu ý đối chiếu: câu hỏi ghi 3 đồng $2, nhưng phép tính trong lời giải được cung cấp dùng 2 đồng $2. Giữ đáp án 5 theo tài liệu; số lượng đồng $2 trong lời giải cần được đối chiếu.\nĐáp số: 5.",
+      "Tổng số tiền của Peter là: 6 × $1 + 2 × $2 + 4 × $5 = $30.\nVì $30 = $6 × 5 nên Peter có thể mua nhiều nhất 5 món quà lưu niệm.\nĐáp số: 5.",
     topicId: "unassigned",
     strand: "Combinatorics / Tổ hợp",
   },
