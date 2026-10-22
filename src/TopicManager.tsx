@@ -40,6 +40,7 @@ export default function TopicManager({
   const [paper, setPaper] = useState("all");
   const [search, setSearch] = useState("");
   const [onlyUnassigned, setOnlyUnassigned] = useState(false);
+  const [onlySelected, setOnlySelected] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
   const [error, setError] = useState(loaded.error);
   const [deleteRequested, setDeleteRequested] = useState(false);
@@ -55,6 +56,7 @@ export default function TopicManager({
   const visible = inPaper.filter(
     (q) =>
       (!onlyUnassigned || !assigned.has(questionId(q))) &&
+      (!onlySelected || Boolean(draft?.questionIds.includes(questionId(q)))) &&
       `${q.sourceNumber} ${q.text} ${q.translation ?? ""}`
         .toLocaleLowerCase()
         .includes(search.trim().toLocaleLowerCase()),
@@ -67,6 +69,8 @@ export default function TopicManager({
     });
     setError("");
     setDeleteRequested(false);
+    setOnlyUnassigned(false);
+    setOnlySelected(false);
   }
   function persist(next: UserTopic[]) {
     try {
@@ -247,14 +251,30 @@ export default function TopicManager({
               />
             </label>
           </div>
-          <label className="topic-unassigned-filter">
-            <input
-              type="checkbox"
-              checked={onlyUnassigned}
-              onChange={(e) => setOnlyUnassigned(e.target.checked)}
-            />{" "}
-            Chỉ hiện câu chưa có chủ đề
-          </label>
+          <div className="topic-membership-filters">
+            <label className="topic-unassigned-filter">
+              <input
+                type="checkbox"
+                checked={onlyUnassigned}
+                onChange={(e) => {
+                  setOnlyUnassigned(e.target.checked);
+                  if (e.target.checked) setOnlySelected(false);
+                }}
+              />
+              Chỉ hiện câu chưa có chủ đề
+            </label>
+            <label className="topic-unassigned-filter">
+              <input
+                type="checkbox"
+                checked={onlySelected}
+                onChange={(e) => {
+                  setOnlySelected(e.target.checked);
+                  if (e.target.checked) setOnlyUnassigned(false);
+                }}
+              />
+              Chỉ hiện câu đã gắn với chủ đề
+            </label>
+          </div>
           <div className="topic-question-picker">
             {visible.map((q) => {
               const id = questionId(q);

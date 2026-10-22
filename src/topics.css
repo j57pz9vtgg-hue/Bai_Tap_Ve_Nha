@@ -179,3 +179,9 @@
     margin-left: 0;
   }
 }
+
+.topic-membership-filters {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 28px;
+}
