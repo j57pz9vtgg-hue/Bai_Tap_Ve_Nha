@@ -150,7 +150,7 @@ export const TIMO_GRADE2_QUALIFIER7: Question[] = [
       "Neither odd nor even / Không lẻ không chẵn",
     ],
     strand: "Number Theory / Lý thuyết số",
-    topicId: "unassigned",
+    topicId: "topic-12",
     correct: 0,
     explanation:
       "1 + 2 + 3 + … + 9 = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9\n= (1 + 9) + (2 + 8) + (3 + 7) + (4 + 6) + 5\n= 10 + 10 + 10 + 10 + 5 = 45.\nĐáp số: A.",

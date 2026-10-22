@@ -45,7 +45,7 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     correctText: "95",
     explanation:
       "Để hoàn thành 4 bức tranh, Mary cần vẽ 4 lần và nghỉ 3 lần.\nTổng thời gian Mary cần là: 20 + 20 + 20 + 20 + 5 + 5 + 5 = 95 (phút).\nĐáp số: 95.",
-    topicId: "unassigned",
+    topicId: "topic-02",
     strand: "Logical thinking / Tư duy lô-gic",
   },
   {
@@ -179,7 +179,7 @@ export const TIMO_GRADE2_NATIONAL1: Question[] = [
     acceptedAnswers: ["lẻ", "số lẻ"],
     explanation:
       "Tổng của 15 số lẻ là số lẻ nên tổng điểm của 15 đứa trẻ đầu tiên là số lẻ.\nTổng của 6 số chẵn là số chẵn nên tổng điểm của 6 đứa trẻ tiếp theo là số chẵn.\nTổng của một số lẻ và một số chẵn là số lẻ nên tổng điểm của 21 đứa trẻ này là số lẻ.\nTổng của 2 số lẻ là số chẵn. Do đó, để tổng điểm của 30 đứa trẻ là số chẵn thì tổng điểm của 9 đứa trẻ còn lại là số lẻ.\nĐáp số: Odd.",
-    topicId: "unassigned",
+    topicId: "topic-12",
     strand: "Number Theory / Số học",
   },
   {

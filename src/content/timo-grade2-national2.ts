@@ -163,7 +163,7 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     correctText: "1024",
     explanation:
       "Chọn chữ số nhỏ nhất khác 0 để làm hàng nghìn. Do đó, hàng nghìn là 1.\nChọn chữ số nhỏ nhất trong các chữ số còn lại để làm hàng trăm. Do đó, hàng trăm là 0.\nChọn chữ số nhỏ nhất trong các chữ số còn lại để làm hàng chục. Do đó, hàng chục là 2.\nChọn chữ số chẵn nhỏ nhất trong các chữ số còn lại để làm hàng đơn vị. Do đó, hàng đơn vị là 4.\nVậy số cần tìm là 1024.\nĐáp số: 1024.",
-    topicId: "unassigned",
+    topicId: "topic-21",
     strand: "Number Theory / Số học",
   },
   {
@@ -179,7 +179,7 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     acceptedAnswers: ["lẻ", "số lẻ"],
     explanation:
       "Ta tìm chữ số hàng đơn vị của từng phép tính nhân như sau:\n4 × 7 − 3 × 6 + 5 × 4 + 9 × 8 − 6 × 2 − 7 × 9\n↓          ↓          ↓          ↓          ↓          ↓\n8 − 8 + 0 + 2 − 2 − 3\nNhận thấy: 8 − 8 + 0 + 2 − 2 − 3 = 0 − 3.\nĐể tìm chữ số hàng đơn vị của phép tính, ta lấy 10 trừ 3 bằng 7.\nVì 7 là số lẻ nên kết quả của phép tính đã cho là số lẻ.\nĐáp số: Odd.",
-    topicId: "unassigned",
+    topicId: "topic-12",
     strand: "Number Theory / Số học",
   },
   {
@@ -315,7 +315,7 @@ export const TIMO_GRADE2_NATIONAL2: Question[] = [
     correctText: "9740",
     explanation:
       "Chọn chữ số lớn nhất trong các chữ số đã cho để làm hàng nghìn. Do đó, hàng nghìn là 9.\nChọn chữ số lớn nhất trong các chữ số còn lại để làm hàng trăm. Do đó, hàng trăm là 7.\nChọn chữ số lớn nhất trong các chữ số còn lại để làm hàng chục. Do đó, hàng chục là 4.\nVì số cần tạo là số chẵn nên hàng đơn vị là 0.\nVậy số chẵn lớn nhất có 4 chữ số tạo được là 9740.\nĐáp số: 9740.",
-    topicId: "unassigned",
+    topicId: "topic-21",
     strand: "Combinatorics / Tổ hợp",
   },
   {

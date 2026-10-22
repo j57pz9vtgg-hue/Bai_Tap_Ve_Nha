@@ -202,7 +202,7 @@ export const TIMO_GRADE2_QUALIFIER6: Question[] = [
       "Neither odd nor even / Không chẵn không lẻ",
     ],
     strand: "Number Theory / Lý thuyết số",
-    topicId: "unassigned",
+    topicId: "topic-12",
     correct: 0,
     explanation:
       "1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14\n= (1 + 14) + (2 + 13) + (3 + 12) + (4 + 11) + (5 + 10) + (6 + 9) + (7 + 8)\n= 15 + 15 + 15 + 15 + 15 + 15 + 15\n= (15 + 15) + (15 + 15) + (15 + 15) + 15\n= 30 + 30 + 30 + 15\n= 105.\nVì 105 là số lẻ nên kết quả phép tính đã cho là một số lẻ.\nĐáp số: A.",
@@ -265,7 +265,7 @@ export const TIMO_GRADE2_QUALIFIER6: Question[] = [
       "Có nhiều nhất bao nhiêu đường thẳng được tạo bởi 5 điểm trên cùng một mặt phẳng?",
     options: ["6", "8", "9", "10"],
     strand: "Geometry / Hình học",
-    topicId: "unassigned",
+    topicId: "topic-23",
     correct: 3,
     explanation:
       "Số đường thẳng được tạo bởi 5 điểm trên một mặt phẳng là: 5 × (5 − 1) : 2 = 10 (đường).\nĐáp số: D.",
@@ -291,7 +291,7 @@ export const TIMO_GRADE2_QUALIFIER6: Question[] = [
       "Số nhỏ nhất có 4 chữ số tạo bởi các chữ số 3, 9, 4 và 0 mà chia hết cho 10 là số nào? (Mỗi chữ số chỉ dùng một lần).",
     options: ["3094", "3049", "3940", "3490"],
     strand: "Combinatorics / Tổ hợp",
-    topicId: "unassigned",
+    topicId: "topic-21",
     correct: 3,
     explanation:
       "Số chia hết cho 10 có chữ số hàng đơn vị là 0.\nVậy số nhỏ nhất có 4 chữ số chia hết cho 10 tạo bởi các số đã cho là 3490.\nĐáp số: D.",
@@ -317,7 +317,7 @@ export const TIMO_GRADE2_QUALIFIER6: Question[] = [
       "Chọn 2 trong 6 đứa trẻ để tham gia một cuộc thi toán. Hỏi có bao nhiêu cách chọn khác nhau?",
     options: ["15", "17", "18", "20"],
     strand: "Combinatorics / Tổ hợp",
-    topicId: "unassigned",
+    topicId: "topic-23",
     correct: 0,
     explanation:
       "Chọn đứa trẻ thứ nhất: có 6 cách.\nChọn đứa trẻ thứ hai: có 5 cách.\nTuy nhiên các cặp đứa trẻ được chọn như trên sẽ được tính 2 lần (chọn bạn A rồi chọn bạn B cũng chính là cách chọn bạn B rồi chọn bạn A).\nVậy số cách khác nhau để chọn ra 2 đứa trẻ trong số 6 đứa trẻ là 6 × 5 : 2 = 15 (cách).\nĐáp số: A.",

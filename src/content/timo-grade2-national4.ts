@@ -180,7 +180,7 @@ export const TIMO_GRADE2_NATIONAL4: Question[] = [
     acceptedAnswers: ["lẻ", "số lẻ"],
     explanation:
       "5 × 5 + 9 × 7 − 4 × 4 + 8 × 8 − 7 × 1 − 2 × 6 = 25 + 63 − 16 + 64 − 7 − 12 = 117.\nVì 117 là số lẻ nên kết quả của phép tính đã cho là số lẻ.\nĐáp số: Odd.",
-    topicId: "unassigned",
+    topicId: "topic-12",
     strand: "Number Theory / Số học",
   },
   {

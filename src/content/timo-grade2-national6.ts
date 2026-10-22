@@ -210,7 +210,7 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     acceptedAnswers: ["chẵn", "số chẵn"],
     explanation:
       "Vì A là số lẻ nên ta có thể coi A = 1.\nKhi đó A × (A + 1) × (A + 2) = 1 × (1 + 1) × (1 + 2) = 1 × 2 × 3 = 6.\nVì 6 là số chẵn nên A × (A + 1) × (A + 2) là số chẵn.\nĐáp số: Even.",
-    topicId: "unassigned",
+    topicId: "topic-12",
     strand: "Number Theory / Số học",
   },
   {
@@ -333,7 +333,7 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     correctText: "8750",
     explanation:
       "Ta chọn chữ số lớn nhất có thể để làm hàng nghìn (là 8).\nVì số cần tạo là số chẵn nên chọn chữ số 0 làm hàng đơn vị.\nChọn chữ số lớn nhất có thể trong các chữ số còn lại (3, 5, 7) để làm hàng trăm (là 7).\nChọn chữ số lớn nhất có thể trong các chữ số còn lại (3, 5) để làm hàng chục (là 5).\nVậy số có 4 chữ số lớn nhất được tạo thành từ các chữ số đã cho là 8750.\nĐáp số: 8750.",
-    topicId: "unassigned",
+    topicId: "topic-21",
     strand: "Combinatorics / Tổ hợp",
   },
   {
@@ -348,7 +348,7 @@ export const TIMO_GRADE2_NATIONAL6: Question[] = [
     correctText: "504",
     explanation:
       "Chọn 1 vận động viên để trao giải vàng: có 9 cách.\nChọn 1 vận động viên để trao giải bạc: có 8 cách.\nChọn 1 vận động viên để trao giải đồng: có 7 cách.\nCó tất cả: 9 × 8 × 7 = 504 cách.\nĐáp số: 504.",
-    topicId: "unassigned",
+    topicId: "topic-23",
     strand: "Combinatorics / Tổ hợp",
   },
   {

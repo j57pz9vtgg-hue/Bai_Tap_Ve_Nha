@@ -161,7 +161,7 @@ export const TIMO_GRADE2_NATIONAL7: Question[] = [
     acceptedAnswers: ["chẵn", "số chẵn"],
     explanation:
       "3 + 7 + 11 + 15 + 19 + 23 + 27 + 31 = (3 + 27) + (7 + 23) + (11 + 19) + 15 + 31\n= 30 + 30 + 30 + 15 + 31 = 90 + 15 + 31 = 105 + 31 = 136.\nVì 136 là số chẵn nên kết quả của phép tính đã cho là số chẵn.\nĐáp số: Even.",
-    topicId: "unassigned",
+    topicId: "topic-12",
     strand: "Number Theory / Số học",
   },
   {
@@ -356,7 +356,7 @@ export const TIMO_GRADE2_NATIONAL7: Question[] = [
     correctText: "2046",
     explanation:
       "Chọn chữ số nhỏ nhất khác 0 làm hàng nghìn (là 2).\nChọn chữ số nhỏ nhất trong các chữ số còn lại (0, 4, 6, 8) làm hàng trăm (là 0).\nChọn chữ số nhỏ nhất trong các chữ số còn lại (4, 6, 8) làm hàng chục (là 4).\nChọn chữ số nhỏ nhất trong các chữ số còn lại (6, 8) làm hàng đơn vị (là 6).\nVậy số có 4 chữ số nhỏ nhất tạo từ các chữ số đã cho là 2046.\nĐáp số: 2046.",
-    topicId: "unassigned",
+    topicId: "topic-21",
     strand: "Combinatorics / Tổ hợp",
   },
   {

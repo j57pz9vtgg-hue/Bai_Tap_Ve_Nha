@@ -180,7 +180,7 @@ export const TIMO_GRADE2_NATIONAL3: Question[] = [
     acceptedAnswers: ["lẻ", "số lẻ"],
     explanation:
       "5 × 7 − 3 × 9 + 5 × 4 + 9 × 8 − 6 × 2 − 7 × 9\n= 35 − 27 + 20 + 72 − 12 − 63\n= 25.\nVì 25 là số lẻ nên kết quả của phép tính là số lẻ.\nĐáp số: Odd.",
-    topicId: "unassigned",
+    topicId: "topic-12",
     strand: "Number Theory / Số học",
   },
   {

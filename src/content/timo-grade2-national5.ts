@@ -192,7 +192,7 @@ export const TIMO_GRADE2_NATIONAL5: Question[] = [
     acceptedAnswers: ["chẵn", "số chẵn"],
     explanation:
       "7 × 8 + 8 × 9 + 9 × 10 − 1 × 1 − 2 × 3 − 3 × 3\n= 56 + 72 + 90 − 1 − 6 − 9 = 218 − 1 − 6 − 9 = 202.\nVì 202 là số chẵn nên kết quả của phép tính đã cho là số chẵn.\nĐáp số: Even.",
-    topicId: "unassigned",
+    topicId: "topic-12",
     strand: "Number Theory / Số học",
   },
   {
@@ -357,7 +357,7 @@ export const TIMO_GRADE2_NATIONAL5: Question[] = [
     correctText: "4",
     explanation:
       "Gọi 4 hương vị lần lượt là A, B, C, D. Ta có các cách kết hợp sau:\nA − B − C, A − B − D, A − C − D, B − C − D.\nVậy có 4 loại kem khác nhau.\nĐáp số: 4.",
-    topicId: "unassigned",
+    topicId: "topic-23",
     strand: "Combinatorics / Tổ hợp",
   },
   {

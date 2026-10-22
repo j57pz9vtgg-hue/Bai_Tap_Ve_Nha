@@ -179,7 +179,7 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
     translation: "Trong các số dưới đây, hỏi có bao nhiêu số chẵn lớn hơn 20?",
     options: ["5", "4", "6", "3"],
     strand: "Number Theory / Lý thuyết số",
-    topicId: "unassigned",
+    topicId: "topic-12",
     correct: 1,
     explanation:
       "Các số chẵn lớn hơn 20 là: 22, 52, 70, 54.\nVậy có 4 số chẵn thỏa mãn đề bài.\nĐáp số: B.",
@@ -278,7 +278,7 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
       "Một cửa hàng muốn cho số bánh sau vào 4 hộp. Hỏi mỗi hộp có bao nhiêu miếng bánh biết rằng các hộp đều có số bánh như nhau?",
     options: ["2", "6", "4", "3"],
     strand: "Combinatorics / Tổ hợp",
-    topicId: "unassigned",
+    topicId: "topic-14",
     correct: 3,
     explanation:
       "Ta có cách chia đều số bánh vào 4 hộp như hình minh họa.\nVậy 1 hộp có 3 miếng bánh.\nĐáp số: D.",
@@ -318,7 +318,7 @@ export const TIMO_GRADE2_QUALIFIER4: Question[] = [
       "Có 5 bạn gồm Amy, Ben, Cindy, Dan, Erik tham gia một buổi học cờ vua. Cứ hai bạn bất kì chơi với nhau đúng một ván cờ. Hỏi có tất cả bao nhiêu ván cờ trong buổi học đó?",
     options: ["20", "10", "15", "5"],
     strand: "Combinatorics / Tổ hợp",
-    topicId: "unassigned",
+    topicId: "topic-23",
     correct: 1,
     explanation:
       "Cách 1: Chọn bạn thứ nhất chơi ván cờ: có 5 cách. Chọn bạn thứ hai chơi ván cờ: có 4 cách. Vậy số cách chọn ra 2 bạn là: 5 × 4 = 20 cách. Tuy nhiên các cặp được chọn như trên sẽ được tính 2 lần nên số cách khác nhau để chọn ra 2 bạn trong số 5 bạn là: 20 : 2 = 10 (cách).\nCách 2: Amy chơi 4 ván với 4 bạn còn lại. Ben chơi 3 ván với 3 bạn còn lại (trừ Amy). Cindy chơi 2 ván với 2 bạn còn lại (trừ Amy và Ben). Dan chơi 1 ván với 1 bạn còn lại (là Erik). Vậy có tất cả 4 + 3 + 2 + 1 = 10 ván cờ.\nĐáp số: B.",

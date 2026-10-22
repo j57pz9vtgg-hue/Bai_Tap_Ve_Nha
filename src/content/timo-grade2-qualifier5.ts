@@ -185,7 +185,7 @@ export const TIMO_GRADE2_QUALIFIER5: Question[] = [
     translation: "Trong các số dưới đây, hỏi có bao nhiêu số lẻ lớn hơn 39?",
     options: ["3", "2", "4", "1"],
     strand: "Number Theory / Lý thuyết số",
-    topicId: "unassigned",
+    topicId: "topic-12",
     correct: 1,
     explanation:
       "Các số lẻ lớn hơn 39 là 93 và 41.\nVậy có 2 số lẻ lớn hơn 39 trong các số đã cho.\nĐáp số: B.",
@@ -252,7 +252,7 @@ export const TIMO_GRADE2_QUALIFIER5: Question[] = [
       "Daniel vẽ 6 đường thẳng trên một tờ giấy. Hỏi anh ấy có thể tạo ra nhiều nhất bao nhiêu hình vuông?",
     options: ["1", "4", "5", "6"],
     strand: "Geometry / Hình học",
-    topicId: "unassigned",
+    topicId: "topic-15",
     diagram: "p5-max-squares",
     correct: 2,
     explanation:
@@ -280,7 +280,7 @@ export const TIMO_GRADE2_QUALIFIER5: Question[] = [
       "Chia các hình ngôi sao dưới đây thành 3 nhóm bằng nhau. Hỏi có bao nhiêu hình ngôi sao trong 2 nhóm đầu tiên?",
     options: ["3", "4", "6", "9"],
     strand: "Combinatorics / Tổ hợp",
-    topicId: "unassigned",
+    topicId: "topic-14",
     correct: 2,
     explanation:
       "Chia đều 9 hình ngôi sao vào 3 nhóm thì mỗi nhóm có 9 : 3 = 3 ngôi sao.\nTrong 2 nhóm đầu tiên có 3 + 3 = 6 ngôi sao.\nĐáp số: C.",
