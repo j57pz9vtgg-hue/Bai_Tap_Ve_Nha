@@ -463,13 +463,13 @@ export default function Quiz({
         </div>
       )}
       {confirmLeave ? (
-        <div className="quiz-confirm">
-          <div
-            role="alertdialog"
-            aria-modal="true"
-            aria-labelledby="leave-title"
-          >
-            <h3 id="leave-title">Tạm dừng cuộc phiêu lưu?</h3>
+        <Dialog
+          title="Tạm dừng cuộc phiêu lưu?"
+          className="leave-confirm-dialog"
+          onClose={() => setConfirmLeave(false)}
+        >
+          <div className="leave-confirm-content">
+            <h3>Tạm dừng cuộc phiêu lưu?</h3>
             <p>
               Câu trả lời đã được lưu. Đồng hồ vẫn tiếp tục chạy, bé nhớ quay
               lại trước khi hết giờ nhé.
@@ -484,7 +484,7 @@ export default function Quiz({
               Tiếp tục làm bài
             </button>
           </div>
-        </div>
+        </Dialog>
       ) : null}
     </Dialog>
   );

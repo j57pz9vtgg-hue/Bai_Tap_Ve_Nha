@@ -19,6 +19,9 @@ import type { Category, Exercise, Result, Section } from "./data";
 export const publicAsset = (name: string) =>
   `${import.meta.env.BASE_URL}assets/${name}.webp`;
 
+let openDialogCount = 0;
+let originalBodyOverflow = "";
+
 export function Dialog({
   children,
   onClose,
@@ -34,11 +37,15 @@ export function Dialog({
   useEffect(() => {
     const dialog = ref.current!;
     dialog.showModal();
-    const previous = document.body.style.overflow;
+    if (openDialogCount === 0)
+      originalBodyOverflow = document.body.style.overflow;
+    openDialogCount += 1;
     document.body.style.overflow = "hidden";
     return () => {
       dialog.close();
-      document.body.style.overflow = previous;
+      openDialogCount -= 1;
+      if (openDialogCount === 0)
+        document.body.style.overflow = originalBodyOverflow;
     };
   }, []);
   return (

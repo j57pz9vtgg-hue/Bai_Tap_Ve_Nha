@@ -491,14 +491,6 @@
   border-radius: 12px;
   padding-top: 0;
 }
-.paper-dialog .quiz-confirm {
-  position: fixed;
-  z-index: 10;
-}
-.paper-dialog .quiz-confirm > div {
-  max-width: 480px;
-  background: white;
-}
 @media (min-width: 1500px) {
   .paper-world {
     padding-left: 6%;

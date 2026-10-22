@@ -371,33 +371,42 @@
   margin: 14px auto 0;
   font-size: 12px;
 }
-.quiz-confirm {
-  position: absolute;
-  inset: 0;
-  background: #fffdf3ed;
-  z-index: 5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 25px;
-  backdrop-filter: blur(5px);
-  border-radius: 23px;
+.dialog.leave-confirm-dialog {
+  width: min(440px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 38px 28px 24px;
+  border: 1px solid #cbdfea;
+  border-radius: 20px;
+  background: #fff;
+  color: #071b52;
+  box-shadow: 0 20px 70px #102c5040;
 }
-.quiz-confirm > div {
-  max-width: 380px;
-  text-align: center;
+.leave-confirm-dialog::backdrop {
+  background: #102c5066;
+  backdrop-filter: blur(2px);
+}
+.leave-confirm-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 18px;
+  text-align: center;
 }
-.quiz-confirm h3 {
-  font-size: 28px;
+.leave-confirm-content h3 {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.3;
 }
-.quiz-confirm p {
-  font-size: 14px;
-  line-height: 1.85;
-  color: #6b7f71;
+.leave-confirm-content p {
+  margin: 0;
+  color: #527187;
+  font-size: 15px;
+  line-height: 1.65;
+}
+.leave-confirm-content > button {
+  width: 100%;
+  min-height: 44px;
+  justify-content: center;
 }
 .confirm-icon {
   color: #e18836;

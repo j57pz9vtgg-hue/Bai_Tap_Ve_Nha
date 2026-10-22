@@ -648,9 +648,6 @@ button {
 .question-navigator .current-question {
   outline-color: #159bac;
 }
-.quiz-confirm {
-  background: #f5fcfff5;
-}
 .result-score {
   color: #0d9ba7;
 }
@@ -1094,12 +1091,6 @@ button {
   }
   .result-list-icon {
     padding: 7px;
-  }
-  .quiz-confirm h3 {
-    font-size: 25px;
-  }
-  .quiz-confirm p {
-    font-size: 13px;
   }
 }
 @media (max-width: 479px) {
