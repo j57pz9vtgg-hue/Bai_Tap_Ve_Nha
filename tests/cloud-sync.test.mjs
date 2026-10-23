@@ -196,25 +196,14 @@ await test("source exam inventory remains 350 unique questions with received key
   );
   assert(equal({ a: 1, b: { c: 2 } }, { b: { c: 2 }, a: 1 }));
 });
-await test("curated topics expose only three approved source examples while all other questions await approval", () => {
+await test("removed topics return all350 source questions to unassigned without changing practice data", () => {
   const progressBefore = store.get(progressKey);
   const topics = data.getExercises("timo", "topic", 2);
-  const approved = topics.filter((topic) => topic.id !== "unassigned");
-  assert.deepEqual(approved.map((topic) => topic.title), [
-    "Tìm số thích hợp để điền vào chỗ trống",
-    "Tính số đồ vật sau khi nhận hoặc cho",
-    "Bài toán về tuổi",
-  ]);
-  assert.deepEqual(approved.map((topic) => topic.example.sourceNumber), [1, 2, 3]);
-  for (const topic of approved) {
-    assert.equal(topic.questionCount, 0);
-    assert.deepEqual(data.getQuestions(2, "timo", topic), []);
-    assert.equal(topic.examples.length, 1);
-    assert.equal(topic.example.sourcePaper, "Đề số 1 · Vòng loại TIMO lớp 2");
-  }
-  const waiting = data.getQuestions(2, "timo", topics.find((topic) => topic.id === "unassigned"));
-  assert.equal(waiting.length, 347);
-  assert.equal(new Set([...waiting, ...approved.flatMap((topic) => topic.examples)].map(questionId)).size, 350);
+  assert.deepEqual(topics.map((topic) => topic.id), ["unassigned"]);
+  const waiting = data.getQuestions(2, "timo", topics[0]);
+  assert.equal(waiting.length, 350);
+  assert.equal(new Set(waiting.map(questionId)).size, 350);
+  assert.deepEqual(waiting.map(questionId), source.map(questionId));
   assert.equal(store.get(progressKey), progressBefore);
 });
 await rm(folder, { recursive: true, force: true });

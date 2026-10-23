@@ -1,59 +1,8 @@
-// Proposals only. This file must never be used to assign practice membership.
-export const TOPIC_REVIEW = [
-  {
-    id: "sequence",
-    title: "Tìm số thích hợp để điền vào chỗ trống",
-    sample: { paper: "qualifier-01", number: 1 },
-    note: "17 câu dưới đây cùng yêu cầu tìm số còn thiếu, số tiếp theo hoặc số ở một vị trí trong dãy. Tất cả đang chờ bạn duyệt, chưa được thêm vào chủ đề.",
-    candidates: [
-      { paper: "qualifier-01", number: 12 },
-      { paper: "qualifier-02", number: 1 },
-      { paper: "qualifier-02", number: 12 },
-      { paper: "qualifier-03", number: 1 },
-      { paper: "qualifier-03", number: 12 },
-      { paper: "qualifier-04", number: 5 },
-      { paper: "qualifier-04", number: 11 },
-      { paper: "qualifier-05", number: 5 },
-      { paper: "qualifier-05", number: 11 },
-      { paper: "qualifier-06", number: 2 },
-      { paper: "qualifier-06", number: 12 },
-      { paper: "qualifier-07", number: 3 },
-      { paper: "qualifier-07", number: 13 },
-      { paper: "national-01", number: 1 },
-      { paper: "national-01", number: 15 },
-      { paper: "national-06", number: 3 },
-      { paper: "national-07", number: 13 },
-    ],
-  },
-  {
-    id: "objects",
-    title: "Tính số đồ vật sau khi nhận hoặc cho",
-    sample: { paper: "qualifier-01", number: 2 },
-    note: "Chưa có câu khác trùng hẳn dạng biết số ban đầu rồi nhận/cho để tìm số còn lại. 4 câu dưới đây chỉ gần dạng cộng tổng; chưa có tình huống nhận hoặc cho. Chưa đề xuất tự động gắn câu nào. Các bài chuyển để bằng nhau, tính ngược, mua bán hoặc chia nhóm vẫn để Chưa có chủ đề.",
-    candidates: [
-      { paper: "qualifier-02", number: 2 },
-      { paper: "qualifier-03", number: 2 },
-      { paper: "qualifier-04", number: 1 },
-      { paper: "qualifier-05", number: 1 },
-    ],
-  },
-  {
-    id: "age",
-    title: "Bài toán về tuổi",
-    sample: { paper: "qualifier-01", number: 3 },
-    note: "11 câu dưới đây cùng bài toán về tuổi. Các câu vòng loại gồm tìm tuổi hiện tại, tuổi sau một khoảng thời gian và tuổi theo mẹ; các câu quốc gia mở rộng sang quan hệ tuổi mẹ và con/anh chị em. Tất cả chờ bạn duyệt; chưa đưa câu nào vào chủ đề.",
-    candidates: [
-      { paper: "qualifier-02", number: 3 },
-      { paper: "qualifier-03", number: 3 },
-      { paper: "qualifier-04", number: 4 },
-      { paper: "qualifier-05", number: 4 },
-      { paper: "qualifier-06", number: 5 },
-      { paper: "national-02", number: 1 },
-      { paper: "national-03", number: 1 },
-      { paper: "national-04", number: 1 },
-      { paper: "national-05", number: 3 },
-      { paper: "national-06", number: 2 },
-      { paper: "national-07", number: 3 },
-    ],
-  },
-];
+// Cleared with the removed topics. Suggestions never assign practice membership.
+export const TOPIC_REVIEW: {
+  id: string;
+  title: string;
+  sample: { paper: string; number: number };
+  note: string;
+  candidates: { paper: string; number: number }[];
+}[] = [];
