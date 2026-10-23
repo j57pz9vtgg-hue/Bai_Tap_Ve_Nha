@@ -137,3 +137,5 @@
 - Latest owner request re-enables per-question Phân loại chủ đề inside Chưa có chủ đề. Allow choosing an existing topic or creating one inline and optional source example; assigned rows disappear immediately. Do not restore deleted topics or a global manager. New topics use user-topic-v2- IDs and normal Firebase merge; continue tombstoning older user-topic IDs. Keep all source papers, drafts/results, Dragon theme and review table formatting policy.
 
 - Classification popup order: full source question (translation, source diagram and choices), visible topic list, then the selected topic’s teaching examples expanded immediately. Changing selection only previews; persist only on Gắn vào chủ đề. Show an explicit empty-example message for topics without one. Topic practice examples retain their default collapsed state and existing public-example exception.
+
+- Make classification discoverable from the catalog: the Chưa có chủ đề card action must read Phân loại chủ đề (including when an old result exists), opening the unassigned list with per-question classification buttons.
