@@ -8,6 +8,7 @@ import {
   FileCheck2,
   Play,
   Send,
+  Search,
 } from "lucide-react";
 import {
   getExercises,
@@ -27,6 +28,7 @@ import type { Exercise, Question, Section, StudentAnswer } from "./data";
 type Props = {
   classificationOnly?: boolean;
   onClassify?: (question: Question) => void;
+  questionSearch?: { value: string; onChange: (value: string) => void; total: number };
   submitted?: boolean;
   score?: number;
   onReview?: () => void;
@@ -212,8 +214,17 @@ export function PaperWorkspace(p: Props) {
           </div>
           {p.classificationOnly ? (
             <div className="unassigned-actions">
+              {p.questionSearch && (
+                <div className="unassigned-search">
+                  <label className="unassigned-search-field">
+                    <Search size={19} aria-hidden="true" />
+                    <input type="search" aria-label="Tìm nội dung câu hỏi" placeholder="Tìm nội dung câu hỏi…" value={p.questionSearch.value} onChange={(event) => p.questionSearch?.onChange(event.target.value)} />
+                  </label>
+                  {p.questionSearch.value && <button className="text-button" onClick={() => p.questionSearch?.onChange("")}>Xóa tìm kiếm</button>}
+                </div>
+              )}
               <span role="status">
-                {p.questions.length} câu hỏi
+                {p.questionSearch?.value.trim() ? `${p.questions.length}/${p.questionSearch.total} câu hỏi` : `${p.questions.length} câu hỏi`}
               </span>
             </div>
           ) : (
@@ -307,7 +318,7 @@ export function PaperWorkspace(p: Props) {
           )}
           {p.classificationOnly && !p.questions.length && (
             <p className="unassigned-empty" role="status">
-              Tất cả câu hỏi đã được phân loại vào chủ đề.
+              {p.questionSearch?.total ? "Không tìm thấy câu hỏi phù hợp. Hãy thử từ khóa khác hoặc xóa tìm kiếm." : "Tất cả câu hỏi đã được phân loại vào chủ đề."}
             </p>
           )}
           {p.questions.map((q, i) => (
@@ -343,12 +354,7 @@ export function PaperWorkspace(p: Props) {
                       value={p.answers[i] ?? ""}
                       onChange={(e) => p.onAnswer(i, e.target.value)}
                     />
-                    {p.classificationOnly && p.onClassify && (
-                <div className="question-classify-action">
-                  <button className="secondary-button" onClick={() => p.onClassify?.(q)} aria-label={`Phân loại chủ đề câu ${i + 1}`}>Phân loại chủ đề</button>
-                </div>
-              )}
-              {p.review && hasProvidedAnswer(q) && (
+                    {p.review && hasProvidedAnswer(q) && (
                       <span>
                         {isCorrectAnswer(q, p.answers[i])
                           ? "Đúng"

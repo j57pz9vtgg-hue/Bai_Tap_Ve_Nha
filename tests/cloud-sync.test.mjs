@@ -7,7 +7,7 @@ import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 const folder = await mkdtemp(join(tmpdir(), "learning-sync-test-"));
 await build({
-  entryPoints: ["src/cloud/merge.ts", "src/cloud/records.ts", "src/data.ts", "src/topicPolicy.ts"],
+  entryPoints: ["src/cloud/merge.ts", "src/cloud/records.ts", "src/data.ts", "src/topicPolicy.ts", "src/questionSearch.ts"],
   outdir: folder,
   bundle: true,
   platform: "node",
@@ -223,5 +223,15 @@ await test("new classifications persist and receive remote edits while deleted l
   assert.equal(data.getQuestions(2, "timo", topics[0]).length, 2);
   assert.equal(data.getQuestions(2, "timo", topics[1]).length, 348);
   assert.equal(store.get(progressKey), progressBefore);
+});
+await test("question search matches English/Vietnamese without accents and excludes hidden solutions", async () => {
+  const { matchesQuestionSearch } = await import(pathToFileURL(join(folder, "questionSearch.mjs")));
+  assert(matchesQuestionSearch(source[1], "TONY vien bi"));
+  assert(matchesQuestionSearch(source[0], "DIEN VAO CHO TRONG"));
+  assert(matchesQuestionSearch(source[0], "điền vào chỗ trống"));
+  assert(matchesQuestionSearch(source[0], "24"));
+  assert(matchesQuestionSearch(source[0], "   "));
+  assert(!matchesQuestionSearch(source[0], "khoang cach"));
+  assert(!matchesQuestionSearch(source[0], "unmatched987654321"));
 });
 await rm(folder, { recursive: true, force: true });

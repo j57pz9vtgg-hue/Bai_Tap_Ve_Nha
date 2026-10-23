@@ -1089,7 +1089,8 @@
 }
 
 /* Consistent question typography without changing the existing page layout. */
-.exam-paper {
+.exam-paper,
+.source-question-preview {
   font-family: Arial, Helvetica, sans-serif;
 }
 .exam-paper .paper-question legend,
@@ -1100,14 +1101,23 @@
 .exam-paper .letter-addition,
 .exam-paper .operation-boxes span,
 .exam-paper .paper-explanation,
-.exam-paper .supplied-explanation {
-  font-family: inherit;
+.exam-paper .supplied-explanation,
+.source-question-preview > p,
+.source-question-preview .question-translation,
+.source-question-preview .diagram-number-line,
+.source-question-preview .bell-equations,
+.source-question-preview .letter-addition,
+.source-question-preview .operation-boxes span,
+.source-question-preview .topic-example-options,
+.classification-topic-example .supplied-explanation {
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 18px;
   font-weight: 400;
   font-style: normal;
   line-height: 1.5;
 }
-.exam-paper svg text {
+.exam-paper svg text,
+.source-question-preview svg text {
   font-family: Arial, Helvetica, sans-serif;
 }
 

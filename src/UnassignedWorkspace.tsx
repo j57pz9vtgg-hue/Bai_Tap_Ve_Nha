@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { matchesQuestionSearch } from "./questionSearch";
 import { ClassifyQuestion } from "./ClassifyQuestion";
 import { Dialog } from "./components";
 import { getExercises, getQuestions } from "./data";
@@ -15,6 +16,7 @@ export default function UnassignedWorkspace({
   onClose: () => void;
   onChanged: () => void;
 }) {
+  const [query, setQuery] = useState("");
   const [classifying, setClassifying] = useState<Question | null>(null);
   const exercise = getExercises(section, "topic", grade).find(
     (topic) => topic.id === "unassigned",
@@ -36,7 +38,8 @@ export default function UnassignedWorkspace({
         exercise={exercise}
         grade={grade}
         section={section}
-        questions={questions}
+        questions={questions.filter((question) => matchesQuestionSearch(question, query))}
+        questionSearch={{ value: query, onChange: setQuery, total: questions.length }}
         answers={{}}
         started={false}
         review={false}

@@ -91,3 +91,5 @@ Danh sách đề xuất ở `src/content/topic-review.ts` hoàn toàn độc l�
 Cập nhật mới nhất: đã bật lại phân loại từng câu trong Chưa có chủ đề (chọn chủ đề có sẵn/tạo mới trực tiếp, tùy chọn gắn bài mẫu). Không phục hồi các chủ đề đã xóa hay nút quản lý toàn cục. Chủ đề mới dùng mã user-topic-v2- và đồng bộ Firebase bình thường; bản ghi chủ đề cũ tiếp tục được xử lý xóa.
 
 Cửa sổ phân loại hiển thị đầy đủ câu hỏi nguồn, danh sách chủ đề, rồi mở ngay bài mẫu của chủ đề được chọn. Chọn chủ đề chỉ xem trước; chỉ nút Gắn vào chủ đề mới lưu thay đổi.
+
+Trong Chưa có chủ đề có ô tìm nội dung tiếng Anh/Việt không phân biệt dấu, số câu phù hợp và nút xóa từ khóa. Cửa sổ phân loại dùng Arial18px, nét thường và giãn dòng1.5 như đề; mỗi câu trắc nghiệm hoặc tự điền chỉ có một nút phân loại hoạt động.

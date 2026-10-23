@@ -139,3 +139,7 @@
 - Classification popup order: full source question (translation, source diagram and choices), visible topic list, then the selected topic’s teaching examples expanded immediately. Changing selection only previews; persist only on Gắn vào chủ đề. Show an explicit empty-example message for topics without one. Topic practice examples retain their default collapsed state and existing public-example exception.
 
 - Make classification discoverable from the catalog: the Chưa có chủ đề card action must read Phân loại chủ đề (including when an old result exists), opening the unassigned list with per-question classification buttons.
+
+- Match classification question/example content typography to exam papers: Arial18px, regular weight/style, line-height1.5, including translations and number sequences; preserve diagram labels and UI chrome. Add question-content search in Chưa có chủ đề, supporting English/Vietnamese with or without accents, case-insensitive terms. Filtering must not change assignments/progress; show matched/total counts, clear action and honest no-match state. Never search hidden answers/solutions.
+
+- Regression fix: render the per-question classification action exactly once, after the fieldset. Never insert another button inside the written-answer label/disabled fieldset; verify both MCQ and national text questions.

@@ -255,3 +255,14 @@
  .classification-topic-example .topic-example-columns { grid-template-columns: minmax(0, 1fr); }
  .classification-topic-example .topic-example-heading { flex-wrap: wrap; }
 }
+
+.unassigned-actions { flex-wrap: wrap; grid-column: 1 / -1; }
+.unassigned-search { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.unassigned-search-field { display: flex; align-items: center; gap: 9px; background: white; border: 1px solid #b9d9e6; border-radius: 10px; padding: 9px 12px; }
+.unassigned-search-field:focus-within { outline: 2px solid #008bb1; outline-offset: 2px; }
+.unassigned-search-field input { width: min(330px, 34vw); min-width: 0; border: 0; outline: none; background: transparent; font: 16px/1.5 Arial, sans-serif; }
+@media(max-width:650px) {
+ .unassigned-actions, .unassigned-search, .unassigned-search-field { width: 100%; }
+ .unassigned-search-field input { width: 100%; }
+ .unassigned-actions { align-items: flex-start; }
+}
