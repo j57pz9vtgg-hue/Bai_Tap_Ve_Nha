@@ -24,6 +24,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci --no-audit --no-fund
+      - name: Check sync merges and source data preservation
+        run: npm run test:sync
       - name: Build for the repository Pages URL
         run: npm run build
         env:

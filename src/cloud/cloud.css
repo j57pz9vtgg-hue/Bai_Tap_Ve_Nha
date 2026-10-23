@@ -1,0 +1,88 @@
+.cloud-sync-button {
+  position: relative;
+  flex-shrink: 0;
+}
+.cloud-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #718399;
+  position: absolute;
+  bottom: 5px;
+  right: 4px;
+  border: 1px solid white;
+}
+.cloud-synced .cloud-status-dot {
+  background: #138458;
+}
+.cloud-syncing .cloud-status-dot,
+.cloud-connecting .cloud-status-dot {
+  background: #008ba1;
+}
+.cloud-error .cloud-status-dot,
+.cloud-conflict .cloud-status-dot {
+  background: #bb4c28;
+}
+.cloud-dialog {
+  width: min(650px, calc(100vw - 32px));
+}
+.cloud-dialog p {
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.cloud-state {
+  background: #edf6f8;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.cloud-state.cloud-error,
+.cloud-error,
+.cloud-conflict {
+  color: #9b3a24;
+}
+.cloud-password-label {
+  display: grid;
+  gap: 10px;
+  margin: 20px 0;
+  font-weight: 600;
+}
+.cloud-password-label input {
+  padding: 12px;
+  border: 1px solid #afbfce;
+  border-radius: 8px;
+  font: inherit;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+.cloud-dialog button:not(.primary-button):not(.dialog-close) {
+  padding: 10px 14px;
+  font: inherit;
+  border: 1px solid #b8cbd7;
+  border-radius: 8px;
+  background: white;
+  color: #173869;
+  cursor: pointer;
+}
+.cloud-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.cloud-conflict {
+  padding: 14px;
+  border: 1px solid #e4b39f;
+  border-radius: 8px;
+  margin: 15px 0;
+}
+.cloud-conflict button {
+  margin: 8px 8px 0 0;
+}
+.cloud-backup {
+  margin-top: 20px;
+}
+.cloud-note {
+  color: #617080;
+  font-size: 14px;
+}

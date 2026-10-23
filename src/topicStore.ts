@@ -1,3 +1,4 @@
+import { writeLearningStorage } from "./cloud/storage";
 import type { Exercise, Question } from "./data";
 
 export type UserTopic = {
@@ -51,7 +52,7 @@ export function readUserTopics(questions: Question[]): UserTopic[] | null {
   );
 }
 export function saveUserTopics(topics: UserTopic[]) {
-  localStorage.setItem(
+  writeLearningStorage(
     KEY,
     JSON.stringify({
       version: 1,

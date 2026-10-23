@@ -1,3 +1,4 @@
+import { CLOUD_APPLIED, writeLearningStorage } from "./cloud/storage";
 import {
   lazy,
   Suspense,
@@ -31,6 +32,7 @@ import { THEMES, useLearningTheme } from "./theme";
 import { useAppAccess } from "./AccessGate";
 import { ParentPassword } from "./ParentPassword";
 
+const CloudSync = lazy(() => import("./cloud/CloudSync"));
 const Quiz = lazy(() => import("./Quiz"));
 const UnassignedWorkspace = lazy(() => import("./UnassignedWorkspace"));
 const TopicManager = lazy(() => import("./TopicManager"));
@@ -100,12 +102,21 @@ export default function App() {
 
   useEffect(() => {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+      writeLearningStorage(STORAGE_KEY, JSON.stringify(saved));
       setStorageError(false);
     } catch {
       setStorageError(true);
     }
   }, [saved]);
+
+  useEffect(() => {
+    const refresh = () => {
+      setSaved(readSaved());
+      refreshTopics((v) => v + 1);
+    };
+    window.addEventListener(CLOUD_APPLIED, refresh);
+    return () => window.removeEventListener(CLOUD_APPLIED, refresh);
+  }, []);
 
   function changeProgram(program: "timo" | "asmo" | "school") {
     setSection(program === "school" ? schoolSubject : program);
@@ -186,6 +197,9 @@ export default function App() {
                   </button>
                 ) : null}
               </div>
+              <Suspense fallback={null}>
+                <CloudSync />
+              </Suspense>
               <button
                 className="icon-button appearance-button"
                 aria-label="Chọn giao diện"

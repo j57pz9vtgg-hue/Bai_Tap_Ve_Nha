@@ -1,3 +1,4 @@
+import { writeLearningStorage } from "./cloud/storage";
 import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { APP_ACCESS } from "./accessConfig";
@@ -106,6 +107,14 @@ export function ParentPassword({
     }
     setBusy(true);
     try {
+      if (
+        JSON.stringify(readCredential()) !== JSON.stringify(credential.value)
+      ) {
+        setError(
+          "Mật khẩu phụ huynh đã được cập nhật ở máy khác. Hãy đóng và mở lại cửa sổ này.",
+        );
+        return;
+      }
       if (credential.value && !(await verify(password, credential.value))) {
         if (active.current) setError("Mật khẩu chưa đúng. Vui lòng nhập lại.");
         return;
@@ -123,7 +132,7 @@ export function ParentPassword({
         const salt = hex(crypto.getRandomValues(new Uint8Array(16)));
         const digest = await derive(nextPassword, salt);
         if (!active.current) return;
-        localStorage.setItem(KEY, JSON.stringify({ version: 1, salt, digest }));
+        writeLearningStorage(KEY, JSON.stringify({ version: 1, salt, digest }));
         setPassword("");
         setNextPassword("");
         setConfirmation("");
@@ -260,7 +269,7 @@ export function ParentPassword({
         </>
       )}
       <p className="sample-notice">
-        Khóa phụ huynh trên trình duyệt này, không đồng bộ giữa các thiết bị.
+        Khóa phụ huynh được lưu trên máy và sẽ đồng bộ khi đã kết nối tài khoản.
         Phụ huynh nên thiết lập trước khi giao máy cho bé.
       </p>
     </div>

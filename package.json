@@ -7,9 +7,11 @@
     "dev": "vite --host 0.0.0.0",
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 0.0.0.0",
-    "configure-access": "node scripts/set-access-password.mjs"
+    "configure-access": "node scripts/set-access-password.mjs",
+    "test:sync": "node --test tests/cloud-sync.test.mjs"
   },
   "dependencies": {
+    "firebase": "^13.1.0",
     "lucide-react": "^0.468.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -20,6 +22,7 @@
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.4",
     "typescript": "~5.7.2",
-    "vite": "^6.0.5"
+    "vite": "^6.0.5",
+    "esbuild": "^0.25.12"
   }
 }

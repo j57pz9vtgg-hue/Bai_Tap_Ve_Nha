@@ -22,7 +22,7 @@ npm run preview
 - **Ghi nhớ đăng nhập** lưu mật khẩu đã xác nhận dưới dạng mã hóa trong IndexedDB, cùng khóa trình duyệt không thể xuất. Khi đăng xuất hoặc quay lại màn hình đăng nhập, mật khẩu được điền sẵn dưới dạng dấu chấm; người dùng vẫn phải bấm **Đăng nhập**. Chọn ghi nhớ không tự đăng nhập. **Đăng xuất** kết thúc phiên nhưng giữ mật khẩu đã nhớ, dữ liệu bài làm và mật khẩu phụ huynh; **bỏ tích** để xóa mật khẩu đã nhớ. Mật khẩu trống/sai không được lưu. Cấu hình truy cập thay đổi sẽ làm mất hiệu lực mật khẩu đã nhớ cũ.
 - Mật khẩu phụ huynh: phụ huynh tự thiết lập sau khi vào ứng dụng, tối thiểu 6 ký tự, bắt buộc khác mật khẩu đăng nhập. Đổi mật khẩu cần mật khẩu phụ huynh hiện tại. Salt/bản băm lưu riêng ở `homework-parent-password:v1` trên trình duyệt này.
 - Điểm số, đáp án và lời giải chỉ được hiển thị sau khi nhập đúng mật khẩu phụ huynh. Mỗi lần mở lại kết quả phải nhập lại. Thẻ đề chỉ thông báo kết quả đã lưu.
-- Đây là khóa thao tác ở phía trình duyệt, không phải xác thực máy chủ. GitHub Pages vẫn phục vụ tệp tĩnh; mã nguồn và dữ liệu lưu cục bộ có thể được xem bằng công cụ phát triển. Mật khẩu phụ huynh và kết quả chưa đồng bộ giữa thiết bị.
+- Đây là khóa thao tác ở phía trình duyệt, không phải xác thực máy chủ. GitHub Pages vẫn phục vụ tệp tĩnh; mã nguồn và dữ liệu lưu cục bộ có thể được xem bằng công cụ phát triển. Chủ đề, bài làm, kết quả và khóa phụ huynh có thể đồng bộ bằng tài khoản Firebase được cấu hình; phải kết nối thành công trước khi coi dữ liệu đã lưu trực tuyến.
 
 Để đổi mật khẩu truy cập dùng chung, đọc mật khẩu từ đầu vào chuẩn, không ghi mật khẩu vào kho mã. Ví dụ trong Bash:
 
@@ -62,3 +62,22 @@ Website: https://j57pz9vtgg-hue.github.io/Bai_Tap_Ve_Nha/
 Workflow `.github/workflows/deploy-pages.yml` build/xuất bản khi `main` thay đổi, kiểm tra trang công khai cùng hình ảnh và phông chữ. Build đặt `VITE_BASE_PATH=/Bai_Tap_Ve_Nha/`. Phát triển cục bộ dùng `/`.
 
 React 19, TypeScript, Vite, Lucide, hình WebP, Baloo 2 và Be Vietnam Pro lưu cục bộ.
+
+
+## Đồng bộ Firebase
+
+Dự án hiện dùng `goc-hoc-tap-cua-be-19a0b`, tài khoản Email/Password `gochoctapcuabe01@gmail.com`, UID `7Ek9VDZPrSYFuJNlwVpGgDk481l2`. Cấu hình web ở `src/cloud/firebaseConfig.ts` là thông tin công khai, không phải khóa quản trị. Không đưa mật khẩu, service account hay private key vào mã nguồn.
+
+1. Mở ứng dụng trên máy đang có dữ liệu và đăng nhập như trước. Ứng dụng thử kết nối Firebase bằng mật khẩu vừa nhập.
+2. Nếu mật khẩu Firebase khác mật khẩu vào ứng dụng, bấm biểu tượng đám mây → nhập **mật khẩu tài khoản đồng bộ** một lần → Kết nối đồng bộ. Không cần đăng nhập Google. Firebase SDK giữ phiên trên trình duyệt đó; cần kết nối lại khi ngắt kết nối, xóa dữ liệu trình duyệt hoặc phiên không còn hợp lệ.
+3. Đợi trạng thái **Đã đồng bộ** trước khi mở trên máy khác. Máy mới dùng cùng tài khoản và sẽ nhận chủ đề, bài mẫu đã gắn, câu đã chọn, lớp học, kết quả, bài đang làm và khóa phụ huynh.
+
+Website vẫn ở GitHub Pages. Không dùng Firebase Hosting hoặc Analytics. `firestore.rules` khớp quy tắc chủ ứng dụng đã xuất bản: chỉ UID được cấu hình có quyền truy cập vùng `/users/{UID}/...` của chính mình. Nếu đổi tài khoản, phải đổi cả UID trong cấu hình và Rules; không xóa dữ liệu cũ để xử lý lỗi đăng nhập.
+
+Dữ liệu lưu theo từng bản ghi `/users/{UID}/records/{recordId}`. Chủ đề dùng mã nguồn câu hỏi làm tham chiếu; bài làm và kết quả giữ nguyên snapshot câu hỏi, câu trả lời và thời hạn. Transaction đọc phiên bản mới nhất trước khi ghi, ghép thay đổi độc lập và báo xung đột khi hai máy sửa cùng giá trị. Xóa chủ đề tạo dấu xóa để máy khác không khôi phục lại bản cũ. Khi đang mở bài, đáp án vừa nhập ở máy khác trong cùng lượt làm được cập nhật mà không đổi thời hạn.
+
+Dữ liệu cục bộ vẫn tồn tại. Có bản dự phòng IndexedDB trước lần đồng bộ đầu tiên; nút **Tải bản sao dữ liệu trên máy** xuất dữ liệu hiện tại, không chứa mật khẩu đăng nhập hoặc token Firebase. Khi đang mở ứng dụng và mất mạng, thao tác được lưu trên máy rồi thử đồng bộ lại khi kết nối trở lại. Chưa có chế độ PWA để bảo đảm tải ứng dụng/màn hình chưa mở khi hoàn toàn ngoại tuyến.
+
+Các thao tác độc lập được ghép tự động. Nếu có xung đột, mở biểu tượng đám mây và chọn **Giữ bản trên máy này** hoặc **Dùng bản trực tuyến** cho riêng bản ghi bị xung đột; có thể tải bản sao trước khi chọn. Chỉ trạng thái **Đã đồng bộ** mới xác nhận hàng đợi hiện tại đã được xử lý. Lỗi mạng, quyền, hạn mức, dữ liệu hỏng hoặc bản ghi lớn hơn 850 KB được báo rõ, không âm thầm cắt dữ liệu. Giao diện và mật khẩu đăng nhập ứng dụng đã nhớ vẫn là tùy chọn riêng của thiết bị.
+
+Kiểm tra tự động: `npm run test:sync` chạy các trường hợp ghép câu/đáp án, xóa, xung đột, giữ nguyên snapshot/thời hạn và đủ350 câu nguồn. Bộ giả lập Firebase chính thức cần tải công cụ từ `storage.googleapis.com`; không coi kiểm thử mô phỏng transport là kiểm chứng đăng nhập hay Rules trên Firebase thật.

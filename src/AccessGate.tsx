@@ -199,6 +199,11 @@ export function AccessGate({ children }: { children: ReactNode }) {
       } catch {
         /* A blocked persistent store does not prevent this login. */
       }
+      // Try the existing app password once. If Firebase has a different password,
+      // local access still works and the cloud dialog can connect it once.
+      void import("./cloud/firebaseSync")
+        .then(({ tryCloudLogin }) => tryCloudLogin(password))
+        .catch(() => {});
       setPassword("");
       setUnlocked(true);
     } catch {

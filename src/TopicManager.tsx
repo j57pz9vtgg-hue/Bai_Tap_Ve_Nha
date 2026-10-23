@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { CLOUD_APPLIED } from "./cloud/storage";
+import { useEffect, useMemo, useState } from "react";
 import { Dialog } from "./components";
 import { getExercises, getQuestions } from "./data";
 import type { Question } from "./data";
@@ -61,6 +62,19 @@ export default function TopicManager({
         .toLocaleLowerCase()
         .includes(search.trim().toLocaleLowerCase()),
   );
+  useEffect(() => {
+    const refresh = () => {
+      if (!draft) {
+        try {
+          setTopics(readUserTopics(questions) ?? []);
+        } catch {
+          setError("Không đọc được dữ liệu chủ đề mới.");
+        }
+      }
+    };
+    window.addEventListener(CLOUD_APPLIED, refresh);
+    return () => window.removeEventListener(CLOUD_APPLIED, refresh);
+  }, [draft, questions]);
   function edit(topic: UserTopic) {
     setDraft({
       ...topic,
@@ -74,9 +88,43 @@ export default function TopicManager({
   }
   function persist(next: UserTopic[], nextTopic?: UserTopic) {
     try {
-      saveUserTopics(next);
-      setTopics(next);
-      if (nextTopic) edit(nextTopic);
+      // Apply only this editor's changes to the latest on-device list.
+      // A different device may have updated it while the editor was open.
+      const latest = readUserTopics(questions) ?? [];
+      const fingerprint = (topic: UserTopic | undefined) =>
+        topic
+          ? JSON.stringify({
+              title: topic.title,
+              questionIds: topic.questionIds,
+              exampleIds: topic.examples.map(questionId),
+            })
+          : null;
+      const merged = new Map(latest.map((topic) => [topic.id, topic]));
+      for (const id of new Set([
+        ...topics.map((topic) => topic.id),
+        ...next.map((topic) => topic.id),
+      ])) {
+        const before = topics.find((topic) => topic.id === id);
+        const after = next.find((topic) => topic.id === id);
+        if (fingerprint(before) === fingerprint(after)) continue;
+        const current = merged.get(id);
+        if (
+          fingerprint(current) !== fingerprint(before) &&
+          fingerprint(current) !== fingerprint(after)
+        ) {
+          setError(
+            "Chủ đề này đã được sửa trên máy khác. Hãy hủy chỉnh sửa và mở lại để dùng dữ liệu mới nhất.",
+          );
+          return;
+        }
+        if (after) merged.set(id, after);
+        else merged.delete(id);
+      }
+      const updated = [...merged.values()];
+      saveUserTopics(updated);
+      setTopics(updated);
+      if (nextTopic)
+        edit(updated.find((topic) => topic.id === nextTopic.id) ?? nextTopic);
       else setDraft(null);
       setError("");
       onSaved();
@@ -368,6 +416,7 @@ export default function TopicManager({
             <button
               onClick={() => {
                 setDraft(null);
+                setTopics(readUserTopics(questions) ?? []);
                 setError("");
               }}
             >

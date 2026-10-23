@@ -1,3 +1,4 @@
+import { CLOUD_APPLIED, SYNC_KEYS } from "./cloud/storage";
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
@@ -17,6 +18,7 @@ import { publicAsset } from "./components";
 import { ParentPassword } from "./ParentPassword";
 import { PaperWorkspace } from "./PaperWorkspace";
 import {
+  readSaved,
   getPracticeQuestions,
   getQuestions,
   hasStudentAnswer,
@@ -133,6 +135,38 @@ export default function Quiz({
     });
     setStage("result");
   }
+
+  useEffect(() => {
+    if (!started || finished || previewOnly) return;
+    const refresh = (event: Event) => {
+      if ((event as CustomEvent<string>).detail !== SYNC_KEYS.progress) return;
+      const incoming = readSaved();
+      const result = incoming.results[id];
+      if (
+        result &&
+        Date.parse(result.date) >= deadline - 900000 &&
+        !incoming.drafts[id]
+      ) {
+        submitted.current = true;
+        setAnswers(result.answers ?? {});
+        if (result.questions)
+          setQuestions(correctStoredTranscriptions(result.questions));
+        setElapsedSeconds(result.elapsedSeconds ?? 0);
+        setStage("result");
+        return;
+      }
+      const currentDraft = incoming.drafts[id];
+      if (!currentDraft || currentDraft.deadline !== deadline) return;
+      setAnswers((previous) =>
+        JSON.stringify(previous) === JSON.stringify(currentDraft.answers)
+          ? previous
+          : currentDraft.answers,
+      );
+      setIndex(currentDraft.index);
+    };
+    window.addEventListener(CLOUD_APPLIED, refresh);
+    return () => window.removeEventListener(CLOUD_APPLIED, refresh);
+  }, [deadline, finished, id, previewOnly, started]);
 
   useEffect(() => {
     if (!started || finished) return;
