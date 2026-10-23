@@ -11,45 +11,13 @@ const KEY = "homework-user-topics:v1";
 export const questionId = (q: Question) =>
   `${q.sourcePaper}::${q.sourceNumber}`;
 export function readUserTopics(questions: Question[]): UserTopic[] | null {
-  const raw = localStorage.getItem(KEY);
-  if (!raw) return null;
-  const data = JSON.parse(raw);
-  if (data.version !== 1 || !Array.isArray(data.topics))
-    throw new Error("Dữ liệu chủ đề không hợp lệ.");
-  const sources = new Map(questions.map((q) => [questionId(q), q]));
-  const ids = new Set<string>();
-  return data.topics.map(
-    (topic: {
-      id: string;
-      title: string;
-      questionIds: string[];
-      exampleIds: string[];
-    }) => {
-      if (
-        typeof topic.id !== "string" ||
-        !topic.id.startsWith("user-topic-") ||
-        ids.has(topic.id) ||
-        typeof topic.title !== "string" ||
-        !topic.title.trim() ||
-        !Array.isArray(topic.questionIds) ||
-        !topic.questionIds.every((id) => typeof id === "string") ||
-        !Array.isArray(topic.exampleIds) ||
-        !topic.exampleIds.every((id) => typeof id === "string")
-      )
-        throw new Error("Dữ liệu chủ đề không hợp lệ.");
-      ids.add(topic.id);
-      return {
-        id: topic.id,
-        title: topic.title,
-        questionIds: [...new Set(topic.questionIds)].filter((id) =>
-          sources.has(id),
-        ),
-        examples: [...new Set(topic.exampleIds)].flatMap((id) =>
-          sources.has(id) ? [sources.get(id)!] : [],
-        ),
-      };
-    },
-  );
+  // Owner requested removal of every user-created topic on all devices.
+  if (localStorage.getItem(KEY) !== '{"version":1,"topics":[]}') {
+    writeLearningStorage(KEY, '{"version":1,"topics":[]}');
+  }
+  void questions;
+  return [];
+
 }
 export function saveUserTopics(topics: UserTopic[]) {
   writeLearningStorage(

@@ -26,8 +26,6 @@ import type { Exercise, Question, Section, StudentAnswer } from "./data";
 
 type Props = {
   classificationOnly?: boolean;
-  onManageTopics?: () => void;
-  onClassify?: (question: Question) => void;
   submitted?: boolean;
   score?: number;
   onReview?: () => void;
@@ -214,11 +212,8 @@ export function PaperWorkspace(p: Props) {
           {p.classificationOnly ? (
             <div className="unassigned-actions">
               <span role="status">
-                Còn {p.questions.length} câu chưa phân loại
+                {p.questions.length} câu hỏi
               </span>
-              <button className="primary-button" onClick={p.onManageTopics}>
-                Tạo / quản lý chủ đề
-              </button>
             </div>
           ) : (
             <>
@@ -403,17 +398,6 @@ export function PaperWorkspace(p: Props) {
                   </div>
                 )}
               </fieldset>
-              {p.classificationOnly && (
-                <div className="question-classify-action">
-                  <button
-                    className="secondary-button"
-                    onClick={() => p.onClassify?.(q)}
-                    aria-label={`Phân loại chủ đề câu ${i + 1}`}
-                  >
-                    Phân loại chủ đề
-                  </button>
-                </div>
-              )}
               {p.review && hasProvidedAnswer(q) && (
                 <aside
                   className="paper-explanation"

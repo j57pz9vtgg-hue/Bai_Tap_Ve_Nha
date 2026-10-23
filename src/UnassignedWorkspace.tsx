@@ -1,23 +1,16 @@
-import { useState } from "react";
 import { Dialog } from "./components";
 import { getExercises, getQuestions } from "./data";
-import type { Question, Section } from "./data";
+import type { Section } from "./data";
 import { PaperWorkspace } from "./PaperWorkspace";
-import { ClassifyQuestion } from "./ClassifyQuestion";
 export default function UnassignedWorkspace({
   grade,
   section,
   onClose,
-  onManageTopics,
-  onChanged,
 }: {
   grade: number;
   section: Section;
   onClose: () => void;
-  onManageTopics: () => void;
-  onChanged: () => void;
 }) {
-  const [classifying, setClassifying] = useState<Question | null>(null);
   const exercise = getExercises(section, "topic", grade).find(
     (topic) => topic.id === "unassigned",
   ) ?? {
@@ -49,16 +42,7 @@ export default function UnassignedWorkspace({
         onSubmit={() => {}}
         onClose={onClose}
         classificationOnly
-        onClassify={setClassifying}
-        onManageTopics={onManageTopics}
       />
-      {classifying && (
-        <ClassifyQuestion
-          question={classifying}
-          onClose={() => setClassifying(null)}
-          onSaved={onChanged}
-        />
-      )}
     </Dialog>
   );
 }

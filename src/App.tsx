@@ -35,7 +35,6 @@ import { ParentPassword } from "./ParentPassword";
 const CloudSync = lazy(() => import("./cloud/CloudSync"));
 const Quiz = lazy(() => import("./Quiz"));
 const UnassignedWorkspace = lazy(() => import("./UnassignedWorkspace"));
-const TopicManager = lazy(() => import("./TopicManager"));
 type Selection = {
   exercise: Exercise;
   section: Section;
@@ -47,7 +46,6 @@ export default function App() {
   const { theme } = useLearningTheme();
   const { logout } = useAppAccess();
   const [appearanceOpen, setAppearanceOpen] = useState(false);
-  const [topicManagerOpen, setTopicManagerOpen] = useState(false);
   const [, refreshTopics] = useState(0);
   const mastheadRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -357,20 +355,6 @@ export default function App() {
           />
         </Dialog>
       )}
-      {topicManagerOpen && (
-        <Suspense
-          fallback={
-            <div className="loading-overlay" role="status">
-              Đang mở quản lý chủ đề…
-            </div>
-          }
-        >
-          <TopicManager
-            onClose={() => setTopicManagerOpen(false)}
-            onSaved={() => refreshTopics((v) => v + 1)}
-          />
-        </Suspense>
-      )}
       {selection ? (
         <Suspense
           fallback={
@@ -385,8 +369,6 @@ export default function App() {
               grade={selection.grade}
               section={selection.section}
               onClose={() => setSelection(null)}
-              onManageTopics={() => setTopicManagerOpen(true)}
-              onChanged={() => refreshTopics((value) => value + 1)}
             />
           ) : (
             <Quiz

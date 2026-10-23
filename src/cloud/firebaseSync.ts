@@ -351,7 +351,7 @@ class FirebaseSync {
         const description = local.get(id) ?? remoteKnown ?? known;
         if (!description) continue;
         const latest = localRecords().get(id);
-        const startPayload = latest?.payload ?? null;
+        const startPayload = description.kind === "topic" ? null : latest?.payload ?? null;
         if (
           !this.resolutions.has(id) &&
           known &&
@@ -388,7 +388,9 @@ class FirebaseSync {
               let payload: Json;
               try {
                 payload =
-                  choice === "local"
+                  description.kind === "topic"
+                    ? null
+                    : choice === "local"
                     ? startPayload
                     : choice === "remote"
                       ? remotePayload
@@ -430,7 +432,7 @@ class FirebaseSync {
             },
           );
           if (generation !== this.generation || !this.references) return;
-          if (equal(localRecords().get(id)?.payload ?? null, startPayload))
+          if (description.kind === "topic" || equal(localRecords().get(id)?.payload ?? null, startPayload))
             applyRecord(result);
           else this.rerun = true; // Never replace edits made while a request was in flight.
           this.base.set(id, result);

@@ -369,7 +369,7 @@ export function ExerciseCard({
             </button>
             <button className="retry-button" onClick={onOpen}>
               {exercise.id === "unassigned"
-                ? "Phân loại câu hỏi"
+                ? "Xem câu hỏi"
                 : hasDraft
                   ? "Tiếp tục"
                   : "Làm lại"}
@@ -378,7 +378,7 @@ export function ExerciseCard({
         ) : (
           <button className="start-button" onClick={onOpen}>
             {exercise.id === "unassigned"
-              ? "Phân loại câu hỏi"
+              ? "Xem câu hỏi"
               : exercise.category === "topic" && exercise.questionCount === 0
                 ? "Chọn câu hỏi"
                 : hasDraft
