@@ -1,3 +1,4 @@
+import { isRetiredTopic } from "../topicPolicy";
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
@@ -350,8 +351,9 @@ class FirebaseSync {
         const remoteKnown = this.remote.get(id);
         const description = local.get(id) ?? remoteKnown ?? known;
         if (!description) continue;
+        const retiredTopic = description.kind === "topic" && isRetiredTopic(description.key);
         const latest = localRecords().get(id);
-        const startPayload = description.kind === "topic" ? null : latest?.payload ?? null;
+        const startPayload = retiredTopic ? null : latest?.payload ?? null;
         if (
           !this.resolutions.has(id) &&
           known &&
@@ -388,7 +390,7 @@ class FirebaseSync {
               let payload: Json;
               try {
                 payload =
-                  description.kind === "topic"
+                  retiredTopic
                     ? null
                     : choice === "local"
                     ? startPayload
@@ -432,7 +434,7 @@ class FirebaseSync {
             },
           );
           if (generation !== this.generation || !this.references) return;
-          if (description.kind === "topic" || equal(localRecords().get(id)?.payload ?? null, startPayload))
+          if (retiredTopic || equal(localRecords().get(id)?.payload ?? null, startPayload))
             applyRecord(result);
           else this.rerun = true; // Never replace edits made while a request was in flight.
           this.base.set(id, result);

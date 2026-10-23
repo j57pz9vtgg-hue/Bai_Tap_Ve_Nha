@@ -198,7 +198,7 @@ export default function TopicManager({
             disabled={Boolean(loaded.error)}
             onClick={() =>
               edit({
-                id: `user-topic-${crypto.randomUUID()}`,
+                id: `user-topic-v2-${crypto.randomUUID()}`,
                 title: "",
                 questionIds: [],
                 examples: [],

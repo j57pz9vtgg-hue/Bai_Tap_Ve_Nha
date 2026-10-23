@@ -355,6 +355,7 @@ export default function App() {
           ) : selection.exercise.id === "unassigned" &&
           selection.mode !== "result" ? (
             <UnassignedWorkspace
+              onChanged={() => refreshTopics((value) => value + 1)}
               grade={selection.grade}
               section={selection.section}
               onClose={() => setSelection(null)}

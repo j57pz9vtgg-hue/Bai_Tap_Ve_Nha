@@ -57,7 +57,7 @@ export function ClassifyQuestion({
           return;
         }
         target = {
-          id: `user-topic-${crypto.randomUUID()}`,
+          id: `user-topic-v2-${crypto.randomUUID()}`,
           title: title.trim(),
           questionIds: [],
           examples: [],

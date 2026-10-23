@@ -26,6 +26,7 @@ import type { Exercise, Question, Section, StudentAnswer } from "./data";
 
 type Props = {
   classificationOnly?: boolean;
+  onClassify?: (question: Question) => void;
   submitted?: boolean;
   score?: number;
   onReview?: () => void;
@@ -342,7 +343,12 @@ export function PaperWorkspace(p: Props) {
                       value={p.answers[i] ?? ""}
                       onChange={(e) => p.onAnswer(i, e.target.value)}
                     />
-                    {p.review && hasProvidedAnswer(q) && (
+                    {p.classificationOnly && p.onClassify && (
+                <div className="question-classify-action">
+                  <button className="secondary-button" onClick={() => p.onClassify?.(q)} aria-label={`Phân loại chủ đề câu ${i + 1}`}>Phân loại chủ đề</button>
+                </div>
+              )}
+              {p.review && hasProvidedAnswer(q) && (
                       <span>
                         {isCorrectAnswer(q, p.answers[i])
                           ? "Đúng"
@@ -398,6 +404,11 @@ export function PaperWorkspace(p: Props) {
                   </div>
                 )}
               </fieldset>
+              {p.classificationOnly && p.onClassify && (
+                <div className="question-classify-action">
+                  <button className="secondary-button" onClick={() => p.onClassify?.(q)} aria-label={`Phân loại chủ đề câu ${i + 1}`}>Phân loại chủ đề</button>
+                </div>
+              )}
               {p.review && hasProvidedAnswer(q) && (
                 <aside
                   className="paper-explanation"

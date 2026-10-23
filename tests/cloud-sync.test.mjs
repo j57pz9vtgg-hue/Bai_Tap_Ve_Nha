@@ -7,7 +7,7 @@ import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 const folder = await mkdtemp(join(tmpdir(), "learning-sync-test-"));
 await build({
-  entryPoints: ["src/cloud/merge.ts", "src/cloud/records.ts", "src/data.ts"],
+  entryPoints: ["src/cloud/merge.ts", "src/cloud/records.ts", "src/data.ts", "src/topicPolicy.ts"],
   outdir: folder,
   bundle: true,
   platform: "node",
@@ -204,6 +204,24 @@ await test("removed topics return all350 source questions to unassigned without 
   assert.equal(waiting.length, 350);
   assert.equal(new Set(waiting.map(questionId)).size, 350);
   assert.deepEqual(waiting.map(questionId), source.map(questionId));
+  assert.equal(store.get(progressKey), progressBefore);
+});
+await test("new classifications persist and receive remote edits while deleted legacy topics remain hidden", async () => {
+  const { isRetiredTopic } = await import(pathToFileURL(join(folder, "topicPolicy.mjs")));
+  assert.equal(isRetiredTopic("user-topic-deleted"), true);
+  assert.equal(isRetiredTopic("reviewed-topic-01"), true);
+  const id = "user-topic-v2-current";
+  assert.equal(isRetiredTopic(id), false);
+  const progressBefore = store.get(progressKey);
+  const current = { ...topic, id, questionIds: [questionId(source[0])], exampleIds: [] };
+  store.set(topicKey, JSON.stringify({version: 1, topics: [topic, current]}));
+  let topics = data.getExercises("timo", "topic", 2);
+  assert.deepEqual(topics.map((topic) => topic.id), [id, "unassigned"]);
+  assert.equal(data.getQuestions(2, "timo", topics[0]).length, 1);
+  applyRecord({kind: "topic", key: id, payload: {...current, questionIds: [questionId(source[0]), questionId(source[1])]}});
+  topics = data.getExercises("timo", "topic", 2);
+  assert.equal(data.getQuestions(2, "timo", topics[0]).length, 2);
+  assert.equal(data.getQuestions(2, "timo", topics[1]).length, 348);
   assert.equal(store.get(progressKey), progressBefore);
 });
 await rm(folder, { recursive: true, force: true });
