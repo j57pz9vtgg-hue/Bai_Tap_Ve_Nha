@@ -37,4 +37,23 @@ export const TOPIC_REVIEW = [
       { paper: "qualifier-05", number: 1 },
     ],
   },
+  {
+    id: "age",
+    title: "Bài toán về tuổi",
+    sample: { paper: "qualifier-01", number: 3 },
+    note: "11 câu dưới đây cùng bài toán về tuổi. Các câu vòng loại gồm tìm tuổi hiện tại, tuổi sau một khoảng thời gian và tuổi theo mẹ; các câu quốc gia mở rộng sang quan hệ tuổi mẹ và con/anh chị em. Tất cả chờ bạn duyệt; chưa đưa câu nào vào chủ đề.",
+    candidates: [
+      { paper: "qualifier-02", number: 3 },
+      { paper: "qualifier-03", number: 3 },
+      { paper: "qualifier-04", number: 4 },
+      { paper: "qualifier-05", number: 4 },
+      { paper: "qualifier-06", number: 5 },
+      { paper: "national-02", number: 1 },
+      { paper: "national-03", number: 1 },
+      { paper: "national-04", number: 1 },
+      { paper: "national-05", number: 3 },
+      { paper: "national-06", number: 2 },
+      { paper: "national-07", number: 3 },
+    ],
+  },
 ];

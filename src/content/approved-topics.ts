@@ -13,4 +13,10 @@ export const APPROVED_TOPICS = [
     questionIds: [] as string[],
     exampleIds: ["Đề số 1 · Vòng loại TIMO lớp 2::2"],
   },
+  {
+    id: "reviewed-topic-03",
+    title: "Bài toán về tuổi",
+    questionIds: [] as string[],
+    exampleIds: ["Đề số 1 · Vòng loại TIMO lớp 2::3"],
+  },
 ];

@@ -84,6 +84,6 @@ Kiểm tra tự động: `npm run test:sync` chạy các trường hợp ghép c
 
 ## Chủ đề được chủ ứng dụng duyệt
 
-Chức năng tự tạo/quản lý/phân loại đã được bỏ. Các chủ đề mới được khai báo bằng tham chiếu câu nguồn trong `src/content/approved-topics.ts`; chỉ thêm câu luyện tập khi chủ ứng dụng đồng ý. Chủ đề hiện chỉ có bài mẫu mở màn xem ví dụ công khai, không tạo lượt làm bài rỗng. Hai bài mẫu được chỉ định là vòng loại1 câu1 và câu2;348 câu khác vẫn ở Chưa có chủ đề. Chủ đề người dùng cũ tiếp tục được xóa cục bộ và đồng bộ dấu xóa lên Firebase, không phục hồi khi nhận dữ liệu từ máy khác. Các chủ đề đã duyệt được phát hành cùng ứng dụng nên xuất hiện đồng nhất trên các máy.
+Chức năng tự tạo/quản lý/phân loại đã được bỏ. Các chủ đề mới được khai báo bằng tham chiếu câu nguồn trong `src/content/approved-topics.ts`; chỉ thêm câu luyện tập khi chủ ứng dụng đồng ý. Chủ đề hiện chỉ có bài mẫu mở màn xem ví dụ công khai, không tạo lượt làm bài rỗng. Ba bài mẫu được chỉ định là vòng loại1 câu1, câu2 và câu3;347 câu khác vẫn ở Chưa có chủ đề. Chủ đề người dùng cũ tiếp tục được xóa cục bộ và đồng bộ dấu xóa lên Firebase, không phục hồi khi nhận dữ liệu từ máy khác. Các chủ đề đã duyệt được phát hành cùng ứng dụng nên xuất hiện đồng nhất trên các máy.
 
 Danh sách đề xuất ở `src/content/topic-review.ts` hoàn toàn độc lập với danh sách đã duyệt. `scripts/build-topic-review.tsx` tạo `public/review/topic-questions.html`, bảng hai cột vị trí/chi tiết lấy nguyên câu hỏi và hình từ nguồn, không xuất đáp án/lời giải. Không đưa câu vào chủ đề chỉ vì có mặt trong bảng đề xuất.
