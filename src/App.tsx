@@ -202,6 +202,7 @@ export default function App() {
                 className="icon-button appearance-button"
                 aria-label="Chọn giao diện"
                 title="Chọn giao diện"
+                aria-expanded={appearanceOpen}
                 onClick={() => setAppearanceOpen(true)}
               >
                 <Palette size={22} />
@@ -216,6 +217,7 @@ export default function App() {
               </button>
               <button
                 className="parent-button"
+                aria-expanded={parentOpen}
                 onClick={() => setParentOpen(true)}
               >
                 <UsersRound size={23} fill="currentColor" />
@@ -263,10 +265,11 @@ export default function App() {
           </p>
         ) : null}
         <section className="exercise-section" aria-labelledby="catalog-title">
-          <h2 id="catalog-title" className="visually-hidden">
+          <h2 id="catalog-title" className={theme === "dragon" ? "dragon-catalog-title" : "visually-hidden"}>
             {search.trim() ? "Kết quả tìm kiếm" : title}
           </h2>
-          <span className="visually-hidden" aria-live="polite">
+          {theme === "dragon" && <p className="dragon-catalog-subtitle">Lớp {grade} · {isExam ? "Toán" : SECTION_LABELS[section]}</p>}
+          <span className={theme === "dragon" ? "dragon-catalog-count" : "visually-hidden"} aria-live="polite">
             {exercises.length} {category === "topic" ? "chủ đề" : "đề"}
           </span>
           {exercises.length ? (

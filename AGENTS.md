@@ -125,3 +125,5 @@
 - Hide the redundant paper-heading block (paper number/title, Đề bài count and answer-choice instruction) while taking qualifier papers, per the owner screenshot. Keep questions, toolbar/timer and parent review intact.
 
 - Quiz introduction popup must use the selected learning theme hero and matching accessible description, including national papers; never hardcode Pixel when another theme is selected.
+
+- Added optional Thư viện Rồng (dragon) theme from owner references: emerald/gold library hero, matching mobile art, parchment filters and source-only compact catalog, gold-framed gemstone controls with hover/selected states. Keep existing themes selectable, original questions/results, and theme-correct quiz introduction. Reference sample15papers/scores are decorative only: real qualifier catalog has7papers.

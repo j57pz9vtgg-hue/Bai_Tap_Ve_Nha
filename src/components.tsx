@@ -281,7 +281,7 @@ export function ExerciseCard({
   onView: () => void;
 }) {
   const { theme } = useLearningTheme();
-  const artIndex = index % 16;
+  const artIndex = theme === "dragon" ? index % 8 : index % 16;
   const number =
     exercise.category === "topic"
       ? index + 1
@@ -357,7 +357,7 @@ export function ExerciseCard({
           className="exercise-card-art"
           aria-hidden="true"
           style={{
-            backgroundPosition: `${((artIndex % 4) * 100) / 3}% ${(Math.floor(artIndex / 4) * 100) / 3}%`,
+            backgroundPosition: `${((artIndex % 4) * 100) / 3}% ${theme === "dragon" ? Math.floor(artIndex / 4) * 100 : (Math.floor(artIndex / 4) * 100) / 3}%`,
           }}
         />
       )}
