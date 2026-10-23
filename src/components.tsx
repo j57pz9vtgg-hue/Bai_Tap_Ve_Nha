@@ -380,7 +380,7 @@ export function ExerciseCard({
             {exercise.id === "unassigned"
               ? "Xem câu hỏi"
               : exercise.category === "topic" && exercise.questionCount === 0
-                ? "Chọn câu hỏi"
+                ? "Xem bài mẫu"
                 : hasDraft
                   ? "Tiếp tục"
                   : "Làm bài"}

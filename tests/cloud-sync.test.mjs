@@ -196,4 +196,24 @@ await test("source exam inventory remains 350 unique questions with received key
   );
   assert(equal({ a: 1, b: { c: 2 } }, { b: { c: 2 }, a: 1 }));
 });
+await test("curated topics expose only two approved source examples while all other questions await approval", () => {
+  const progressBefore = store.get(progressKey);
+  const topics = data.getExercises("timo", "topic", 2);
+  const approved = topics.filter((topic) => topic.id !== "unassigned");
+  assert.deepEqual(approved.map((topic) => topic.title), [
+    "Tìm số thích hợp để điền vào chỗ trống",
+    "Tính số đồ vật sau khi nhận hoặc cho",
+  ]);
+  assert.deepEqual(approved.map((topic) => topic.example.sourceNumber), [1, 2]);
+  for (const topic of approved) {
+    assert.equal(topic.questionCount, 0);
+    assert.deepEqual(data.getQuestions(2, "timo", topic), []);
+    assert.equal(topic.examples.length, 1);
+    assert.equal(topic.example.sourcePaper, "Đề số 1 · Vòng loại TIMO lớp 2");
+  }
+  const waiting = data.getQuestions(2, "timo", topics.find((topic) => topic.id === "unassigned"));
+  assert.equal(waiting.length, 348);
+  assert.equal(new Set([...waiting, ...approved.flatMap((topic) => topic.examples)].map(questionId)).size, 350);
+  assert.equal(store.get(progressKey), progressBefore);
+});
 await rm(folder, { recursive: true, force: true });

@@ -1,3 +1,4 @@
+import { APPROVED_TOPICS } from "./content/approved-topics";
 import { writeLearningStorage } from "./cloud/storage";
 import type { Exercise, Question } from "./data";
 
@@ -39,9 +40,15 @@ export function resolveUserTopics(questions: Question[]): Exercise[] {
   } catch {
     return [];
   }
-  topics ??= [];
+  const sources = new Map(questions.map((q) => [questionId(q), q]));
+  topics = APPROVED_TOPICS.filter((topic) => topic.exampleIds.every((id) => sources.has(id))).map((topic) => ({
+    id: topic.id,
+    title: topic.title,
+    questionIds: topic.questionIds,
+    examples: topic.exampleIds.map((id) => sources.get(id)!),
+  }));
   const available = new Set(questions.map(questionId));
-  const assigned = new Set(topics.flatMap((t) => t.questionIds));
+  const assigned = new Set(topics.flatMap((t) => [...t.questionIds, ...t.examples.map(questionId)]));
   const resolved: Exercise[] = topics.map((t) => ({
     id: t.id,
     title: t.title,

@@ -33,6 +33,7 @@ import { useAppAccess } from "./AccessGate";
 import { ParentPassword } from "./ParentPassword";
 
 const CloudSync = lazy(() => import("./cloud/CloudSync"));
+const TopicPreview = lazy(() => import("./TopicPreview"));
 const Quiz = lazy(() => import("./Quiz"));
 const UnassignedWorkspace = lazy(() => import("./UnassignedWorkspace"));
 type Selection = {
@@ -290,24 +291,7 @@ export default function App() {
                     result={saved.results[id]}
                     hasDraft={Boolean(saved.drafts[id])}
                     onOpen={() =>
-                      exercise.questionCount === 0
-                        ? setSelection({
-                            exercise: {
-                              id: "unassigned",
-                              title: "Chưa có chủ đề",
-                              category: "topic",
-                              questionCount: 0,
-                            },
-                            section,
-                            grade,
-                            mode: "play",
-                          })
-                        : setSelection({
-                            exercise,
-                            section,
-                            grade,
-                            mode: "play",
-                          })
+                      setSelection({ exercise, section, grade, mode: exercise.questionCount === 0 ? "example" : "play" })
                     }
                     onView={() =>
                       setSelection({ exercise, section, grade, mode: "result" })
@@ -366,7 +350,9 @@ export default function App() {
             </div>
           }
         >
-          {selection.exercise.id === "unassigned" &&
+          {selection.mode === "example" && selection.exercise.questionCount === 0 ? (
+            <TopicPreview exercise={selection.exercise} onClose={() => setSelection(null)} />
+          ) : selection.exercise.id === "unassigned" &&
           selection.mode !== "result" ? (
             <UnassignedWorkspace
               grade={selection.grade}

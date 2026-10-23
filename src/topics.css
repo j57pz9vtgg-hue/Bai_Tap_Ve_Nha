@@ -237,3 +237,5 @@
   height: 20px;
   accent-color: #009dae;
 }
+
+.topic-preview-back { margin: 4px 0 18px; display: inline-flex; align-items: center; gap: 8px; }

@@ -80,7 +80,7 @@ export function TopicExample({
               </section>
             </div>
           ))}
-          {!practicing && (
+          {!practicing && (exercise.questionCount ?? 0) > 0 && (
             <button className="primary-button" onClick={onPractice}>
               {hasDraft ? "Tiếp tục luyện tập" : "Bắt đầu luyện tập"}{" "}
               <ArrowRight size={20} />
