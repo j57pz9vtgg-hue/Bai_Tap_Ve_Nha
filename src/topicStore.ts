@@ -50,18 +50,6 @@ export function readUserTopics(questions: Question[]): UserTopic[] | null {
     },
   );
 }
-export function saveUserTopics(topics: UserTopic[]) {
-  localStorage.setItem(
-    KEY,
-    JSON.stringify({
-      version: 1,
-      topics: topics.map(({ examples, ...topic }) => ({
-        ...topic,
-        exampleIds: examples.map(questionId),
-      })),
-    }),
-  );
-}
 export function resolveUserTopics(questions: Question[]): Exercise[] {
   if (typeof localStorage === "undefined") return [];
   let topics: UserTopic[] | null;

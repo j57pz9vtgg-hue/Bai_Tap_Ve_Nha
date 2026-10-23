@@ -367,14 +367,22 @@ export function ExerciseCard({
             <button className="view-result-button" onClick={onView}>
               Xem kết quả
             </button>
-            <button className="retry-button" onClick={onOpen}>
+            <button
+              className="retry-button"
+              onClick={onOpen}
+              disabled={exercise.questionCount === 0 && !hasDraft}
+            >
               {hasDraft ? "Tiếp tục" : "Làm lại"}
             </button>
           </>
         ) : (
-          <button className="start-button" onClick={onOpen}>
-            {exercise.category === "topic" && exercise.questionCount === 0
-              ? "Chọn câu hỏi"
+          <button
+            className="start-button"
+            onClick={onOpen}
+            disabled={exercise.questionCount === 0 && !hasDraft}
+          >
+            {exercise.questionCount === 0 && !hasDraft
+              ? "Chưa có câu hỏi"
               : hasDraft
                 ? "Tiếp tục"
                 : "Làm bài"}
