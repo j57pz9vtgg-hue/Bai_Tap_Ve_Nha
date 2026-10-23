@@ -19,3 +19,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 import "./paper.css";
 
 import "./themes.css";
+
+import "./topics.css";
