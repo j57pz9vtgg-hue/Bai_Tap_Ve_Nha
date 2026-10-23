@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Dialog, formatDuration } from "./components";
 import { publicAsset } from "./components";
+import { THEMES, useLearningTheme } from "./theme";
 import { ParentPassword } from "./ParentPassword";
 import { PaperWorkspace } from "./PaperWorkspace";
 import {
@@ -58,6 +59,8 @@ export default function Quiz({
   onSetupPassword,
   onConfigure,
 }: QuizProps) {
+  const { theme } = useLearningTheme();
+  const currentTheme = THEMES.find((item) => item.id === theme) ?? THEMES[0];
   const [reviewingSaved, setReviewingSaved] = useState(Boolean(initialResult));
   const isPaper = section === "timo" || section === "asmo";
   const isTopic = isPaper && exercise.category === "topic";
@@ -227,8 +230,8 @@ export default function Quiz({
       {!started && !isTopic ? (
         <div className="quiz-intro">
           <img
-            src={publicAsset("pixel-hero")}
-            alt="Cuộc phiêu lưu học tập trong thế giới pixel"
+            src={publicAsset(currentTheme.hero)}
+            alt={`Giao diện ${currentTheme.name}`}
           />
           <span className="intro-kicker">Sẵn sàng khám phá chưa?</span>
           <h2>{exercise.title}</h2>

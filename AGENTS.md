@@ -123,3 +123,5 @@
 - Latest owner request: remove user topic creation/management/classification and delete all classified user topics. Keep original questions, drafts, results and Firebase sync. Unassigned opens a read-only question list; no assignment buttons. User topic records are retired and synchronized as tombstones, including records received from other devices; never restore old topics.
 
 - Hide the redundant paper-heading block (paper number/title, Đề bài count and answer-choice instruction) while taking qualifier papers, per the owner screenshot. Keep questions, toolbar/timer and parent review intact.
+
+- Quiz introduction popup must use the selected learning theme hero and matching accessible description, including national papers; never hardcode Pixel when another theme is selected.
