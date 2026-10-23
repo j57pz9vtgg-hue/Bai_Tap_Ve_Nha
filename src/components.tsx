@@ -368,16 +368,22 @@ export function ExerciseCard({
               Xem kết quả
             </button>
             <button className="retry-button" onClick={onOpen}>
-              {hasDraft ? "Tiếp tục" : "Làm lại"}
+              {exercise.id === "unassigned"
+                ? "Phân loại câu hỏi"
+                : hasDraft
+                  ? "Tiếp tục"
+                  : "Làm lại"}
             </button>
           </>
         ) : (
           <button className="start-button" onClick={onOpen}>
-            {exercise.category === "topic" && exercise.questionCount === 0
-              ? "Chọn câu hỏi"
-              : hasDraft
-                ? "Tiếp tục"
-                : "Làm bài"}
+            {exercise.id === "unassigned"
+              ? "Phân loại câu hỏi"
+              : exercise.category === "topic" && exercise.questionCount === 0
+                ? "Chọn câu hỏi"
+                : hasDraft
+                  ? "Tiếp tục"
+                  : "Làm bài"}
           </button>
         )}
       </div>

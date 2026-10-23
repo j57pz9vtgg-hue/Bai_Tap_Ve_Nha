@@ -201,3 +201,39 @@
     gap: 0;
   }
 }
+
+.unassigned-actions {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.question-classify-action {
+  padding-top: 14px;
+}
+.unassigned-empty {
+  padding: 24px;
+  text-align: center;
+}
+.classify-question-dialog {
+  width: min(650px, calc(100vw - 32px));
+}
+.classify-question-dialog p {
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.classification-source {
+  color: #52647b;
+  font-size: 14px;
+}
+.classify-example {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 18px 0;
+}
+.classify-example input {
+  width: 20px;
+  height: 20px;
+  accent-color: #009dae;
+}

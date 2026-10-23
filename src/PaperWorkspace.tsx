@@ -25,6 +25,9 @@ import {
 import type { Exercise, Question, Section, StudentAnswer } from "./data";
 
 type Props = {
+  classificationOnly?: boolean;
+  onManageTopics?: () => void;
+  onClassify?: (question: Question) => void;
   submitted?: boolean;
   score?: number;
   onReview?: () => void;
@@ -76,7 +79,7 @@ export function PaperWorkspace(p: Props) {
         </button>
       </div>
       <div className="paper-shell">
-        {topic && !p.started && (
+        {topic && !p.started && !p.classificationOnly && (
           <section className="topic-setup" aria-label="Chọn nội dung luyện tập">
             <div className="topic-filters">
               <label>
@@ -208,64 +211,78 @@ export function PaperWorkspace(p: Props) {
               )}
             </div>
           </div>
-          <div className="paper-stat">
-            <Clock3 />
-            <div>
-              <small>
-                {p.submitted ? "Thời gian làm bài" : "Thời gian đã làm"}
-              </small>
-              <strong>{clock}</strong>
-            </div>
-          </div>
-          <div className="paper-stat">
-            <FileCheck2 />
-            <div>
-              <small>Đã trả lời</small>
-              <strong>
-                {answered}/{p.questions.length} câu
-              </strong>
-            </div>
-          </div>
-          {p.submitted && (
-            <div className="paper-stat paper-result" role="status">
-              <FileCheck2 />
-              <div>
-                <small>Kết quả</small>
-                <strong>
-                  {p.score}/{p.questions.length} câu đúng
-                </strong>
-              </div>
-            </div>
-          )}
-          {p.submitted && !p.review ? (
-            <div className="paper-result-actions">
-              <button className="paper-submit" onClick={p.onReview}>
-                Xem đáp án & lời giải
-              </button>
-              <button className="secondary-button" onClick={p.onRestart}>
-                Làm lại
+          {p.classificationOnly ? (
+            <div className="unassigned-actions">
+              <span role="status">
+                Còn {p.questions.length} câu chưa phân loại
+              </span>
+              <button className="primary-button" onClick={p.onManageTopics}>
+                Tạo / quản lý chủ đề
               </button>
             </div>
-          ) : p.started && !p.review ? (
-            <div className="paper-result-actions">
-              {submit}
-              <button className="secondary-button" onClick={p.onRestart}>
-                Làm lại
-              </button>
-            </div>
-          ) : p.review ? (
-            <button className="paper-submit" onClick={p.onClose}>
-              Hoàn tất
-            </button>
           ) : (
-            <button
-              className="paper-submit"
-              onClick={p.onStart}
-              disabled={!p.questions.length}
-            >
-              <Play size={20} />
-              Bắt đầu
-            </button>
+            <>
+              {" "}
+              <div className="paper-stat">
+                <Clock3 />
+                <div>
+                  <small>
+                    {p.submitted ? "Thời gian làm bài" : "Thời gian đã làm"}
+                  </small>
+                  <strong>{clock}</strong>
+                </div>
+              </div>
+              <div className="paper-stat">
+                <FileCheck2 />
+                <div>
+                  <small>Đã trả lời</small>
+                  <strong>
+                    {answered}/{p.questions.length} câu
+                  </strong>
+                </div>
+              </div>
+              {p.submitted && (
+                <div className="paper-stat paper-result" role="status">
+                  <FileCheck2 />
+                  <div>
+                    <small>Kết quả</small>
+                    <strong>
+                      {p.score}/{p.questions.length} câu đúng
+                    </strong>
+                  </div>
+                </div>
+              )}
+              {p.submitted && !p.review ? (
+                <div className="paper-result-actions">
+                  <button className="paper-submit" onClick={p.onReview}>
+                    Xem đáp án & lời giải
+                  </button>
+                  <button className="secondary-button" onClick={p.onRestart}>
+                    Làm lại
+                  </button>
+                </div>
+              ) : p.started && !p.review ? (
+                <div className="paper-result-actions">
+                  {submit}
+                  <button className="secondary-button" onClick={p.onRestart}>
+                    Làm lại
+                  </button>
+                </div>
+              ) : p.review ? (
+                <button className="paper-submit" onClick={p.onClose}>
+                  Hoàn tất
+                </button>
+              ) : (
+                <button
+                  className="paper-submit"
+                  onClick={p.onStart}
+                  disabled={!p.questions.length}
+                >
+                  <Play size={20} />
+                  Bắt đầu
+                </button>
+              )}
+            </>
           )}
         </header>
         {p.reviewAccess}
@@ -292,9 +309,16 @@ export function PaperWorkspace(p: Props) {
               </div>
             </div>
           )}
+          {p.classificationOnly && !p.questions.length && (
+            <p className="unassigned-empty" role="status">
+              Tất cả câu hỏi đã được phân loại vào chủ đề.
+            </p>
+          )}
           {p.questions.map((q, i) => (
             <div
-              key={i}
+              key={
+                p.classificationOnly ? `${q.sourcePaper}:${q.sourceNumber}` : i
+              }
               className={
                 p.review
                   ? "paper-question-row review-row"
@@ -379,6 +403,17 @@ export function PaperWorkspace(p: Props) {
                   </div>
                 )}
               </fieldset>
+              {p.classificationOnly && (
+                <div className="question-classify-action">
+                  <button
+                    className="secondary-button"
+                    onClick={() => p.onClassify?.(q)}
+                    aria-label={`Phân loại chủ đề câu ${i + 1}`}
+                  >
+                    Phân loại chủ đề
+                  </button>
+                </div>
+              )}
               {p.review && hasProvidedAnswer(q) && (
                 <aside
                   className="paper-explanation"

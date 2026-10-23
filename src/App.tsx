@@ -32,6 +32,7 @@ import { useAppAccess } from "./AccessGate";
 import { ParentPassword } from "./ParentPassword";
 
 const Quiz = lazy(() => import("./Quiz"));
+const UnassignedWorkspace = lazy(() => import("./UnassignedWorkspace"));
 const TopicManager = lazy(() => import("./TopicManager"));
 type Selection = {
   exercise: Exercise;
@@ -256,17 +257,6 @@ export default function App() {
           <span className="visually-hidden" aria-live="polite">
             {exercises.length} {category === "topic" ? "chủ đề" : "đề"}
           </span>
-          {category === "topic" && section === "timo" && grade === 2 && (
-            <div className="topic-manage-entry">
-              <button
-                className="primary-button"
-                onClick={() => setTopicManagerOpen(true)}
-              >
-                Tạo / quản lý chủ đề
-              </button>
-              <p>Tự chọn bài mẫu và các câu luyện tập từ bộ đề có sẵn.</p>
-            </div>
-          )}
           {exercises.length ? (
             <div className="exercise-grid">
               {exercises.map((exercise, index) => {
@@ -286,7 +276,17 @@ export default function App() {
                     hasDraft={Boolean(saved.drafts[id])}
                     onOpen={() =>
                       exercise.questionCount === 0
-                        ? setTopicManagerOpen(true)
+                        ? setSelection({
+                            exercise: {
+                              id: "unassigned",
+                              title: "Chưa có chủ đề",
+                              category: "topic",
+                              questionCount: 0,
+                            },
+                            section,
+                            grade,
+                            mode: "play",
+                          })
                         : setSelection({
                             exercise,
                             section,
@@ -365,37 +365,50 @@ export default function App() {
             </div>
           }
         >
-          <Quiz
-            key={`${exerciseId}:${selection.mode}`}
-            id={exerciseId}
-            onConfigure={(nextGrade, nextSection, nextExercise) =>
-              setSelection({
-                grade: nextGrade,
-                section: nextSection,
-                exercise: nextExercise,
-                mode: "play",
-              })
-            }
-            previewOnly={selection.mode === "example"}
-            exercise={selection.exercise}
-            grade={selection.grade}
-            section={selection.section}
-            draft={
-              selection.mode !== "result" ? saved.drafts[exerciseId] : undefined
-            }
-            initialResult={
-              selection.mode === "result"
-                ? saved.results[exerciseId]
-                : undefined
-            }
-            onSetupPassword={() => {
-              setSelection(null);
-              setParentOpen(true);
-            }}
-            onSave={saveDraft}
-            onFinish={finish}
-            onClose={() => setSelection(null)}
-          />
+          {selection.exercise.id === "unassigned" &&
+          selection.mode !== "result" ? (
+            <UnassignedWorkspace
+              grade={selection.grade}
+              section={selection.section}
+              onClose={() => setSelection(null)}
+              onManageTopics={() => setTopicManagerOpen(true)}
+              onChanged={() => refreshTopics((value) => value + 1)}
+            />
+          ) : (
+            <Quiz
+              key={`${exerciseId}:${selection.mode}`}
+              id={exerciseId}
+              onConfigure={(nextGrade, nextSection, nextExercise) =>
+                setSelection({
+                  grade: nextGrade,
+                  section: nextSection,
+                  exercise: nextExercise,
+                  mode: "play",
+                })
+              }
+              previewOnly={selection.mode === "example"}
+              exercise={selection.exercise}
+              grade={selection.grade}
+              section={selection.section}
+              draft={
+                selection.mode !== "result"
+                  ? saved.drafts[exerciseId]
+                  : undefined
+              }
+              initialResult={
+                selection.mode === "result"
+                  ? saved.results[exerciseId]
+                  : undefined
+              }
+              onSetupPassword={() => {
+                setSelection(null);
+                setParentOpen(true);
+              }}
+              onSave={saveDraft}
+              onFinish={finish}
+              onClose={() => setSelection(null)}
+            />
+          )}
         </Suspense>
       ) : null}
     </div>
