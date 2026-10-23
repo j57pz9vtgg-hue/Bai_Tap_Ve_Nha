@@ -3,23 +3,25 @@ import { ArrowRight, BookOpen } from "lucide-react";
 import {
   QuestionIllustration,
   hasSolutionDiagram,
-  ShapeIcon,
 } from "./QuestionIllustration";
+import { QuestionPreview } from "./QuestionPreview";
 import type { Exercise } from "./data";
 export function TopicExample({
   exercise,
   showSignal = 0,
+  defaultExpanded = false,
   hasDraft,
   practicing = false,
   onPractice,
 }: {
   exercise: Exercise;
   showSignal?: number;
+  defaultExpanded?: boolean;
   hasDraft: boolean;
   practicing?: boolean;
   onPractice: () => void;
 }) {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(defaultExpanded);
   useEffect(() => {
     if (showSignal) setExpanded(true);
   }, [showSignal]);
@@ -46,28 +48,7 @@ export function TopicExample({
             >
               <section>
                 <h3>Ví dụ{examples.length > 1 ? ` ${index + 1}` : ""}</h3>
-                <p>{example.text}</p>
-                <p className="question-translation">{example.translation}</p>
-                <QuestionIllustration diagram={example.diagram} />
-                <div className="topic-example-options">
-                  {example.options.map((option, i) => (
-                    <span key={i}>
-                      {"ABCD"[i]}.{" "}
-                      {example.diagram === "shape-pattern" ? (
-                        <svg
-                          className="option-shape"
-                          viewBox="-17 -17 34 34"
-                          role="img"
-                          aria-label={option}
-                        >
-                          <ShapeIcon index={i} />
-                        </svg>
-                      ) : (
-                        option
-                      )}
-                    </span>
-                  ))}
-                </div>
+                <QuestionPreview question={example} />
               </section>
               <section>
                 <h3>

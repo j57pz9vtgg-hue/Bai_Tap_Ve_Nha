@@ -1,4 +1,6 @@
 import { useMemo, useState } from "react";
+import { QuestionPreview } from "./QuestionPreview";
+import { TopicExample } from "./TopicExample";
 import { Dialog } from "./components";
 import { getExercises, getQuestions } from "./data";
 import type { Question } from "./data";
@@ -37,6 +39,7 @@ export function ClassifyQuestion({
   const [title, setTitle] = useState("");
   const [example, setExample] = useState(false);
   const [error, setError] = useState(loaded.error);
+  const selectedTopic = loaded.topics.find((topic) => topic.id === topicId);
   function assign() {
     try {
       const latest = readUserTopics(sources) ?? [];
@@ -100,11 +103,15 @@ export function ClassifyQuestion({
       <p className="classification-source">
         {question.sourcePaper} · Câu {question.sourceNumber}
       </p>
-      <p>{question.text}</p>
+      <section className="classification-question" aria-label="Câu hỏi đang phân loại">
+        <QuestionPreview question={question} />
+      </section>
       <label className="topic-field">
         Chọn chủ đề
         <select
           aria-label="Chọn chủ đề để phân loại"
+          className="classification-topic-list"
+          size={Math.min(6, Math.max(3, loaded.topics.length + 2))}
           value={topicId}
           onChange={(event) => {
             setTopicId(event.target.value);
@@ -132,6 +139,19 @@ export function ClassifyQuestion({
           />
         </label>
       )}
+      <section className="classification-topic-example" aria-label="Bài mẫu của chủ đề đã chọn">
+        {selectedTopic?.examples.length ? (
+          <TopicExample
+            key={selectedTopic.id}
+            exercise={{ id: selectedTopic.id, title: selectedTopic.title, category: "topic", questionCount: 0, examples: selectedTopic.examples }}
+            defaultExpanded
+            hasDraft={false}
+            onPractice={() => {}}
+          />
+        ) : (
+          <p className="classification-source">{selectedTopic || topicId === "__new__" ? "Chủ đề này chưa có bài mẫu." : "Chọn chủ đề để xem bài mẫu."}</p>
+        )}
+      </section>
       <label className="classify-example">
         <input
           type="checkbox"

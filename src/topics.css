@@ -239,3 +239,19 @@
 }
 
 .topic-preview-back { margin: 4px 0 18px; display: inline-flex; align-items: center; gap: 8px; }
+
+.classify-question-dialog { width: min(940px, calc(100vw - 32px)); }
+.classification-question { padding: 0 0 18px; margin-bottom: 18px; border-bottom: 1px solid #d9e5ee; }
+.source-question-preview { font: 18px/1.5 Arial, sans-serif; }
+.source-question-preview .topic-example-options { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.source-question-preview .topic-example-options > span { min-width: 0; overflow-wrap: anywhere; }
+.topic-field .classification-topic-list { min-height: 132px; padding: 6px; }
+.classification-topic-list option { padding: 10px; border-radius: 5px; }
+.classification-topic-example { margin-top: 18px; }
+.classification-topic-example .topic-example-intro { margin-top: 0; }
+.classification-topic-example .topic-example-heading h2 { font-size: 20px; }
+@media(max-width:650px) {
+ .source-question-preview .topic-example-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+ .classification-topic-example .topic-example-columns { grid-template-columns: minmax(0, 1fr); }
+ .classification-topic-example .topic-example-heading { flex-wrap: wrap; }
+}
