@@ -121,3 +121,5 @@
 - Unit/source tests are npm run test:sync. Current two-browser UI QA can use an explicit mocked SDK transport; label that evidence honestly. Official emulator and live Firebase checks require the Google network destinations allowed by the managed environment, plus real user authentication for positive live checks. Do not claim mock transport verifies Firebase Auth or Rules. No real cloud data or account password is used in QA.
 
 - Latest owner request: remove user topic creation/management/classification and delete all classified user topics. Keep original questions, drafts, results and Firebase sync. Unassigned opens a read-only question list; no assignment buttons. User topic records are retired and synchronized as tombstones, including records received from other devices; never restore old topics.
+
+- Hide the redundant paper-heading block (paper number/title, Đề bài count and answer-choice instruction) while taking qualifier papers, per the owner screenshot. Keep questions, toolbar/timer and parent review intact.

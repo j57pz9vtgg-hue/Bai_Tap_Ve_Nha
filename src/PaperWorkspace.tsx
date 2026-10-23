@@ -285,7 +285,7 @@ export function PaperWorkspace(p: Props) {
           className={`exam-paper ${p.review ? "review-paper" : ""}`}
           aria-label={p.review ? "Đáp án và lời giải" : "Bài luyện tập Toán"}
         >
-          {!topic && (
+          {!topic && (p.exercise.category !== "qualifier" || p.review) && (
             <div className="paper-heading">
               <h1>
                 {p.review
