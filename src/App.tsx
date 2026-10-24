@@ -266,6 +266,13 @@ export default function App() {
           </p>
         ) : null}
         <section className="exercise-section" aria-labelledby="catalog-title">
+          {theme === "toys" ? (
+            <div className="toys-catalog-banner">
+              <h2 id="catalog-title">{search.trim() ? "Kết quả tìm kiếm" : title}</h2>
+              <p>Lớp {grade} · {isExam ? "Toán" : SECTION_LABELS[section]}</p>
+              <span className="toys-catalog-count" aria-live="polite">{exercises.length} {category === "topic" ? "chủ đề" : "đề"}</span>
+            </div>
+          ) : <>
           <h2 id="catalog-title" className={theme === "dragon" ? "dragon-catalog-title" : "visually-hidden"}>
             {search.trim() ? "Kết quả tìm kiếm" : title}
           </h2>
@@ -273,6 +280,7 @@ export default function App() {
           <span className={theme === "dragon" ? "dragon-catalog-count" : "visually-hidden"} aria-live="polite">
             {exercises.length} {category === "topic" ? "chủ đề" : "đề"}
           </span>
+          </>}
           {exercises.length ? (
             <div className="exercise-grid">
               {exercises.map((exercise, index) => {

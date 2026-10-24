@@ -159,7 +159,7 @@ export function StudyFilters({
   return (
     <div className="study-filters" aria-label="Bộ lọc bài tập">
       <div className="filter-field">
-        {(theme === "crystal" || theme === "cloud" || theme === "forest") && (
+        {(["crystal", "cloud", "forest", "toys"].includes(theme)) && (
           <span className="crystal-filter-icon" aria-hidden="true">
             <GraduationCap size={29} />
           </span>
@@ -181,7 +181,7 @@ export function StudyFilters({
         </div>
       </div>
       <div className="filter-field">
-        {(theme === "crystal" || theme === "cloud" || theme === "forest") && (
+        {(["crystal", "cloud", "forest", "toys"].includes(theme)) && (
           <span className="crystal-filter-icon" aria-hidden="true">
             <BookOpen size={29} />
           </span>
@@ -203,7 +203,7 @@ export function StudyFilters({
         </div>
       </div>
       <div className="filter-field">
-        {(theme === "crystal" || theme === "cloud" || theme === "forest") && (
+        {(["crystal", "cloud", "forest", "toys"].includes(theme)) && (
           <span className="crystal-filter-icon" aria-hidden="true">
             <Blocks size={29} />
           </span>
@@ -228,7 +228,7 @@ export function StudyFilters({
         </div>
       </div>
       <div className="filter-field">
-        {(theme === "crystal" || theme === "cloud" || theme === "forest") && (
+        {(["crystal", "cloud", "forest", "toys"].includes(theme)) && (
           <span className="crystal-filter-icon" aria-hidden="true">
             <ClipboardList size={29} />
           </span>

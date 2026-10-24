@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 export const THEMES = [
+  { id: "toys", name: "Đồ chơi 3D mềm", hero: "toys-hero" },
   { id: "dragon", name: "Thư viện Rồng", hero: "dragon-hero" },
   { id: "pixel", name: "Thế giới Pixel", hero: "pixel-hero" },
   { id: "bunny", name: "Thỏ con", hero: "bunny-hero" },
