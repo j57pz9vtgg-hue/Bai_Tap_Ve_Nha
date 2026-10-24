@@ -3,7 +3,6 @@ import type { ReactNode } from "react";
 export const THEMES = [
   { id: "arctic", name: "Khám phá Bắc Cực", hero: "arctic-hero" },
   { id: "toys", name: "Đồ chơi 3D mềm", hero: "toys-hero" },
-  { id: "dragon", name: "Thư viện Rồng", hero: "dragon-hero" },
   { id: "pixel", name: "Thế giới Pixel", hero: "pixel-hero" },
   { id: "bunny", name: "Thỏ con", hero: "bunny-hero" },
   { id: "crystal", name: "Đảo pha lê", hero: "crystal-hero" },
@@ -25,9 +24,9 @@ export const useLearningTheme = () => useContext(ThemeContext);
 export function LearningThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<LearningTheme>(() => {
     try {
-      return (
-        THEMES.find((t) => t.id === localStorage.getItem(KEY))?.id ?? "pixel"
-      );
+      const savedTheme = localStorage.getItem(KEY);
+      if (savedTheme === "dragon") return "arctic";
+      return THEMES.find((t) => t.id === savedTheme)?.id ?? "pixel";
     } catch {
       return "pixel";
     }

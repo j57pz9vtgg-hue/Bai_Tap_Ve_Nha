@@ -273,11 +273,11 @@ export default function App() {
               <span className="toys-catalog-count" aria-live="polite">{exercises.length} {category === "topic" ? "chủ đề" : "đề"}</span>
             </div>
           ) : <>
-          <h2 id="catalog-title" className={["dragon", "arctic"].includes(theme) ? `${theme}-catalog-title` : "visually-hidden"}>
+          <h2 id="catalog-title" className={(theme === "arctic") ? `${theme}-catalog-title` : "visually-hidden"}>
             {search.trim() ? "Kết quả tìm kiếm" : title}
           </h2>
-          {["dragon", "arctic"].includes(theme) && <p className={`${theme}-catalog-subtitle`}>Lớp {grade} · {isExam ? "Toán" : SECTION_LABELS[section]}</p>}
-          <span className={["dragon", "arctic"].includes(theme) ? `${theme}-catalog-count` : "visually-hidden"} aria-live="polite">
+          {(theme === "arctic") && <p className={`${theme}-catalog-subtitle`}>Lớp {grade} · {isExam ? "Toán" : SECTION_LABELS[section]}</p>}
+          <span className={(theme === "arctic") ? `${theme}-catalog-count` : "visually-hidden"} aria-live="polite">
             {exercises.length} {category === "topic" ? "chủ đề" : "đề"}
           </span>
           </>}

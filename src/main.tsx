@@ -22,7 +22,6 @@ import "./themes.css";
 
 import "./topics.css";
 
-import "./dragon.css";
 
 import "./toys.css";
 

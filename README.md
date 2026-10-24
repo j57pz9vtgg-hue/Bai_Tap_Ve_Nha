@@ -93,3 +93,7 @@ Cập nhật mới nhất: đã bật lại phân loại từng câu trong Chưa
 Cửa sổ phân loại hiển thị đầy đủ câu hỏi nguồn, danh sách chủ đề, rồi mở ngay bài mẫu của chủ đề được chọn. Chọn chủ đề chỉ xem trước; chỉ nút Gắn vào chủ đề mới lưu thay đổi.
 
 Trong Chưa có chủ đề có ô tìm nội dung tiếng Anh/Việt không phân biệt dấu, số câu phù hợp và nút xóa từ khóa. Cửa sổ phân loại dùng Arial18px, nét thường và giãn dòng1.5 như đề; mỗi câu trắc nghiệm hoặc tự điền chỉ có một nút phân loại hoạt động.
+
+## Giao diện mới
+
+Có thêm Đồ chơi3D mềm (toys) và Khám phá Bắc Cực (arctic), chọn bằng biểu tượng bảng màu. Cả hai dùng hình riêng trên điện thoại và giữ nguyên đề thật, kết quả, bài đang làm, tìm kiếm, phân loại và đồng bộ. Thư viện Rồng đã được bỏ; trình duyệt đang lưu dragon tự chuyển sang arctic. Các lựa chọn giao diện hợp lệ khác được giữ nguyên. Hình tham khảo có15 đề/kết quả minh họa; ứng dụng vẫn hiển thị đúng7 đề vòng loại đã nhận, không tạo đề hoặc kết quả giả.
