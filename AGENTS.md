@@ -146,3 +146,5 @@
 
 - Process owner requests sequentially: finish, test, publish and confirm web deployment of each request before starting the next. Current theme queue: add Đồ chơi 3D mềm, then add Khám phá Bắc Cực, then remove Thư viện Rồng. Preserve questions/progress and existing remaining themes. Do not add reference sample papers/results.
 - Đồ chơi 3D mềm uses the owner’s soft clay3D reference: warm cream, pastel filter icons, sky-blue category banner, real source count, orange primary actions, green result/blue retry actions, toy sprites. It is optional under the appearance picker and must persist; quiz intros use the chosen theme art. Desktop5-column catalog and mobile1-column retain all real interactions.
+
+- Khám phá Bắc Cực (arctic) is an optional owner-requested theme: snow-capped wooden brand sign, orange-scarf penguin/polar bear, igloo, icy landscape, white/blue cards and orange controls/ordinals. Native heading/count show real source data. Use dedicated mobile art, preserve topic classification/search/Arial question text, all other themes and existing data. Theme selection and national quiz intros must match the chosen theme.
